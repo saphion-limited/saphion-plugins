@@ -2020,16 +2020,16 @@
    "schema": {
     "additionalProperties": false,
     "properties": {
+     "at": {
+      "default": "",
+      "type": "string"
+     },
      "continuation_ref": {
       "type": "string"
      },
      "find": {
       "default": "",
       "maxLength": 1000,
-      "type": "string"
-     },
-     "member": {
-      "default": "",
       "type": "string"
      }
     },
@@ -6476,6 +6476,11 @@
    "schema": {
     "additionalProperties": false,
     "properties": {
+     "at": {
+      "default": "",
+      "maxLength": 160,
+      "type": "string"
+     },
      "file_continuation_ref": {
       "type": "string"
      },
@@ -6483,18 +6488,6 @@
       "default": "",
       "maxLength": 500,
       "type": "string"
-     },
-     "member": {
-      "default": "",
-      "type": "string"
-     },
-     "pages": {
-      "items": {
-       "minimum": 1,
-       "type": "integer"
-      },
-      "maxItems": 20,
-      "type": "array"
      }
     },
     "required": [
