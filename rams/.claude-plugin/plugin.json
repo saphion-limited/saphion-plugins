@@ -1,0 +1,15 @@
+{
+  "name": "rams",
+  "displayName": "RAMS",
+  "version": "1.0.0",
+  "description": "Risk assessments and method statements made from your Organisation's own template.",
+  "author": {
+    "name": "Saphion"
+  },
+  "category": "Bids and safety",
+  "default": "on",
+  "entry": "create-rams",
+  "featured": false,
+  "updatedAt": "2026-11-01T00:00:00Z",
+  "firstPublishedAt": "2026-11-01T00:00:00Z"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "skill-creator",
+  "displayName": "Skill creator",
+  "version": "1.0.0",
+  "description": "Make or change your own skills by talking the job through with Beacon, trying a draft on a real example, and saving it.",
+  "author": {
+    "name": "Saphion"
+  },
+  "category": "Documents and files",
+  "default": "on",
+  "entry": "skill-creator",
+  "featured": false,
+  "updatedAt": "2026-11-01T00:00:00Z",
+  "firstPublishedAt": "2026-11-01T00:00:00Z"
+}

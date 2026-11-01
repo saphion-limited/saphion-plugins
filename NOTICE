@@ -1,0 +1,28 @@
+Saphion plugins
+Copyright 2026 Saphion Limited. Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Third-party notices
+
+The Design plugin's procedure (design/skills/design/SKILL.md) adapts open-source skills published by
+Anthropic, PBC.
+
+1. anthropics/skills, commit dbd4588f9e1033efb41dad4bef2f7947c8993d44
+   https://github.com/anthropics/skills
+   Licence: Apache License, Version 2.0. Full text:
+   upstream/anthropics-skills@dbd4588/LICENSE
+
+   Adapted works and where they are used:
+     - skills/frontend-design, with principles taken from skills/brand-guidelines,
+       skills/theme-factory and skills/canvas-design
+       -> design/skills/design/SKILL.md (the "design" skill)
+
+   Changes made by Saphion: the text was rewritten for Saphion's own surfaces and tools (apps that
+   style themselves without network fonts, Word, PDF and PowerPoint files rendered in the file
+   sandbox, native Saphion widgets, Organisation style), extended with Saphion's own sections, and
+   shortened where it did not apply. It is not the upstream text.
+
+Studied, not copied. Anthropic's docx, pdf, pptx and xlsx skills are published under terms that
+are not open source. Saphion read them only to judge what a complete procedure covers. The skills
+make-document, make-presentation, make-spreadsheet, edit-word-document, edit-presentation,
+edit-spreadsheet, edit-pdf and research-report are written in Saphion's own words against Saphion's
+own tools and contain no text from them.

@@ -1,0 +1,16 @@
+<!-- SURFACE_REASON: shared look guidance spliced into every Skill that makes something visual (design, design_app, make_document, make_presentation), so the look rules have one owner and one text -->
+## The look, planned before any code
+
+Write these for yourself first (in a program, as comments at its top). Where the brief leaves one open, choose, and say in your reply what you chose.
+
+- **Subject, audience, primary job:** the specific thing this is about, who looks at it and in what state of mind (a site manager on a phone at seven in the morning, a client's board reading a printout), and the one thing the first screen, page or slide must let them do or understand.
+- **The Organisation's own style** (colours, logo, fonts, a template it supplied) outranks your taste. Use it exactly: give each brand colour a job (ground, ink, accent, status), choose text colour from the ground it sits on, and keep a logo whole, uncoloured and clear of crowding. Use a brand face only where the surface can render it; otherwise take the nearest face it has and say so.
+- **Palette**, where there is no Organisation style: four to six named colours with hex values and jobs (for example "Slate ink for text, Chalk for the ground, Kiln red for the one action"). One dominates, the sharp accent is rare, status colours only ever mean status, and the palette comes from the subject's world.
+- **Type:** one or two families, the role of each, and a scale for title, heading, body and caption. An app may load any Google Fonts family (nothing else from the network), chosen for this subject and followed by a system fallback. Word, PDF and PowerPoint files render in a sandbox with Calibri, Arial, Cambria, Times New Roman and Courier New: choose among those.
+- **Theme:** a name for what the palette and type stand for ("Kiln and slate"), defined once (tokens, styles or the slide master) and used for everything.
+
+Check the contrast of each pairing you use: 4.5 to 1 for text, 3 to 1 for large text and for lines that carry meaning, and never carry meaning by colour alone. Check the plan against the brief: would it look the same for a different subject? If it matches the generic look below, change it unless the brief or the Organisation's style asks for it in so many words.
+
+**The generic look to avoid:** a purple-to-blue gradient or any gradient used because it looks modern; every item in an equal rounded card with the same soft shadow; a row of three icon-heading-line boxes; a big centred hero with two buttons; every heading centred; emoji or stock icons standing in for thought; glows, blobs, glass panels and animated backgrounds; a dashboard of identical numbers with none that matters most; headlines such as "Welcome", "Overview" or "Insights"; fake logos, fake testimonials and suspiciously round figures; a cream or parchment ground with a terracotta accent and a serif display face; a near-black ground with one acid accent; a newspaper layout of hairline rules and dense columns whatever the subject; one word of a headline set apart in italic or another colour; small tracked capitals above every heading; a monospace face for every small label; numbered markers (01, 02) on content that is not a sequence.
+
+Plain and well made beats busy. When the result renders, look at it as the person will, then remove one thing that is not needed.

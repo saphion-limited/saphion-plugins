@@ -1,0 +1,15 @@
+{
+  "name": "tenders",
+  "displayName": "Tenders",
+  "version": "1.0.0",
+  "description": "A source-grounded tender response prepared from a tender pack, for human review.",
+  "author": {
+    "name": "Saphion"
+  },
+  "category": "Bids and safety",
+  "default": "on",
+  "entry": "prepare-tender-response",
+  "featured": false,
+  "updatedAt": "2026-11-01T00:00:00Z",
+  "firstPublishedAt": "2026-11-01T00:00:00Z"
+}

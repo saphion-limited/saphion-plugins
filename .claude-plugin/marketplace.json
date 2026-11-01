@@ -1,0 +1,61 @@
+{
+  "name": "saphion-plugins",
+  "owner": {
+    "name": "Saphion"
+  },
+  "metadata": {
+    "description": "Saphion's own plugins for Beacon: documents and files, design, RAMS, tenders and the skill creator."
+  },
+  "plugins": [
+    {
+      "name": "design",
+      "source": "./design",
+      "description": "Palette, type and layout for pages and dashboards, and polished single-file apps for the side pane.",
+      "version": "1.0.0",
+      "category": "Design",
+      "author": {
+        "name": "Saphion"
+      }
+    },
+    {
+      "name": "rams",
+      "source": "./rams",
+      "description": "Risk assessments and method statements made from your Organisation's own template.",
+      "version": "1.0.0",
+      "category": "Bids and safety",
+      "author": {
+        "name": "Saphion"
+      }
+    },
+    {
+      "name": "saphion-documents",
+      "source": "./saphion-documents",
+      "description": "Word and PDF files, spreadsheets and presentations to download or send, and documents that live inside Saphion.",
+      "version": "1.1.0",
+      "category": "Documents and files",
+      "author": {
+        "name": "Saphion"
+      }
+    },
+    {
+      "name": "skill-creator",
+      "source": "./skill-creator",
+      "description": "Make or change your own skills by talking the job through with Beacon, trying a draft on a real example, and saving it.",
+      "version": "1.0.0",
+      "category": "Documents and files",
+      "author": {
+        "name": "Saphion"
+      }
+    },
+    {
+      "name": "tenders",
+      "source": "./tenders",
+      "description": "A source-grounded tender response prepared from a tender pack, for human review.",
+      "version": "1.0.0",
+      "category": "Bids and safety",
+      "author": {
+        "name": "Saphion"
+      }
+    }
+  ]
+}

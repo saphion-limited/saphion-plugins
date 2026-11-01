@@ -1,0 +1,30 @@
+name: Check
+
+# Every pull request and every push: each plugin must be inside the Beacon contract (.saphion/) and well formed.
+# The job id is `check`: branch protection on main requires it, and Promote reads it to know a commit is green.
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Layout and frontmatter
+        run: python scripts/check_repo.py
+      - name: Beacon contract
+        run: |
+          set -euo pipefail
+          plugins=$(find . -maxdepth 3 -path './*/.claude-plugin/plugin.json' -print | sed -e 's#/\.claude-plugin/plugin\.json$##' | sort)
+          test -n "$plugins" || { echo "no plugin folders found"; exit 1; }
+          echo "$plugins"
+          # shellcheck disable=SC2086
+          python .saphion/plugin_contract.py .saphion/beacon-plugin-contract.json $plugins

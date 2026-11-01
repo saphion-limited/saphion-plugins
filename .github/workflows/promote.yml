@@ -1,0 +1,70 @@
+name: Promote
+
+# Cuts an immutable release tag (release-<date>-<sha>) from a green commit on main. Saphion's catalogue follows a tag, never main's head.
+# Manual only. The `promote` job waits for a required reviewer on the `production` environment, so nothing is promoted without approval.
+on:
+  workflow_dispatch:
+    inputs:
+      sha:
+        description: "Commit to promote (full sha on main). Leave empty for main's head."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+  checks: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      sha: ${{ steps.pick.outputs.sha }}
+      tag: ${{ steps.pick.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Pick a green commit on main
+        id: pick
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_SHA: ${{ inputs.sha }}
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          sha="${INPUT_SHA:-$(git rev-parse origin/main)}"
+          sha=$(git rev-parse --verify "${sha}^{commit}")
+          git merge-base --is-ancestor "$sha" origin/main || { echo "::error::$sha is not on main."; exit 1; }
+          verdict=$(gh api "repos/${GITHUB_REPOSITORY}/commits/${sha}/check-runs?check_name=check&per_page=100" \
+            --jq '[.check_runs[] | select(.app.slug == "github-actions")] | sort_by(.completed_at) | last | .conclusion // "none"')
+          [ "$verdict" = "success" ] || { echo "::error::The Check workflow on $sha is '$verdict', not success. Promote only a green commit."; exit 1; }
+          tag="release-$(date -u +%Y-%m-%d)-${sha:0:10}"
+          if git ls-remote --exit-code --tags origin "refs/tags/${tag}" >/dev/null 2>&1; then
+            echo "::error::Tag $tag already exists; tags are immutable."; exit 1
+          fi
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+  promote:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: production
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.verify.outputs.sha }}
+      - name: Cut the tag
+        env:
+          TAG: ${{ needs.verify.outputs.tag }}
+          SHA: ${{ needs.verify.outputs.sha }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$TAG" "$SHA" -m "Saphion plugins ${TAG} (${SHA})"
+          git push origin "refs/tags/${TAG}"
+          echo "Promoted ${SHA} as ${TAG}" >> "$GITHUB_STEP_SUMMARY"
