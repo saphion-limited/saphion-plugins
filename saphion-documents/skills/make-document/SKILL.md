@@ -1,6 +1,7 @@
 ---
 name: "make-document"
 description: "A Word (.docx) or PDF file to download or send"
+user-invocable: false
 metadata:
   outcome: "A new Word document (.docx) or PDF file built for the person to download or send, such as a report, letter, minutes or method statement, designed, laid out cleanly and checked page by page."
   not-outcomes: |-

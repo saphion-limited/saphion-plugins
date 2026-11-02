@@ -1,6 +1,7 @@
 ---
 name: "write-document"
 description: "A document that lives inside Saphion: the default when someone asks for a document"
+user-invocable: false
 metadata:
   outcome: "A document that lives in Saphion, written or changed: outlined first, filled one section at a time, edited in place without overwriting the person's own changes, and answered in its comment threads."
   not-outcomes: |-

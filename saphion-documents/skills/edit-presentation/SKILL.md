@@ -1,6 +1,7 @@
 ---
 name: "edit-presentation"
 description: "Add slides to a PowerPoint template or deck on its own layouts, and update its slides"
+user-invocable: false
 metadata:
   outcome: "A PowerPoint template or deck the person supplied, changed and returned: slides added on its own layouts, slides updated, its layouts, theme and placeholders kept, every slide measured and looked at, nothing overflowing."
   not-outcomes: |-

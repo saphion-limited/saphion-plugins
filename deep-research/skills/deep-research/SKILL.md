@@ -1,5 +1,5 @@
 ---
-name: "research-report"
+name: "deep-research"
 description: "Research a question across several sources and deliver a cited report with a bundle of its sources"
 metadata:
   outcome: "A question researched across several sources Beacon read, answered in a Word report in which every claim cites a source that opens its real page, with a downloadable bundle of the report and its source list; or a plain statement that the sources found were not good enough, with nothing invented."
@@ -95,7 +95,7 @@ Write the report as Markdown text, in this shape (leave out a section with nothi
 
 ## 7. Make the report and the bundle
 
-Run `scripts/build_research_report.py` with `run_skill_script` (`skill_name: "research-report"`, `script_name`) and `args`: the report's
+Run `scripts/build_research_report.py` with `run_skill_script` (`skill_name: "deep-research"`, `script_name`) and `args`: the report's
 Markdown as one text, and optionally a file name (no extension). Do not make the report with `file_make`: this script is the one door, so
 a report that fails the checks never lands as a file.
 

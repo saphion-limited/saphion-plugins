@@ -1,7 +1,7 @@
 {
   "name": "design",
   "displayName": "Design",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Palette, type and layout for pages and dashboards, and polished single-file apps for the side pane.",
   "author": {
     "name": "Saphion"
@@ -9,6 +9,6 @@
   "category": "Design",
   "default": "on",
   "featured": false,
-  "updatedAt": "2026-11-01T00:00:00Z",
+  "updatedAt": "2026-11-02T23:30:00Z",
   "firstPublishedAt": "2026-11-01T00:00:00Z"
 }

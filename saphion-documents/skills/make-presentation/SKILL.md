@@ -1,6 +1,7 @@
 ---
 name: "make-presentation"
 description: "PowerPoint decks (.pptx) with one idea per slide"
+user-invocable: false
 metadata:
   outcome: "A new PowerPoint deck (.pptx) built for the person: one idea per slide, a designed consistent theme, real charts and tables where there is data, and every slide checked for overflow."
   not-outcomes: |-

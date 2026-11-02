@@ -1,6 +1,7 @@
 ---
 name: "make-spreadsheet"
 description: "Excel workbooks with live formulas"
+user-invocable: false
 metadata:
   outcome: "A new Excel workbook (.xlsx) built for the person: tidy sheets, real formulas for totals and derived values, formatted headers and numbers, and no formula errors."
   not-outcomes: |-
