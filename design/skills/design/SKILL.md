@@ -1,6 +1,13 @@
 ---
 name: "design"
 description: "Palette, type and layout for a Saphion page, dashboard or other visual work that no file or app skill covers"
+metadata:
+  outcome: "The visual design of a page, dashboard or other visual work that Saphion AI makes for people to look at, with a palette, type and layout chosen for its subject and audience, planned, built and critiqued."
+  not-outcomes: |-
+    A single-file app, Word or PDF file or PowerPoint deck: their own skills carry the design.
+    A plain text answer, or a spreadsheet, where nothing is laid out to look at.
+    Figures, tables, charts, records or places that Saphion already shows natively in their own form.
+    Change only the content of something already designed.
 ---
 <!-- SURFACE_REASON: procedure prompt asset for the design skill, loaded into the model's skill instructions as the visual-design procedure for Documents, dashboards and other visual work no file or app skill covers -->
 <!-- Adapted from anthropics/skills `frontend-design` (commit dbd4588f9e10, Apache-2.0), with principles from `brand-guidelines`, `theme-factory` and `canvas-design` (same licence). Changed by Saphion: rewritten for Saphion's tools and surfaces. See /NOTICE. -->

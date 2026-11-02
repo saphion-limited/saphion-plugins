@@ -1,6 +1,11 @@
 ---
 name: "prepare-tender-response"
 description: "From a tender pack"
+metadata:
+  outcome: "Prepare or continue a Bid's source-grounded Tender response for human review and preparation-document export."
+  not-outcomes: |-
+    Answer a general procurement question or summarise a document without preparing a response.
+    Submit a bid to a buyer or approve answers on the person's behalf.
 ---
 <!-- SURFACE_REASON: the shipped skill that prepares a Bid's one tender response Document from its tender pack -->
 # Prepare a tender response

@@ -1,6 +1,11 @@
 ---
 name: "write-document"
 description: "A document that lives inside Saphion: the default when someone asks for a document"
+metadata:
+  outcome: "A document that lives in Saphion, written or changed: outlined first, filled one section at a time, edited in place without overwriting the person's own changes, and answered in its comment threads."
+  not-outcomes: |-
+    Answer in the conversation without making a document.
+    Make a spreadsheet, a presentation or an app.
 ---
 <!-- SURFACE_REASON: procedure prompt asset for the write_document skill, loaded into the model's skill instructions for writing and editing a document that lives in Saphion -->
 # Write a Saphion document

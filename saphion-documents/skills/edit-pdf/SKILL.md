@@ -1,6 +1,12 @@
 ---
 name: "edit-pdf"
 description: "Fill in a PDF form, join PDFs into one, take pages out of a PDF or turn its pages"
+metadata:
+  outcome: "A PDF the person supplied, changed and returned: a form's fields filled in, several PDFs joined in the order asked, chosen pages taken out as their own files, or chosen pages turned, every output read back and looked at."
+  not-outcomes: |-
+    Build a new PDF or Word document from nothing.
+    Read, summarise or answer questions about a PDF without changing it.
+    Edit the text or pictures on a PDF page, sign it, or open a password-protected or scanned one.
 ---
 <!-- SURFACE_REASON: procedure prompt asset and helper scripts for the edit_pdf skill, loaded into the model's skill instructions for filling, merging, splitting and rotating PDFs the person supplied -->
 # Work with PDFs

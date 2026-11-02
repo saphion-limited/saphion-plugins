@@ -1,6 +1,12 @@
 ---
 name: "skill-creator"
 description: "Make or change one of your own skills by talking it through"
+metadata:
+  outcome: "A skill of the person's own, made or changed with them: what the job is, a draft they try on a real example, revised until it is right, then saved to their own skills."
+  not-outcomes: |-
+    Use a skill the person already has to do its job.
+    Share a skill, give it to the Organisation or remove it.
+    Make a file, a document or an app.
 ---
 <!-- SURFACE_REASON: procedure prompt asset for the skill_creator skill, loaded into the model's skill instructions when a person makes or changes a skill of their own with Beacon -->
 # Skill creator

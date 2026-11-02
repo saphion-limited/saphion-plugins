@@ -1,6 +1,13 @@
 ---
 name: "edit-word-document"
 description: "Change a Word (.docx) file the person supplied: a clause, comments or tracked changes, with everything else left as it was"
+metadata:
+  outcome: "A Word (.docx) file the person supplied, changed and returned: a clause reworded, comments added, changes tracked as a redline, with its styles, its own comments and its existing tracked changes intact."
+  not-outcomes: |-
+    Build a new Word document or PDF from nothing.
+    Summarise, read or answer questions about a Word file without changing it.
+    Edit a document that lives inside Saphion.
+    Change a Word file Beacon made itself without comments or tracked changes, which is changed in place as the file it is.
 ---
 <!-- SURFACE_REASON: procedure prompt asset for the edit_word_document skill, loaded into the model's skill instructions for faithful edits to a supplied Word file -->
 # Edit a Word document
