@@ -37,7 +37,7 @@ Call `file_build` with exactly these fields: `program`, `language` (`python` or 
 | Job | Use |
 |---|---|
 | New workbook | `openpyxl`; `pandas` to shape bulk data before writing it |
-| Change a workbook you made | Pass its `file_id` as `replaces_file_id`: same file, new version. Open it with `openpyxl.load_workbook`, change it, save the same kind. Never rebuild from nothing or make a second copy. |
+| Change a workbook you made | Pass its `continuation_ref` as `replaces_file_id`: same file, new version. Open it with `openpyxl.load_workbook`, change it, save the same kind. Never rebuild from nothing or make a second copy. |
 
 Give `file_build` the program, the output names, `checks: ["recalc"]` and a one-line
 `description` of what the workbook is for.

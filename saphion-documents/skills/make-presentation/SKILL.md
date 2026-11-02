@@ -39,7 +39,7 @@ Call `file_build` with exactly these fields: `program`, `language` (`python` or 
 | Job | Use |
 |---|---|
 | New deck | Node with `pptxgenjs` (masters, rich native charts, tables, shapes) or Python with `python-pptx` (native charts and tables too, plus text measuring with `pillow`) |
-| Change a deck you made | Pass its `file_id` as `replaces_file_id`: same file, new version. Open it with `pptx.Presentation`, change it, save a `.pptx`. Never rebuild from nothing or make a second copy. |
+| Change a deck you made | Pass its `continuation_ref` as `replaces_file_id`: same file, new version. Open it with `pptx.Presentation`, change it, save a `.pptx`. Never rebuild from nothing or make a second copy. |
 
 Give `file_build` the program, the output names, `checks: ["validate_ooxml", "render_pages"]` and a
 one-line `description`. Both checks are mandatory.

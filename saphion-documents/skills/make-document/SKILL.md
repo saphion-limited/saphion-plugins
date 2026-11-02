@@ -41,7 +41,7 @@ Call `file_build` with exactly these fields: `program`, `language` (`python` or 
 | Word file | Python with `python-docx` (default), or Node `docx` when you need finer numbering or table control |
 | PDF from scratch (summary, certificate, form) | Python with `reportlab` `platypus` (section 5) |
 | PDF of a document the person also edits | Build the `.docx` in one run. In a second run, convert it inside the program: `soffice --headless --convert-to pdf --outdir . file.docx`, with `HOME` set to a writable folder, and deliver the PDF |
-| Change a file you made | Pass its `file_id` as `replaces_file_id`: same file, new version. Open it, change it, save the same kind. Never rebuild from nothing or make a second copy. |
+| Change a file you made | Pass its `continuation_ref` as `replaces_file_id`: same file, new version. Open it, change it, save the same kind. Never rebuild from nothing or make a second copy. |
 | Stamp or read a PDF | `pypdf`: open the PDF named in `inputs` and write the stamped copy as a new output. A PDF you made is changed with `replaces_file_id`, as above. |
 
 Give `file_build` the program, the output names, `checks: ["render_pages"]` and a one-line
