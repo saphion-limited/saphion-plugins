@@ -1341,6 +1341,25 @@
     "type": "object"
    }
   },
+  "board_read": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "boards",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "board_view_save": {
    "choices": {
     "act": [
