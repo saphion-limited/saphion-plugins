@@ -2044,6 +2044,41 @@
    ],
    "family": "host"
   },
+  "closing_question": {
+   "choices": {},
+   "doors": [
+    "beacon"
+   ],
+   "family": "host",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "answers": {
+      "items": {
+       "maxLength": 24,
+       "type": "string"
+      },
+      "maxItems": 2,
+      "minItems": 1,
+      "type": "array"
+     },
+     "question": {
+      "maxLength": 100,
+      "type": "string"
+     },
+     "recap": {
+      "maxLength": 300,
+      "type": "string"
+     }
+    },
+    "required": [
+     "recap",
+     "question",
+     "answers"
+    ],
+    "type": "object"
+   }
+  },
   "context_read": {
    "choices": {},
    "doors": [
