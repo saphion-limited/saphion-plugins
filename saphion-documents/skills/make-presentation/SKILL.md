@@ -39,7 +39,7 @@ Call `file_build` with exactly these fields: `program`, `language` (`python` or 
 | Job | Use |
 |---|---|
 | New deck | Node with `pptxgenjs` (masters, rich native charts, tables, shapes) or Python with `python-pptx` (native charts and tables too, plus text measuring with `pillow`) |
-| Change a deck you made | Pass its `file_id` as `replaces_file_id`: same file, new version. Open it with `pptx.Presentation`, change it, save a `.pptx`. Never rebuild from nothing or make a second copy. |
+| Change a deck you made | Pass its `continuation_ref` as `replaces_file_id`: same file, new version. Open it with `pptx.Presentation`, change it, save a `.pptx`. Never rebuild from nothing or make a second copy. |
 
 Give `file_build` the program, the output names, `checks: ["validate_ooxml", "render_pages"]` and a
 one-line `description`. Both checks are mandatory.
@@ -133,15 +133,6 @@ these in the program; the check will not catch them.
 - One paragraph per list item. Keep the neighbouring paragraph's properties when adding one, and bold
   titles and inline labels ("Status:") the way the deck does. Let bullets come from the layout.
 - Match the deck's existing look unless the person asks to change it.
-
-## 5b. A template or deck the person supplied
-<!-- TEMPORARY BRIDGE [skill_packages]: this section is deleted when skill_packages is released (S11); the edit procedures replace it -->
-
-This applies to a template or a deck the person attached or you found with `find`: a file Beacon did not make.
-When you have a procedure for adding slides to or updating a supplied deck, it does that work and this section is not used.
-
-- A template deck the person attached is not a template the program can apply: use the Organisation's
-  style as section 2 describes.
 
 ## 6. The checks (mandatory)
 

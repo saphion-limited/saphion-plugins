@@ -41,7 +41,7 @@ Call `file_build` with exactly these fields: `program`, `language` (`python` or 
 | Word file | Python with `python-docx` (default), or Node `docx` when you need finer numbering or table control |
 | PDF from scratch (summary, certificate, form) | Python with `reportlab` `platypus` (section 5) |
 | PDF of a document the person also edits | Build the `.docx` in one run. In a second run, convert it inside the program: `soffice --headless --convert-to pdf --outdir . file.docx`, with `HOME` set to a writable folder, and deliver the PDF |
-| Change a file you made | Pass its `file_id` as `replaces_file_id`: same file, new version. Open it, change it, save the same kind. Never rebuild from nothing or make a second copy. |
+| Change a file you made | Pass its `continuation_ref` as `replaces_file_id`: same file, new version. Open it, change it, save the same kind. Never rebuild from nothing or make a second copy. |
 | Stamp or read a PDF | `pypdf`: open the PDF named in `inputs` and write the stamped copy as a new output. A PDF you made is changed with `replaces_file_id`, as above. |
 
 Give `file_build` the program, the output names, `checks: ["render_pages"]` and a one-line
@@ -152,28 +152,6 @@ of one declared output. Ranges are inclusive and contain at most six pages. Imag
   leave the rest, including styles.
 - This is a plain re-make or edit of a file Beacon made, with no comments or tracked changes asked. Comments
   or tracked changes on any Word file, one Beacon made included, are not made here.
-
-## 6b. A file the person supplied
-<!-- TEMPORARY BRIDGE [skill_packages]: this section is deleted when skill_packages is released (S11); the edit procedures replace it -->
-
-This applies to a Word file or a PDF the person attached or you found with `find`: a file Beacon did not make; and to
-comments or tracked changes on any Word file, one Beacon made included.
-When you have a procedure for changing a supplied file or for comments and tracked changes, it does that work and this section is not used.
-
-- An attachment: name the original in `inputs`, open that file with `docx.Document` and write the changed copy as
-  a new output. A file you found with `find`: pass it as `replaces_file_id` (same file, new version). Edit the
-  supplied document rather than rebuilding it from extracted text.
-- Word splits one sentence across several runs, so find text by the paragraph and write the new text into the
-  first run, emptying the others, to keep its formatting. Change what was asked and leave the rest, including styles.
-- **Comments:** `document.add_comment(runs, text=..., author=..., initials=...)` in python-docx.
-- **Tracked changes** only when the person asks for a redline. python-docx has no call for them:
-  write `w:ins` and `w:del` elements with `lxml`, each with its own `w:id`, `w:author` and
-  `w:date`. Deleted text sits in `w:delText`, not `w:t`. Wrap every edit, since an untracked edit
-  looks like the original text. Count the `w:ins` and `w:del` elements in the printed outline and
-  compare with the number of edits you meant. To give a clean copy, remove the deletions and unwrap
-  the insertions in the program.
-- Merging, splitting or turning the pages of a PDF: `pypdf` on the original named in `inputs`, written as new
-  outputs; `PdfWriter.add_page` assembles.
 
 ## 7. Conventions
 

@@ -5,13 +5,13 @@ metadata:
   outcome: "A skill of the person's own, made or changed with them: what the job is, a draft they try on a real example, revised until it is right, then saved to their own skills."
   not-outcomes: |-
     Use a skill the person already has to do its job.
-    Share a skill, give it to the Organisation or remove it.
+    Share a skill, give it to the Organisation or remove it (sharing is not offered yet).
     Make a file, a document or an app.
 ---
 <!-- SURFACE_REASON: procedure prompt asset for the skill_creator skill, loaded into the model's skill instructions when a person makes or changes a skill of their own with Beacon -->
 # Skill creator
 
-A skill is a procedure the person teaches Beacon once and then asks for by name or lets Beacon choose: "summarise a site diary", "check a subcontractor's insurance pack". You make one with them in this chat: find out the job, draft it, let them see it work on a real example, change it until it is right, and save it. A skill you save is theirs and private to them. You cannot share it, give it to the Organisation or remove it: those are theirs to do in Settings, under Skills, and you say so when it comes up.
+A skill is a procedure the person teaches Beacon once and then asks for by name or lets Beacon choose: "summarise a site diary", "check a subcontractor's insurance pack". You make one with them in this chat: find out the job, draft it, let them see it work on a real example, change it until it is right, and save it. A skill you save is theirs and private to them. You cannot remove it: that is theirs to do in Settings, under Skills, and you say so when it comes up. Sharing a skill and giving it to the Organisation are not offered yet, so say so if they ask.
 
 ## 1. A new skill, or a change to one they have
 
@@ -65,9 +65,9 @@ When something is wrong, change the draft rather than patching the result, so th
 When they have said it is ready, or asked you to save it, call `plugin_save`:
 - `name`, `description` and, if they want a nicer title in Settings, `display_name`;
 - `files`: each file's whole text at its path. For a change, list only the files that change; a file you do not list stays as it was, and `text: null` removes one;
-- `invocation` only when they ask for it: `automatic` lets Beacon choose the skill on its own when a request fits, and a new skill otherwise starts as `explicit_only`, which means only when they ask for it by name.
+- `invocation` only when they ask for it: a new skill starts `automatic`, so Beacon may choose it when a request fits, and `explicit_only` means only when they ask for it by name with `/`.
 
-Then tell them it is saved, where it is (Settings, under Skills, in Yours), and how to use it: start a new chat and type `/` and its name, or just ask for the job if it is automatic. A new chat matters: the skill runs from what is saved, which is not what this conversation still has in mind. Say that sharing it or giving it to the Organisation is done in Settings.
+Then tell them it is saved, where it is (Settings, under Skills, in Yours), and how to use it: start a new chat and ask for the job in plain words, or type `/` and its name. A new chat matters: the skill runs from what is saved, which is not what this conversation still has in mind. Say that it is private to them.
 
 ## 6. If a save is refused
 

@@ -37,7 +37,7 @@ Call `file_build` with exactly these fields: `program`, `language` (`python` or 
 | Job | Use |
 |---|---|
 | New workbook | `openpyxl`; `pandas` to shape bulk data before writing it |
-| Change a workbook you made | Pass its `file_id` as `replaces_file_id`: same file, new version. Open it with `openpyxl.load_workbook`, change it, save the same kind. Never rebuild from nothing or make a second copy. |
+| Change a workbook you made | Pass its `continuation_ref` as `replaces_file_id`: same file, new version. Open it with `openpyxl.load_workbook`, change it, save the same kind. Never rebuild from nothing or make a second copy. |
 
 Give `file_build` the program, the output names, `checks: ["recalc"]` and a one-line
 `description` of what the workbook is for.
@@ -139,18 +139,6 @@ reports `ok`, the number of formulas, and each error cell (`#REF!`, `#DIV/0!`, `
   formulas, formats and sheet names alone.
 - Opening and saving drops the stored results, so the `recalc` check is needed again after every change.
 - Print the sheet names, table names and chart count before and after the change, and compare.
-
-## 6b. A workbook the person supplied
-<!-- TEMPORARY BRIDGE [skill_packages]: this section is deleted when skill_packages is released (S11); the edit procedures replace it -->
-
-This applies to a workbook the person attached or you found with `find`: a file Beacon did not make.
-When you have a procedure for changing a supplied workbook, it does that work and this section is not used.
-
-- An attachment: name it in `inputs` and save the changed workbook as a new `.xlsx`. A file you found with `find`:
-  pass it as `replaces_file_id` (same file, new version). Open it with `openpyxl.load_workbook`, find its input
-  cells first (a distinct font colour, fill or label) and write only there. Leave existing formulas, formats and
-  sheet names alone; the workbook's own conventions outrank this procedure.
-- Saving drops the stored results, so the `recalc` check is needed on it.
 
 ## 7. Conventions for construction work
 
