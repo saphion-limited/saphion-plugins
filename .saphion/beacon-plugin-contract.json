@@ -1062,9 +1062,11 @@
   "board_change": {
    "choices": {
     "act": [
+     "apply_template",
      "create",
      "move",
      "place_record",
+     "save_template",
      "section"
     ],
     "action": [
@@ -1325,13 +1327,58 @@
          "act"
         ],
         "type": "object"
+       },
+       {
+        "additionalProperties": false,
+        "properties": {
+         "act": {
+          "const": "apply_template",
+          "type": "string"
+         },
+         "start_on": {
+          "default": "",
+          "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$",
+          "type": "string"
+         }
+        },
+        "required": [
+         "act"
+        ],
+        "type": "object"
+       },
+       {
+        "additionalProperties": false,
+        "properties": {
+         "act": {
+          "const": "save_template",
+          "type": "string"
+         },
+         "name": {
+          "default": "",
+          "maxLength": 255,
+          "type": "string"
+         }
+        },
+        "required": [
+         "act"
+        ],
+        "type": "object"
        }
       ]
+     },
+     "into_continuation_ref": {
+      "type": "string"
      },
      "project_continuation_ref": {
       "type": "string"
      },
      "record_continuation_ref": {
+      "type": "string"
+     },
+     "source_continuation_ref": {
+      "type": "string"
+     },
+     "template_continuation_ref": {
       "type": "string"
      }
     },
