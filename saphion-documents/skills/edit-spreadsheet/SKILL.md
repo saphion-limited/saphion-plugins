@@ -1,6 +1,12 @@
 ---
 name: "edit-spreadsheet"
 description: "Change an Excel workbook the person supplied: add rows, change an input or add a summary, with its formulas, formatting and sheets kept"
+metadata:
+  outcome: "An Excel workbook (.xlsx) the person supplied, changed and returned: rows added, an input changed or a summary sheet added, with every formula kept and recalculated, and its formatting, named cells and sheets as they were."
+  not-outcomes: |-
+    Build a new workbook from nothing.
+    Read, check or summarise a workbook without changing it.
+    Make a CSV, or change a macro-enabled (.xlsm) or old (.xls) workbook.
 ---
 <!-- SURFACE_REASON: procedure prompt asset for the edit_spreadsheet skill, loaded into the model's skill instructions for changing a supplied Excel workbook without losing its formulas -->
 # Edit a spreadsheet
@@ -43,7 +49,10 @@ every formula, name, rule, validation list, table, chart and print area for you,
 
 - **`set`: change an input.** `sheet`, `cell`, `value`: a number, text, `true`/`false`, `null` to clear, or a formula
   beginning `=`. Text in ISO form (`2026-11-01`) written into a date-formatted cell becomes a real date. A cell that holds a
-  formula is refused unless the person asked for it to become a fixed value, and then the entry says `"overwrite_formula": true`.
+  formula is refused: a formula is not an input, so change the input it reads. Replacing it with a fixed value stops it calculating,
+  which "set it to 20000" does not ask for. Ask in words first, naming the cell and what stops calculating ("E4 calculates
+  quantity times rate; setting it to 20000 stops that. Replace it?"), end your reply there, and only after the person's yes put
+  `"confirmed_fixed_value": "E4"` (that entry's own cell) on the entry.
 - **`insert_rows`: add rows.** `before_row` is the row the new rows go ahead of: the subtotal or totals row under the table,
   or the row after the last used row to add at the bottom. `rows` is a list of objects keyed by column letter. The new rows copy
   their formatting from `like_row` (default: the row above `before_row`, and name another if that row is a heading or total) and
@@ -53,8 +62,9 @@ every formula, name, rule, validation list, table, chart and print area for you,
   each one that did, so check every total you expect is there. A total that does not end there needs its own `set`.
 - **`add_sheet`: add a summary.** `name` (at most 31 characters), optional `position` (0 first; omit for last), `cells` with
   `cell`, `value` (a formula reads other sheets' cells as supplied) and optional `style_from` (a cell of the supplied workbook
-  whose look the cell takes), `number_format`, `bold`; and `column_widths`. Summaries read figures through formulas, never
-  retyped numbers.
+  whose look the cell takes), `number_format`, `bold`; and `column_widths`. A cell with no `style_from` is written in the font
+  most of the supplied workbook's cells use (so is a cell `set` or `insert_rows` makes where there was no look to copy), and `bold`
+  keeps that font. Summaries read figures through formulas, never retyped numbers.
 - `output_name` (ending `.xlsx`) names the new file; the default is the supplied file's name with `-edited` added
   (`Cost plan.xlsx` comes back as `Cost plan-edited.xlsx`), so it never replaces or duplicates the original in the person's files.
 - `accept_losses`: see section 4.

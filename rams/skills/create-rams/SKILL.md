@@ -1,6 +1,11 @@
 ---
 name: "create-rams"
 description: "Risk assessment and method statement"
+metadata:
+  outcome: "One Risk Assessment and Method Statement for one specific job the person wants produced: the RAMS record with its hazards and method steps, and its Word document from the Organisation's RAMS template."
+  not-outcomes: |-
+    Provide an ordinary safety briefing, checklist, explanation or guidance.
+    Draft ordinary chat content merely because its subject overlaps workplace safety.
 ---
 <!-- SURFACE_REASON: procedure prompt asset for the create_rams skill, loaded into the model's skill instructions for making a RAMS record and its Word document from the Organisation's own template -->
 # Create a RAMS

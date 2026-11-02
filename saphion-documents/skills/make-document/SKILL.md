@@ -1,6 +1,14 @@
 ---
 name: "make-document"
 description: "A Word (.docx) or PDF file to download or send"
+metadata:
+  outcome: "A new Word document (.docx) or PDF file built for the person to download or send, such as a report, letter, minutes or method statement, designed, laid out cleanly and checked page by page."
+  not-outcomes: |-
+    Write the text in the conversation.
+    Prepare a RAMS held in the Risk and Method Statements product.
+    Make a presentation or a spreadsheet.
+  hand-over-edit-word-document: "Change a Word file the person supplied, or add comments or tracked changes to any Word file."
+  hand-over-edit-pdf: "Fill in, join, take pages out of or turn the pages of a PDF the person supplied."
 ---
 <!-- SURFACE_REASON: procedure prompt asset for the make_document skill, loaded into the model's skill instructions for building Word and PDF files -->
 # Make a document

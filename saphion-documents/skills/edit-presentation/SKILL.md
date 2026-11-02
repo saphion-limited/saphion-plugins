@@ -1,6 +1,12 @@
 ---
 name: "edit-presentation"
 description: "Add slides to a PowerPoint template or deck on its own layouts, and update its slides"
+metadata:
+  outcome: "A PowerPoint template or deck the person supplied, changed and returned: slides added on its own layouts, slides updated, its layouts, theme and placeholders kept, every slide measured and looked at, nothing overflowing."
+  not-outcomes: |-
+    Build a new deck from nothing, or one that no template or supplied deck is the base of.
+    Summarise or read a deck without changing it.
+    Make a Word document, PDF or spreadsheet.
 ---
 <!-- SURFACE_REASON: procedure prompt asset and helper scripts for the edit_presentation skill, loaded into the model's skill instructions for changing a PowerPoint template or deck the person supplied -->
 # Edit a presentation

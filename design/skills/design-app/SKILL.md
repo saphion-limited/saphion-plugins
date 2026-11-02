@@ -1,6 +1,12 @@
 ---
 name: "design-app"
 description: "Polished single-file HTML apps and pages for the side pane, design included"
+metadata:
+  outcome: "A polished, substantial single-file HTML app or page for the side pane: designed for its subject, clear hierarchy, light and dark themes, every state, accessible, and honest about its data."
+  not-outcomes: |-
+    A quick or throwaway app, calculator or widget where no polish was asked for.
+    Figures, tables, charts, records or places that Saphion already shows natively.
+    Make a Word, PDF, PowerPoint or Excel file.
 ---
 <!-- SURFACE_REASON: procedure prompt asset for the design_app skill, loaded into the model's skill instructions for polished single-file apps -->
 # Design an app

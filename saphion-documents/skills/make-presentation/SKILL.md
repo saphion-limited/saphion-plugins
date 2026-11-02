@@ -1,6 +1,13 @@
 ---
 name: "make-presentation"
 description: "PowerPoint decks (.pptx) with one idea per slide"
+metadata:
+  outcome: "A new PowerPoint deck (.pptx) built for the person: one idea per slide, a designed consistent theme, real charts and tables where there is data, and every slide checked for overflow."
+  not-outcomes: |-
+    Outline or script a talk in the conversation without making a file.
+    Make a Word document, PDF or spreadsheet.
+    Make an interactive app or page.
+  hand-over-edit-presentation: "Add slides to, or update slides in, a template or a deck the person supplied."
 ---
 <!-- SURFACE_REASON: procedure prompt asset for the make_presentation skill, loaded into the model's skill instructions for building PowerPoint decks -->
 # Make a presentation

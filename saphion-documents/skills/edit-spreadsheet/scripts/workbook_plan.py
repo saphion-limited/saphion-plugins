@@ -28,7 +28,7 @@ class SetCell:
     sheet: str
     cell: str
     value: Any
-    overwrite_formula: bool
+    confirmed_fixed_value: bool  # the plan names this cell as one the person agreed to turn into a fixed value
 
 
 @dataclass(frozen=True)
@@ -127,9 +127,12 @@ def _sets(items: list[Any]) -> tuple[SetCell, ...]:
     made = []
     for number, item in enumerate(items, start=1):
         where = f"set[{number}]"
-        item = _object(item, where, {"sheet", "cell", "value", "overwrite_formula"}, {"sheet", "cell", "value"})
-        made.append(SetCell(_text(item["sheet"], f"{where}.sheet"), cell_address(item["cell"], f"{where}.cell"),
-                            _scalar(item["value"], f"{where}.value"), item.get("overwrite_formula") is True))
+        item = _object(item, where, {"sheet", "cell", "value", "confirmed_fixed_value"}, {"sheet", "cell", "value"})
+        address = cell_address(item["cell"], f"{where}.cell")
+        confirmed = "confirmed_fixed_value" in item and cell_address(item["confirmed_fixed_value"], f"{where}.confirmed_fixed_value")
+        if confirmed and confirmed != address:
+            raise PlanRefused(f"{where}.confirmed_fixed_value names {confirmed}, which is not this entry's cell {address}: it confirms one cell.")
+        made.append(SetCell(_text(item["sheet"], f"{where}.sheet"), address, _scalar(item["value"], f"{where}.value"), bool(confirmed)))
     return tuple(made)
 
 

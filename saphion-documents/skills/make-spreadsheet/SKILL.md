@@ -1,6 +1,13 @@
 ---
 name: "make-spreadsheet"
 description: "Excel workbooks with live formulas"
+metadata:
+  outcome: "A new Excel workbook (.xlsx) built for the person: tidy sheets, real formulas for totals and derived values, formatted headers and numbers, and no formula errors."
+  not-outcomes: |-
+    Read, check or summarise a spreadsheet the person supplied.
+    Show figures, a table or a chart in the conversation rather than as a file.
+    Make a CSV or plain text file.
+  hand-over-edit-spreadsheet: "Change a workbook the person supplied: add rows, change an input or add a summary while keeping its formulas and layout."
 ---
 <!-- SURFACE_REASON: procedure prompt asset for the make_spreadsheet skill, loaded into the model's skill instructions for building Excel workbooks -->
 # Make a spreadsheet

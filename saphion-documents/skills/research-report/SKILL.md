@@ -1,6 +1,12 @@
 ---
 name: "research-report"
 description: "Research a question across several sources and deliver a cited report with a bundle of its sources"
+metadata:
+  outcome: "A question researched across several sources Beacon read, answered in a Word report in which every claim cites a source that opens its real page, with a downloadable bundle of the report and its source list; or a plain statement that the sources found were not good enough, with nothing invented."
+  not-outcomes: |-
+    Answer a single fact, date or figure that one search settles.
+    Summarise or answer questions about a file the person supplied.
+    Write a document from what the person already told you, with no research.
 ---
 <!-- SURFACE_REASON: procedure prompt asset and helper script for the research_report skill, loaded into the model's skill instructions for researching a question across sources and delivering a cited report -->
 # Research report
