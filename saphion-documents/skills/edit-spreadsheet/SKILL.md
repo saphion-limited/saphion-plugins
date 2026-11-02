@@ -62,9 +62,8 @@ every formula, name, rule, validation list, table, chart and print area for you,
   each one that did, so check every total you expect is there. A total that does not end there needs its own `set`.
 - **`add_sheet`: add a summary.** `name` (at most 31 characters), optional `position` (0 first; omit for last), `cells` with
   `cell`, `value` (a formula reads other sheets' cells as supplied) and optional `style_from` (a cell of the supplied workbook
-  whose look the cell takes), `number_format`, `bold`; and `column_widths`. A cell with no `style_from` is written in the font
-  most of the supplied workbook's cells use (so is a cell `set` or `insert_rows` makes where there was no look to copy), and `bold`
-  keeps that font. Summaries read figures through formulas, never retyped numbers.
+  whose look the cell takes), `number_format`, `bold`; and `column_widths`. Summaries read figures through formulas, never
+  retyped numbers.
 - `output_name` (ending `.xlsx`) names the new file; the default is the supplied file's name with `-edited` added
   (`Cost plan.xlsx` comes back as `Cost plan-edited.xlsx`), so it never replaces or duplicates the original in the person's files.
 - `accept_losses`: see section 4.

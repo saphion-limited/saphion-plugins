@@ -32,7 +32,7 @@ still unknown goes into your reply as something to confirm, not into the documen
 
 ## 2. Create the RAMS record
 
-Call `record_structure` for `rams` to see its fields, its Status choices and
+Call `record_fields` for `rams` to see its fields, its Status choices and
 how a linked field is written. Find the RAMS board's record set with `find`
 (kind `record`, `record_class` `rams`), then call `record_change` with that record set's `record_set_continuation_ref`
 and a `change` of `act` `create`, `resource_class: rams` and `values`: name (a concise title for the job, such as "Roof edge protection,

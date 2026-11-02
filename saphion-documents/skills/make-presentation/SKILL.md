@@ -134,15 +134,6 @@ these in the program; the check will not catch them.
   titles and inline labels ("Status:") the way the deck does. Let bullets come from the layout.
 - Match the deck's existing look unless the person asks to change it.
 
-## 5b. A template or deck the person supplied
-<!-- TEMPORARY BRIDGE [skill_packages]: this section is deleted when skill_packages is released (S11); the edit procedures replace it -->
-
-This applies to a template or a deck the person attached or you found with `find`: a file Beacon did not make.
-When you have a procedure for adding slides to or updating a supplied deck, it does that work and this section is not used.
-
-- A template deck the person attached is not a template the program can apply: use the Organisation's
-  style as section 2 describes.
-
 ## 6. The checks (mandatory)
 
 `validate_ooxml` confirms the package opens and counts slides and layouts; compare the slide count

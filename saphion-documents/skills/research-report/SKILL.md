@@ -84,7 +84,7 @@ Write the report as Markdown text, in this shape (leave out a section with nothi
   full and how many passages you used, and the date. **What could not be established**: anything you could not source, stated plainly.
   These three state no finding and need no citation.
 - **Everything else is a finding, and every finding is cited**: each sentence, each list item, each row of a table, and every table cell
-  that holds a figure. A source is cited as you cite it in a reply: `[[cite:handle]]` after the sentence it supports, with the handle the
+  that holds a figure. A source is cited as `[[cite:handle]]` after the sentence it supports, with the handle the
   tool result gave for that source (`source_id`). Cite a claim with the sources that support it; a sentence no source supports does not
   go in the report.
 - **Never write an address, a link or a source's details.** A web address, a Markdown link and an image are refused. The host knows what
