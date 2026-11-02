@@ -4662,9 +4662,6 @@
      "day": {
       "type": "string"
      },
-     "gives_work": {
-      "type": "boolean"
-     },
      "kind": {
       "enum": [
        "any",
@@ -4690,12 +4687,18 @@
       ],
       "type": "string"
      },
+     "person_gives_work": {
+      "type": "boolean"
+     },
      "product": {
       "default": "",
       "enum": [
        "crm"
       ],
       "type": "string"
+     },
+     "project_counts": {
+      "type": "boolean"
      },
      "query": {
       "default": "",
@@ -4736,9 +4739,6 @@
       "minLength": 1,
       "type": "string"
      },
-     "with_counts": {
-      "type": "boolean"
-     },
      "within": {
       "maxLength": 200,
       "type": "string"
@@ -4776,6 +4776,11 @@
      "query": {
       "default": "",
       "maxLength": 500,
+      "type": "string"
+     },
+     "record_class": {
+      "default": "",
+      "maxLength": 170,
       "type": "string"
      },
      "scope": {
@@ -8813,6 +8818,61 @@
     "type": "object"
    }
   },
+  "record_fields": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "organisation_reach",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "describe": {
+      "items": {
+       "maxLength": 128,
+       "minLength": 1,
+       "type": "string"
+      },
+      "maxItems": 40,
+      "type": "array"
+     },
+     "parts": {
+      "items": {
+       "enum": [
+        "fields",
+        "views",
+        "acts",
+        "meanings",
+        "record_sets",
+        "automation"
+       ],
+       "type": "string"
+      },
+      "maxItems": 6,
+      "minItems": 1,
+      "type": "array"
+     },
+     "record_class": {
+      "maxLength": 170,
+      "type": "string"
+     },
+     "view_kinds": {
+      "items": {
+       "maxLength": 32,
+       "minLength": 1,
+       "type": "string"
+      },
+      "maxItems": 8,
+      "type": "array"
+     }
+    },
+    "required": [
+     "record_class"
+    ],
+    "type": "object"
+   }
+  },
   "record_review": {
    "choices": {
     "act": [
@@ -9034,62 +9094,6 @@
     "required": [
      "role",
      "record_continuation_ref"
-    ],
-    "type": "object"
-   }
-  },
-  "record_structure": {
-   "choices": {},
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "organisation_reach",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "describe": {
-      "items": {
-       "maxLength": 128,
-       "minLength": 1,
-       "type": "string"
-      },
-      "maxItems": 40,
-      "type": "array"
-     },
-     "parts": {
-      "items": {
-       "enum": [
-        "fields",
-        "views",
-        "sections",
-        "acts",
-        "meanings",
-        "record_sets",
-        "automation"
-       ],
-       "type": "string"
-      },
-      "maxItems": 7,
-      "minItems": 1,
-      "type": "array"
-     },
-     "record_class": {
-      "maxLength": 170,
-      "type": "string"
-     },
-     "view_kinds": {
-      "items": {
-       "maxLength": 32,
-       "minLength": 1,
-       "type": "string"
-      },
-      "maxItems": 8,
-      "type": "array"
-     }
-    },
-    "required": [
-     "record_class"
     ],
     "type": "object"
    }
