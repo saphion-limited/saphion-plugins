@@ -279,6 +279,7 @@
         "reminder.overdue",
         "plan.starts_late",
         "plan.replanned",
+        "plan.cannot_fit",
         "reminder.request_chase",
         "connector.request_decided",
         "plugin.created",
@@ -2105,6 +2106,126 @@
     "type": "object"
    }
   },
+  "conversation_post": {
+   "choices": {
+    "act": [
+     "comment",
+     "update"
+    ]
+   },
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "record_updates",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "change": {
+      "discriminator": {
+       "propertyName": "act"
+      },
+      "oneOf": [
+       {
+        "additionalProperties": false,
+        "properties": {
+         "act": {
+          "const": "update",
+          "type": "string"
+         },
+         "attachments": {
+          "items": {
+           "maxLength": 2048,
+           "minLength": 1,
+           "type": "string"
+          },
+          "maxItems": 20,
+          "type": "array"
+         },
+         "body": {
+          "minLength": 1,
+          "type": "string"
+         }
+        },
+        "required": [
+         "body",
+         "act"
+        ],
+        "type": "object"
+       },
+       {
+        "additionalProperties": false,
+        "allOf": [
+         {
+          "oneOf": [
+           {
+            "required": [
+             "thread"
+            ]
+           },
+           {
+            "required": [
+             "block"
+            ]
+           }
+          ]
+         },
+         {
+          "dependentRequired": {
+           "quote": [
+            "block"
+           ]
+          }
+         }
+        ],
+        "properties": {
+         "act": {
+          "const": "comment",
+          "type": "string"
+         },
+         "block": {
+          "maxLength": 160,
+          "minLength": 1,
+          "saphion.issued_references": true,
+          "type": "string"
+         },
+         "body": {
+          "minLength": 1,
+          "type": "string"
+         },
+         "quote": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "type": "string"
+         },
+         "thread": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+         }
+        },
+        "required": [
+         "body",
+         "act"
+        ],
+        "type": "object"
+       }
+      ]
+     },
+     "continuation_ref": {
+      "type": "string"
+     },
+     "update_continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "change"
+    ],
+    "type": "object"
+   }
+  },
   "conversation_search": {
    "choices": {},
    "doors": [
@@ -3235,71 +3356,6 @@
     },
     "required": [
      "change"
-    ],
-    "type": "object"
-   }
-  },
-  "document_comment": {
-   "choices": {},
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "record_updates",
-   "schema": {
-    "additionalProperties": false,
-    "allOf": [
-     {
-      "oneOf": [
-       {
-        "required": [
-         "thread"
-        ]
-       },
-       {
-        "required": [
-         "block"
-        ]
-       }
-      ]
-     },
-     {
-      "dependentRequired": {
-       "quote": [
-        "block"
-       ]
-      }
-     }
-    ],
-    "properties": {
-     "block": {
-      "maxLength": 160,
-      "minLength": 1,
-      "saphion.issued_references": true,
-      "type": "string"
-     },
-     "body": {
-      "minLength": 1,
-      "type": "string"
-     },
-     "continuation_ref": {
-      "type": "string"
-     },
-     "quote": {
-      "maxLength": 2000,
-      "minLength": 1,
-      "type": "string"
-     },
-     "thread": {
-      "maxLength": 128,
-      "minLength": 1,
-      "pattern": "^\\S+$",
-      "type": "string"
-     }
-    },
-    "required": [
-     "body",
-     "continuation_ref"
     ],
     "type": "object"
    }
@@ -6788,43 +6844,6 @@
      }
     },
     "required": [
-     "continuation_ref"
-    ],
-    "type": "object"
-   }
-  },
-  "organisation_record_update_post": {
-   "choices": {},
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "record_updates",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "attachments": {
-      "items": {
-       "maxLength": 2048,
-       "minLength": 1,
-       "type": "string"
-      },
-      "maxItems": 20,
-      "type": "array"
-     },
-     "body": {
-      "minLength": 1,
-      "type": "string"
-     },
-     "continuation_ref": {
-      "type": "string"
-     },
-     "update_continuation_ref": {
-      "type": "string"
-     }
-    },
-    "required": [
-     "body",
      "continuation_ref"
     ],
     "type": "object"
