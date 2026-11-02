@@ -8,6 +8,7 @@ keeps pointing at the old rows, which is how a totals formula silently stops cou
 from __future__ import annotations
 
 import datetime
+from collections import Counter
 from copy import copy
 from dataclasses import dataclass, field, replace
 from typing import Any
@@ -15,6 +16,7 @@ from typing import Any
 from openpyxl.cell.cell import MergedCell
 from openpyxl.formatting.formatting import ConditionalFormattingList
 from openpyxl.formula.translate import Translator
+from openpyxl.styles import DEFAULT_FONT
 from openpyxl.styles.numbers import is_date_format
 from openpyxl.utils.cell import (
     column_index_from_string,
@@ -57,6 +59,31 @@ def formula_text(value: Any) -> str | None:
     return value if isinstance(value, str) and value.startswith("=") else None
 
 
+BaseFont = tuple[str, float]  # the (name, size) a workbook's cells are mostly written in
+
+
+def base_font(workbook: Any) -> BaseFont:
+    """The (name, size) most of the workbook's cells with something in them are written in.
+
+    Read once, from the workbook as supplied, before the plan writes anything: a cell the plan makes is written in what the person's own cells are
+    written in, not in openpyxl's Calibri 11 (which is what an unstyled cell reads as, and so how a new cell would otherwise look beside Arial 10).
+    On a tie the font met first (sheet order, then cell order) wins. A workbook with nothing in it has only the default font.
+    """
+    held = Counter((cell.font.name, cell.font.sz) for sheet in workbook.worksheets for cell in sheet._cells.values()
+                   if cell.value is not None and cell.font.name and cell.font.sz)
+    return held.most_common(1)[0][0] if held else (DEFAULT_FONT.name, DEFAULT_FONT.sz)
+
+
+def _in_base_font(cell: Any, base: BaseFont) -> None:
+    """Write ``cell`` in the workbook's base font, keeping everything else about its font (bold, colour). A font tied to the theme's font
+    (``scheme``) would show the theme's font whatever its name says, so it is let go when the name changes."""
+    if (cell.font.name, cell.font.sz) != base:
+        font = copy(cell.font)
+        font.name, font.sz = base
+        font.scheme = None
+        cell.font = font
+
+
 def _sheet(workbook: Any, name: str) -> Any:
     if name not in workbook.sheetnames:
         raise PlanRefused(f"The workbook has no sheet {name!r}. Its sheets: {', '.join(repr(item) for item in workbook.sheetnames)}.")
@@ -74,7 +101,7 @@ def _typed(cell: Any, value: Any) -> Any:
     return value
 
 
-def _set(workbook: Any, step: SetCell, applied: Applied) -> None:
+def _set(workbook: Any, step: SetCell, applied: Applied, base: BaseFont) -> None:
     sheet = _sheet(workbook, step.sheet)
     cell = sheet[step.cell]
     if isinstance(cell, MergedCell):
@@ -87,12 +114,15 @@ def _set(workbook: Any, step: SetCell, applied: Applied) -> None:
                           f"calculating, and only after their yes put \"confirmed_fixed_value\": \"{step.cell}\" on this entry.")
     if held is not None:
         applied.overwritten.add((step.sheet, cell.row, cell.column))
+    new = cell.value is None and not cell.has_style  # a cell the person did not have: the audit leaves it out, so it may take the base font
     cell.value = _typed(cell, step.value)
+    if new:
+        _in_base_font(cell, base)
     applied.edited.add((step.sheet, cell.row, cell.column))
     applied.formulas_added += formula_text(cell.value) is not None
 
 
-def _add_sheet(workbook: Any, step: NewSheet, applied: Applied) -> None:
+def _add_sheet(workbook: Any, step: NewSheet, applied: Applied, base: BaseFont) -> None:
     if step.name.casefold() in {name.casefold() for name in workbook.sheetnames}:
         raise PlanRefused(f"The workbook already has a sheet called {step.name!r}; sheet names are the same in any letter case.")
     sheet = workbook.create_sheet(step.name, step.position)
@@ -102,6 +132,8 @@ def _add_sheet(workbook: Any, step: NewSheet, applied: Applied) -> None:
             name, _, address = item.style_from.rpartition("!")
             source = _sheet(workbook, name.strip("'").replace("''", "'"))[cell_address(address, f"style_from {item.style_from!r}")]
             cell._style = copy(source._style)
+        else:
+            _in_base_font(cell, base)
         cell.value = _typed(cell, item.value)
         if item.number_format:
             cell.number_format = item.number_format
@@ -236,7 +268,7 @@ def _move_rows(workbook: Any, plan: Plan, rows: RowMap, applied: Applied) -> Non
         held.attr_text = _move_formula("=" + (held.attr_text or ""), None, rows)[1:]
 
 
-def _fill_new_rows(workbook: Any, step: InsertRows, insertion: Insertion, rows: RowMap, plain: RowMap, applied: Applied) -> None:
+def _fill_new_rows(workbook: Any, step: InsertRows, insertion: Insertion, rows: RowMap, plain: RowMap, applied: Applied, base: BaseFont) -> None:
     sheet = workbook[step.sheet]
     first = rows.first_new_row(insertion)
     model = rows.row(step.sheet, step.like_row) if step.like_row else None
@@ -260,6 +292,8 @@ def _fill_new_rows(workbook: Any, step: InsertRows, insertion: Insertion, rows: 
                     # Written for a row of the workbook as supplied: the references move with it, and "{row}" is this row.
                     value = _move_formula(value.replace("{row}", str(OWN_ROW)), step.sheet, plain).replace(str(OWN_ROW), str(row))
                 target.value = _typed(target, value)
+                if not target.has_style and target.value is not None:  # no row above to copy a look from, or its cell here had none
+                    _in_base_font(target, base)
                 applied.formulas_added += formula_text(target.value) is not None
             elif source is not None and formula_text(source.value) is not None and not isinstance(source.value, ArrayFormula):
                 target.value = Translator(source.value, origin=source.coordinate).translate_formula(target.coordinate)
@@ -274,15 +308,16 @@ def _fill_new_rows(workbook: Any, step: InsertRows, insertion: Insertion, rows: 
 def apply_plan(workbook: Any, plan: Plan) -> Applied:
     """Carry out ``plan`` on ``workbook`` (every address in it as the workbook was supplied) and report what was done."""
     applied = Applied()
+    base = base_font(workbook)  # before any step writes, so a step's own cells never decide it
     for step in plan.sets:
-        _set(workbook, step, applied)
+        _set(workbook, step, applied, base)
     for step in plan.sheets:
-        _add_sheet(workbook, step, applied)
+        _add_sheet(workbook, step, applied, base)
     insertions = [Insertion(step.sheet, step.before_row, len(step.rows), step.extend_ranges) for step in plan.inserts]
     applied.rows = rows = RowMap(insertions)
     if insertions:
         _move_rows(workbook, plan, rows, applied)
         plain = RowMap([replace(item, extend=False) for item in insertions])
         for step, insertion in zip(plan.inserts, insertions, strict=True):
-            _fill_new_rows(workbook, step, insertion, rows, plain, applied)
+            _fill_new_rows(workbook, step, insertion, rows, plain, applied, base)
     return applied
