@@ -34,7 +34,7 @@ response. Use `domains` for official sites (`gov.uk`, the regulator), `published
 files, documents) is `find` and `read`: a question about the person's own work is answered from their own material first.
 
 Keep notes as you go, one line for each source you may use: the handle the tool result gave it (`source_id`), what it is, its date, whether
-you read it in full or used the passage the search returned, and which sub-question it answers. You cite by handle; you never need, and
+you opened it with `web_read` or used the passage the search returned, and which sub-question it answers. You cite by handle; you never need, and
 must never write, a title, date or address from memory.
 
 ## 3. Read the primary sources
@@ -80,8 +80,8 @@ Write the report as Markdown text, in this shape (leave out a section with nothi
 ## Method
 ```
 
-- **Question**: the question, and the scope you settled (jurisdiction, period). **Method**: the searches you ran, how many pages you read in
-  full and how many passages you used, and the date. **What could not be established**: anything you could not source, stated plainly.
+- **Question**: the question, and the scope you settled (jurisdiction, period). **Method**: the searches you ran, how many pages you opened
+  and how many search passages you used, and the date. **What could not be established**: anything you could not source, stated plainly.
   These three state no finding and need no citation.
 - **Everything else is a finding, and every finding is cited**: each sentence, each list item, each row of a table, and every table cell
   that holds a figure. A source is cited as you cite it in a reply: `[[cite:handle]]` after the sentence it supports, with the handle the
