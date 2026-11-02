@@ -81,9 +81,10 @@ def _set(workbook: Any, step: SetCell, applied: Applied) -> None:
         anchor = next(item for item in sheet.merged_cells.ranges if step.cell in item)
         raise PlanRefused(f"{step.sheet}!{step.cell} is inside the merged range {anchor.coord}: write to its top-left cell {anchor.start_cell.coordinate}.")
     held = formula_text(cell.value)
-    if held is not None and not step.overwrite_formula:
-        raise PlanRefused(f"{step.sheet}!{step.cell} holds the formula {held}. A formula is not an input: change the input it reads, or, only if the "
-                          "person asked for this cell to become a fixed value, set overwrite_formula to true on this entry.")
+    if held is not None and not step.confirmed_fixed_value:
+        raise PlanRefused(f"{step.sheet}!{step.cell} holds the formula {held}. A formula is not an input: change the input it reads. Turning this cell "
+                          "into a fixed value is more than was asked, since it stops calculating: ask the person in words, naming the cell and what stops "
+                          f"calculating, and only after their yes put \"confirmed_fixed_value\": \"{step.cell}\" on this entry.")
     if held is not None:
         applied.overwritten.add((step.sheet, cell.row, cell.column))
     cell.value = _typed(cell, step.value)

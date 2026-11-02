@@ -43,7 +43,10 @@ every formula, name, rule, validation list, table, chart and print area for you,
 
 - **`set`: change an input.** `sheet`, `cell`, `value`: a number, text, `true`/`false`, `null` to clear, or a formula
   beginning `=`. Text in ISO form (`2026-11-01`) written into a date-formatted cell becomes a real date. A cell that holds a
-  formula is refused unless the person asked for it to become a fixed value, and then the entry says `"overwrite_formula": true`.
+  formula is refused: a formula is not an input, so change the input it reads. Replacing it with a fixed value stops it calculating,
+  which "set it to 20000" does not ask for. Ask in words first, naming the cell and what stops calculating ("E4 calculates
+  quantity times rate; setting it to 20000 stops that. Replace it?"), end your reply there, and only after the person's yes put
+  `"confirmed_fixed_value": "E4"` (that entry's own cell) on the entry.
 - **`insert_rows`: add rows.** `before_row` is the row the new rows go ahead of: the subtotal or totals row under the table,
   or the row after the last used row to add at the bottom. `rows` is a list of objects keyed by column letter. The new rows copy
   their formatting from `like_row` (default: the row above `before_row`, and name another if that row is a heading or total) and

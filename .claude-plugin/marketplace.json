@@ -31,7 +31,7 @@
       "name": "saphion-documents",
       "source": "./saphion-documents",
       "description": "Word and PDF files, spreadsheets and presentations to download or send, and documents that live inside Saphion.",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "category": "Documents and files",
       "author": {
         "name": "Saphion"
