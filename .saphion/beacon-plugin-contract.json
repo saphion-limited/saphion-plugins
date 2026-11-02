@@ -4631,6 +4631,9 @@
       "maxLength": 100,
       "type": "string"
      },
+     "project_continuation_ref": {
+      "type": "string"
+     },
      "query": {
       "default": "",
       "maxLength": 500,
