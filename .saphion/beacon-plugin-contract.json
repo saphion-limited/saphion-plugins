@@ -11001,6 +11001,27 @@
     "type": "object"
    }
   },
+  "tool_search": {
+   "choices": {},
+   "doors": [
+    "beacon"
+   ],
+   "family": "host",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "query": {
+      "maxLength": 500,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "query"
+    ],
+    "type": "object"
+   }
+  },
   "waiting_on_you_list": {
    "choices": {
     "category": [

@@ -46,6 +46,7 @@ NEAR_MISS = 0.9
 _FRONT = re.compile(r"\A﻿?---[ \t]*\r?\n(.*?)^---[ \t]*\r?\n?", re.M | re.S)
 _FIELD = re.compile(r"^([A-Za-z0-9_.-]+):[ \t]*(.*)$")
 _WORD = re.compile(r"\b[a-z][a-z0-9]*(?:_[a-z0-9]+)+\b")
+_TICKED = re.compile(r"`([a-z][a-z0-9]*(?:_[a-z0-9]+)+)`")
 _NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 _TOOL_ENTRY = re.compile(r"\s*([^\s,()]+)(?:\(([^)]*)\))?[\s,]*")
 #: ``act`` as a word (backticked or bare) then its value: backticked or a bare identifier.
@@ -95,12 +96,14 @@ def property_names(schema: object) -> set[str]:
     return names
 
 
-def unknown_tool_mentions(text: str, names: Iterable[str], known_words: Iterable[str] = (), *, near_miss: bool = True) -> set[str]:
+def unknown_tool_mentions(text: str, names: Iterable[str], known_words: Iterable[str] = (), *, near_miss: bool = True, ticked: bool = True) -> set[str]:
     """The words of ``text`` that read as a tool's name but that no tool has.
 
     A word is one when it is snake_case with its first part the family of at least three tool names (``file_``, ``app_``) and its last part
-    the end of one, or when it is a near miss of a tool name. A word of ``known_words`` (an input or a choice some tool declares) is never
-    one, so ``record_class`` and ``from_questionnaire`` are not taken for a misspelled tool. ``near_miss=False`` judges the shape alone."""
+    the end of one, or when it is a near miss of a tool name, or when it is written in backticks with such a first part and no tool, input or
+    choice by that name: a tool renamed or retired (``record_structure`` once ``record_fields`` replaced it) or an identifier the model no longer
+    sees (``file_id`` once a file is shown by its ``continuation_ref``). A word of ``known_words`` (an input or a choice some tool declares) is never
+    one, so ``record_class`` and ``from_questionnaire`` are not taken for a misspelled tool. ``near_miss=False`` judges the shape alone, and ``ticked=False`` leaves out the backticked names (a caller that has no ``known_words`` to give)."""
     names = set(names)
     known = set(known_words)
     heads = {head for head, count in Counter(name.split("_")[0] for name in names if "_" in name).items() if count >= 3}
@@ -112,6 +115,9 @@ def unknown_tool_mentions(text: str, names: Iterable[str], known_words: Iterable
             continue
         shaped = word.split("_")[0] in heads and word.rsplit("_", 1)[1] in tails
         if shaped or (near_miss and difflib.get_close_matches(word, ordered, n=1, cutoff=NEAR_MISS)):
+            found.add(word)
+    for word in _TICKED.findall(text) if ticked else ():
+        if word not in names and word not in known and word.split("_")[0] in heads:
             found.add(word)
     return found
 
