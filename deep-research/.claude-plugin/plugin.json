@@ -2,7 +2,7 @@
   "name": "deep-research",
   "displayName": "Deep research",
   "version": "1.0.0",
-  "description": "Research a question across several sources and get a cited report with its sources.",
+  "description": "Research a question properly across many sources and get a cited report that takes a position.",
   "author": {
     "name": "Saphion"
   },
