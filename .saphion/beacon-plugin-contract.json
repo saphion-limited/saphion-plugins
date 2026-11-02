@@ -2234,9 +2234,9 @@
           "type": "string"
          },
          "thread": {
-          "maxLength": 128,
+          "maxLength": 170,
           "minLength": 1,
-          "pattern": "^\\S+$",
+          "saphion.issued_references": true,
           "type": "string"
          }
         },
@@ -3473,8 +3473,9 @@
     "additionalProperties": false,
     "properties": {
      "after": {
-      "maxLength": 160,
+      "maxLength": 170,
       "minLength": 1,
+      "saphion.issued_references": true,
       "type": "string"
      },
      "block": {
