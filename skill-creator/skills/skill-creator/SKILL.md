@@ -65,9 +65,9 @@ When something is wrong, change the draft rather than patching the result, so th
 When they have said it is ready, or asked you to save it, call `plugin_save`:
 - `name`, `description` and, if they want a nicer title in Settings, `display_name`;
 - `files`: each file's whole text at its path. For a change, list only the files that change; a file you do not list stays as it was, and `text: null` removes one;
-- `invocation` only when they ask for it: `automatic` lets Beacon choose the skill on its own when a request fits, and a new skill otherwise starts as `explicit_only`, which means only when they ask for it by name.
+- `invocation` only when they ask for it: a new skill starts `automatic`, so Beacon may choose it when a request fits, and `explicit_only` means only when they ask for it by name with `/`.
 
-Then tell them it is saved, where it is (Settings, under Skills, in Yours), and how to use it: start a new chat and type `/` and its name, or just ask for the job if it is automatic. A new chat matters: the skill runs from what is saved, which is not what this conversation still has in mind. Say that it is private to them.
+Then tell them it is saved, where it is (Settings, under Skills, in Yours), and how to use it: start a new chat and ask for the job in plain words, or type `/` and its name. A new chat matters: the skill runs from what is saved, which is not what this conversation still has in mind. Say that it is private to them.
 
 ## 6. If a save is refused
 
