@@ -1,6 +1,11 @@
 {
  "bindings": [
   {
+   "command": "dataviz",
+   "plugin": "dataviz",
+   "scope": "platform"
+  },
+  {
    "command": "deep-research",
    "plugin": "deep-research",
    "scope": "platform"
@@ -1876,15 +1881,6 @@
          "config": {
           "$ref": "#/$defs/FilteredViewConfigInput"
          },
-         "dashboard_copy_of": {
-          "maxLength": 170,
-          "type": "string"
-         },
-         "dashboard_name": {
-          "maxLength": 120,
-          "minLength": 1,
-          "type": "string"
-         },
          "kind": {
           "enum": [
            "table",
@@ -2212,18 +2208,6 @@
     "type": "object"
    }
   },
-  "context_read": {
-   "choices": {},
-   "doors": [
-    "codeact"
-   ],
-   "family": "assistant_connection",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {},
-    "type": "object"
-   }
-  },
   "continue_reading": {
    "choices": {},
    "doors": [
@@ -2394,395 +2378,10 @@
     "type": "object"
    }
   },
-  "dashboard_catalogue": {
+  "dashboard_read": {
    "choices": {},
    "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "dashboards",
-   "schema": {
-    "$defs": {
-     "Identifier": {
-      "maxLength": 128,
-      "minLength": 1,
-      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@|/+=-]{0,127}$",
-      "type": "string"
-     }
-    },
-    "additionalProperties": false,
-    "allOf": [
-     {
-      "if": {
-       "required": [
-        "preview"
-       ]
-      },
-      "then": {
-       "properties": {
-        "dataset_keys": {
-         "maxItems": 0
-        },
-        "primitive_keys": {
-         "maxItems": 0
-        },
-        "source_keys": {
-         "maxItems": 0
-        }
-       }
-      }
-     }
-    ],
-    "properties": {
-     "continuation_ref": {
-      "type": "string"
-     },
-     "dataset_keys": {
-      "items": {
-       "$ref": "#/$defs/Identifier"
-      },
-      "type": "array"
-     },
-     "preview": {
-      "additionalProperties": false,
-      "properties": {
-       "config": {
-        "additionalProperties": true,
-        "type": "object"
-       },
-       "primitive": {
-        "$ref": "#/$defs/Identifier"
-       },
-       "title": {
-        "maxLength": 160,
-        "minLength": 1,
-        "type": "string"
-       }
-      },
-      "required": [
-       "primitive",
-       "title",
-       "config"
-      ],
-      "type": "object"
-     },
-     "primitive_keys": {
-      "items": {
-       "$ref": "#/$defs/Identifier"
-      },
-      "type": "array"
-     },
-     "source_keys": {
-      "items": {
-       "type": "string"
-      },
-      "type": "array"
-     }
-    },
-    "type": "object"
-   }
-  },
-  "dashboard_change": {
-   "choices": {
-    "act": [
-     "create",
-     "update",
-     "widget_add",
-     "widget_add_preset",
-     "widget_move",
-     "widget_remove",
-     "widget_update"
-    ],
-    "from_layout": [
-     "crm-forecast-widgets",
-     "crm-home-widgets",
-     "crm-pipeline-changes",
-     "projects-overview",
-     "rams-overview",
-     "tenders-overview",
-     "workspace-overview"
-    ],
-    "size": [
-     "compact",
-     "large",
-     "medium",
-     "small",
-     "standard",
-     "tall",
-     "wide"
-    ]
-   },
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "dashboards",
-   "schema": {
-    "$defs": {
-     "Identifier": {
-      "maxLength": 128,
-      "minLength": 1,
-      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@|/+=-]{0,127}$",
-      "type": "string"
-     },
-     "WidgetPlaceByReference": {
-      "additionalProperties": false,
-      "properties": {
-       "after": {
-        "type": "string"
-       },
-       "size": {
-        "enum": [
-         "small",
-         "medium",
-         "large",
-         "wide"
-        ],
-        "type": "string"
-       }
-      },
-      "type": "object"
-     },
-     "WidgetPresetStart": {
-      "additionalProperties": false,
-      "properties": {
-       "preset": {
-        "$ref": "#/$defs/Identifier"
-       },
-       "settings": {
-        "additionalProperties": true,
-        "type": "object"
-       },
-       "size": {
-        "enum": [
-         "compact",
-         "standard",
-         "tall"
-        ],
-        "type": "string"
-       }
-      },
-      "required": [
-       "preset"
-      ],
-      "type": "object"
-     }
-    },
-    "additionalProperties": false,
-    "properties": {
-     "change": {
-      "discriminator": {
-       "propertyName": "act"
-      },
-      "oneOf": [
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "create",
-          "type": "string"
-         },
-         "from_layout": {
-          "enum": [
-           "workspace-overview",
-           "projects-overview",
-           "tenders-overview",
-           "rams-overview",
-           "crm-home-widgets",
-           "crm-forecast-widgets",
-           "crm-pipeline-changes"
-          ],
-          "type": "string"
-         },
-         "name": {
-          "maxLength": 120,
-          "minLength": 1,
-          "type": "string"
-         }
-        },
-        "required": [
-         "name",
-         "act"
-        ],
-        "type": "object"
-       },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "update",
-          "type": "string"
-         },
-         "dashboard_filter": {
-          "anyOf": [
-           {
-            "additionalProperties": true,
-            "type": "object"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "name": {
-          "maxLength": 120,
-          "minLength": 1,
-          "type": "string"
-         },
-         "put_back_previous": {
-          "default": false,
-          "type": "boolean"
-         }
-        },
-        "required": [
-         "act"
-        ],
-        "type": "object"
-       },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "widget_add",
-          "type": "string"
-         },
-         "kind": {
-          "$ref": "#/$defs/Identifier"
-         },
-         "place": {
-          "$ref": "#/$defs/WidgetPlaceByReference"
-         },
-         "settings": {
-          "additionalProperties": true,
-          "type": "object"
-         },
-         "title": {
-          "maxLength": 160,
-          "minLength": 1,
-          "type": "string"
-         }
-        },
-        "required": [
-         "kind",
-         "title",
-         "settings",
-         "act"
-        ],
-        "type": "object"
-       },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "widget_add_preset",
-          "type": "string"
-         },
-         "from_preset": {
-          "$ref": "#/$defs/WidgetPresetStart"
-         },
-         "place": {
-          "$ref": "#/$defs/WidgetPlaceByReference"
-         },
-         "title": {
-          "maxLength": 160,
-          "minLength": 1,
-          "type": "string"
-         }
-        },
-        "required": [
-         "from_preset",
-         "act"
-        ],
-        "type": "object"
-       },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "widget_update",
-          "type": "string"
-         },
-         "settings": {
-          "additionalProperties": true,
-          "type": "object"
-         },
-         "title": {
-          "maxLength": 160,
-          "minLength": 1,
-          "type": "string"
-         },
-         "widget_continuation_ref": {
-          "type": "string"
-         }
-        },
-        "required": [
-         "widget_continuation_ref",
-         "act"
-        ],
-        "type": "object"
-       },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "widget_move",
-          "type": "string"
-         },
-         "place": {
-          "$ref": "#/$defs/WidgetPlaceByReference"
-         },
-         "widget_continuation_ref": {
-          "type": "string"
-         }
-        },
-        "required": [
-         "place",
-         "widget_continuation_ref",
-         "act"
-        ],
-        "type": "object"
-       },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "widget_remove",
-          "type": "string"
-         },
-         "widget_continuation_ref": {
-          "type": "string"
-         }
-        },
-        "required": [
-         "widget_continuation_ref",
-         "act"
-        ],
-        "type": "object"
-       }
-      ]
-     },
-     "continuation_ref": {
-      "type": "string"
-     },
-     "description": {
-      "maxLength": 240,
-      "minLength": 1,
-      "type": "string"
-     },
-     "project_continuation_ref": {
-      "type": "string"
-     }
-    },
-    "required": [
-     "change"
-    ],
-    "type": "object"
-   }
-  },
-  "dashboard_delete": {
-   "choices": {},
-   "doors": [
-    "beacon"
+    "routed"
    ],
    "family": "dashboards",
    "schema": {
@@ -2795,30 +2394,6 @@
     "required": [
      "continuation_ref"
     ],
-    "type": "object"
-   }
-  },
-  "dashboard_read": {
-   "choices": {},
-   "doors": [
-    "routed"
-   ],
-   "family": "dashboards",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "continuation_ref": {
-      "type": "string"
-     },
-     "home": {
-      "default": false,
-      "type": "boolean"
-     },
-     "include_results": {
-      "default": false,
-      "type": "boolean"
-     }
-    },
     "type": "object"
    }
   },
@@ -3893,8 +3468,6 @@
      "file",
      "form",
      "generated_document",
-     "home",
-     "landing",
      "not",
      "person",
      "project",
@@ -4225,8 +3798,6 @@
        "file",
        "form",
        "generated_document",
-       "home",
-       "landing",
        "person",
        "project",
        "record",
@@ -6418,18 +5989,6 @@
     "type": "object"
    }
   },
-  "organisations_list": {
-   "choices": {},
-   "doors": [
-    "codeact"
-   ],
-   "family": "assistant_connection",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {},
-    "type": "object"
-   }
-  },
   "people_find": {
    "choices": {},
    "doors": [
@@ -7721,7 +7280,6 @@
      "pending",
      "refused",
      "reported",
-     "results",
      "retired",
      "search",
      "skipped",
@@ -7768,7 +7326,6 @@
        "forbidden",
        "failed",
        "pending",
-       "results",
        "changes",
        "block",
        "search",
