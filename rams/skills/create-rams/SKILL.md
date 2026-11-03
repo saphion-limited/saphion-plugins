@@ -35,10 +35,10 @@ still unknown goes into your reply as something to confirm, not into the documen
 Call `record_fields` for `rams` to see its fields, its Status choices and
 how a linked field is written. Find the RAMS board's record set with `find`
 (kind `record`, `record_class` `rams`), then call `record_change` with that record set's `record_set_continuation_ref`
-and a `change` of `act` `create`, `resource_class: rams` and `values`: name (a concise title for the job, such as "Roof edge protection,
+with `act` `create`, `resource_class: rams` and `values`: name (a concise title for the job, such as "Roof edge protection,
 Unit 4"), project (leave it out in a Project conversation), activity, location (where on site), start_date, end_date, prepared_by, people and
 ppe. Leave status alone: it begins as Draft. Change a record you already made with
-`record_change` and a `change` of `act` `update`, using the reference its read issued. Change only what you were asked
+`record_change` with `act` `update` and an `updates` entry (its `continuation_ref` and `changes`), using the reference its read issued. Change only what you were asked
 to change.
 
 ## 3. Choose the hazards
