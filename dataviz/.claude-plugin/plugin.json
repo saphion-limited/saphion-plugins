@@ -1,0 +1,14 @@
+{
+  "name": "dataviz",
+  "displayName": "Dashboards as apps",
+  "version": "1.0.0",
+  "description": "Ask Beacon for a dashboard and get an app: its figures worked out in code from your own data, drawn and kept in one place.",
+  "author": {
+    "name": "Saphion"
+  },
+  "category": "Design",
+  "default": "on",
+  "featured": false,
+  "updatedAt": "2026-11-03T12:00:00Z",
+  "firstPublishedAt": "2026-11-03T12:00:00Z"
+}

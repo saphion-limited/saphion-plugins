@@ -8,6 +8,16 @@
   },
   "plugins": [
     {
+      "name": "dataviz",
+      "source": "./dataviz",
+      "description": "Ask Beacon for a dashboard and get an app: its figures worked out in code from your own data, drawn and kept in one place.",
+      "version": "1.0.0",
+      "category": "Design",
+      "author": {
+        "name": "Saphion"
+      }
+    },
+    {
       "name": "deep-research",
       "source": "./deep-research",
       "description": "Research a question properly across many sources and get a cited report that takes a position.",
@@ -20,7 +30,7 @@
     {
       "name": "design",
       "source": "./design",
-      "description": "Palette, type and layout for pages and dashboards, and polished single-file apps for the side pane.",
+      "description": "Palette, type and layout for pages, and polished single-file apps for the side pane.",
       "version": "1.1.0",
       "category": "Design",
       "author": {

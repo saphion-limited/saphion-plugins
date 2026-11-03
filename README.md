@@ -6,8 +6,9 @@ folder is one plugin (`.claude-plugin/plugin.json`, `skills/<name>/SKILL.md`, sc
 | Plugin | What it does |
 | --- | --- |
 | `saphion-documents` | Built in: Word and PDF files, spreadsheets and presentations, and documents inside Saphion |
+| `dataviz` | Ask for a dashboard and get an app: figures worked out in code from your own data |
 | `deep-research` | Research a question across several sources and get a cited report with its sources |
-| `design` | Palette, type and layout for pages, dashboards and single-file apps |
+| `design` | Palette, type and layout for pages and single-file apps |
 | `rams` | Risk assessments and method statements from an Organisation's own template |
 | `tenders` | A source-grounded tender response prepared from a tender pack |
 | `skill-creator` | Make or change your own skills by talking the job through with Beacon |

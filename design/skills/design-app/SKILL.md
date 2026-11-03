@@ -15,8 +15,9 @@ metadata:
 You are making a polished single-file HTML app or page that opens in Saphion's side pane: a
 calculator, an explorer of figures, a timeline, a dashboard, a briefing page, a small tool. You
 make it with `generateSandboxedUi`. This procedure carries the design and the mechanics of a good
-one (section 3 is the look); load no other skill for it. A quick throwaway app does not need it; a
-person who asks for something polished, presentable or substantial does.
+one (section 3 is the look). A quick throwaway app does not need it; a person who asks for something polished, presentable or
+substantial does. A dashboard of the Organisation's data is built with the dashboard procedure beside this one: that carries the
+data, this carries the page.
 
 To change an app already made (here or in an earlier chat: `find` it, then `read` it), use `app_edit` for
 targeted changes or pass `replaces` for a rewrite. Never make a second copy. `read` with view `versions` lists the versions an app
@@ -33,7 +34,8 @@ what the report shows. The check has no person to read for, so an app's live sou
 
 - **Is an app the right thing?** A table, chart, metric, records list, spreadsheet, progress
   visual or set of places on a map already has a native Saphion form: use that, never rebuild it
-  in HTML. A project's programme belongs to the Programme timeline. An app is for bespoke
+  in HTML. A dashboard Beacon makes is the exception: Beacon builds apps, not Dashboards, so its
+  figures and charts are drawn in the page. A project's programme belongs to the Programme timeline. An app is for bespoke
   interaction: explorers, calculators, simulations, 3D, games, a designed page.
 - **Default to business work:** reports, dashboards, explorers of figures, timelines, calculators, site and supplier
   views. Games, simulations and 3D models are fully available whenever the person asks.

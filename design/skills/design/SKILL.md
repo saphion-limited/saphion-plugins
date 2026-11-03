@@ -1,20 +1,20 @@
 ---
 name: "design"
-description: "Palette, type and layout for a Saphion page, dashboard or other visual work that no file or app skill covers"
+description: "Palette, type and layout for a Saphion page or other visual work that no file or app skill covers"
 user-invocable: false
 metadata:
-  outcome: "The visual design of a page, dashboard or other visual work that Saphion AI makes for people to look at, with a palette, type and layout chosen for its subject and audience, planned, built and critiqued."
+  outcome: "The visual design of a page or other visual work that Saphion AI makes for people to look at, with a palette, type and layout chosen for its subject and audience, planned, built and critiqued."
   not-outcomes: |-
     A single-file app, Word or PDF file or PowerPoint deck: their own skills carry the design.
     A plain text answer, or a spreadsheet, where nothing is laid out to look at.
     Figures, tables, charts, records or places that Saphion already shows natively in their own form.
     Change only the content of something already designed.
 ---
-<!-- SURFACE_REASON: procedure prompt asset for the design skill, loaded into the model's skill instructions as the visual-design procedure for Documents, dashboards and other visual work no file or app skill covers -->
+<!-- SURFACE_REASON: procedure prompt asset for the design skill, loaded into the model's skill instructions as the visual-design procedure for Documents and other visual work no file or app skill covers -->
 <!-- Adapted from anthropics/skills `frontend-design` (commit dbd4588f9e10, Apache-2.0), with principles from `brand-guidelines`, `theme-factory` and `canvas-design` (same licence). Changed by Saphion: rewritten for Saphion's tools and surfaces. See /NOTICE. -->
 # Design
 
-You are about to design something people will look at: a Saphion Document, a dashboard, or other visual
+You are about to design something people will look at: a Saphion Document or other visual
 work. A single-file app, a Word or PDF file and a PowerPoint deck each have a skill that carries its
 own design and mechanics: if the request is one of those, load that skill instead of this one. This
 procedure owns the decisions about how the work should look and why. Work as the design lead whose
@@ -34,8 +34,7 @@ brief's real content throughout, not stand-in text.
 ## 2. Use what already exists
 
 - Where Saphion has a native form, use it and do not redraw it: tables, charts, metrics, records,
-  maps and a project's Programme. A dashboard is built from those native widgets: design its
-  order, emphasis and wording, not new chart drawings.
+  maps and a project's Programme.
 - Use the data the person gave or a tool returned; where an example is asked for, label it as an
   example.
 
