@@ -244,6 +244,8 @@
         "change.agreed",
         "change.declined",
         "scheduled_task.ran",
+        "conversation.reminded",
+        "conversation.reminder_failed",
         "scheduled_task.run_opened",
         "automation.notified",
         "automation.run_needs_attention",
@@ -9414,6 +9416,33 @@
       "type": "string"
      }
     },
+    "type": "object"
+   }
+  },
+  "send_later": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "conversation_reminders",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T([01]\\d|2[0-3]):[0-5]\\d$",
+      "type": "string"
+     },
+     "message": {
+      "maxLength": 4000,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "message",
+     "at"
+    ],
     "type": "object"
    }
   },
