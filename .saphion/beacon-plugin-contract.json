@@ -375,111 +375,127 @@
    "family": "visualisations",
    "schema": {
     "additionalProperties": false,
-    "properties": {
-     "change": {
-      "discriminator": {
-       "propertyName": "act"
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "create"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
       },
-      "oneOf": [
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "create",
-          "type": "string"
-         },
-         "html": {
-          "type": "string"
-         },
-         "title": {
-          "maxLength": 150,
-          "type": "string"
-         }
-        },
-        "required": [
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "title",
+         "html"
+        ]
+       },
+       "required": [
+        "title",
+        "html"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "edit"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref",
+         "edits"
+        ]
+       },
+       "required": [
+        "edits"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "rewrite"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
          "title",
          "html",
-         "act"
-        ],
-        "type": "object"
+         "continuation_ref"
+        ]
        },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "edit",
-          "type": "string"
-         },
-         "edits": {
-          "items": {
-           "additionalProperties": false,
-           "properties": {
-            "new": {
-             "type": "string"
-            },
-            "old": {
-             "minLength": 1,
-             "type": "string"
-            }
-           },
-           "required": [
-            "old",
-            "new"
-           ],
-           "type": "object"
-          },
-          "maxItems": 50,
-          "minItems": 1,
-          "type": "array"
-         }
-        },
-        "required": [
-         "edits",
-         "act"
-        ],
-        "type": "object"
+       "required": [
+        "html"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "restore"
+         ]
+        }
        },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "rewrite",
-          "type": "string"
-         },
-         "html": {
-          "type": "string"
-         },
-         "title": {
-          "maxLength": 150,
-          "type": "string"
-         }
-        },
-        "required": [
-         "html",
-         "act"
-        ],
-        "type": "object"
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref",
+         "version"
+        ]
        },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "restore",
-          "type": "string"
-         },
-         "version": {
-          "maxLength": 64,
-          "minLength": 1,
-          "type": "string"
-         }
-        },
-        "required": [
-         "version",
-         "act"
-        ],
-        "type": "object"
-       }
-      ]
+       "required": [
+        "version"
+       ]
+      }
+     }
+    ],
+    "properties": {
+     "act": {
+      "enum": [
+       "create",
+       "edit",
+       "rewrite",
+       "restore"
+      ],
+      "type": "string"
      },
      "continuation_ref": {
       "type": "string"
@@ -488,10 +504,44 @@
       "maxLength": 240,
       "minLength": 1,
       "type": "string"
+     },
+     "edits": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "new": {
+         "type": "string"
+        },
+        "old": {
+         "minLength": 1,
+         "type": "string"
+        }
+       },
+       "required": [
+        "old",
+        "new"
+       ],
+       "type": "object"
+      },
+      "maxItems": 50,
+      "minItems": 1,
+      "type": "array"
+     },
+     "html": {
+      "type": "string"
+     },
+     "title": {
+      "maxLength": 150,
+      "type": "string"
+     },
+     "version": {
+      "maxLength": 64,
+      "minLength": 1,
+      "type": "string"
      }
     },
     "required": [
-     "change"
+     "act"
     ],
     "type": "object"
    }
@@ -504,7 +554,7 @@
      "set",
      "update"
     ],
-    "do": [
+    "op": [
      "delete",
      "set",
      "update"
@@ -517,211 +567,149 @@
    "family": "visualisations",
    "schema": {
     "additionalProperties": false,
-    "properties": {
-     "change": {
-      "discriminator": {
-       "propertyName": "act"
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "set"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
       },
-      "oneOf": [
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "set",
-          "type": "string"
-         },
-         "collection": {
-          "maxLength": 40,
-          "minLength": 1,
-          "type": "string"
-         },
-         "key": {
-          "maxLength": 200,
-          "minLength": 1,
-          "type": "string"
-         },
-         "value": {
-          "additionalProperties": true,
-          "type": "object"
-         }
-        },
-        "required": [
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
          "collection",
          "key",
          "value",
-         "act"
-        ],
-        "type": "object"
+         "continuation_ref"
+        ]
        },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "update",
-          "type": "string"
-         },
-         "collection": {
-          "maxLength": 40,
-          "minLength": 1,
-          "type": "string"
-         },
-         "key": {
-          "maxLength": 200,
-          "minLength": 1,
-          "type": "string"
-         },
-         "value": {
-          "additionalProperties": true,
-          "minProperties": 1,
-          "type": "object"
+       "required": [
+        "collection",
+        "key",
+        "value"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "update"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "allOf": [
+        {
+         "properties": {
+          "value": {
+           "minProperties": 1
+          }
          }
-        },
-        "required": [
+        }
+       ],
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
          "collection",
          "key",
          "value",
-         "act"
-        ],
-        "type": "object"
+         "continuation_ref"
+        ]
        },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "delete",
-          "type": "string"
-         },
-         "collection": {
-          "maxLength": 40,
-          "minLength": 1,
-          "type": "string"
-         },
-         "key": {
-          "maxLength": 200,
-          "minLength": 1,
-          "type": "string"
-         }
-        },
-        "required": [
+       "required": [
+        "collection",
+        "key",
+        "value"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "delete"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
          "collection",
          "key",
-         "act"
-        ],
-        "type": "object"
+         "continuation_ref"
+        ]
        },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "batch",
-          "type": "string"
-         },
-         "operations": {
-          "items": {
-           "discriminator": {
-            "propertyName": "do"
-           },
-           "oneOf": [
-            {
-             "additionalProperties": false,
-             "properties": {
-              "collection": {
-               "maxLength": 40,
-               "minLength": 1,
-               "type": "string"
-              },
-              "do": {
-               "const": "set",
-               "type": "string"
-              },
-              "key": {
-               "maxLength": 200,
-               "minLength": 1,
-               "type": "string"
-              },
-              "value": {
-               "additionalProperties": true,
-               "type": "object"
-              }
-             },
-             "required": [
-              "do",
-              "collection",
-              "key",
-              "value"
-             ],
-             "type": "object"
-            },
-            {
-             "additionalProperties": false,
-             "properties": {
-              "collection": {
-               "maxLength": 40,
-               "minLength": 1,
-               "type": "string"
-              },
-              "do": {
-               "const": "update",
-               "type": "string"
-              },
-              "key": {
-               "maxLength": 200,
-               "minLength": 1,
-               "type": "string"
-              },
-              "value": {
-               "additionalProperties": true,
-               "minProperties": 1,
-               "type": "object"
-              }
-             },
-             "required": [
-              "do",
-              "collection",
-              "key",
-              "value"
-             ],
-             "type": "object"
-            },
-            {
-             "additionalProperties": false,
-             "properties": {
-              "collection": {
-               "maxLength": 40,
-               "minLength": 1,
-               "type": "string"
-              },
-              "do": {
-               "const": "delete",
-               "type": "string"
-              },
-              "key": {
-               "maxLength": 200,
-               "minLength": 1,
-               "type": "string"
-              }
-             },
-             "required": [
-              "do",
-              "collection",
-              "key"
-             ],
-             "type": "object"
-            }
-           ]
-          },
-          "maxItems": 50,
-          "minItems": 1,
-          "type": "array"
-         }
-        },
-        "required": [
-         "operations",
-         "act"
-        ],
-        "type": "object"
-       }
-      ]
+       "required": [
+        "collection",
+        "key"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "batch"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref",
+         "operations"
+        ]
+       },
+       "required": [
+        "operations"
+       ]
+      }
+     }
+    ],
+    "properties": {
+     "act": {
+      "enum": [
+       "set",
+       "update",
+       "delete",
+       "batch"
+      ],
+      "type": "string"
+     },
+     "collection": {
+      "maxLength": 40,
+      "minLength": 1,
+      "type": "string"
      },
      "continuation_ref": {
       "type": "string"
@@ -730,10 +718,125 @@
       "maxLength": 240,
       "minLength": 1,
       "type": "string"
+     },
+     "key": {
+      "maxLength": 119,
+      "minLength": 1,
+      "type": "string"
+     },
+     "operations": {
+      "items": {
+       "discriminator": {
+        "propertyName": "op"
+       },
+       "oneOf": [
+        {
+         "additionalProperties": false,
+         "properties": {
+          "collection": {
+           "maxLength": 40,
+           "minLength": 1,
+           "type": "string"
+          },
+          "key": {
+           "maxLength": 119,
+           "minLength": 1,
+           "type": "string"
+          },
+          "op": {
+           "const": "set",
+           "type": "string"
+          },
+          "value": {
+           "additionalProperties": true,
+           "type": "object"
+          }
+         },
+         "required": [
+          "collection",
+          "key",
+          "value",
+          "op"
+         ],
+         "type": "object"
+        },
+        {
+         "additionalProperties": false,
+         "allOf": [
+          {
+           "properties": {
+            "value": {
+             "minProperties": 1
+            }
+           }
+          }
+         ],
+         "properties": {
+          "collection": {
+           "maxLength": 40,
+           "minLength": 1,
+           "type": "string"
+          },
+          "key": {
+           "maxLength": 119,
+           "minLength": 1,
+           "type": "string"
+          },
+          "op": {
+           "const": "update",
+           "type": "string"
+          },
+          "value": {
+           "additionalProperties": true,
+           "type": "object"
+          }
+         },
+         "required": [
+          "collection",
+          "key",
+          "value",
+          "op"
+         ],
+         "type": "object"
+        },
+        {
+         "additionalProperties": false,
+         "properties": {
+          "collection": {
+           "maxLength": 40,
+           "minLength": 1,
+           "type": "string"
+          },
+          "key": {
+           "maxLength": 119,
+           "minLength": 1,
+           "type": "string"
+          },
+          "op": {
+           "const": "delete",
+           "type": "string"
+          }
+         },
+         "required": [
+          "collection",
+          "key",
+          "op"
+         ],
+         "type": "object"
+        }
+       ]
+      },
+      "maxItems": 50,
+      "minItems": 1,
+      "type": "array"
+     },
+     "value": {
+      "additionalProperties": true,
+      "type": "object"
      }
     },
     "required": [
-     "change",
+     "act",
      "continuation_ref"
     ],
     "type": "object"
@@ -757,7 +860,7 @@
       "type": "string"
      },
      "key": {
-      "maxLength": 200,
+      "maxLength": 119,
       "minLength": 1,
       "type": "string"
      },
@@ -1034,197 +1137,163 @@
    "family": "automations",
    "schema": {
     "additionalProperties": false,
-    "properties": {
-     "change": {
-      "discriminator": {
-       "propertyName": "act"
-      },
-      "oneOf": [
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "create",
-          "type": "string"
-         },
-         "description": {
-          "type": "string"
-         },
-         "entry_context": {
-          "additionalProperties": true,
-          "type": "object"
-         },
-         "graph": {
-          "additionalProperties": true,
-          "type": "object"
-         },
-         "importance": {
-          "enum": [
-           "low",
-           "normal",
-           "high",
-           "critical"
-          ],
-          "type": "string"
-         },
-         "management": {
-          "additionalProperties": true,
-          "type": "object"
-         },
-         "model_selection": {
-          "additionalProperties": true,
-          "type": "object"
-         },
-         "name": {
-          "type": "string"
-         },
-         "schedule": {
-          "additionalProperties": true,
-          "type": "object"
-         },
-         "trigger": {
-          "additionalProperties": true,
-          "type": "object"
-         },
-         "trigger_source": {
-          "additionalProperties": true,
-          "type": "object"
-         }
-        },
-        "required": [
-         "name",
-         "trigger",
-         "graph",
-         "act"
-        ],
-        "type": "object"
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "create"
+         ]
+        }
        },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "update",
-          "type": "string"
-         },
-         "description": {
-          "type": "string"
-         },
-         "enabled": {
-          "const": false,
-          "type": "boolean"
-         },
-         "entry_context": {
-          "additionalProperties": true,
-          "type": "object"
-         },
-         "graph": {
-          "additionalProperties": true,
-          "type": "object"
-         },
-         "importance": {
-          "enum": [
-           "low",
-           "normal",
-           "high",
-           "critical"
-          ],
-          "type": "string"
-         },
-         "management": {
-          "additionalProperties": true,
-          "type": "object"
-         },
-         "model_selection": {
-          "additionalProperties": true,
-          "type": "object"
-         },
-         "name": {
-          "type": "string"
-         },
-         "schedule": {
-          "additionalProperties": true,
-          "type": "object"
-         },
-         "steps": {
-          "items": {
-           "additionalProperties": false,
-           "allOf": [
-            {
-             "else": {
-              "required": [
-               "step"
-              ]
-             },
-             "if": {
-              "properties": {
-               "change": {
-                "enum": [
-                 "remove"
-                ]
-               }
-              },
-              "required": [
-               "change"
-              ]
-             },
-             "then": {
-              "not": {
-               "required": [
-                "step"
-               ]
-              }
-             }
-            }
-           ],
-           "properties": {
-            "change": {
-             "enum": [
-              "replace",
-              "remove",
-              "insert_before",
-              "insert_after"
-             ],
-             "type": "string"
-            },
-            "step": {
-             "additionalProperties": true,
-             "type": "object"
-            },
-            "step_continuation_ref": {
-             "type": "string"
-            }
-           },
-           "required": [
-            "change",
-            "step_continuation_ref"
-           ],
-           "type": "object"
-          },
-          "maxItems": 20,
-          "type": "array"
-         },
-         "trigger": {
-          "additionalProperties": true,
-          "type": "object"
-         },
-         "trigger_source": {
-          "additionalProperties": true,
-          "type": "object"
-         }
-        },
-        "required": [
-         "act"
-        ],
-        "type": "object"
-       }
-      ]
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "name",
+         "description",
+         "importance",
+         "trigger",
+         "trigger_source",
+         "management",
+         "entry_context",
+         "schedule",
+         "model_selection",
+         "graph"
+        ]
+       },
+       "required": [
+        "name",
+        "trigger",
+        "graph"
+       ]
+      }
+     }
+    ],
+    "properties": {
+     "act": {
+      "enum": [
+       "create",
+       "update"
+      ],
+      "type": "string"
      },
      "continuation_ref": {
       "type": "string"
+     },
+     "description": {
+      "type": "string"
+     },
+     "enabled": {
+      "const": false,
+      "type": "boolean"
+     },
+     "entry_context": {
+      "additionalProperties": true,
+      "type": "object"
+     },
+     "graph": {
+      "additionalProperties": true,
+      "type": "object"
+     },
+     "importance": {
+      "enum": [
+       "low",
+       "normal",
+       "high",
+       "critical"
+      ],
+      "type": "string"
+     },
+     "management": {
+      "additionalProperties": true,
+      "type": "object"
+     },
+     "model_selection": {
+      "additionalProperties": true,
+      "type": "object"
+     },
+     "name": {
+      "type": "string"
+     },
+     "schedule": {
+      "additionalProperties": true,
+      "type": "object"
+     },
+     "steps": {
+      "items": {
+       "additionalProperties": false,
+       "allOf": [
+        {
+         "else": {
+          "required": [
+           "step"
+          ]
+         },
+         "if": {
+          "properties": {
+           "change": {
+            "enum": [
+             "remove"
+            ]
+           }
+          },
+          "required": [
+           "change"
+          ]
+         },
+         "then": {
+          "not": {
+           "required": [
+            "step"
+           ]
+          }
+         }
+        }
+       ],
+       "properties": {
+        "change": {
+         "enum": [
+          "replace",
+          "remove",
+          "insert_before",
+          "insert_after"
+         ],
+         "type": "string"
+        },
+        "step": {
+         "additionalProperties": true,
+         "type": "object"
+        },
+        "step_continuation_ref": {
+         "type": "string"
+        }
+       },
+       "required": [
+        "change",
+        "step_continuation_ref"
+       ],
+       "type": "object"
+      },
+      "maxItems": 20,
+      "type": "array"
+     },
+     "trigger": {
+      "additionalProperties": true,
+      "type": "object"
+     },
+     "trigger_source": {
+      "additionalProperties": true,
+      "type": "object"
      }
     },
     "required": [
-     "change"
+     "act"
     ],
     "type": "object"
    }
@@ -1357,299 +1426,370 @@
      }
     },
     "additionalProperties": false,
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "create"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "name",
+         "record_class",
+         "table_name",
+         "project_continuation_ref",
+         "private"
+        ]
+       },
+       "required": [
+        "name"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "section"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "allOf": [
+        {
+         "if": {
+          "properties": {
+           "action": {
+            "enum": [
+             "add"
+            ]
+           }
+          },
+          "required": [
+           "action"
+          ]
+         },
+         "then": {
+          "not": {
+           "anyOf": [
+            {
+             "required": [
+              "section_id"
+             ]
+            }
+           ]
+          },
+          "required": [
+           "name"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "action": {
+            "enum": [
+             "rename"
+            ]
+           }
+          },
+          "required": [
+           "action"
+          ]
+         },
+         "then": {
+          "not": {
+           "anyOf": [
+            {
+             "required": [
+              "ordinal"
+             ]
+            }
+           ]
+          },
+          "required": [
+           "name",
+           "section_id"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "action": {
+            "enum": [
+             "move"
+            ]
+           }
+          },
+          "required": [
+           "action"
+          ]
+         },
+         "then": {
+          "not": {
+           "anyOf": [
+            {
+             "required": [
+              "name"
+             ]
+            }
+           ]
+          },
+          "required": [
+           "ordinal",
+           "section_id"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "action": {
+            "enum": [
+             "remove"
+            ]
+           }
+          },
+          "required": [
+           "action"
+          ]
+         },
+         "then": {
+          "not": {
+           "anyOf": [
+            {
+             "required": [
+              "name"
+             ]
+            },
+            {
+             "required": [
+              "ordinal"
+             ]
+            }
+           ]
+          },
+          "required": [
+           "section_id"
+          ]
+         }
+        }
+       ],
+       "propertyNames": {
+        "enum": [
+         "act",
+         "name",
+         "action",
+         "section_id",
+         "ordinal",
+         "board_continuation_ref"
+        ]
+       },
+       "required": [
+        "action"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "move"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "project_continuation_ref",
+         "board_continuation_ref",
+         "to_organisation"
+        ]
+       }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "place_record"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "section_id",
+         "board_continuation_ref",
+         "record_continuation_ref",
+         "position"
+        ]
+       }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "apply_template"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "board_continuation_ref",
+         "start_on",
+         "into_continuation_ref"
+        ]
+       }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "save_template"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "source_continuation_ref",
+         "template_continuation_ref",
+         "template_name"
+        ]
+       }
+      }
+     }
+    ],
     "properties": {
-     "board_continuation_ref": {
+     "act": {
+      "enum": [
+       "create",
+       "section",
+       "move",
+       "place_record",
+       "apply_template",
+       "save_template"
+      ],
       "type": "string"
      },
-     "change": {
-      "discriminator": {
-       "propertyName": "act"
-      },
-      "oneOf": [
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "create",
-          "type": "string"
-         },
-         "name": {
-          "maxLength": 120,
-          "minLength": 1,
-          "type": "string"
-         },
-         "private": {
-          "const": true,
-          "type": "boolean"
-         },
-         "record_class": {
-          "$ref": "#/$defs/Identifier"
-         },
-         "table_name": {
-          "maxLength": 120,
-          "minLength": 1,
-          "type": "string"
-         }
-        },
-        "required": [
-         "name",
-         "act"
-        ],
-        "type": "object"
-       },
-       {
-        "additionalProperties": false,
-        "allOf": [
-         {
-          "if": {
-           "properties": {
-            "action": {
-             "enum": [
-              "add"
-             ]
-            }
-           },
-           "required": [
-            "action"
-           ]
-          },
-          "then": {
-           "not": {
-            "anyOf": [
-             {
-              "required": [
-               "section_id"
-              ]
-             }
-            ]
-           },
-           "required": [
-            "name"
-           ]
-          }
-         },
-         {
-          "if": {
-           "properties": {
-            "action": {
-             "enum": [
-              "rename"
-             ]
-            }
-           },
-           "required": [
-            "action"
-           ]
-          },
-          "then": {
-           "not": {
-            "anyOf": [
-             {
-              "required": [
-               "ordinal"
-              ]
-             }
-            ]
-           },
-           "required": [
-            "name",
-            "section_id"
-           ]
-          }
-         },
-         {
-          "if": {
-           "properties": {
-            "action": {
-             "enum": [
-              "move"
-             ]
-            }
-           },
-           "required": [
-            "action"
-           ]
-          },
-          "then": {
-           "not": {
-            "anyOf": [
-             {
-              "required": [
-               "name"
-              ]
-             }
-            ]
-           },
-           "required": [
-            "ordinal",
-            "section_id"
-           ]
-          }
-         },
-         {
-          "if": {
-           "properties": {
-            "action": {
-             "enum": [
-              "remove"
-             ]
-            }
-           },
-           "required": [
-            "action"
-           ]
-          },
-          "then": {
-           "not": {
-            "anyOf": [
-             {
-              "required": [
-               "name"
-              ]
-             },
-             {
-              "required": [
-               "ordinal"
-              ]
-             }
-            ]
-           },
-           "required": [
-            "section_id"
-           ]
-          }
-         }
-        ],
-        "properties": {
-         "act": {
-          "const": "section",
-          "type": "string"
-         },
-         "action": {
-          "enum": [
-           "add",
-           "rename",
-           "move",
-           "remove"
-          ],
-          "type": "string"
-         },
-         "name": {
-          "maxLength": 120,
-          "minLength": 1,
-          "type": "string"
-         },
-         "ordinal": {
-          "exclusiveMaximum": 200,
-          "minimum": 0,
-          "type": "integer"
-         },
-         "section_id": {
-          "$ref": "#/$defs/Identifier"
-         }
-        },
-        "required": [
-         "action",
-         "act"
-        ],
-        "type": "object"
-       },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "move",
-          "type": "string"
-         },
-         "to_organisation": {
-          "const": true,
-          "type": "boolean"
-         }
-        },
-        "required": [
-         "act"
-        ],
-        "type": "object"
-       },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "place_record",
-          "type": "string"
-         },
-         "ordinal": {
-          "maximum": 9007199254740991,
-          "minimum": 0,
-          "type": "integer"
-         },
-         "section_id": {
-          "default": "",
-          "maxLength": 128,
-          "type": "string"
-         }
-        },
-        "required": [
-         "act"
-        ],
-        "type": "object"
-       },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "apply_template",
-          "type": "string"
-         },
-         "start_on": {
-          "default": "",
-          "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$",
-          "type": "string"
-         }
-        },
-        "required": [
-         "act"
-        ],
-        "type": "object"
-       },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "save_template",
-          "type": "string"
-         },
-         "name": {
-          "default": "",
-          "maxLength": 255,
-          "type": "string"
-         }
-        },
-        "required": [
-         "act"
-        ],
-        "type": "object"
-       }
-      ]
+     "action": {
+      "enum": [
+       "add",
+       "rename",
+       "move",
+       "remove"
+      ],
+      "type": "string"
+     },
+     "board_continuation_ref": {
+      "type": "string"
      },
      "into_continuation_ref": {
       "type": "string"
      },
+     "name": {
+      "maxLength": 120,
+      "minLength": 1,
+      "type": "string"
+     },
+     "ordinal": {
+      "exclusiveMaximum": 200,
+      "minimum": 0,
+      "type": "integer"
+     },
+     "position": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "type": "integer"
+     },
+     "private": {
+      "const": true,
+      "type": "boolean"
+     },
      "project_continuation_ref": {
       "type": "string"
+     },
+     "record_class": {
+      "$ref": "#/$defs/Identifier"
      },
      "record_continuation_ref": {
       "type": "string"
      },
+     "section_id": {
+      "$ref": "#/$defs/Identifier"
+     },
      "source_continuation_ref": {
+      "type": "string"
+     },
+     "start_on": {
+      "default": "",
+      "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$",
+      "type": "string"
+     },
+     "table_name": {
+      "maxLength": 120,
+      "minLength": 1,
       "type": "string"
      },
      "template_continuation_ref": {
       "type": "string"
+     },
+     "template_name": {
+      "default": "",
+      "maxLength": 255,
+      "type": "string"
+     },
+     "to_organisation": {
+      "const": true,
+      "type": "boolean"
      }
     },
     "required": [
-     "change"
+     "act"
     ],
     "type": "object"
    }
@@ -1814,122 +1954,6 @@
       "required": [
        "field"
       ],
-      "type": "object"
-     },
-     "FilteredViewConfigInput": {
-      "properties": {
-       "calendar": {
-        "anyOf": [
-         {
-          "additionalProperties": false,
-          "properties": {
-           "layout": {
-            "enum": [
-             "month",
-             "week",
-             "day"
-            ],
-            "type": "string"
-           }
-          },
-          "type": "object"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "columns": {
-        "items": {
-         "maxLength": 128,
-         "minLength": 1,
-         "type": "string"
-        },
-        "maxItems": 200,
-        "type": "array"
-       },
-       "group_by": {
-        "anyOf": [
-         {
-          "additionalProperties": false,
-          "properties": {
-           "bucket": {
-            "enum": [
-             "relative",
-             "week",
-             "month",
-             "quarter",
-             "year"
-            ],
-            "type": "string"
-           },
-           "field": {
-            "maxLength": 128,
-            "minLength": 1,
-            "type": "string"
-           },
-           "show_empty": {
-            "type": "boolean"
-           },
-           "then": {
-            "additionalProperties": false,
-            "properties": {
-             "bucket": {
-              "enum": [
-               "relative",
-               "week",
-               "month",
-               "quarter",
-               "year"
-              ],
-              "type": "string"
-             },
-             "field": {
-              "maxLength": 128,
-              "minLength": 1,
-              "type": "string"
-             }
-            },
-            "required": [
-             "field"
-            ],
-            "type": "object"
-           }
-          },
-          "required": [
-           "field"
-          ],
-          "type": "object"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "hidden": {
-        "items": {
-         "maxLength": 128,
-         "minLength": 1,
-         "type": "string"
-        },
-        "maxItems": 200,
-        "type": "array"
-       },
-       "predicate": {
-        "anyOf": [
-         {
-          "$ref": "#/$defs/SemanticFilterInput"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "sort": {
-        "maxLength": 670,
-        "type": "string"
-       }
-      },
       "type": "object"
      },
      "SemanticFilterInput": {
@@ -2115,7 +2139,86 @@
      }
     },
     "additionalProperties": false,
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "add"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "kind",
+         "name",
+         "shared",
+         "config",
+         "board_continuation_ref"
+        ]
+       },
+       "required": [
+        "kind"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "configure"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "allOf": [
+        {
+         "anyOf": [
+          {
+           "required": [
+            "name"
+           ]
+          },
+          {
+           "required": [
+            "config"
+           ]
+          }
+         ]
+        }
+       ],
+       "propertyNames": {
+        "enum": [
+         "act",
+         "name",
+         "config",
+         "board_continuation_ref",
+         "view_continuation_ref"
+        ]
+       }
+      }
+     }
+    ],
     "properties": {
+     "act": {
+      "enum": [
+       "add",
+       "configure"
+      ],
+      "type": "string"
+     },
      "board_continuation_ref": {
       "anyOf": [
        {
@@ -2126,87 +2229,142 @@
        }
       ]
      },
-     "change": {
-      "discriminator": {
-       "propertyName": "act"
-      },
-      "oneOf": [
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "add",
-          "type": "string"
-         },
-         "config": {
-          "$ref": "#/$defs/FilteredViewConfigInput"
-         },
-         "kind": {
-          "enum": [
-           "table",
-           "dashboard",
-           "kanban",
-           "calendar",
-           "timeline",
-           "workload",
-           "form",
-           "pivot"
-          ],
-          "type": "string"
-         },
-         "name": {
-          "maxLength": 120,
-          "minLength": 1,
-          "type": "string"
-         },
-         "shared": {
-          "type": "boolean"
-         }
-        },
-        "required": [
-         "kind",
-         "act"
-        ],
-        "type": "object"
-       },
-       {
-        "additionalProperties": false,
-        "allOf": [
+     "config": {
+      "properties": {
+       "calendar": {
+        "anyOf": [
          {
-          "anyOf": [
-           {
-            "required": [
-             "name"
-            ]
-           },
-           {
-            "required": [
-             "config"
-            ]
+          "additionalProperties": false,
+          "properties": {
+           "layout": {
+            "enum": [
+             "month",
+             "week",
+             "day"
+            ],
+            "type": "string"
            }
-          ]
-         }
-        ],
-        "properties": {
-         "act": {
-          "const": "configure",
-          "type": "string"
+          },
+          "type": "object"
          },
-         "config": {
-          "$ref": "#/$defs/FilteredViewConfigInput"
-         },
-         "name": {
-          "maxLength": 120,
-          "minLength": 1,
-          "type": "string"
+         {
+          "type": "null"
          }
+        ]
+       },
+       "columns": {
+        "items": {
+         "maxLength": 128,
+         "minLength": 1,
+         "type": "string"
         },
-        "required": [
-         "act"
-        ],
-        "type": "object"
+        "maxItems": 200,
+        "type": "array"
+       },
+       "group_by": {
+        "anyOf": [
+         {
+          "additionalProperties": false,
+          "properties": {
+           "bucket": {
+            "enum": [
+             "relative",
+             "week",
+             "month",
+             "quarter",
+             "year"
+            ],
+            "type": "string"
+           },
+           "field": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+           },
+           "show_empty": {
+            "type": "boolean"
+           },
+           "then": {
+            "additionalProperties": false,
+            "properties": {
+             "bucket": {
+              "enum": [
+               "relative",
+               "week",
+               "month",
+               "quarter",
+               "year"
+              ],
+              "type": "string"
+             },
+             "field": {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+             }
+            },
+            "required": [
+             "field"
+            ],
+            "type": "object"
+           }
+          },
+          "required": [
+           "field"
+          ],
+          "type": "object"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "hidden": {
+        "items": {
+         "maxLength": 128,
+         "minLength": 1,
+         "type": "string"
+        },
+        "maxItems": 200,
+        "type": "array"
+       },
+       "predicate": {
+        "anyOf": [
+         {
+          "$ref": "#/$defs/SemanticFilterInput"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "sort": {
+        "maxLength": 670,
+        "type": "string"
        }
-      ]
+      },
+      "type": "object"
+     },
+     "kind": {
+      "enum": [
+       "table",
+       "dashboard",
+       "kanban",
+       "calendar",
+       "timeline",
+       "workload",
+       "form",
+       "pivot"
+      ],
+      "type": "string"
+     },
+     "name": {
+      "maxLength": 120,
+      "minLength": 1,
+      "type": "string"
+     },
+     "shared": {
+      "type": "boolean"
      },
      "view_continuation_ref": {
       "anyOf": [
@@ -2220,7 +2378,7 @@
      }
     },
     "required": [
-     "change",
+     "act",
      "board_continuation_ref"
     ],
     "type": "object"
@@ -2414,6 +2572,12 @@
     "type": "object"
    }
   },
+  "chart_display": {
+   "doors": [
+    "beacon"
+   ],
+   "family": "host"
+  },
   "closing_question": {
    "choices": {},
    "doors": [
@@ -2448,6 +2612,12 @@
     ],
     "type": "object"
    }
+  },
+  "comparison_card": {
+   "doors": [
+    "beacon"
+   ],
+   "family": "host"
   },
   "completions_read": {
    "choices": {},
@@ -2529,100 +2699,121 @@
    "family": "record_updates",
    "schema": {
     "additionalProperties": false,
-    "properties": {
-     "change": {
-      "discriminator": {
-       "propertyName": "act"
-      },
-      "oneOf": [
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "update",
-          "type": "string"
-         },
-         "attachments": {
-          "items": {
-           "maxLength": 2048,
-           "minLength": 1,
-           "type": "string"
-          },
-          "maxItems": 20,
-          "type": "array"
-         },
-         "body": {
-          "minLength": 1,
-          "type": "string"
-         }
-        },
-        "required": [
-         "body",
-         "act"
-        ],
-        "type": "object"
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "update"
+         ]
+        }
        },
-       {
-        "additionalProperties": false,
-        "allOf": [
-         {
-          "oneOf": [
-           {
-            "required": [
-             "thread"
-            ]
-           },
-           {
-            "required": [
-             "block"
-            ]
-           }
-          ]
-         },
-         {
-          "dependentRequired": {
-           "quote": [
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "body",
+         "attachments",
+         "update_continuation_ref"
+        ]
+       }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "comment"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "allOf": [
+        {
+         "oneOf": [
+          {
+           "required": [
+            "thread"
+           ]
+          },
+          {
+           "required": [
             "block"
            ]
           }
-         }
-        ],
-        "properties": {
-         "act": {
-          "const": "comment",
-          "type": "string"
-         },
-         "block": {
-          "maxLength": 160,
-          "minLength": 1,
-          "saphion.issued_references": true,
-          "type": "string"
-         },
-         "body": {
-          "minLength": 1,
-          "type": "string"
-         },
-         "quote": {
-          "maxLength": 2000,
-          "minLength": 1,
-          "type": "string"
-         },
-         "thread": {
-          "maxLength": 170,
-          "minLength": 1,
-          "saphion.issued_references": true,
-          "type": "string"
-         }
+         ]
         },
-        "required": [
+        {
+         "dependentRequired": {
+          "quote": [
+           "block"
+          ]
+         }
+        }
+       ],
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
          "body",
-         "act"
-        ],
-        "type": "object"
+         "thread",
+         "block",
+         "quote"
+        ]
        }
-      ]
+      }
+     }
+    ],
+    "properties": {
+     "act": {
+      "enum": [
+       "update",
+       "comment"
+      ],
+      "type": "string"
+     },
+     "attachments": {
+      "items": {
+       "maxLength": 2048,
+       "minLength": 1,
+       "type": "string"
+      },
+      "maxItems": 20,
+      "type": "array"
+     },
+     "block": {
+      "maxLength": 160,
+      "minLength": 1,
+      "saphion.issued_references": true,
+      "type": "string"
+     },
+     "body": {
+      "minLength": 1,
+      "type": "string"
      },
      "continuation_ref": {
+      "type": "string"
+     },
+     "quote": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "thread": {
+      "maxLength": 170,
+      "minLength": 1,
+      "saphion.issued_references": true,
       "type": "string"
      },
      "update_continuation_ref": {
@@ -2630,7 +2821,8 @@
      }
     },
     "required": [
-     "change"
+     "act",
+     "body"
     ],
     "type": "object"
    }
@@ -2944,370 +3136,124 @@
      }
     },
     "additionalProperties": false,
-    "properties": {
-     "change": {
-      "discriminator": {
-       "propertyName": "act"
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "create"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
       },
-      "oneOf": [
-       {
-        "additionalProperties": false,
-        "allOf": [
-         {
-          "oneOf": [
-           {
-            "required": [
-             "outline"
-            ]
-           },
-           {
-            "required": [
-             "starter"
-            ]
-           }
-          ]
-         },
-         {
-          "dependentRequired": {
-           "note": [
+      "then": {
+       "allOf": [
+        {
+         "oneOf": [
+          {
+           "required": [
             "outline"
            ]
+          },
+          {
+           "required": [
+            "starter"
+           ]
           }
-         }
-        ],
-        "properties": {
-         "act": {
-          "const": "create",
-          "type": "string"
-         },
-         "note": {
-          "maxLength": 400,
-          "minLength": 1,
-          "type": "string"
-         },
-         "outline": {
-          "items": {
-           "maxLength": 400,
-           "minLength": 1,
-           "type": "string"
-          },
-          "maxItems": 40,
-          "minItems": 1,
-          "type": "array"
-         },
-         "starter": {
-          "maxLength": 160,
-          "minLength": 1,
-          "type": "string"
-         },
-         "title": {
-          "maxLength": 240,
-          "minLength": 1,
-          "type": "string"
-         }
+         ]
         },
-        "required": [
+        {
+         "dependentRequired": {
+          "note": [
+           "outline"
+          ]
+         }
+        }
+       ],
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
          "title",
-         "act"
-        ],
-        "type": "object"
+         "outline",
+         "note",
+         "starter",
+         "project_continuation_ref",
+         "tab_of_continuation_ref"
+        ]
        },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "edit",
-          "type": "string"
-         },
-         "operations": {
-          "items": {
-           "additionalProperties": false,
-           "properties": {
-            "after": {
-             "maxLength": 160,
-             "minLength": 1,
-             "saphion.issued_references": true,
-             "type": "string"
-            },
-            "attrs": {
-             "additionalProperties": true,
-             "type": "object"
-            },
-            "block": {
-             "maxLength": 160,
-             "minLength": 1,
-             "saphion.issued_references": true,
-             "type": "string"
-            },
-            "cell": {
-             "items": {
-              "type": "integer"
-             },
-             "maxItems": 2,
-             "minItems": 2,
-             "type": "array"
-            },
-            "chart": {
-             "$ref": "#/$defs/PageChart"
-            },
-            "find": {
-             "maxLength": 4000,
-             "minLength": 1,
-             "type": "string"
-            },
-            "markdown": {
-             "type": "string"
-            },
-            "nth": {
-             "default": 1,
-             "minimum": 1,
-             "type": "integer"
-            },
-            "op": {
-             "enum": [
-              "replace",
-              "replace_section",
-              "insert",
-              "delete",
-              "move",
-              "set"
-             ],
-             "type": "string"
-            },
-            "preset": {
-             "maxLength": 80,
-             "type": "string"
-            },
-            "settings": {
-             "additionalProperties": true,
-             "type": "object"
-            },
-            "size": {
-             "maxLength": 24,
-             "type": "string"
-            },
-            "text": {
-             "maxLength": 100000,
-             "type": "string"
-            }
-           },
-           "required": [
-            "op"
-           ],
-           "type": "object"
-          },
-          "maxItems": 50,
-          "type": "array"
-         },
-         "put_back_previous": {
-          "default": false,
-          "type": "boolean"
-         }
-        },
-        "required": [
-         "act"
-        ],
-        "type": "object"
+       "required": [
+        "title"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "edit"
+         ]
+        }
        },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "from_questionnaire",
-          "type": "string"
-         },
-         "overview": {
-          "type": "string"
-         },
-         "questions": {
-          "items": {
-           "additionalProperties": false,
-           "properties": {
-            "answer": {
-             "additionalProperties": false,
-             "properties": {
-              "allow_free_text": {
-               "default": false,
-               "type": "boolean"
-              },
-              "confirm_statement": {
-               "$ref": "#/$defs/SourcePassageSelection"
-              },
-              "control": {
-               "default": "rich_text",
-               "enum": [
-                "address",
-                "artefact_only",
-                "checkbox",
-                "date",
-                "document_reference",
-                "email",
-                "multiselect",
-                "number",
-                "rich_text",
-                "rows_select",
-                "select",
-                "tel",
-                "text",
-                "textarea",
-                "url"
-               ],
-               "type": "string"
-              },
-              "max_items": {
-               "$ref": "#/$defs/SourceScalarSelection"
-              },
-              "na_allowed": {
-               "default": false,
-               "type": "boolean"
-              },
-              "options": {
-               "items": {
-                "$ref": "#/$defs/SourceOption"
-               },
-               "type": "array"
-              },
-              "parts": {
-               "items": {
-                "additionalProperties": false,
-                "properties": {
-                 "control": {
-                  "default": "text",
-                  "enum": [
-                   "checkbox",
-                   "date",
-                   "email",
-                   "multiselect",
-                   "number",
-                   "select",
-                   "tel",
-                   "text",
-                   "textarea",
-                   "url"
-                  ],
-                  "type": "string"
-                 },
-                 "name": {
-                  "$ref": "#/$defs/SourcePassageSelection"
-                 },
-                 "options": {
-                  "items": {
-                   "$ref": "#/$defs/SourceOption"
-                  },
-                  "type": "array"
-                 }
-                },
-                "required": [
-                 "name"
-                ],
-                "type": "object"
-               },
-               "type": "array"
-              }
-             },
-             "type": "object"
-            },
-            "answers_with": {
-             "$ref": "#/$defs/SourcePassageSelection"
-            },
-            "applies": {
-             "additionalProperties": false,
-             "properties": {
-              "excused_by": {
-               "items": {
-                "$ref": "#/$defs/SourcePassageSelection"
-               },
-               "minItems": 1,
-               "type": "array"
-              },
-              "statement": {
-               "$ref": "#/$defs/SourcePassageSelection"
-              },
-              "when": {
-               "$ref": "#/$defs/SourcePassageSelection"
-              }
-             },
-             "required": [
-              "when",
-              "excused_by",
-              "statement"
-             ],
-             "type": "object"
-            },
-            "artefacts": {
-             "items": {
-              "$ref": "#/$defs/SourcePassageSelection"
-             },
-             "type": "array"
-            },
-            "criterion": {
-             "$ref": "#/$defs/SourceCriterion"
-            },
-            "instructions": {
-             "items": {
-              "$ref": "#/$defs/SourcePassageSelection"
-             },
-             "type": "array"
-            },
-            "label": {
-             "$ref": "#/$defs/SourcePassageSelection"
-            },
-            "limits": {
-             "items": {
-              "additionalProperties": false,
-              "properties": {
-               "scope": {
-                "default": "",
-                "type": "string"
-               },
-               "statement": {
-                "$ref": "#/$defs/SourcePassageSelection"
-               }
-              },
-              "required": [
-               "statement"
-              ],
-              "type": "object"
-             },
-             "type": "array"
-            },
-            "required": {
-             "default": true,
-             "type": "boolean"
-            },
-            "return_document": {
-             "$ref": "#/$defs/SourceCriterion"
-            },
-            "weighting": {
-             "$ref": "#/$defs/SourceScalarSelection"
-            },
-            "wording": {
-             "$ref": "#/$defs/SourcePassageSelection"
-            }
-           },
-           "required": [
-            "wording"
-           ],
-           "type": "object"
-          },
-          "maxItems": 1000,
-          "minItems": 1,
-          "type": "array"
-         },
-         "title": {
-          "default": "",
-          "maxLength": 240,
-          "type": "string"
-         }
-        },
-        "required": [
-         "overview",
-         "questions",
-         "act"
-        ],
-        "type": "object"
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref",
+         "operations",
+         "put_back_previous"
+        ]
        }
-      ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "from_questionnaire"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "title",
+         "overview",
+         "questions"
+        ]
+       },
+       "required": [
+        "overview",
+        "questions"
+       ]
+      }
+     }
+    ],
+    "properties": {
+     "act": {
+      "enum": [
+       "create",
+       "edit",
+       "from_questionnaire"
+      ],
+      "type": "string"
      },
      "continuation_ref": {
       "type": "string"
@@ -3317,15 +3263,302 @@
       "minLength": 1,
       "type": "string"
      },
+     "note": {
+      "maxLength": 400,
+      "minLength": 1,
+      "type": "string"
+     },
+     "operations": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "after": {
+         "maxLength": 160,
+         "minLength": 1,
+         "saphion.issued_references": true,
+         "type": "string"
+        },
+        "attrs": {
+         "additionalProperties": true,
+         "type": "object"
+        },
+        "block": {
+         "maxLength": 160,
+         "minLength": 1,
+         "saphion.issued_references": true,
+         "type": "string"
+        },
+        "cell": {
+         "items": {
+          "type": "integer"
+         },
+         "maxItems": 2,
+         "minItems": 2,
+         "type": "array"
+        },
+        "chart": {
+         "$ref": "#/$defs/PageChart"
+        },
+        "find": {
+         "maxLength": 4000,
+         "minLength": 1,
+         "type": "string"
+        },
+        "markdown": {
+         "type": "string"
+        },
+        "nth": {
+         "default": 1,
+         "minimum": 1,
+         "type": "integer"
+        },
+        "op": {
+         "enum": [
+          "replace",
+          "replace_section",
+          "insert",
+          "delete",
+          "move",
+          "set"
+         ],
+         "type": "string"
+        },
+        "preset": {
+         "maxLength": 80,
+         "type": "string"
+        },
+        "settings": {
+         "additionalProperties": true,
+         "type": "object"
+        },
+        "size": {
+         "maxLength": 24,
+         "type": "string"
+        },
+        "text": {
+         "maxLength": 100000,
+         "type": "string"
+        }
+       },
+       "required": [
+        "op"
+       ],
+       "type": "object"
+      },
+      "maxItems": 50,
+      "type": "array"
+     },
+     "outline": {
+      "items": {
+       "maxLength": 400,
+       "minLength": 1,
+       "type": "string"
+      },
+      "maxItems": 40,
+      "minItems": 1,
+      "type": "array"
+     },
+     "overview": {
+      "type": "string"
+     },
      "project_continuation_ref": {
+      "type": "string"
+     },
+     "put_back_previous": {
+      "default": false,
+      "type": "boolean"
+     },
+     "questions": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "answer": {
+         "additionalProperties": false,
+         "properties": {
+          "allow_free_text": {
+           "default": false,
+           "type": "boolean"
+          },
+          "confirm_statement": {
+           "$ref": "#/$defs/SourcePassageSelection"
+          },
+          "control": {
+           "default": "rich_text",
+           "enum": [
+            "address",
+            "artefact_only",
+            "checkbox",
+            "date",
+            "document_reference",
+            "email",
+            "multiselect",
+            "number",
+            "rich_text",
+            "rows_select",
+            "select",
+            "tel",
+            "text",
+            "textarea",
+            "url"
+           ],
+           "type": "string"
+          },
+          "max_items": {
+           "$ref": "#/$defs/SourceScalarSelection"
+          },
+          "na_allowed": {
+           "default": false,
+           "type": "boolean"
+          },
+          "options": {
+           "items": {
+            "$ref": "#/$defs/SourceOption"
+           },
+           "type": "array"
+          },
+          "parts": {
+           "items": {
+            "additionalProperties": false,
+            "properties": {
+             "control": {
+              "default": "text",
+              "enum": [
+               "checkbox",
+               "date",
+               "email",
+               "multiselect",
+               "number",
+               "select",
+               "tel",
+               "text",
+               "textarea",
+               "url"
+              ],
+              "type": "string"
+             },
+             "name": {
+              "$ref": "#/$defs/SourcePassageSelection"
+             },
+             "options": {
+              "items": {
+               "$ref": "#/$defs/SourceOption"
+              },
+              "type": "array"
+             }
+            },
+            "required": [
+             "name"
+            ],
+            "type": "object"
+           },
+           "type": "array"
+          }
+         },
+         "type": "object"
+        },
+        "answers_with": {
+         "$ref": "#/$defs/SourcePassageSelection"
+        },
+        "applies": {
+         "additionalProperties": false,
+         "properties": {
+          "excused_by": {
+           "items": {
+            "$ref": "#/$defs/SourcePassageSelection"
+           },
+           "minItems": 1,
+           "type": "array"
+          },
+          "statement": {
+           "$ref": "#/$defs/SourcePassageSelection"
+          },
+          "when": {
+           "$ref": "#/$defs/SourcePassageSelection"
+          }
+         },
+         "required": [
+          "when",
+          "excused_by",
+          "statement"
+         ],
+         "type": "object"
+        },
+        "artefacts": {
+         "items": {
+          "$ref": "#/$defs/SourcePassageSelection"
+         },
+         "type": "array"
+        },
+        "criterion": {
+         "$ref": "#/$defs/SourceCriterion"
+        },
+        "instructions": {
+         "items": {
+          "$ref": "#/$defs/SourcePassageSelection"
+         },
+         "type": "array"
+        },
+        "label": {
+         "$ref": "#/$defs/SourcePassageSelection"
+        },
+        "limits": {
+         "items": {
+          "additionalProperties": false,
+          "properties": {
+           "scope": {
+            "default": "",
+            "type": "string"
+           },
+           "statement": {
+            "$ref": "#/$defs/SourcePassageSelection"
+           }
+          },
+          "required": [
+           "statement"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "required": {
+         "default": true,
+         "type": "boolean"
+        },
+        "return_document": {
+         "$ref": "#/$defs/SourceCriterion"
+        },
+        "weighting": {
+         "$ref": "#/$defs/SourceScalarSelection"
+        },
+        "wording": {
+         "$ref": "#/$defs/SourcePassageSelection"
+        }
+       },
+       "required": [
+        "wording"
+       ],
+       "type": "object"
+      },
+      "maxItems": 1000,
+      "minItems": 1,
+      "type": "array"
+     },
+     "starter": {
+      "maxLength": 160,
+      "minLength": 1,
       "type": "string"
      },
      "tab_of_continuation_ref": {
       "type": "string"
+     },
+     "title": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
      }
     },
     "required": [
-     "change"
+     "act"
     ],
     "type": "object"
    }
@@ -3730,7 +3963,9 @@
      "record",
      "run",
      "scheduled_task",
-     "team"
+     "skill",
+     "team",
+     "template"
     ],
     "operator": [
      "date_after",
@@ -4057,7 +4292,9 @@
        "record",
        "run",
        "scheduled_task",
-       "team"
+       "skill",
+       "team",
+       "template"
       ],
       "type": "string"
      },
@@ -4140,7 +4377,7 @@
     "properties": {
      "held_by": {
       "default": "",
-      "maxLength": 64,
+      "maxLength": 256,
       "type": "string"
      },
      "kind": {
@@ -4213,72 +4450,93 @@
    "family": "form_definitions",
    "schema": {
     "additionalProperties": false,
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "create"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "board_continuation_ref",
+         "name",
+         "mode"
+        ]
+       },
+       "required": [
+        "name"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "update"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "name",
+         "continuation_ref",
+         "body"
+        ]
+       }
+      }
+     }
+    ],
     "properties": {
+     "act": {
+      "enum": [
+       "create",
+       "update"
+      ],
+      "type": "string"
+     },
      "board_continuation_ref": {
       "type": "string"
      },
-     "change": {
-      "discriminator": {
-       "propertyName": "act"
-      },
-      "oneOf": [
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "create",
-          "type": "string"
-         },
-         "mode": {
-          "default": "create",
-          "enum": [
-           "create",
-           "update"
-          ],
-          "type": "string"
-         },
-         "name": {
-          "maxLength": 200,
-          "minLength": 1,
-          "type": "string"
-         }
-        },
-        "required": [
-         "name",
-         "act"
-        ],
-        "type": "object"
-       },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "update",
-          "type": "string"
-         },
-         "body": {
-          "additionalProperties": true,
-          "type": "object"
-         },
-         "name": {
-          "maxLength": 200,
-          "minLength": 1,
-          "type": "string"
-         }
-        },
-        "required": [
-         "act"
-        ],
-        "type": "object"
-       }
-      ]
+     "body": {
+      "additionalProperties": true,
+      "type": "object"
      },
      "continuation_ref": {
+      "type": "string"
+     },
+     "mode": {
+      "default": "create",
+      "enum": [
+       "create",
+       "update"
+      ],
+      "type": "string"
+     },
+     "name": {
+      "maxLength": 200,
+      "minLength": 1,
       "type": "string"
      }
     },
     "required": [
-     "change"
+     "act"
     ],
     "type": "object"
    }
@@ -4372,6 +4630,12 @@
     ],
     "type": "object"
    }
+  },
+  "link_preview": {
+   "doors": [
+    "beacon"
+   ],
+   "family": "host"
   },
   "load_skill": {
    "doors": [
@@ -4544,6 +4808,12 @@
     ],
     "type": "object"
    }
+  },
+  "message_compose": {
+   "doors": [
+    "beacon"
+   ],
+   "family": "host"
   },
   "microsoft_365_calendar_create_event": {
    "choices": {},
@@ -5989,118 +6259,6 @@
     "type": "object"
    }
   },
-  "next_steps_review_save": {
-   "choices": {
-    "kind": [
-     "action",
-     "record_change",
-     "request_received",
-     "update",
-     "update_action",
-     "waiting"
-    ]
-   },
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "next_steps",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "source_continuation_refs": {
-      "items": {
-       "type": "string"
-      },
-      "type": "array"
-     },
-     "steps": {
-      "items": {
-       "additionalProperties": false,
-       "properties": {
-        "action_continuation_ref": {
-         "default": "",
-         "maxLength": 64,
-         "type": "string"
-        },
-        "changes": {
-         "additionalProperties": {
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "items": {
-             "type": "string"
-            },
-            "type": "array"
-           }
-          ]
-         },
-         "maxProperties": 12,
-         "type": "object"
-        },
-        "due": {
-         "default": "",
-         "maxLength": 20,
-         "type": "string"
-        },
-        "kind": {
-         "enum": [
-          "update",
-          "action",
-          "update_action",
-          "waiting",
-          "record_change",
-          "request_received"
-         ],
-         "type": "string"
-        },
-        "owner": {
-         "default": "",
-         "maxLength": 200,
-         "type": "string"
-        },
-        "promised_return": {
-         "default": "",
-         "maxLength": 20,
-         "type": "string"
-        },
-        "provider": {
-         "default": "",
-         "maxLength": 200,
-         "type": "string"
-        },
-        "text": {
-         "maxLength": 4000,
-         "minLength": 1,
-         "type": "string"
-        },
-        "turnaround": {
-         "minimum": 0,
-         "type": "integer"
-        }
-       },
-       "required": [
-        "kind",
-        "text"
-       ],
-       "type": "object"
-      },
-      "maxItems": 20,
-      "type": "array"
-     },
-     "target_continuation_ref": {
-      "type": "string"
-     }
-    },
-    "required": [
-     "steps",
-     "source_continuation_refs"
-    ],
-    "type": "object"
-   }
-  },
   "organisation_authority_read": {
    "choices": {},
    "doors": [
@@ -6282,6 +6440,12 @@
     ],
     "type": "object"
    }
+  },
+  "places_map": {
+   "doors": [
+    "beacon"
+   ],
+   "family": "host"
   },
   "planradar_project_changes": {
    "choices": {},
@@ -6480,17 +6644,13 @@
   "plugin_read": {
    "choices": {},
    "doors": [
-    "beacon",
-    "codeact"
+    "routed"
    ],
    "family": "skill_authoring",
    "schema": {
     "additionalProperties": false,
     "properties": {
-     "name": {
-      "maxLength": 64,
-      "minLength": 1,
-      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+     "continuation_ref": {
       "type": "string"
      },
      "path": {
@@ -6505,138 +6665,13 @@
      }
     },
     "required": [
-     "name"
+     "continuation_ref"
     ],
     "type": "object"
    }
   },
-  "plugin_save": {
-   "choices": {
-    "invocation": [
-     "automatic",
-     "explicit_only"
-    ]
-   },
-   "doors": [
-    "beacon"
-   ],
-   "family": "skill_authoring",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "description": {
-      "maxLength": 2000,
-      "minLength": 1,
-      "type": "string"
-     },
-     "display_name": {
-      "maxLength": 80,
-      "minLength": 1,
-      "type": "string"
-     },
-     "files": {
-      "items": {
-       "additionalProperties": false,
-       "properties": {
-        "path": {
-         "maxLength": 255,
-         "minLength": 1,
-         "type": "string"
-        },
-        "text": {
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        }
-       },
-       "required": [
-        "path",
-        "text"
-       ],
-       "type": "object"
-      },
-      "maxItems": 200,
-      "type": "array"
-     },
-     "invocation": {
-      "items": {
-       "additionalProperties": false,
-       "properties": {
-        "invocation": {
-         "enum": [
-          "automatic",
-          "explicit_only"
-         ],
-         "type": "string"
-        },
-        "skill": {
-         "maxLength": 64,
-         "minLength": 1,
-         "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-         "type": "string"
-        }
-       },
-       "required": [
-        "skill",
-        "invocation"
-       ],
-       "type": "object"
-      },
-      "type": "array"
-     },
-     "name": {
-      "maxLength": 64,
-      "minLength": 1,
-      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-      "type": "string"
-     }
-    },
-    "required": [
-     "name",
-     "description"
-    ],
-    "type": "object"
-   }
-  },
-  "present": {
-   "choices": {
-    "kind": [
-     "chart",
-     "file",
-     "metric",
-     "progress_visualisation",
-     "records",
-     "spreadsheet"
-    ],
-    "sort": [
-     "ascending",
-     "descending"
-    ],
-    "stacking": [
-     "percent",
-     "stacked"
-    ],
-    "type": [
-     "bar",
-     "breakdown",
-     "funnel",
-     "gauge",
-     "heatmap",
-     "line",
-     "pie",
-     "scatter",
-     "treemap",
-     "waterfall"
-    ],
-    "zones": [
-     "buffer"
-    ]
-   },
+  "present_file": {
+   "choices": {},
    "doors": [
     "beacon",
     "codeact"
@@ -6644,148 +6679,13 @@
    "family": "visualisations",
    "schema": {
     "additionalProperties": false,
-    "allOf": [
-     {
-      "else": {
-       "not": {
-        "required": [
-         "file_continuation_ref"
-        ]
-       },
-       "required": [
-        "table"
-       ]
-      },
-      "if": {
-       "properties": {
-        "kind": {
-         "enum": [
-          "file"
-         ]
-        }
-       },
-       "required": [
-        "kind"
-       ]
-      },
-      "then": {
-       "not": {
-        "required": [
-         "table"
-        ]
-       },
-       "properties": {
-        "body": {
-         "maxProperties": 0
-        }
-       },
-       "required": [
-        "file_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "kind": {
-         "enum": [
-          "chart"
-         ]
-        }
-       },
-       "required": [
-        "kind"
-       ]
-      },
-      "then": {
-       "properties": {
-        "body": {
-         "properties": {
-          "presentation": {
-           "additionalProperties": false,
-           "properties": {
-            "benchmark": {
-             "type": "number"
-            },
-            "benchmark_label": {
-             "maxLength": 60,
-             "minLength": 1,
-             "type": "string"
-            },
-            "opening": {
-             "type": "number"
-            },
-            "sort": {
-             "enum": [
-              "descending",
-              "ascending"
-             ],
-             "type": "string"
-            },
-            "stacking": {
-             "enum": [
-              "stacked",
-              "percent"
-             ],
-             "type": "string"
-            },
-            "type": {
-             "enum": [
-              "bar",
-              "line",
-              "pie",
-              "breakdown",
-              "gauge",
-              "scatter",
-              "treemap",
-              "heatmap",
-              "funnel",
-              "waterfall"
-             ],
-             "type": "string"
-            },
-            "zones": {
-             "enum": [
-              "buffer"
-             ],
-             "type": "string"
-            }
-           },
-           "type": "object"
-          }
-         }
-        }
-       }
-      }
-     }
-    ],
     "properties": {
-     "body": {
-      "additionalProperties": true,
-      "type": "object"
-     },
      "file_continuation_ref": {
-      "type": "string"
-     },
-     "kind": {
-      "enum": [
-       "records",
-       "spreadsheet",
-       "chart",
-       "metric",
-       "progress_visualisation",
-       "file"
-      ],
-      "type": "string"
-     },
-     "table": {
-      "maxLength": 200,
-      "minLength": 1,
       "type": "string"
      }
     },
     "required": [
-     "kind"
+     "file_continuation_ref"
     ],
     "type": "object"
    }
@@ -6864,146 +6764,177 @@
        "kind"
       ],
       "type": "object"
+     },
+     "ProjectStartingFactsInput": {
+      "additionalProperties": false,
+      "properties": {
+       "client": {
+        "type": "string"
+       },
+       "description": {
+        "type": "string"
+       },
+       "fields": {
+        "additionalProperties": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "number"
+          }
+         ]
+        },
+        "type": "object"
+       },
+       "lead": {
+        "type": "string"
+       },
+       "location": {
+        "$ref": "#/$defs/ProjectLocationInput"
+       },
+       "phase": {
+        "type": "string"
+       },
+       "value": {
+        "type": "number"
+       }
+      },
+      "type": "object"
      }
     },
     "additionalProperties": false,
-    "properties": {
-     "change": {
-      "discriminator": {
-       "propertyName": "act"
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "create"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
       },
-      "oneOf": [
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "create",
-          "type": "string"
-         },
-         "facts": {
-          "additionalProperties": false,
-          "properties": {
-           "client": {
-            "type": "string"
-           },
-           "description": {
-            "type": "string"
-           },
-           "fields": {
-            "additionalProperties": {
-             "anyOf": [
-              {
-               "type": "string"
-              },
-              {
-               "type": "number"
-              }
-             ]
-            },
-            "type": "object"
-           },
-           "lead": {
-            "type": "string"
-           },
-           "location": {
-            "$ref": "#/$defs/ProjectLocationInput"
-           },
-           "phase": {
-            "type": "string"
-           },
-           "value": {
-            "type": "number"
-           }
-          },
-          "type": "object"
-         },
-         "name": {
-          "maxLength": 255,
-          "minLength": 1,
-          "type": "string"
-         },
-         "offer": {
-          "$ref": "#/$defs/ProjectOfferReference"
-         }
-        },
-        "required": [
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
          "name",
-         "act"
-        ],
+         "facts",
+         "offer"
+        ]
+       },
+       "required": [
+        "name"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "update"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "changes",
+         "read_from"
+        ]
+       },
+       "required": [
+        "changes"
+       ]
+      }
+     }
+    ],
+    "properties": {
+     "act": {
+      "enum": [
+       "create",
+       "update"
+      ],
+      "type": "string"
+     },
+     "changes": {
+      "additionalProperties": false,
+      "allOf": [
+       {
+        "minProperties": 1
+       }
+      ],
+      "properties": {
+       "client": {
+        "type": "string"
+       },
+       "colour": {
+        "type": "string"
+       },
+       "description": {
+        "type": "string"
+       },
+       "fields": {
+        "additionalProperties": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "number"
+          }
+         ]
+        },
         "type": "object"
        },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "update",
-          "type": "string"
-         },
-         "changes": {
-          "additionalProperties": false,
-          "allOf": [
-           {
-            "minProperties": 1
-           }
-          ],
-          "properties": {
-           "client": {
-            "type": "string"
-           },
-           "colour": {
-            "type": "string"
-           },
-           "description": {
-            "type": "string"
-           },
-           "fields": {
-            "additionalProperties": {
-             "anyOf": [
-              {
-               "type": "string"
-              },
-              {
-               "type": "number"
-              }
-             ]
-            },
-            "type": "object"
-           },
-           "lead": {
-            "type": "string"
-           },
-           "location": {
-            "$ref": "#/$defs/ProjectLocationInput"
-           },
-           "mark": {
-            "type": "string"
-           },
-           "name": {
-            "type": "string"
-           }
-          },
-          "type": "object"
-         },
-         "read_from": {
-          "maxLength": 300,
-          "minLength": 1,
-          "type": "string"
-         }
-        },
-        "required": [
-         "changes",
-         "act"
-        ],
-        "type": "object"
+       "lead": {
+        "type": "string"
+       },
+       "location": {
+        "$ref": "#/$defs/ProjectLocationInput"
+       },
+       "mark": {
+        "type": "string"
+       },
+       "name": {
+        "type": "string"
        }
-      ]
+      },
+      "type": "object"
      },
      "continuation_ref": {
+      "type": "string"
+     },
+     "facts": {
+      "$ref": "#/$defs/ProjectStartingFactsInput"
+     },
+     "name": {
+      "maxLength": 255,
+      "minLength": 1,
+      "type": "string"
+     },
+     "offer": {
+      "$ref": "#/$defs/ProjectOfferReference"
+     },
+     "read_from": {
+      "maxLength": 300,
+      "minLength": 1,
       "type": "string"
      }
     },
     "required": [
-     "change"
+     "act"
     ],
     "type": "object"
    }
@@ -7022,64 +6953,69 @@
    "family": "project_files",
    "schema": {
     "additionalProperties": false,
-    "properties": {
-     "change": {
-      "discriminator": {
-       "propertyName": "act"
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "write"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
       },
-      "oneOf": [
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "write",
-          "type": "string"
-         },
-         "markdown": {
-          "default": true,
-          "type": "boolean"
-         },
-         "name": {
-          "maxLength": 255,
-          "minLength": 1,
-          "type": "string"
-         },
-         "text": {
-          "minLength": 1,
-          "type": "string"
-         }
-        },
-        "required": [
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "project_continuation_ref",
          "name",
          "text",
-         "act"
-        ],
-        "type": "object"
+         "markdown"
+        ]
        },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "edit",
-          "type": "string"
-         },
-         "name": {
-          "maxLength": 255,
-          "minLength": 1,
-          "type": "string"
-         },
-         "text": {
-          "minLength": 1,
-          "type": "string"
-         }
-        },
-        "required": [
+       "required": [
+        "name"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "edit"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "name",
          "text",
-         "act"
-        ],
-        "type": "object"
+         "continuation_ref"
+        ]
        }
-      ]
+      }
+     }
+    ],
+    "properties": {
+     "act": {
+      "enum": [
+       "write",
+       "edit"
+      ],
+      "type": "string"
      },
      "continuation_ref": {
       "type": "string"
@@ -7089,12 +7025,26 @@
       "minLength": 1,
       "type": "string"
      },
+     "markdown": {
+      "default": true,
+      "type": "boolean"
+     },
+     "name": {
+      "maxLength": 255,
+      "minLength": 1,
+      "type": "string"
+     },
      "project_continuation_ref": {
+      "type": "string"
+     },
+     "text": {
+      "minLength": 1,
       "type": "string"
      }
     },
     "required": [
-     "change"
+     "act",
+     "text"
     ],
     "type": "object"
    }
@@ -7574,19 +7524,12 @@
     "type": "object"
    }
   },
-  "read_skill_resource": {
-   "doors": [
-    "beacon"
-   ],
-   "family": "host"
-  },
   "record_change": {
    "choices": {
     "act": [
      "create",
      "create_many",
      "restore",
-     "set_field",
      "update",
      "void"
     ]
@@ -7620,337 +7563,370 @@
      }
     },
     "additionalProperties": false,
-    "properties": {
-     "change": {
-      "discriminator": {
-       "propertyName": "act"
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "create"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
       },
-      "oneOf": [
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "create",
-          "type": "string"
-         },
-         "follows_link_kind": {
-          "default": "",
-          "maxLength": 80,
-          "type": "string"
-         },
-         "follows_reason": {
-          "default": "",
-          "maxLength": 2000,
-          "type": "string"
-         },
-         "resource_class": {
-          "maxLength": 64,
-          "minLength": 1,
-          "pattern": "^[^:\\s]+$",
-          "type": "string"
-         },
-         "values": {
-          "additionalProperties": {
-           "$ref": "#/$defs/JsonValue"
-          },
-          "minProperties": 1,
-          "type": "object"
-         }
-        },
-        "required": [
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
          "resource_class",
+         "record_set_continuation_ref",
          "values",
-         "act"
-        ],
-        "type": "object"
+         "follows_continuation_ref",
+         "follows_link_kind",
+         "follows_update_continuation_ref",
+         "follows_reason"
+        ]
        },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "update",
-          "type": "string"
-         },
-         "history": {
-          "default": false,
-          "type": "boolean"
-         },
-         "records": {
-          "items": {
-           "additionalProperties": false,
-           "allOf": [
-            {
-             "anyOf": [
-              {
-               "properties": {
-                "changes": {
-                 "minProperties": 1
-                }
-               },
-               "required": [
-                "changes"
-               ]
-              },
-              {
-               "properties": {
-                "created_on": {
-                 "minLength": 1
-                }
-               },
-               "required": [
-                "created_on"
-               ]
-              },
-              {
-               "properties": {
-                "stage_history": {
-                 "minItems": 1
-                }
-               },
-               "required": [
-                "stage_history"
-               ]
-              }
-             ]
-            }
-           ],
-           "properties": {
-            "changes": {
-             "additionalProperties": {
-              "$ref": "#/$defs/JsonValue"
-             },
-             "type": "object"
-            },
-            "continuation_ref": {
-             "minLength": 1,
-             "type": "string"
-            },
-            "created_on": {
-             "default": "",
-             "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$",
-             "type": "string"
-            },
-            "stage_history": {
-             "items": {
-              "$ref": "#/$defs/StageHistoryEntry"
-             },
-             "maxItems": 100,
-             "type": "array"
-            }
-           },
-           "required": [
-            "continuation_ref"
-           ],
-           "type": "object"
-          },
-          "maxItems": 100,
-          "minItems": 1,
-          "type": "array"
-         }
-        },
-        "required": [
-         "records",
-         "act"
-        ],
-        "type": "object"
+       "required": [
+        "resource_class",
+        "values"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "update"
+         ]
+        }
        },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "create_many",
-          "type": "string"
-         },
-         "history": {
-          "default": false,
-          "type": "boolean"
-         },
-         "idempotency_key": {
-          "maxLength": 100,
-          "minLength": 1,
-          "pattern": "^\\S+$",
-          "type": "string"
-         },
-         "list_name": {
-          "default": "",
-          "maxLength": 200,
-          "type": "string"
-         },
-         "records": {
-          "items": {
-           "additionalProperties": false,
-           "properties": {
-            "created_on": {
-             "default": "",
-             "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$",
-             "type": "string"
-            },
-            "ref": {
-             "default": "",
-             "maxLength": 64,
-             "pattern": "^[A-Za-z0-9_.-]*$",
-             "type": "string"
-            },
-            "resource_class": {
-             "maxLength": 64,
-             "minLength": 1,
-             "pattern": "^[^:\\s]+$",
-             "type": "string"
-            },
-            "source_id": {
-             "default": "",
-             "maxLength": 200,
-             "type": "string"
-            },
-            "stage_history": {
-             "items": {
-              "$ref": "#/$defs/StageHistoryEntry"
-             },
-             "maxItems": 100,
-             "type": "array"
-            },
-            "values": {
-             "additionalProperties": {
-              "$ref": "#/$defs/JsonValue"
-             },
-             "minProperties": 1,
-             "type": "object"
-            }
-           },
-           "required": [
-            "resource_class",
-            "values"
-           ],
-           "type": "object"
-          },
-          "maxItems": 200,
-          "minItems": 1,
-          "type": "array"
-         }
-        },
-        "required": [
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "history",
+         "updates"
+        ]
+       },
+       "required": [
+        "updates"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "create_many"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "history",
          "idempotency_key",
-         "records",
-         "act"
-        ],
-        "type": "object"
+         "list_name",
+         "records"
+        ]
        },
-       {
-        "additionalProperties": false,
-        "allOf": [
-         {
-          "oneOf": [
-           {
-            "properties": {
-             "record_continuation_refs": {
-              "minItems": 1
-             }
-            },
-            "required": [
-             "record_continuation_refs"
-            ]
-           },
-           {
-            "required": [
-             "selection_continuation_ref"
-            ]
-           }
-          ]
-         }
-        ],
-        "properties": {
-         "act": {
-          "const": "set_field",
-          "type": "string"
-         },
-         "record_continuation_refs": {
-          "items": {
-           "type": "string"
-          },
-          "maxItems": 200,
-          "type": "array"
-         },
-         "selection_continuation_ref": {
-          "minLength": 1,
-          "type": "string"
-         },
-         "values": {
-          "additionalProperties": {
-           "$ref": "#/$defs/JsonValue"
-          },
-          "maxProperties": 50,
-          "minProperties": 1,
-          "type": "object"
-         }
-        },
-        "required": [
-         "values",
-         "act"
-        ],
-        "type": "object"
+       "required": [
+        "idempotency_key",
+        "records"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "restore",
+          "void"
+         ]
+        }
        },
-       {
-        "additionalProperties": false,
-        "allOf": [
-         {
-          "oneOf": [
-           {
-            "properties": {
-             "record_continuation_refs": {
-              "minItems": 1
-             }
-            },
-            "required": [
-             "record_continuation_refs"
-            ]
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "allOf": [
+        {
+         "oneOf": [
+          {
+           "properties": {
+            "record_continuation_refs": {
+             "minItems": 1
+            }
            },
-           {
-            "required": [
-             "selection_continuation_ref"
-            ]
-           }
-          ]
-         }
-        ],
-        "properties": {
-         "act": {
-          "enum": [
-           "restore",
-           "void"
-          ],
-          "type": "string"
-         },
-         "record_continuation_refs": {
-          "items": {
-           "type": "string"
+           "required": [
+            "record_continuation_refs"
+           ]
           },
-          "maxItems": 200,
-          "type": "array"
-         },
-         "selection_continuation_ref": {
-          "minLength": 1,
-          "type": "string"
-         }
-        },
-        "required": [
-         "act"
-        ],
-        "type": "object"
+          {
+           "required": [
+            "selection_continuation_ref"
+           ]
+          }
+         ]
+        }
+       ],
+       "propertyNames": {
+        "enum": [
+         "act",
+         "record_continuation_refs",
+         "selection_continuation_ref"
+        ]
        }
-      ]
+      }
+     }
+    ],
+    "properties": {
+     "act": {
+      "enum": [
+       "create",
+       "update",
+       "create_many",
+       "restore",
+       "void"
+      ],
+      "type": "string"
      },
      "follows_continuation_ref": {
+      "type": "string"
+     },
+     "follows_link_kind": {
+      "default": "",
+      "maxLength": 80,
+      "type": "string"
+     },
+     "follows_reason": {
+      "default": "",
+      "maxLength": 2000,
       "type": "string"
      },
      "follows_update_continuation_ref": {
       "type": "string"
      },
+     "history": {
+      "default": false,
+      "type": "boolean"
+     },
+     "idempotency_key": {
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "type": "string"
+     },
+     "list_name": {
+      "default": "",
+      "maxLength": 200,
+      "type": "string"
+     },
+     "record_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 200,
+      "type": "array"
+     },
      "record_set_continuation_ref": {
       "type": "string"
+     },
+     "records": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "created_on": {
+         "default": "",
+         "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$",
+         "type": "string"
+        },
+        "ref": {
+         "default": "",
+         "maxLength": 64,
+         "pattern": "^[A-Za-z0-9_.-]*$",
+         "type": "string"
+        },
+        "resource_class": {
+         "maxLength": 64,
+         "minLength": 1,
+         "pattern": "^[^:\\s]+$",
+         "type": "string"
+        },
+        "source_id": {
+         "default": "",
+         "maxLength": 200,
+         "type": "string"
+        },
+        "stage_history": {
+         "items": {
+          "$ref": "#/$defs/StageHistoryEntry"
+         },
+         "maxItems": 100,
+         "type": "array"
+        },
+        "values": {
+         "additionalProperties": {
+          "$ref": "#/$defs/JsonValue"
+         },
+         "minProperties": 1,
+         "type": "object"
+        }
+       },
+       "required": [
+        "resource_class",
+        "values"
+       ],
+       "type": "object"
+      },
+      "maxItems": 200,
+      "minItems": 1,
+      "type": "array"
+     },
+     "resource_class": {
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[^:\\s]+$",
+      "type": "string"
+     },
+     "selection_continuation_ref": {
+      "minLength": 1,
+      "type": "string"
+     },
+     "updates": {
+      "items": {
+       "additionalProperties": false,
+       "allOf": [
+        {
+         "oneOf": [
+          {
+           "required": [
+            "continuation_ref"
+           ]
+          },
+          {
+           "required": [
+            "selection_continuation_ref"
+           ]
+          }
+         ]
+        },
+        {
+         "dependentSchemas": {
+          "selection_continuation_ref": {
+           "not": {
+            "anyOf": [
+             {
+              "required": [
+               "created_on"
+              ]
+             },
+             {
+              "required": [
+               "stage_history"
+              ]
+             }
+            ]
+           }
+          }
+         }
+        },
+        {
+         "anyOf": [
+          {
+           "properties": {
+            "changes": {
+             "minProperties": 1
+            }
+           },
+           "required": [
+            "changes"
+           ]
+          },
+          {
+           "properties": {
+            "created_on": {
+             "minLength": 1
+            }
+           },
+           "required": [
+            "created_on"
+           ]
+          },
+          {
+           "properties": {
+            "stage_history": {
+             "minItems": 1
+            }
+           },
+           "required": [
+            "stage_history"
+           ]
+          }
+         ]
+        }
+       ],
+       "properties": {
+        "changes": {
+         "additionalProperties": {
+          "$ref": "#/$defs/JsonValue"
+         },
+         "type": "object"
+        },
+        "continuation_ref": {
+         "minLength": 1,
+         "type": "string"
+        },
+        "created_on": {
+         "default": "",
+         "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$",
+         "type": "string"
+        },
+        "selection_continuation_ref": {
+         "minLength": 1,
+         "type": "string"
+        },
+        "stage_history": {
+         "items": {
+          "$ref": "#/$defs/StageHistoryEntry"
+         },
+         "maxItems": 100,
+         "type": "array"
+        }
+       },
+       "type": "object"
+      },
+      "maxItems": 100,
+      "minItems": 1,
+      "type": "array"
+     },
+     "values": {
+      "additionalProperties": {
+       "$ref": "#/$defs/JsonValue"
+      },
+      "minProperties": 1,
+      "type": "object"
      }
     },
     "required": [
-     "change"
+     "act"
     ],
     "type": "object"
    }
@@ -8197,155 +8173,206 @@
    "family": "organisation_records",
    "schema": {
     "additionalProperties": false,
-    "properties": {
-     "change": {
-      "discriminator": {
-       "propertyName": "act"
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "accept",
+          "return"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
       },
-      "oneOf": [
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "enum": [
-           "accept",
-           "return"
-          ],
-          "type": "string"
-         },
-         "names": {
-          "default": "",
-          "maxLength": 200,
-          "type": "string"
-         },
-         "note": {
-          "default": "",
-          "maxLength": 2000,
-          "type": "string"
-         },
-         "signing_as": {
-          "default": "",
-          "maxLength": 200,
-          "type": "string"
-         },
-         "stage": {
-          "maxLength": 200,
-          "minLength": 1,
-          "type": "string"
-         }
-        },
-        "required": [
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
          "stage",
-         "act"
-        ],
-        "type": "object"
+         "note",
+         "signing_as",
+         "names",
+         "continuation_ref"
+        ]
        },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "propose_change",
-          "type": "string"
-         },
-         "changes": {
-          "items": {
-           "additionalProperties": false,
-           "properties": {
-            "field": {
-             "maxLength": 128,
-             "minLength": 1,
-             "type": "string"
-            },
-            "note": {
-             "default": "",
-             "maxLength": 2000,
-             "type": "string"
-            },
-            "value": {
-             "maxLength": 2000,
-             "type": "string"
-            }
-           },
-           "required": [
-            "field",
-            "value"
-           ],
-           "type": "object"
-          },
-          "maxItems": 64,
-          "minItems": 1,
-          "type": "array"
-         }
-        },
-        "required": [
-         "changes",
-         "act"
-        ],
-        "type": "object"
+       "required": [
+        "stage"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "propose_change"
+         ]
+        }
        },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "decide_change",
-          "type": "string"
-         },
-         "changes": {
-          "items": {
-           "additionalProperties": false,
-           "properties": {
-            "accepted": {
-             "type": "boolean"
-            },
-            "field": {
-             "maxLength": 128,
-             "minLength": 1,
-             "type": "string"
-            },
-            "note": {
-             "default": "",
-             "maxLength": 2000,
-             "type": "string"
-            }
-           },
-           "required": [
-            "field",
-            "accepted"
-           ],
-           "type": "object"
-          },
-          "maxItems": 64,
-          "minItems": 1,
-          "type": "array"
-         }
-        },
-        "required": [
-         "changes",
-         "act"
-        ],
-        "type": "object"
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "proposals"
+        ]
        },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "act": {
-          "const": "report_complete",
-          "type": "string"
-         }
-        },
-        "required": [
-         "act"
-        ],
-        "type": "object"
+       "required": [
+        "proposals"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "decide_change"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "decisions"
+        ]
+       },
+       "required": [
+        "decisions"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "report_complete"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref"
+        ]
        }
-      ]
+      }
+     }
+    ],
+    "properties": {
+     "act": {
+      "enum": [
+       "accept",
+       "return",
+       "propose_change",
+       "decide_change",
+       "report_complete"
+      ],
+      "type": "string"
      },
      "continuation_ref": {
+      "type": "string"
+     },
+     "decisions": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "accepted": {
+         "type": "boolean"
+        },
+        "field": {
+         "maxLength": 128,
+         "minLength": 1,
+         "type": "string"
+        },
+        "note": {
+         "default": "",
+         "maxLength": 2000,
+         "type": "string"
+        }
+       },
+       "required": [
+        "field",
+        "accepted"
+       ],
+       "type": "object"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+     },
+     "names": {
+      "default": "",
+      "maxLength": 200,
+      "type": "string"
+     },
+     "note": {
+      "default": "",
+      "maxLength": 2000,
+      "type": "string"
+     },
+     "proposals": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "field": {
+         "maxLength": 128,
+         "minLength": 1,
+         "type": "string"
+        },
+        "note": {
+         "default": "",
+         "maxLength": 2000,
+         "type": "string"
+        },
+        "value": {
+         "maxLength": 2000,
+         "type": "string"
+        }
+       },
+       "required": [
+        "field",
+        "value"
+       ],
+       "type": "object"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+     },
+     "signing_as": {
+      "default": "",
+      "maxLength": 200,
+      "type": "string"
+     },
+     "stage": {
+      "maxLength": 200,
+      "minLength": 1,
       "type": "string"
      }
     },
     "required": [
-     "change",
+     "act",
      "continuation_ref"
     ],
     "type": "object"
@@ -9390,63 +9417,91 @@
     "type": "object"
    }
   },
-  "show_output": {
+  "show_widget": {
    "doors": [
     "beacon"
    ],
    "family": "host"
   },
-  "show_places": {
+  "skill_list": {
    "choices": {},
    "doors": [
-    "beacon",
-    "codeact"
+    "routed"
    ],
-   "family": "places",
+   "family": "skill_authoring",
    "schema": {
     "additionalProperties": false,
     "properties": {
-     "places": {
-      "items": {
-       "additionalProperties": false,
-       "properties": {
-        "note": {
-         "default": "",
-         "maxLength": 400,
-         "type": "string"
-        },
-        "place_ref": {
-         "maxLength": 80,
-         "minLength": 1,
-         "type": "string"
-        }
-       },
-       "required": [
-        "place_ref"
-       ],
-       "type": "object"
-      },
-      "maxItems": 10,
-      "minItems": 1,
-      "type": "array"
-     },
-     "title": {
+     "query": {
       "default": "",
       "maxLength": 200,
       "type": "string"
      }
     },
-    "required": [
-     "places"
-    ],
     "type": "object"
    }
   },
-  "show_source_image": {
+  "skill_propose": {
+   "choices": {},
    "doors": [
     "beacon"
    ],
-   "family": "host"
+   "family": "skill_authoring",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "description": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "display_name": {
+      "maxLength": 80,
+      "minLength": 1,
+      "type": "string"
+     },
+     "files": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "path": {
+         "maxLength": 255,
+         "minLength": 1,
+         "type": "string"
+        },
+        "text": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        }
+       },
+       "required": [
+        "path",
+        "text"
+       ],
+       "type": "object"
+      },
+      "maxItems": 200,
+      "type": "array"
+     },
+     "name": {
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "type": "string"
+     }
+    },
+    "required": [
+     "name",
+     "description"
+    ],
+    "type": "object"
+   }
   },
   "skill_script": {
    "choices": {},
@@ -9489,6 +9544,64 @@
     "type": "object"
    }
   },
+  "step_card": {
+   "doors": [
+    "beacon"
+   ],
+   "family": "host"
+  },
+  "suggest_connector": {
+   "choices": {},
+   "doors": [
+    "beacon"
+   ],
+   "family": "capability_suggestions",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "connectors": {
+      "items": {
+       "maxLength": 120,
+       "minLength": 1,
+       "type": "string"
+      },
+      "maxItems": 5,
+      "minItems": 1,
+      "type": "array"
+     }
+    },
+    "required": [
+     "connectors"
+    ],
+    "type": "object"
+   }
+  },
+  "suggest_skill": {
+   "choices": {},
+   "doors": [
+    "beacon"
+   ],
+   "family": "capability_suggestions",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "skills": {
+      "items": {
+       "maxLength": 120,
+       "minLength": 1,
+       "type": "string"
+      },
+      "maxItems": 5,
+      "minItems": 1,
+      "type": "array"
+     }
+    },
+    "required": [
+     "skills"
+    ],
+    "type": "object"
+   }
+  },
   "targets_read": {
    "choices": {
     "scope": [
@@ -9514,6 +9627,82 @@
       "type": "string"
      }
     },
+    "type": "object"
+   }
+  },
+  "task_create": {
+   "choices": {},
+   "doors": [
+    "beacon"
+   ],
+   "family": "plan",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "active_form": {
+      "minLength": 1,
+      "type": "string"
+     },
+     "description": {
+      "minLength": 1,
+      "type": "string"
+     },
+     "subject": {
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "subject",
+     "description"
+    ],
+    "type": "object"
+   }
+  },
+  "task_update": {
+   "choices": {
+    "status": [
+     "completed",
+     "deleted",
+     "in_progress",
+     "pending"
+    ]
+   },
+   "doors": [
+    "beacon"
+   ],
+   "family": "plan",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "active_form": {
+      "minLength": 1,
+      "type": "string"
+     },
+     "description": {
+      "minLength": 1,
+      "type": "string"
+     },
+     "id": {
+      "type": "integer"
+     },
+     "status": {
+      "enum": [
+       "pending",
+       "in_progress",
+       "completed",
+       "deleted"
+      ],
+      "type": "string"
+     },
+     "subject": {
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "id"
+    ],
     "type": "object"
    }
   },
@@ -9599,142 +9788,39 @@
     "type": "object"
    }
   },
-  "todos": {
-   "choices": {
-    "action": [
-     "add",
-     "complete",
-     "remove"
-    ]
-   },
+  "template_list": {
+   "choices": {},
    "doors": [
-    "beacon"
+    "routed"
    ],
-   "family": "plan",
+   "family": "boards",
    "schema": {
     "additionalProperties": false,
-    "allOf": [
-     {
-      "if": {
-       "properties": {
-        "action": {
-         "enum": [
-          "add"
-         ]
-        }
-       },
-       "required": [
-        "action"
-       ]
-      },
-      "then": {
-       "maxProperties": 2,
-       "required": [
-        "todos"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "action": {
-         "enum": [
-          "complete"
-         ]
-        }
-       },
-       "required": [
-        "action"
-       ]
-      },
-      "then": {
-       "maxProperties": 2,
-       "required": [
-        "items"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "action": {
-         "enum": [
-          "remove"
-         ]
-        }
-       },
-       "required": [
-        "action"
-       ]
-      },
-      "then": {
-       "maxProperties": 2,
-       "required": [
-        "ids"
-       ]
-      }
-     }
-    ],
     "properties": {
-     "action": {
-      "enum": [
-       "add",
-       "complete",
-       "remove"
-      ],
+     "query": {
+      "default": "",
+      "maxLength": 200,
       "type": "string"
-     },
-     "ids": {
-      "items": {
-       "type": "integer"
-      },
-      "minItems": 1,
-      "type": "array"
-     },
-     "items": {
-      "items": {
-       "additionalProperties": false,
-       "properties": {
-        "id": {
-         "type": "integer"
-        },
-        "reason": {
-         "minLength": 1,
-         "type": "string"
-        }
-       },
-       "required": [
-        "id",
-        "reason"
-       ],
-       "type": "object"
-      },
-      "minItems": 1,
-      "type": "array"
-     },
-     "todos": {
-      "items": {
-       "additionalProperties": false,
-       "properties": {
-        "description": {
-         "type": "string"
-        },
-        "title": {
-         "minLength": 1,
-         "type": "string"
-        }
-       },
-       "required": [
-        "title"
-       ],
-       "type": "object"
-      },
-      "minItems": 1,
-      "type": "array"
+     }
+    },
+    "type": "object"
+   }
+  },
+  "template_read": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "boards",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
      }
     },
     "required": [
-     "action"
+     "continuation_ref"
     ],
     "type": "object"
    }
