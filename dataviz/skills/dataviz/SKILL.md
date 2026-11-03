@@ -17,8 +17,8 @@ Beacon builds apps, not Dashboards. The Dashboard product is a place people buil
 `find` and `read` one but has no way to make or change one. A person who asks you for a dashboard, a scorecard or "a view of the
 numbers" gets an app, made once and kept. Say that in one plain line the first time ("I'll build it as an app"), and never call
 the result a Dashboard. The app tool's description carries the sandbox and the live-data contract; the app design rules carry the page
-(tokens, states, controls); this procedure carries the data and the chart craft. Its files are read on demand: `find` kind `skill` with the query `dataviz` for its reference, then `read` it with `at` set to
-`skills/dataviz/references/<name>.md`: `palette.md` is needed by every build; the others are named at the step
+(tokens, states, controls); this procedure carries the data and the chart craft. Its files are read on demand: `read` the reference this skill's load gave, with `at` set to
+`references/<name>.md`: `palette.md` is needed by every build; the others are named at the step
 that uses them.
 
 ## 1. Decide what it answers
