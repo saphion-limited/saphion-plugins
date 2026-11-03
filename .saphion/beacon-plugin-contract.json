@@ -1,11 +1,6 @@
 {
  "bindings": [
   {
-   "command": "dataviz",
-   "plugin": "dataviz",
-   "scope": "platform"
-  },
-  {
    "command": "deep-research",
    "plugin": "deep-research",
    "scope": "platform"
@@ -1881,6 +1876,15 @@
          "config": {
           "$ref": "#/$defs/FilteredViewConfigInput"
          },
+         "dashboard_copy_of": {
+          "maxLength": 170,
+          "type": "string"
+         },
+         "dashboard_name": {
+          "maxLength": 120,
+          "minLength": 1,
+          "type": "string"
+         },
          "kind": {
           "enum": [
            "table",
@@ -1962,6 +1966,129 @@
     "required": [
      "change",
      "board_continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "build_files": {
+   "choices": {
+    "language": [
+     "node",
+     "python"
+    ]
+   },
+   "doors": [
+    "codeact"
+   ],
+   "family": "files",
+   "schema": {
+    "additionalProperties": false,
+    "allOf": [
+     {
+      "if": {
+       "required": [
+        "render_pages"
+       ]
+      },
+      "then": {
+       "properties": {
+        "checks": {
+         "contains": {
+          "const": "render_pages"
+         }
+        }
+       },
+       "required": [
+        "checks"
+       ]
+      }
+     }
+    ],
+    "properties": {
+     "checks": {
+      "default": [],
+      "items": {
+       "enum": [
+        "recalc",
+        "render_pages",
+        "validate_ooxml"
+       ],
+       "type": "string"
+      },
+      "maxItems": 3,
+      "type": "array"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "input_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array"
+     },
+     "language": {
+      "enum": [
+       "python",
+       "node"
+      ],
+      "type": "string"
+     },
+     "outputs": {
+      "items": {
+       "maxLength": 160,
+       "minLength": 1,
+       "pattern": "^[^\\s./\\:][^/\\:]*(?:\\.xlsx|\\.docx|\\.pptx|\\.pdf|\\.csv|\\.zip)$",
+       "type": "string"
+      },
+      "maxItems": 16,
+      "minItems": 1,
+      "type": "array"
+     },
+     "program": {
+      "maxLength": 100000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "render_pages": {
+      "additionalProperties": false,
+      "properties": {
+       "first": {
+        "minimum": 1,
+        "type": "integer"
+       },
+       "last": {
+        "minimum": 1,
+        "type": "integer"
+       },
+       "output": {
+        "minLength": 1,
+        "type": "string"
+       }
+      },
+      "required": [
+       "output",
+       "first",
+       "last"
+      ],
+      "type": "object"
+     },
+     "replaces_continuation_ref": {
+      "type": "string"
+     },
+     "title": {
+      "maxLength": 160,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "program",
+     "language",
+     "outputs",
+     "title"
     ],
     "type": "object"
    }
@@ -2066,6 +2193,34 @@
      "question",
      "answers"
     ],
+    "type": "object"
+   }
+  },
+  "completions_read": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "organisation_reach",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "type": "object"
+   }
+  },
+  "context_read": {
+   "choices": {},
+   "doors": [
+    "codeact"
+   ],
+   "family": "assistant_connection",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {},
     "type": "object"
    }
   },
@@ -2239,10 +2394,395 @@
     "type": "object"
    }
   },
-  "dashboard_read": {
+  "dashboard_catalogue": {
    "choices": {},
    "doors": [
-    "routed"
+    "beacon",
+    "codeact"
+   ],
+   "family": "dashboards",
+   "schema": {
+    "$defs": {
+     "Identifier": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@|/+=-]{0,127}$",
+      "type": "string"
+     }
+    },
+    "additionalProperties": false,
+    "allOf": [
+     {
+      "if": {
+       "required": [
+        "preview"
+       ]
+      },
+      "then": {
+       "properties": {
+        "dataset_keys": {
+         "maxItems": 0
+        },
+        "primitive_keys": {
+         "maxItems": 0
+        },
+        "source_keys": {
+         "maxItems": 0
+        }
+       }
+      }
+     }
+    ],
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "dataset_keys": {
+      "items": {
+       "$ref": "#/$defs/Identifier"
+      },
+      "type": "array"
+     },
+     "preview": {
+      "additionalProperties": false,
+      "properties": {
+       "config": {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       "primitive": {
+        "$ref": "#/$defs/Identifier"
+       },
+       "title": {
+        "maxLength": 160,
+        "minLength": 1,
+        "type": "string"
+       }
+      },
+      "required": [
+       "primitive",
+       "title",
+       "config"
+      ],
+      "type": "object"
+     },
+     "primitive_keys": {
+      "items": {
+       "$ref": "#/$defs/Identifier"
+      },
+      "type": "array"
+     },
+     "source_keys": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array"
+     }
+    },
+    "type": "object"
+   }
+  },
+  "dashboard_change": {
+   "choices": {
+    "act": [
+     "create",
+     "update",
+     "widget_add",
+     "widget_add_preset",
+     "widget_move",
+     "widget_remove",
+     "widget_update"
+    ],
+    "from_layout": [
+     "crm-forecast-widgets",
+     "crm-home-widgets",
+     "crm-pipeline-changes",
+     "projects-overview",
+     "rams-overview",
+     "tenders-overview",
+     "workspace-overview"
+    ],
+    "size": [
+     "compact",
+     "large",
+     "medium",
+     "small",
+     "standard",
+     "tall",
+     "wide"
+    ]
+   },
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "dashboards",
+   "schema": {
+    "$defs": {
+     "Identifier": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@|/+=-]{0,127}$",
+      "type": "string"
+     },
+     "WidgetPlaceByReference": {
+      "additionalProperties": false,
+      "properties": {
+       "after": {
+        "type": "string"
+       },
+       "size": {
+        "enum": [
+         "small",
+         "medium",
+         "large",
+         "wide"
+        ],
+        "type": "string"
+       }
+      },
+      "type": "object"
+     },
+     "WidgetPresetStart": {
+      "additionalProperties": false,
+      "properties": {
+       "preset": {
+        "$ref": "#/$defs/Identifier"
+       },
+       "settings": {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       "size": {
+        "enum": [
+         "compact",
+         "standard",
+         "tall"
+        ],
+        "type": "string"
+       }
+      },
+      "required": [
+       "preset"
+      ],
+      "type": "object"
+     }
+    },
+    "additionalProperties": false,
+    "properties": {
+     "change": {
+      "discriminator": {
+       "propertyName": "act"
+      },
+      "oneOf": [
+       {
+        "additionalProperties": false,
+        "properties": {
+         "act": {
+          "const": "create",
+          "type": "string"
+         },
+         "from_layout": {
+          "enum": [
+           "workspace-overview",
+           "projects-overview",
+           "tenders-overview",
+           "rams-overview",
+           "crm-home-widgets",
+           "crm-forecast-widgets",
+           "crm-pipeline-changes"
+          ],
+          "type": "string"
+         },
+         "name": {
+          "maxLength": 120,
+          "minLength": 1,
+          "type": "string"
+         }
+        },
+        "required": [
+         "name",
+         "act"
+        ],
+        "type": "object"
+       },
+       {
+        "additionalProperties": false,
+        "properties": {
+         "act": {
+          "const": "update",
+          "type": "string"
+         },
+         "dashboard_filter": {
+          "anyOf": [
+           {
+            "additionalProperties": true,
+            "type": "object"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "name": {
+          "maxLength": 120,
+          "minLength": 1,
+          "type": "string"
+         },
+         "put_back_previous": {
+          "default": false,
+          "type": "boolean"
+         }
+        },
+        "required": [
+         "act"
+        ],
+        "type": "object"
+       },
+       {
+        "additionalProperties": false,
+        "properties": {
+         "act": {
+          "const": "widget_add",
+          "type": "string"
+         },
+         "kind": {
+          "$ref": "#/$defs/Identifier"
+         },
+         "place": {
+          "$ref": "#/$defs/WidgetPlaceByReference"
+         },
+         "settings": {
+          "additionalProperties": true,
+          "type": "object"
+         },
+         "title": {
+          "maxLength": 160,
+          "minLength": 1,
+          "type": "string"
+         }
+        },
+        "required": [
+         "kind",
+         "title",
+         "settings",
+         "act"
+        ],
+        "type": "object"
+       },
+       {
+        "additionalProperties": false,
+        "properties": {
+         "act": {
+          "const": "widget_add_preset",
+          "type": "string"
+         },
+         "from_preset": {
+          "$ref": "#/$defs/WidgetPresetStart"
+         },
+         "place": {
+          "$ref": "#/$defs/WidgetPlaceByReference"
+         },
+         "title": {
+          "maxLength": 160,
+          "minLength": 1,
+          "type": "string"
+         }
+        },
+        "required": [
+         "from_preset",
+         "act"
+        ],
+        "type": "object"
+       },
+       {
+        "additionalProperties": false,
+        "properties": {
+         "act": {
+          "const": "widget_update",
+          "type": "string"
+         },
+         "settings": {
+          "additionalProperties": true,
+          "type": "object"
+         },
+         "title": {
+          "maxLength": 160,
+          "minLength": 1,
+          "type": "string"
+         },
+         "widget_continuation_ref": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "widget_continuation_ref",
+         "act"
+        ],
+        "type": "object"
+       },
+       {
+        "additionalProperties": false,
+        "properties": {
+         "act": {
+          "const": "widget_move",
+          "type": "string"
+         },
+         "place": {
+          "$ref": "#/$defs/WidgetPlaceByReference"
+         },
+         "widget_continuation_ref": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "place",
+         "widget_continuation_ref",
+         "act"
+        ],
+        "type": "object"
+       },
+       {
+        "additionalProperties": false,
+        "properties": {
+         "act": {
+          "const": "widget_remove",
+          "type": "string"
+         },
+         "widget_continuation_ref": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "widget_continuation_ref",
+         "act"
+        ],
+        "type": "object"
+       }
+      ]
+     },
+     "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "change"
+    ],
+    "type": "object"
+   }
+  },
+  "dashboard_delete": {
+   "choices": {},
+   "doors": [
+    "beacon"
    ],
    "family": "dashboards",
    "schema": {
@@ -2255,6 +2795,30 @@
     "required": [
      "continuation_ref"
     ],
+    "type": "object"
+   }
+  },
+  "dashboard_read": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "dashboards",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "home": {
+      "default": false,
+      "type": "boolean"
+     },
+     "include_results": {
+      "default": false,
+      "type": "boolean"
+     }
+    },
     "type": "object"
    }
   },
@@ -3154,129 +3718,6 @@
     "type": "object"
    }
   },
-  "file_build": {
-   "choices": {
-    "language": [
-     "node",
-     "python"
-    ]
-   },
-   "doors": [
-    "beacon"
-   ],
-   "family": "files",
-   "schema": {
-    "additionalProperties": false,
-    "allOf": [
-     {
-      "if": {
-       "required": [
-        "render_pages"
-       ]
-      },
-      "then": {
-       "properties": {
-        "checks": {
-         "contains": {
-          "const": "render_pages"
-         }
-        }
-       },
-       "required": [
-        "checks"
-       ]
-      }
-     }
-    ],
-    "properties": {
-     "checks": {
-      "default": [],
-      "items": {
-       "enum": [
-        "recalc",
-        "render_pages",
-        "validate_ooxml"
-       ],
-       "type": "string"
-      },
-      "maxItems": 3,
-      "type": "array"
-     },
-     "description": {
-      "maxLength": 240,
-      "minLength": 1,
-      "type": "string"
-     },
-     "input_continuation_refs": {
-      "items": {
-       "type": "string"
-      },
-      "type": "array"
-     },
-     "language": {
-      "enum": [
-       "python",
-       "node"
-      ],
-      "type": "string"
-     },
-     "outputs": {
-      "items": {
-       "maxLength": 160,
-       "minLength": 1,
-       "pattern": "^[^\\s./\\:][^/\\:]*(?:\\.xlsx|\\.docx|\\.pptx|\\.pdf|\\.csv|\\.zip)$",
-       "type": "string"
-      },
-      "maxItems": 16,
-      "minItems": 1,
-      "type": "array"
-     },
-     "program": {
-      "maxLength": 100000,
-      "minLength": 1,
-      "type": "string"
-     },
-     "render_pages": {
-      "additionalProperties": false,
-      "properties": {
-       "first": {
-        "minimum": 1,
-        "type": "integer"
-       },
-       "last": {
-        "minimum": 1,
-        "type": "integer"
-       },
-       "output": {
-        "minLength": 1,
-        "type": "string"
-       }
-      },
-      "required": [
-       "output",
-       "first",
-       "last"
-      ],
-      "type": "object"
-     },
-     "replaces_continuation_ref": {
-      "type": "string"
-     },
-     "title": {
-      "maxLength": 160,
-      "minLength": 1,
-      "type": "string"
-     }
-    },
-    "required": [
-     "program",
-     "language",
-     "outputs",
-     "title"
-    ],
-    "type": "object"
-   }
-  },
   "file_list": {
    "choices": {
     "sort": [
@@ -3319,436 +3760,6 @@
       "type": "string"
      }
     },
-    "type": "object"
-   }
-  },
-  "file_make": {
-   "choices": {
-    "format": [
-     "csv",
-     "docx",
-     "json",
-     "markdown",
-     "pdf",
-     "text",
-     "xlsx",
-     "zip"
-    ]
-   },
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "files",
-   "schema": {
-    "additionalProperties": false,
-    "allOf": [
-     {
-      "if": {
-       "properties": {
-        "format": {
-         "enum": [
-          "markdown",
-          "text",
-          "docx",
-          "pdf"
-         ]
-        }
-       },
-       "required": [
-        "format"
-       ]
-      },
-      "then": {
-       "not": {
-        "anyOf": [
-         {
-          "required": [
-           "columns"
-          ]
-         },
-         {
-          "required": [
-           "file_continuation_refs"
-          ]
-         },
-         {
-          "required": [
-           "rows"
-          ]
-         },
-         {
-          "required": [
-           "sheets"
-          ]
-         },
-         {
-          "required": [
-           "table"
-          ]
-         }
-        ]
-       },
-       "required": [
-        "markdown"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "format": {
-         "enum": [
-          "csv",
-          "json"
-         ]
-        }
-       },
-       "required": [
-        "format"
-       ]
-      },
-      "then": {
-       "oneOf": [
-        {
-         "not": {
-          "anyOf": [
-           {
-            "required": [
-             "columns"
-            ]
-           },
-           {
-            "required": [
-             "file_continuation_refs"
-            ]
-           },
-           {
-            "required": [
-             "markdown"
-            ]
-           },
-           {
-            "required": [
-             "rows"
-            ]
-           },
-           {
-            "required": [
-             "sheets"
-            ]
-           }
-          ]
-         },
-         "required": [
-          "table"
-         ]
-        },
-        {
-         "not": {
-          "anyOf": [
-           {
-            "required": [
-             "file_continuation_refs"
-            ]
-           },
-           {
-            "required": [
-             "markdown"
-            ]
-           },
-           {
-            "required": [
-             "sheets"
-            ]
-           },
-           {
-            "required": [
-             "table"
-            ]
-           }
-          ]
-         },
-         "required": [
-          "columns",
-          "rows"
-         ]
-        }
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "format": {
-         "enum": [
-          "xlsx"
-         ]
-        }
-       },
-       "required": [
-        "format"
-       ]
-      },
-      "then": {
-       "oneOf": [
-        {
-         "not": {
-          "anyOf": [
-           {
-            "required": [
-             "columns"
-            ]
-           },
-           {
-            "required": [
-             "file_continuation_refs"
-            ]
-           },
-           {
-            "required": [
-             "markdown"
-            ]
-           },
-           {
-            "required": [
-             "rows"
-            ]
-           },
-           {
-            "required": [
-             "sheets"
-            ]
-           }
-          ]
-         },
-         "required": [
-          "table"
-         ]
-        },
-        {
-         "not": {
-          "anyOf": [
-           {
-            "required": [
-             "file_continuation_refs"
-            ]
-           },
-           {
-            "required": [
-             "markdown"
-            ]
-           },
-           {
-            "required": [
-             "sheets"
-            ]
-           },
-           {
-            "required": [
-             "table"
-            ]
-           }
-          ]
-         },
-         "required": [
-          "columns",
-          "rows"
-         ]
-        },
-        {
-         "not": {
-          "anyOf": [
-           {
-            "required": [
-             "columns"
-            ]
-           },
-           {
-            "required": [
-             "file_continuation_refs"
-            ]
-           },
-           {
-            "required": [
-             "markdown"
-            ]
-           },
-           {
-            "required": [
-             "rows"
-            ]
-           },
-           {
-            "required": [
-             "table"
-            ]
-           }
-          ]
-         },
-         "required": [
-          "sheets"
-         ]
-        }
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "format": {
-         "enum": [
-          "zip"
-         ]
-        }
-       },
-       "required": [
-        "format"
-       ]
-      },
-      "then": {
-       "not": {
-        "anyOf": [
-         {
-          "required": [
-           "columns"
-          ]
-         },
-         {
-          "required": [
-           "markdown"
-          ]
-         },
-         {
-          "required": [
-           "rows"
-          ]
-         },
-         {
-          "required": [
-           "sheets"
-          ]
-         },
-         {
-          "required": [
-           "table"
-          ]
-         }
-        ]
-       },
-       "required": [
-        "file_continuation_refs"
-       ]
-      }
-     }
-    ],
-    "properties": {
-     "columns": {
-      "items": {
-       "type": "string"
-      },
-      "maxItems": 64,
-      "minItems": 1,
-      "type": "array"
-     },
-     "description": {
-      "maxLength": 240,
-      "minLength": 1,
-      "type": "string"
-     },
-     "file_continuation_refs": {
-      "items": {
-       "type": "string"
-      },
-      "type": "array"
-     },
-     "format": {
-      "enum": [
-       "markdown",
-       "text",
-       "docx",
-       "pdf",
-       "csv",
-       "xlsx",
-       "json",
-       "zip"
-      ],
-      "type": "string"
-     },
-     "markdown": {
-      "minLength": 1,
-      "type": "string"
-     },
-     "replaces_continuation_ref": {
-      "type": "string"
-     },
-     "rows": {
-      "items": {
-       "items": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "integer"
-         },
-         {
-          "type": "number"
-         },
-         {
-          "type": "boolean"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "type": "array"
-      },
-      "maxItems": 1000,
-      "minItems": 1,
-      "type": "array"
-     },
-     "sheets": {
-      "items": {
-       "additionalProperties": false,
-       "properties": {
-        "name": {
-         "maxLength": 31,
-         "minLength": 1,
-         "type": "string"
-        },
-        "table": {
-         "maxLength": 200,
-         "minLength": 1,
-         "type": "string"
-        }
-       },
-       "required": [
-        "name",
-        "table"
-       ],
-       "type": "object"
-      },
-      "maxItems": 16,
-      "minItems": 1,
-      "type": "array"
-     },
-     "table": {
-      "maxLength": 200,
-      "minLength": 1,
-      "type": "string"
-     },
-     "title": {
-      "maxLength": 160,
-      "minLength": 1,
-      "type": "string"
-     }
-    },
-    "required": [
-     "title",
-     "format"
-    ],
     "type": "object"
    }
   },
@@ -3860,128 +3871,6 @@
   },
   "find": {
    "choices": {
-    "direction": [
-     "asc",
-     "desc"
-    ],
-    "kind": [
-     "any",
-     "archive",
-     "attachment",
-     "automation",
-     "bin",
-     "board",
-     "dashboard",
-     "document",
-     "file",
-     "form",
-     "generated_document",
-     "person",
-     "project",
-     "run",
-     "scheduled_task",
-     "team",
-     "team_today"
-    ],
-    "product": [
-     "crm"
-    ]
-   },
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "codeact",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "by": {
-      "type": "string"
-     },
-     "day": {
-      "type": "string"
-     },
-     "kind": {
-      "enum": [
-       "any",
-       "archive",
-       "attachment",
-       "automation",
-       "bin",
-       "board",
-       "dashboard",
-       "document",
-       "file",
-       "form",
-       "generated_document",
-       "person",
-       "project",
-       "run",
-       "scheduled_task",
-       "team",
-       "team_today"
-      ],
-      "type": "string"
-     },
-     "person_gives_work": {
-      "type": "boolean"
-     },
-     "product": {
-      "default": "",
-      "enum": [
-       "crm"
-      ],
-      "type": "string"
-     },
-     "project_counts": {
-      "type": "boolean"
-     },
-     "query": {
-      "default": "",
-      "maxLength": 500,
-      "type": "string"
-     },
-     "record_class": {
-      "maxLength": 170,
-      "type": "string"
-     },
-     "rule": {
-      "type": "string"
-     },
-     "sort": {
-      "additionalProperties": false,
-      "properties": {
-       "direction": {
-        "enum": [
-         "asc",
-         "desc"
-        ],
-        "type": "string"
-       },
-       "field": {
-        "type": "string"
-       }
-      },
-      "required": [
-       "field"
-      ],
-      "type": "object"
-     },
-     "whose": {
-      "maxLength": 256,
-      "minLength": 1,
-      "type": "string"
-     },
-     "within": {
-      "maxLength": 200,
-      "type": "string"
-     }
-    },
-    "type": "object"
-   }
-  },
-  "find_records": {
-   "choices": {
     "clock": [
      "now",
      "today"
@@ -3993,8 +3882,27 @@
     "kind": [
      "all",
      "any",
+     "archive",
+     "attachment",
+     "automation",
+     "bin",
+     "board",
      "condition",
-     "not"
+     "dashboard",
+     "document",
+     "file",
+     "form",
+     "generated_document",
+     "home",
+     "landing",
+     "not",
+     "person",
+     "project",
+     "record",
+     "run",
+     "scheduled_task",
+     "team",
+     "team_today"
     ],
     "operator": [
      "date_after",
@@ -4021,9 +3929,8 @@
     "person": [
      "current"
     ],
-    "state": [
-     "closed",
-     "open"
+    "product": [
+     "crm"
     ],
     "team": [
      "current"
@@ -4290,6 +4197,9 @@
     },
     "additionalProperties": false,
     "properties": {
+     "by": {
+      "type": "string"
+     },
      "columns": {
       "items": {
        "maxLength": 128,
@@ -4299,6 +4209,47 @@
       "maxItems": 24,
       "type": "array"
      },
+     "day": {
+      "type": "string"
+     },
+     "kind": {
+      "enum": [
+       "any",
+       "archive",
+       "attachment",
+       "automation",
+       "bin",
+       "board",
+       "dashboard",
+       "document",
+       "file",
+       "form",
+       "generated_document",
+       "home",
+       "landing",
+       "person",
+       "project",
+       "record",
+       "run",
+       "scheduled_task",
+       "team",
+       "team_today"
+      ],
+      "type": "string"
+     },
+     "person_gives_work": {
+      "type": "boolean"
+     },
+     "product": {
+      "default": "",
+      "enum": [
+       "crm"
+      ],
+      "type": "string"
+     },
+     "project_counts": {
+      "type": "boolean"
+     },
      "query": {
       "default": "",
       "maxLength": 500,
@@ -4306,6 +4257,9 @@
      },
      "record_class": {
       "maxLength": 170,
+      "type": "string"
+     },
+     "rule": {
       "type": "string"
      },
      "sort": {
@@ -4327,42 +4281,19 @@
       ],
       "type": "object"
      },
-     "state": {
-      "enum": [
-       "open",
-       "closed"
-      ],
-      "type": "string"
-     },
      "where": {
       "$ref": "#/$defs/SemanticFilterInput"
      },
      "whose": {
-      "anyOf": [
-       {
-        "enum": [
-         "mine",
-         "my_team",
-         "my_projects",
-         "anyone"
-        ],
-        "type": "string"
-       },
-       {
-        "maxLength": 256,
-        "minLength": 1,
-        "type": "string"
-       }
-      ]
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
      },
      "within": {
       "maxLength": 200,
       "type": "string"
      }
     },
-    "required": [
-     "record_class"
-    ],
     "type": "object"
    }
   },
@@ -6487,6 +6418,18 @@
     "type": "object"
    }
   },
+  "organisations_list": {
+   "choices": {},
+   "doors": [
+    "codeact"
+   ],
+   "family": "assistant_connection",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {},
+    "type": "object"
+   }
+  },
   "people_find": {
    "choices": {},
    "doors": [
@@ -7778,6 +7721,7 @@
      "pending",
      "refused",
      "reported",
+     "results",
      "retired",
      "search",
      "skipped",
@@ -7824,6 +7768,7 @@
        "forbidden",
        "failed",
        "pending",
+       "results",
        "changes",
        "block",
        "search",
@@ -8675,610 +8620,6 @@
     "type": "object"
    }
   },
-  "records_aggregate": {
-   "choices": {
-    "aggregation": [
-     "avg",
-     "count",
-     "max",
-     "min",
-     "range",
-     "split",
-     "sum"
-    ],
-    "bucket": [
-     "month",
-     "quarter",
-     "relative",
-     "week",
-     "year"
-    ],
-    "clock": [
-     "now",
-     "today"
-    ],
-    "direction": [
-     "asc",
-     "desc"
-    ],
-    "explain": [
-     "completions"
-    ],
-    "kind": [
-     "all",
-     "any",
-     "condition",
-     "not"
-    ],
-    "operator": [
-     "date_after",
-     "date_before",
-     "date_on",
-     "date_within",
-     "empty",
-     "is",
-     "is_not",
-     "none_of",
-     "not_empty",
-     "numeric_between",
-     "numeric_eq",
-     "numeric_gt",
-     "numeric_gte",
-     "numeric_lt",
-     "numeric_lte",
-     "one_of",
-     "text_contains",
-     "text_ends_with",
-     "text_not_contains",
-     "text_starts_with"
-    ],
-    "person": [
-     "current"
-    ],
-    "state": [
-     "completed",
-     "late",
-     "on_time",
-     "undated"
-    ],
-    "team": [
-     "current"
-    ],
-    "window": [
-     "last_3_months",
-     "last_7_days",
-     "last_month",
-     "last_quarter",
-     "last_week",
-     "last_year",
-     "next_days",
-     "next_month",
-     "next_months",
-     "next_quarter",
-     "next_week",
-     "rest_of_this_week",
-     "this_financial_year",
-     "this_month",
-     "this_quarter",
-     "this_week",
-     "this_year",
-     "today",
-     "tomorrow",
-     "trailing_12_months",
-     "yesterday"
-    ]
-   },
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "organisation_reach",
-   "schema": {
-    "$defs": {
-     "ClockInput": {
-      "additionalProperties": false,
-      "properties": {
-       "clock": {
-        "enum": [
-         "today",
-         "now"
-        ],
-        "type": "string"
-       },
-       "days": {
-        "default": 0,
-        "maximum": 3660,
-        "minimum": -3660,
-        "type": "integer"
-       }
-      },
-      "required": [
-       "clock"
-      ],
-      "type": "object"
-     },
-     "CurrentPerson": {
-      "additionalProperties": false,
-      "properties": {
-       "person": {
-        "const": "current",
-        "type": "string"
-       }
-      },
-      "required": [
-       "person"
-      ],
-      "type": "object"
-     },
-     "FieldValue": {
-      "additionalProperties": false,
-      "properties": {
-       "field": {
-        "maxLength": 128,
-        "minLength": 1,
-        "type": "string"
-       }
-      },
-      "required": [
-       "field"
-      ],
-      "type": "object"
-     },
-     "SemanticFilterInput": {
-      "oneOf": [
-       {
-        "additionalProperties": false,
-        "properties": {
-         "field": {
-          "type": "string"
-         },
-         "kind": {
-          "const": "condition"
-         },
-         "operator": {
-          "enum": [
-           "is",
-           "is_not",
-           "one_of",
-           "none_of",
-           "numeric_eq",
-           "numeric_gt",
-           "numeric_gte",
-           "numeric_lt",
-           "numeric_lte",
-           "numeric_between",
-           "text_contains",
-           "text_not_contains",
-           "text_starts_with",
-           "text_ends_with",
-           "date_on",
-           "date_before",
-           "date_after",
-           "date_within",
-           "empty",
-           "not_empty"
-          ]
-         },
-         "value": {
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "integer"
-           },
-           {
-            "type": "number"
-           },
-           {
-            "type": "boolean"
-           },
-           {
-            "$ref": "#/$defs/FieldValue"
-           },
-           {
-            "$ref": "#/$defs/ClockInput"
-           },
-           {
-            "$ref": "#/$defs/CurrentPerson"
-           },
-           {
-            "items": {
-             "anyOf": [
-              {
-               "type": "string"
-              },
-              {
-               "type": "integer"
-              },
-              {
-               "type": "number"
-              },
-              {
-               "type": "boolean"
-              },
-              {
-               "$ref": "#/$defs/FieldValue"
-              },
-              {
-               "$ref": "#/$defs/ClockInput"
-              },
-              {
-               "$ref": "#/$defs/CurrentPerson"
-              },
-              {
-               "type": "null"
-              }
-             ]
-            },
-            "type": "array"
-           },
-           {
-            "additionalProperties": false,
-            "properties": {
-             "team": {
-              "const": "current",
-              "type": "string"
-             }
-            },
-            "required": [
-             "team"
-            ],
-            "type": "object"
-           },
-           {
-            "additionalProperties": false,
-            "properties": {
-             "count": {
-              "default": 0,
-              "maximum": 3660,
-              "minimum": 0,
-              "type": "integer"
-             },
-             "window": {
-              "enum": [
-               "today",
-               "yesterday",
-               "tomorrow",
-               "rest_of_this_week",
-               "last_week",
-               "this_week",
-               "next_week",
-               "last_month",
-               "this_month",
-               "next_month",
-               "last_quarter",
-               "this_quarter",
-               "next_quarter",
-               "last_year",
-               "this_year",
-               "this_financial_year",
-               "last_7_days",
-               "last_3_months",
-               "trailing_12_months",
-               "next_days",
-               "next_months"
-              ],
-              "type": "string"
-             }
-            },
-            "required": [
-             "window"
-            ],
-            "type": "object"
-           }
-          ]
-         }
-        },
-        "required": [
-         "kind",
-         "field",
-         "operator"
-        ]
-       },
-       {
-        "additionalProperties": false,
-        "properties": {
-         "kind": {
-          "enum": [
-           "all",
-           "any",
-           "not"
-          ]
-         },
-         "members": {
-          "items": {
-           "$ref": "#/$defs/SemanticFilterInput"
-          },
-          "maxItems": 20,
-          "minItems": 1,
-          "type": "array"
-         }
-        },
-        "required": [
-         "kind",
-         "members"
-        ]
-       }
-      ],
-      "type": "object"
-     }
-    },
-    "additionalProperties": false,
-    "allOf": [
-     {
-      "else": {
-       "not": {
-        "anyOf": [
-         {
-          "required": [
-           "window"
-          ]
-         },
-         {
-          "required": [
-           "state"
-          ]
-         },
-         {
-          "required": [
-           "whose"
-          ]
-         }
-        ]
-       },
-       "properties": {
-        "measures": {
-         "minItems": 1
-        }
-       },
-       "required": [
-        "record_class",
-        "measures"
-       ]
-      },
-      "if": {
-       "properties": {
-        "explain": {
-         "enum": [
-          "completions"
-         ]
-        }
-       },
-       "required": [
-        "explain"
-       ]
-      },
-      "then": {
-       "not": {
-        "anyOf": [
-         {
-          "required": [
-           "record_class"
-          ]
-         },
-         {
-          "required": [
-           "where"
-          ]
-         },
-         {
-          "required": [
-           "group_by"
-          ]
-         },
-         {
-          "required": [
-           "bucket"
-          ]
-         },
-         {
-          "required": [
-           "measures"
-          ]
-         },
-         {
-          "required": [
-           "order"
-          ]
-         }
-        ]
-       },
-       "required": [
-        "whose"
-       ]
-      }
-     }
-    ],
-    "properties": {
-     "bucket": {
-      "enum": [
-       "relative",
-       "week",
-       "month",
-       "quarter",
-       "year"
-      ],
-      "type": "string"
-     },
-     "continuation_ref": {
-      "type": "string"
-     },
-     "explain": {
-      "const": "completions",
-      "type": "string"
-     },
-     "group_by": {
-      "items": {
-       "maxLength": 128,
-       "minLength": 1,
-       "type": "string"
-      },
-      "maxItems": 2,
-      "type": "array"
-     },
-     "limit": {
-      "default": 50,
-      "maximum": 100,
-      "minimum": 1,
-      "type": "integer"
-     },
-     "measures": {
-      "items": {
-       "additionalProperties": false,
-       "allOf": [
-        {
-         "else": {
-          "not": {
-           "required": [
-            "field"
-           ]
-          }
-         },
-         "if": {
-          "properties": {
-           "aggregation": {
-            "enum": [
-             "sum",
-             "avg",
-             "min",
-             "max",
-             "split",
-             "range"
-            ]
-           }
-          },
-          "required": [
-           "aggregation"
-          ]
-         },
-         "then": {
-          "required": [
-           "field"
-          ]
-         }
-        }
-       ],
-       "properties": {
-        "aggregation": {
-         "default": "count",
-         "enum": [
-          "count",
-          "sum",
-          "avg",
-          "min",
-          "max",
-          "split",
-          "range"
-         ],
-         "type": "string"
-        },
-        "field": {
-         "maxLength": 128,
-         "minLength": 1,
-         "type": "string"
-        },
-        "label": {
-         "maxLength": 64,
-         "minLength": 1,
-         "type": "string"
-        },
-        "where": {
-         "$ref": "#/$defs/SemanticFilterInput"
-        }
-       },
-       "type": "object"
-      },
-      "maxItems": 12,
-      "type": "array"
-     },
-     "order": {
-      "additionalProperties": false,
-      "properties": {
-       "direction": {
-        "default": "desc",
-        "enum": [
-         "asc",
-         "desc"
-        ],
-        "type": "string"
-       },
-       "measure": {
-        "maximum": 12,
-        "minimum": 1,
-        "type": "integer"
-       }
-      },
-      "required": [
-       "measure"
-      ],
-      "type": "object"
-     },
-     "record_class": {
-      "maxLength": 170,
-      "type": "string"
-     },
-     "state": {
-      "default": "completed",
-      "enum": [
-       "completed",
-       "on_time",
-       "late",
-       "undated"
-      ],
-      "type": "string"
-     },
-     "where": {
-      "$ref": "#/$defs/SemanticFilterInput"
-     },
-     "whose": {
-      "anyOf": [
-       {
-        "enum": [
-         "mine",
-         "my_team",
-         "anyone"
-        ],
-        "type": "string"
-       },
-       {
-        "maxLength": 256,
-        "minLength": 1,
-        "type": "string"
-       }
-      ]
-     },
-     "window": {
-      "enum": [
-       "today",
-       "yesterday",
-       "tomorrow",
-       "rest_of_this_week",
-       "last_week",
-       "this_week",
-       "next_week",
-       "last_month",
-       "this_month",
-       "next_month",
-       "last_quarter",
-       "this_quarter",
-       "next_quarter",
-       "last_year",
-       "this_year",
-       "this_financial_year",
-       "last_7_days",
-       "last_3_months",
-       "trailing_12_months"
-      ],
-      "type": "string"
-     },
-     "within": {
-      "type": "string"
-     }
-    },
-    "type": "object"
-   }
-  },
   "records_list": {
    "choices": {
     "clock": [
@@ -9319,10 +8660,6 @@
     ],
     "person": [
      "current"
-    ],
-    "state": [
-     "closed",
-     "open"
     ],
     "team": [
      "current"
@@ -9634,18 +8971,8 @@
       ],
       "type": "object"
      },
-     "state": {
-      "enum": [
-       "open",
-       "closed"
-      ],
-      "type": "string"
-     },
      "where": {
       "$ref": "#/$defs/SemanticFilterInput"
-     },
-     "whose": {
-      "type": "string"
      },
      "within": {
       "maxLength": 200,
@@ -9657,12 +8984,6 @@
     ],
     "type": "object"
    }
-  },
-  "run_skill_script": {
-   "doors": [
-    "beacon"
-   ],
-   "family": "host"
   },
   "scheduled_task_read": {
    "choices": {},
@@ -10341,6 +9662,47 @@
     "beacon"
    ],
    "family": "host"
+  },
+  "skill_script": {
+   "choices": {},
+   "doors": [
+    "codeact"
+   ],
+   "family": "files",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "args": {
+      "items": {
+       "maxLength": 100000,
+       "type": "string"
+      },
+      "maxItems": 64,
+      "type": "array"
+     },
+     "input_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array"
+     },
+     "script": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "skill": {
+      "maxLength": 160,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "skill",
+     "script"
+    ],
+    "type": "object"
+   }
   },
   "targets_read": {
    "choices": {

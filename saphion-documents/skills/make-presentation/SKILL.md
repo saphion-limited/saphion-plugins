@@ -16,20 +16,19 @@ metadata:
 You are building a PowerPoint deck the person will present or send: a client update, a bid
 presentation, a safety briefing, a project review. A good deck is a small number of clear
 slides, each carrying one idea, laid out consistently. You build it by writing a program and
-running it with `file_build`, then you check the file and look at the slide images before the
+running it with `build_files`, then you check the file and look at the slide images before the
 person hears it is ready. This procedure carries its own design guidance (section 2).
 
-Call `file_build` with exactly these fields: `program`, `language` (`python` or `node`), `outputs` (a list of file names, ending `.pptx`), `title`, `checks`, optional `render_pages` (`output`, `first`, `last`), `description`, `inputs` (the person's own files the program opens) and, to change a file you already made, `replaces_file_id`. Call `file_build` directly as its own tool. Never call it from inside `execute_code`: it is not available there.
+From `execute_code`, call `build_files` with exactly these fields: `program`, `language` (`python` or `node`), `outputs` (a list of file names, ending `.pptx`), `title`, `checks`, optional `render_pages` (`output`, `first`, `last`), `input_continuation_refs` (the person's own files the program opens) and, to change a file you already made, `replaces_continuation_ref`. It is a call only `execute_code` offers: `program` is the Python or Node program as one string.
 
 ## 1. What the program can reach
 
 - A run delivers up to **16 files**, each as its own card. A replacement declares exactly one output. No network and no installs, so no downloaded images, icons or
   fonts. A program is stopped after about a minute.
-- The input files are the current version of the file named by `replaces_file_id` (under its own
-  name) and every file you name in `inputs`: site photographs, drawings or tables the person attached,
-  or Organisation files, each by the reference you were shown it under (an attachment's `source_ref`,
-  or `organisation-file:<id>@<hash>`). Each is placed in the working directory under its own name
-  made safe (or the `name` you give) and the result lists the names: put a photograph on a slide from
+- The input files are the current version of the file named by `replaces_continuation_ref` (under its own
+  name) and every file you name in `input_continuation_refs`: site photographs, drawings or tables the person attached,
+  or Organisation files, each by the `reference` you were shown it under. Each is placed in the working directory under its own name
+  made safe and the result lists the names: put a photograph on a slide from
   there (`slide.shapes.add_picture("site-1.jpg", ...)`, `pptxgenjs` `addImage({path})`), never write its
   bytes into the program. Pictures, CSV, Excel, Word, PowerPoint and PDF, at most 15 MB each; a file you
   cannot read here refuses the run, naming it.
@@ -40,10 +39,9 @@ Call `file_build` with exactly these fields: `program`, `language` (`python` or 
 | Job | Use |
 |---|---|
 | New deck | Node with `pptxgenjs` (masters, rich native charts, tables, shapes) or Python with `python-pptx` (native charts and tables too, plus text measuring with `pillow`) |
-| Change a deck you made | Pass its `continuation_ref` as `replaces_file_id`: same file, new version. Open it with `pptx.Presentation`, change it, save a `.pptx`. Never rebuild from nothing or make a second copy. |
+| Change a deck you made | Pass its `continuation_ref` as `replaces_continuation_ref`: same file, new version. Open it with `pptx.Presentation`, change it, save a `.pptx`. Never rebuild from nothing or make a second copy. |
 
-Give `file_build` the program, the output names, `checks: ["validate_ooxml", "render_pages"]` and a
-one-line `description`. Both checks are mandatory.
+Give `build_files` the program, the output names, `checks: ["validate_ooxml", "render_pages"]` . Both checks are mandatory.
 
 ## 2. Plan before you code
 

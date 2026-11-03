@@ -18,15 +18,13 @@ the same layouts, theme and placeholders, the new slides on the template's own l
 measured and looked at, nothing overflowing. Two helper scripts do the file work with `python-pptx`
 inside the file sandbox; you decide the content and the layouts, and you look at every slide.
 
-Run a script with `run_skill_script` (`skill_name: "edit-presentation"`, `script_name`, `args`). The
-sandbox has no network and no installs. A file is named in `args` by the reference you were shown it
-under (an attachment's `source_ref`, or the `continuation_ref` of a file you found); the script receives
-its path. A deck built from nothing, or with no template or supplied deck behind it, is not changed
+Run a script from `execute_code` with `skill_script(skill="edit-presentation", script="scripts/<name>.py", args=[...], input_continuation_refs=[...])`. A file is named in `input_continuation_refs` by the `reference` you were shown it under; in `args` its path is `{input_1}` (the first file), `{input_2}` and so on. The
+sandbox has no network and no installs. A deck built from nothing, or with no template or supplied deck behind it, is not changed
 here: it is built new, by a program that makes it.
 
 ## 1. Know the template
 
-1. Run `scripts/inspect_deck.py` with `args: [<template reference>]`. It prints each slide (its layout,
+1. Run `scripts/inspect_deck.py` with `args: ["{input_1}"]`. It prints each slide (its layout,
    its first text, anything it found wrong) and each layout with its placeholders as
    `number:kind widthxheight` in inches. It writes no file. The run shows the last 2,000 characters: for a
    long deck run it again with `slides` or `layouts` as a second argument to list only that part.
@@ -53,7 +51,7 @@ text of each placeholder; for each slide to update, which placeholders change an
 
 ## 3. Make the change
 
-Run `scripts/edit_deck.py` with `args: [<template reference>, <spec>]`, and optionally a third argument,
+Run `scripts/edit_deck.py` with `args: ["{input_1}", <spec>]`, and optionally a third argument,
 the output name (it must end `.pptx`; the default is the template's name with `-edited`). The spec is one
 JSON text:
 

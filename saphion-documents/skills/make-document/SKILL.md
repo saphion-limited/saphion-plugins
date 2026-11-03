@@ -16,20 +16,19 @@ metadata:
 
 You are building a Word document or a PDF the person will read, print or send: a report, a
 letter, a method statement, a briefing, a one-page summary. You build it by writing a program
-and running it with `file_build`, then you look at the pages it renders before the person
+and running it with `build_files`, then you look at the pages it renders before the person
 hears it is ready. This procedure carries its own design guidance (section 2); load no other skill
 for the look.
 
-Call `file_build` with exactly these fields: `program`, `language` (`python` or `node`), `outputs` (a list of file names, ending `.docx` or `.pdf`), `title`, `checks`, optional `render_pages` (`output`, `first`, `last`), `description`, `inputs` (the person's own files the program opens) and, to change a file you already made, `replaces_file_id`. Call `file_build` directly as its own tool. Never call it from inside `execute_code`: it is not available there.
+From `execute_code`, call `build_files` with exactly these fields: `program`, `language` (`python` or `node`), `outputs` (a list of file names, ending `.docx` or `.pdf`), `title`, `checks`, optional `render_pages` (`output`, `first`, `last`), `input_continuation_refs` (the person's own files the program opens) and, to change a file you already made, `replaces_continuation_ref`. It is a call only `execute_code` offers: `program` is the Python or Node program as one string.
 
 ## 1. What the program can reach
 
 - A run delivers up to **16 files**, each as its own card. Use a ZIP for a folder-preserving bundle. A replacement declares exactly one output.
-- The input files are the current version of the file named by `replaces_file_id` (under its own
-  name) and every file you name in `inputs`: a photograph, a drawing or a table the person attached,
-  or an Organisation file, each by the reference you were shown it under (an attachment's
-  `source_ref`, or `organisation-file:<id>@<hash>`). Each is placed in the working directory under
-  its own name made safe (or the `name` you give) and the result lists the names: open the picture
+- The input files are the current version of the file named by `replaces_continuation_ref` (under its own
+  name) and every file you name in `input_continuation_refs`: a photograph, a drawing or a table the person attached,
+  or an Organisation file, each by the `reference` you were shown it under. Each is placed in the working directory under
+  its own name made safe and the result lists the names: open the picture
   there (`document.add_picture("site-photo.png", width=Inches(5))`, `reportlab` `Image`), never
   write its bytes into the program. Pictures, CSV, Excel, Word, PowerPoint and PDF, at most 15 MB
   each; a file you cannot read here refuses the run, naming it.
@@ -42,11 +41,10 @@ Call `file_build` with exactly these fields: `program`, `language` (`python` or 
 | Word file | Python with `python-docx` (default), or Node `docx` when you need finer numbering or table control |
 | PDF from scratch (summary, certificate, form) | Python with `reportlab` `platypus` (section 5) |
 | PDF of a document the person also edits | Build the `.docx` in one run. In a second run, convert it inside the program: `soffice --headless --convert-to pdf --outdir . file.docx`, with `HOME` set to a writable folder, and deliver the PDF |
-| Change a file you made | Pass its `continuation_ref` as `replaces_file_id`: same file, new version. Open it, change it, save the same kind. Never rebuild from nothing or make a second copy. |
-| Stamp or read a PDF | `pypdf`: open the PDF named in `inputs` and write the stamped copy as a new output. A PDF you made is changed with `replaces_file_id`, as above. |
+| Change a file you made | Pass its `continuation_ref` as `replaces_continuation_ref`: same file, new version. Open it, change it, save the same kind. Never rebuild from nothing or make a second copy. |
+| Stamp or read a PDF | `pypdf`: open the PDF named in `input_continuation_refs` and write the stamped copy as a new output. A PDF you made is changed with `replaces_continuation_ref`, as above. |
 
-Give `file_build` the program, the output names, `checks: ["render_pages"]` and a one-line
-`description`. Add `validate_ooxml` for a `.docx` (it does not open a PDF).
+Give `build_files` the program, the output names, `checks: ["render_pages"]`. Add `validate_ooxml` for a `.docx` (it does not open a PDF).
 
 ## 2. Before you build: the reader and the argument
 

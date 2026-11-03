@@ -14,8 +14,8 @@ metadata:
 
 The person gave you a working workbook and wants it changed: rows added, an input changed, a summary added. It goes back
 looking like their own file with the change made: every formula still a formula and recalculated, every format, named
-cell and sheet where it was. You do not rebuild it and you do not re-save it with a program of your own (`file_build`,
-`execute_code`): this package's script does the edit and then proves, from the file it wrote, that nothing was lost.
+cell and sheet where it was. You do not rebuild it and you do not re-save it with a program of your own (`build_files`):
+this package's script does the edit and then proves, from the file it wrote, that nothing was lost.
 
 Building a new workbook from nothing is not this procedure's job. A `.xlsm` (macros) or an old `.xls` is not edited here: say so.
 
@@ -31,8 +31,8 @@ Building a new workbook from nothing is not this procedure's job. A `.xlsm` (mac
 
 ## 2. Plan the change, then run it once
 
-Run `run_skill_script` with this skill, script `scripts/edit_spreadsheet.py` and two `args`: the workbook's
-`continuation_ref`, and the plan as one JSON object (text). The edited workbook arrives as a new file for the person.
+From `execute_code`, call `skill_script(skill="edit-spreadsheet", script="scripts/edit_spreadsheet.py", args=["{input_1}", <plan>],
+input_continuation_refs=[<the workbook's reference: an attachment's `reference` from its label, or a found file's `continuation_ref`>])`, the plan being one JSON object (text). The edited workbook arrives as a new file for the person.
 
 **Every address in the plan is as the workbook was supplied.** Do not work out where rows will land: the script moves
 every formula, name, rule, validation list, table, chart and print area for you, including what you write in the plan.

@@ -17,14 +17,12 @@ way up. The result must still be their PDF: the same pages, only what was asked 
 helper scripts do the file work with `pypdf` inside the file sandbox; you decide what goes in each field and which pages, and you look at the
 pages. Building a PDF from nothing is not this skill's job.
 
-Run a script with `run_skill_script` (`skill_name: "edit-pdf"`, `script_name`, `args`). The sandbox has no network and no installs. A file is
-named in `args` by the reference you were shown it under (an attachment's `source_ref`, or the `continuation_ref` of a file you found); the
-script receives its path. Each script checks its own result by reading the written file back, and writes nothing if the check fails: the
+Run a script from `execute_code` with `skill_script(skill="edit-pdf", script="scripts/<name>.py", args=[...], input_continuation_refs=[...])`. A file is named in `input_continuation_refs` by the `reference` you were shown it under; in `args` its path is `{input_1}` (the first file), `{input_2}` and so on. The sandbox has no network and no installs. Each script checks its own result by reading the written file back, and writes nothing if the check fails: the
 refusal names what is wrong, so correct the request and run it again. Every output arrives as its own card and the originals are never changed.
 
 ## 1. Know the file
 
-Run `scripts/inspect_pdf.py` with `args: [<reference>, ...]`: one or several PDFs. It prints each file's page count, size and any page that is
+Run `scripts/inspect_pdf.py` with `args: ["{input_1}", ...]`: one or several PDFs. It prints each file's page count, size and any page that is
 already turned, and for a form each field as `name [type, page]` with what it accepts and the value it holds now. It writes no file. The run
 shows you the last 2,000 characters of what the script printed; a form with many fields says where the list stopped: run it again with
 `--from N` as the last two `args` to list the rest. Then `read` the PDF itself with `at` `1-6` and say what you see: a field's label is on the page, not in its name.
@@ -36,7 +34,7 @@ and do not draw text onto it with a program.
 
 1. Read the form's pages and decide, for each field, what the person's facts say belongs in it. A fact you do not have leaves its field empty and
    goes in your reply as a question, as does a tick you cannot support. A field the person did not mention stays as it is.
-2. Run `scripts/fill_pdf_form.py` with `args: [<form reference>, <values>]` and optionally a third, the output name (ending `.pdf`; the default
+2. Run `scripts/fill_pdf_form.py` with `args: ["{input_1}", <values>]` and optionally a third, the output name (ending `.pdf`; the default
    is the form's name with `-filled`). `values` is one JSON object of the field name exactly as inspect printed it to the value:
 
 ```json
@@ -51,14 +49,14 @@ and do not draw text onto it with a program.
 
 ## 3. Join PDFs
 
-Run `scripts/merge_pdf.py` with `args: [<output name>, <first reference>, <second reference>, ...]`: the files are joined whole, in the order
+Run `scripts/merge_pdf.py` with `args: [<output name>, "{input_1}", "{input_2}", ...]`: the files are joined whole, in the order
 you list them. Decide the order from the person's words and from the files' contents, not from their names. Choosing only some pages of a file
 is a split first and a merge after. Form fields come with their pages; fields with the same name in two forms become one field, which the
 script says. The run prints which pages of the result came from which file.
 
 ## 4. Take pages out
 
-Run `scripts/split_pdf.py` with `args: [<reference>, <groups>]`. Pages are numbered from 1 as the viewer counts them, whatever the page itself
+Run `scripts/split_pdf.py` with `args: ["{input_1}", <groups>]`. Pages are numbered from 1 as the viewer counts them, whatever the page itself
 prints (a roman-numbered preface still counts as page 1).
 
 - `"3-5"` is one file of pages 3 to 5. `"2,5,9"` is one file of those pages in that order. `"7-"` runs to the last page.
@@ -68,7 +66,7 @@ prints (a roman-numbered preface still counts as page 1).
 
 ## 5. Turn pages
 
-Run `scripts/rotate_pdf.py` with `args: [<reference>, <degrees>, <pages>]` and optionally a fourth, the output name. Degrees are `90`, `180` or
+Run `scripts/rotate_pdf.py` with `args: ["{input_1}", <degrees>, <pages>]` and optionally a fourth, the output name. Degrees are `90`, `180` or
 `270` clockwise (`-90` is a quarter turn back). Pages are `"all"` or a list such as `"2"` or `"1-3,6"`. Look at the pages first to see which
 way each needs to turn: a landscape scan shown sideways needs 90 or 270, and the render shows which. A turn adds to the page's rotation now,
 so a page already turned 90 and given 90 is at 180. The pages' content is not changed: only how a viewer turns them.

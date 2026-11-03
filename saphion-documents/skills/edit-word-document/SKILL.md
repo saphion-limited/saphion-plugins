@@ -30,8 +30,8 @@ name exactly as it was: styles, numbering, headers and footers, pictures, and th
 
 ## 2. Run the script
 
-Call `run_skill_script` with this skill's name, `script_name` `scripts/word_edit.py` and two `args`: the file's reference (the one you were
-shown it under) and the request as one JSON text.
+From `execute_code`, call `skill_script(skill="edit-word-document", script="scripts/word_edit.py", args=["{input_1}", <request>],
+input_continuation_refs=[<the file's reference: an attachment's `reference` from its label, or a found file's `continuation_ref`>])`, the request being one JSON text.
 
 ```json
 {"author": "Beacon", "edits": [

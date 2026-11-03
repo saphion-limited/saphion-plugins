@@ -15,7 +15,7 @@ The person wants a question properly researched: what the rules require, how opt
 what a good analyst would hand them: the answer first, a position they can act on, and every claim traceable to a source you actually read.
 Depth comes from working each part of the question in turn, and from reading pages rather than search passages. One helper script checks the
 citations and writes the report and its bundle. It runs in the file sandbox, which has no network, so everything you learn comes through
-`web_search`, `web_read`, `legislation_search`, `legislation_read` and Saphion's own reads. A single fact (one date, one figure) is answered
+`web_search`, `web_read` and Saphion's own reads. A single fact (one date, one figure) is answered
 with `web_search` and `depth` `lookup`, not this skill.
 
 ## 1. Ask only what would change the research
@@ -46,8 +46,8 @@ Take the parts one after another, finishing each before the next, and repeat thi
 1. Say to yourself what is still unknown for this part.
 2. Search for it. Run every search you can in one response, side by side. Short queries find more than long ones: a few words, as the best
    source would put them. Never repeat a query: reword it, and if results are thin, widen it. Use `domains` for official sites (`gov.uk`, the
-   regulator), `published_from` when recency matters, and `country`. UK law is `legislation_search` then `legislation_read` of the provision
-   itself, not a website's account of it. What the Organisation holds (its records, files, documents) is `find` and `read`: a question about the
+   regulator), `published_from` when recency matters, and `country`. UK law is searched with `domains` `legislation.gov.uk`, then the provision itself is read
+   with `web_read`, not a website's account of it. What the Organisation holds (its records, files, documents) is `find` and `read`: a question about the
    person's own work is answered from their own material first.
 3. Read the pages behind the best results with `web_read`, up to five a call, asking it this part's question. A search passage is easily
    taken out of context, so one is enough only for a plain fact that it states in full. A summary leads you to the original it cites: find that and read it.
@@ -131,8 +131,8 @@ The answer, in one paragraph.
 
 ## 8. Make the report and the bundle
 
-Run `scripts/build_research_report.py` with `run_skill_script` (`skill_name: "deep-research"`, `script_name`) and `args`: the report's
-Markdown as one text, and optionally a file name (no extension). Do not make the report with `file_make`: this script is the one door, so
+From `execute_code`, run `scripts/build_research_report.py` with `skill_script(skill="deep-research", script="scripts/build_research_report.py", args=[...])`:
+the args are the report's Markdown as one text, and optionally a file name (no extension). Do not make the report with `build_files`: this script is the one door, so
 a report that fails the checks never lands as a file.
 
 It checks the report against the sources the host resolved, and writes nothing unless every check passes:

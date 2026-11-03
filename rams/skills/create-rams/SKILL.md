@@ -15,7 +15,7 @@ read it, sign it and work to it on site. A RAMS is a record on the RAMS board: t
 hazards with their controls and ratings, and its method steps in order. The Organisation's published
 RAMS template turns that record into a Word document with a PDF. You make the record with the record
 tools, write the template's written sections yourself, then call `document_generate`. No other tool
-makes this document, and you never build a RAMS file from scratch with `file_build`.
+makes this document, and you never build a RAMS file from scratch with `build_files`.
 
 ## 1. Gather what is known
 
