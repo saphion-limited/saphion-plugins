@@ -2331,9 +2331,6 @@
       ],
       "type": "object"
      },
-     "replaces_continuation_ref": {
-      "type": "string"
-     },
      "title": {
       "maxLength": 160,
       "minLength": 1,

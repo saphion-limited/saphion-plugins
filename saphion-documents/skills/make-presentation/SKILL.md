@@ -19,14 +19,13 @@ slides, each carrying one idea, laid out consistently. You build it by writing a
 running it with `build_files`, then you check the file and look at the slide images before the
 person hears it is ready. This procedure carries its own design guidance (section 2).
 
-From `execute_code`, call `build_files` with exactly these fields: `program`, `language` (`python` or `node`), `outputs` (a list of file names, ending `.pptx`), `title`, `checks`, optional `render_pages` (`output`, `first`, `last`), `input_continuation_refs` (the person's own files the program opens) and, to change a file you already made, `replaces_continuation_ref`. It is a call only `execute_code` offers: `program` is the Python or Node program as one string.
+From `execute_code`, call `build_files` with exactly these fields: `program`, `language` (`python` or `node`), `outputs` (a list of file names, ending `.pptx`), `title`, `checks`, optional `render_pages` (`output`, `first`, `last`), and `input_continuation_refs` (the person's own files the program opens, and any file you change). It is a call only `execute_code` offers: `program` is the Python or Node program as one string.
 
 ## 1. What the program can reach
 
-- A run delivers up to **16 files**, each as its own card. A replacement declares exactly one output. No network and no installs, so no downloaded images, icons or
+- A run delivers up to **16 files**, each as its own card. No network and no installs, so no downloaded images, icons or
   fonts. A program is stopped after about a minute.
-- The input files are the current version of the file named by `replaces_continuation_ref` (under its own
-  name) and every file you name in `input_continuation_refs`: site photographs, drawings or tables the person attached,
+- The input files are every file you name in `input_continuation_refs`: site photographs, drawings or tables the person attached,
   or Organisation files, each by the `reference` you were shown it under. Each is placed in the working directory under its own name
   made safe and the result lists the names: put a photograph on a slide from
   there (`slide.shapes.add_picture("site-1.jpg", ...)`, `pptxgenjs` `addImage({path})`), never write its
@@ -39,7 +38,7 @@ From `execute_code`, call `build_files` with exactly these fields: `program`, `l
 | Job | Use |
 |---|---|
 | New deck | Node with `pptxgenjs` (masters, rich native charts, tables, shapes) or Python with `python-pptx` (native charts and tables too, plus text measuring with `pillow`) |
-| Change a deck you made | Pass its `continuation_ref` as `replaces_continuation_ref`: same file, new version. Open it with `pptx.Presentation`, change it, save a `.pptx`. Never rebuild from nothing or make a second copy. |
+| Change a deck | Name it in `input_continuation_refs`, open it with `pptx.Presentation`, change it and save it under the same name: that is a new version of the same file, by code. Never rebuild from nothing or save a copy. |
 
 Give `build_files` the program, the output names, `checks: ["validate_ooxml", "render_pages"]` . Both checks are mandatory.
 

@@ -32,7 +32,7 @@ Building a new workbook from nothing is not this procedure's job. A `.xlsm` (mac
 ## 2. Plan the change, then run it once
 
 From `execute_code`, call `skill_script(skill="edit-spreadsheet", script="scripts/edit_spreadsheet.py", args=["{input_1}", <plan>],
-input_continuation_refs=[<the workbook's reference: an attachment's `reference` from its label, or a found file's `continuation_ref`>])`, the plan being one JSON object (text). The edited workbook arrives as a new file for the person.
+input_continuation_refs=[<the workbook's reference: an attachment's `reference` from its label, or a found file's `continuation_ref`>])`, the plan being one JSON object (text). The change is saved as a new version of that same workbook (a file the person uploaded is never changed: the first edit makes one working copy beside it, and every later edit updates that copy); never as a second file.
 
 **Every address in the plan is as the workbook was supplied.** Do not work out where rows will land: the script moves
 every formula, name, rule, validation list, table, chart and print area for you, including what you write in the plan.
@@ -66,8 +66,8 @@ every formula, name, rule, validation list, table, chart and print area for you,
   whose look the cell takes), `number_format`, `bold`; and `column_widths`. A cell with no `style_from` is written in the font
   most of the supplied workbook's cells use (so is a cell `set` or `insert_rows` makes where there was no look to copy), and `bold`
   keeps that font. Summaries read figures through formulas, never retyped numbers.
-- `output_name` (ending `.xlsx`) names the new file; the default is the supplied file's name with `-edited` added
-  (`Cost plan.xlsx` comes back as `Cost plan-edited.xlsx`), so it never replaces or duplicates the original in the person's files.
+- `output_name` (ending `.xlsx`) saves the result as a new file under that name. Leave it out: the workbook is saved under its own name, as a
+  new version of itself. Use it only when the person asks for a copy.
 - `accept_losses`: see section 4.
 
 Keep to what was asked. A rate, allowance or threshold stays in its input cell and formulas refer to it; never write

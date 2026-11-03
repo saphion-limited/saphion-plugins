@@ -52,7 +52,7 @@ text of each placeholder; for each slide to update, which placeholders change an
 ## 3. Make the change
 
 Run `scripts/edit_deck.py` with `args: ["{input_1}", <spec>]`, and optionally a third argument,
-the output name (it must end `.pptx`; the default is the template's name with `-edited`). The spec is one
+the output name (it must end `.pptx`); leave it out and the deck is saved under its own name, as a new version of itself (a file the person uploaded is never changed: the first edit makes one working copy beside it). Name it only when the person asks for a copy. The spec is one
 JSON text:
 
 ```

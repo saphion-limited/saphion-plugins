@@ -20,13 +20,12 @@ you prove it with the `recalc` check before the person hears it is ready.
 
 `recalc` rewrites the workbook after your program finishes. To bundle it in a ZIP, first deliver the checked workbook, then pass that saved file into a second build as an input and archive its final bytes. A ZIP made in the first program contains the pre-check workbook.
 
-From `execute_code`, call `build_files` with exactly these fields: `program`, `language` (`python` or `node`), `outputs` (a list of file names, ending `.xlsx`), `title`, `checks`, `input_continuation_refs` (the person's own files the program opens) and, to change a file you already made, `replaces_continuation_ref`. It is a call only `execute_code` offers: `program` is the Python or Node program as one string.
+From `execute_code`, call `build_files` with exactly these fields: `program`, `language` (`python` or `node`), `outputs` (a list of file names, ending `.xlsx`), `title`, `checks`, and `input_continuation_refs` (the person's own files the program opens, and any file you change). It is a call only `execute_code` offers: `program` is the Python or Node program as one string.
 
 ## 1. What the program can reach
 
-- A run delivers up to **16 files**, each as its own card. A replacement declares exactly one output. No network and no installs. A program is stopped after about a minute.
-- The input files are the current version of the file named by `replaces_continuation_ref` (under its own
-  name) and every file you name in `input_continuation_refs`: a CSV, a workbook or a picture the person attached, or an
+- A run delivers up to **16 files**, each as its own card. No network and no installs. A program is stopped after about a minute.
+- The input files are every file you name in `input_continuation_refs`: a CSV, a workbook or a picture the person attached, or an
   Organisation file, each by the `reference` you were shown it under. Each is placed in the working directory under its own name made
   safe and the result lists the names: open it there
   (`openpyxl.load_workbook`, `pandas.read_csv`), never write its data into the program. At most 15 MB
@@ -37,7 +36,7 @@ From `execute_code`, call `build_files` with exactly these fields: `program`, `l
 | Job | Use |
 |---|---|
 | New workbook | `openpyxl`; `pandas` to shape bulk data before writing it |
-| Change a workbook you made | Pass its `continuation_ref` as `replaces_continuation_ref`: same file, new version. Open it with `openpyxl.load_workbook`, change it, save the same kind. Never rebuild from nothing or make a second copy. |
+| Change a workbook | Name it in `input_continuation_refs`, open it with `openpyxl.load_workbook`, change it and save it under the same name: that is a new version of the same file, by code. Never rebuild from nothing or save a copy. |
 
 Give `build_files` the program, the output names, `checks: ["recalc"]`.
 
@@ -102,7 +101,7 @@ reports `ok`, the number of formulas, and each error cell (`#REF!`, `#DIV/0!`, `
    blank is the correct answer for that cell.
 3. **The report proves the formulas evaluate, not that they are right.** An off-by-one range gives a
    clean report and wrong figures, and the report does not show values. For every workbook whose
-   figures matter, make a second run on the delivered file (`replaces_continuation_ref`): open it with
+   figures matter, make a second run on the delivered file (name it in `input_continuation_refs`): open it with
    `openpyxl.load_workbook(..., data_only=True)`, print the key cells (totals, a percentage that
    should be near 100, a count you can add up yourself), and compare them with figures you work out
    independently. Fix and run again if they differ.

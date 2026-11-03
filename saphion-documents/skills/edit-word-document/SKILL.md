@@ -60,8 +60,8 @@ input_continuation_refs=[<the file's reference: an attachment's `reference` from
 ## 3. After the run
 
 - The result lists each edit and what the script itself checked: that the file opens, that every earlier comment and tracked change is still
-  there, and that every paragraph you did not edit reads as before. The edited file arrives as its own card, named after the original with
-  `-edited`; the original is untouched.
+  there, and that every paragraph you did not edit reads as before. The edited file arrives as a new version of the same file, under its own name (a file the person uploaded is
+  never changed: the first edit makes one working copy beside it, and every later edit updates that copy).
 - Say in your reply what you changed (each edit in plain words), how many comments and tracked changes you added and under what name, and the file
   name. Read the delivered file once if you need to confirm the new wording, and say what you did and did not look at: you have not seen the pages
   unless you did.

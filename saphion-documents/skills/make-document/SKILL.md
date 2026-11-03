@@ -20,13 +20,12 @@ and running it with `build_files`, then you look at the pages it renders before 
 hears it is ready. This procedure carries its own design guidance (section 2); load no other skill
 for the look.
 
-From `execute_code`, call `build_files` with exactly these fields: `program`, `language` (`python` or `node`), `outputs` (a list of file names, ending `.docx` or `.pdf`), `title`, `checks`, optional `render_pages` (`output`, `first`, `last`), `input_continuation_refs` (the person's own files the program opens) and, to change a file you already made, `replaces_continuation_ref`. It is a call only `execute_code` offers: `program` is the Python or Node program as one string.
+From `execute_code`, call `build_files` with exactly these fields: `program`, `language` (`python` or `node`), `outputs` (a list of file names, ending `.docx` or `.pdf`), `title`, `checks`, optional `render_pages` (`output`, `first`, `last`), and `input_continuation_refs` (the person's own files the program opens, and any file you change). It is a call only `execute_code` offers: `program` is the Python or Node program as one string.
 
 ## 1. What the program can reach
 
-- A run delivers up to **16 files**, each as its own card. Use a ZIP for a folder-preserving bundle. A replacement declares exactly one output.
-- The input files are the current version of the file named by `replaces_continuation_ref` (under its own
-  name) and every file you name in `input_continuation_refs`: a photograph, a drawing or a table the person attached,
+- A run delivers up to **16 files**, each as its own card. Use a ZIP for a folder-preserving bundle.
+- The input files are every file you name in `input_continuation_refs`: a photograph, a drawing or a table the person attached,
   or an Organisation file, each by the `reference` you were shown it under. Each is placed in the working directory under
   its own name made safe and the result lists the names: open the picture
   there (`document.add_picture("site-photo.png", width=Inches(5))`, `reportlab` `Image`), never
@@ -41,8 +40,8 @@ From `execute_code`, call `build_files` with exactly these fields: `program`, `l
 | Word file | Python with `python-docx` (default), or Node `docx` when you need finer numbering or table control |
 | PDF from scratch (summary, certificate, form) | Python with `reportlab` `platypus` (section 5) |
 | PDF of a document the person also edits | Build the `.docx` in one run. In a second run, convert it inside the program: `soffice --headless --convert-to pdf --outdir . file.docx`, with `HOME` set to a writable folder, and deliver the PDF |
-| Change a file you made | Pass its `continuation_ref` as `replaces_continuation_ref`: same file, new version. Open it, change it, save the same kind. Never rebuild from nothing or make a second copy. |
-| Stamp or read a PDF | `pypdf`: open the PDF named in `input_continuation_refs` and write the stamped copy as a new output. A PDF you made is changed with `replaces_continuation_ref`, as above. |
+| Change a file | Name it in `input_continuation_refs`, open it, change it and save it under the same name: that is a new version of the same file, by code. Never rebuild from nothing or save a copy. |
+| Stamp or read a PDF | `pypdf`: open the PDF named in `input_continuation_refs` and write the stamped copy as a new output. A PDF changed in place is saved under its own name, as above. |
 
 Give `build_files` the program, the output names, `checks: ["render_pages"]`. Add `validate_ooxml` for a `.docx` (it does not open a PDF).
 

@@ -9,7 +9,7 @@ The request is one JSON object: ``{"author": "...", "edits": [ ... ]}``. ``autho
     {"op": "comment", "find": "words as they read", "text": "the comment", "occurrence": 2}
     {"op": "insert_after", "find": "words in the paragraph to follow", "text": "new paragraph\\nanother", "tracked": true, "comment": "why"}
 
-``tracked`` is always stated; ``comment`` and ``occurrence`` are optional. The edited file is written to ``$SKILL_OUTPUT_DIR`` as ``<name>-edited.docx``,
+``tracked`` is always stated; ``comment`` and ``occurrence`` are optional. The edited file is written to ``$SKILL_OUTPUT_DIR`` under the supplied file's own name (a new version of it),
 and only if every edit was made and every check passed: a refused run writes nothing. The run's own verification is printed.
 """
 from __future__ import annotations
@@ -111,8 +111,7 @@ def run(source: Path, raw: str) -> tuple[str, bytes, list[str]]:
     made = ", ".join(f"{count} {name}" for name, count in session.made.items() if count) or "nothing"
     lines.append(f"Checked: opens in python-docx; {before.comment_count} earlier comment(s) and {len(before.revision_ids)} earlier tracked change(s) "
                  f"intact; every other part and paragraph unchanged. Added by {author}: {made}.")
-    stem = re.sub(r"[^\w.\- ]", "", source.stem).strip() or "document"
-    return f"{stem}-edited.docx", saved, lines
+    return source.name, saved, lines
 
 
 def main(argv: list[str]) -> None:

@@ -75,10 +75,9 @@ def main(arguments: list[str]) -> None:
     if len(arguments) not in (2, 3):
         raise SpecError("Usage: edit_deck.py TEMPLATE.pptx SPEC_JSON [OUTPUT.pptx]")
     source, text = arguments[0], arguments[1]
-    output = arguments[2] if len(arguments) == 3 else f"{os.path.splitext(os.path.basename(source))[0]}-edited.pptx"
+    output = arguments[2] if len(arguments) == 3 else os.path.basename(source)
     if not output.lower().endswith(".pptx") or os.sep in output:
         raise SpecError(f"The output is a plain file name ending .pptx, not {output!r}.")
-    output = json.loads(os.environ.get("SKILL_OUTPUT_NAMES") or "{}").get(output, output)  # the name the runner will deliver it under
     deck = Presentation(source)
     original = list(deck.slides)
     plan = operations(text, len(original))

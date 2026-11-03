@@ -18,7 +18,7 @@ helper scripts do the file work with `pypdf` inside the file sandbox; you decide
 pages. Building a PDF from nothing is not this skill's job.
 
 Run a script from `execute_code` with `skill_script(skill="edit-pdf", script="scripts/<name>.py", args=[...], input_continuation_refs=[...])`. A file is named in `input_continuation_refs` by the `reference` you were shown it under; in `args` its path is `{input_1}` (the first file), `{input_2}` and so on. The sandbox has no network and no installs. Each script checks its own result by reading the written file back, and writes nothing if the check fails: the
-refusal names what is wrong, so correct the request and run it again. Every output arrives as its own card and the originals are never changed.
+refusal names what is wrong, so correct the request and run it again. A file changed arrives as a new version of the same file, under its own name (a file the person uploaded is never changed: the first edit makes one working copy beside it, and every later edit updates that copy); a joined or extracted file is a new file.
 
 ## 1. Know the file
 
@@ -34,8 +34,8 @@ and do not draw text onto it with a program.
 
 1. Read the form's pages and decide, for each field, what the person's facts say belongs in it. A fact you do not have leaves its field empty and
    goes in your reply as a question, as does a tick you cannot support. A field the person did not mention stays as it is.
-2. Run `scripts/fill_pdf_form.py` with `args: ["{input_1}", <values>]` and optionally a third, the output name (ending `.pdf`; the default
-   is the form's name with `-filled`). `values` is one JSON object of the field name exactly as inspect printed it to the value:
+2. Run `scripts/fill_pdf_form.py` with `args: ["{input_1}", <values>]` and optionally a third, the output name (ending `.pdf`; leave it out and the form is saved under its own name,
+   as a new version of itself). `values` is one JSON object of the field name exactly as inspect printed it to the value:
 
 ```json
 {"Full name": "Ada Lovelace", "Date of birth": "10/12/1815", "Agree to terms": true, "Role": "Contractor", "Site": "South"}

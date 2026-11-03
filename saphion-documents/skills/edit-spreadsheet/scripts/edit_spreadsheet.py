@@ -80,7 +80,7 @@ def run(source: Path, plan_text: str) -> dict:
     except (zipfile.BadZipFile, KeyError, etree.XMLSyntaxError, OSError, ValueError) as failure:
         raise PlanRefused(f"{source.name} cannot be opened as a workbook: {failure}") from failure
     applied = apply_plan(workbook, plan)
-    staged = Path(tempfile.mkdtemp()) / (plan.output_name or f"{source.stem}-edited.xlsx")  # never the supplied file's own name: the one naming rule
+    staged = Path(tempfile.mkdtemp()) / (plan.output_name or source.name)  # the supplied file's own name is a new version of it; another name is a new file
     workbook.save(staged)
     workbook.close()
     del workbook
@@ -120,11 +120,10 @@ def run(source: Path, plan_text: str) -> dict:
     empty = sum(1 for sheet in values.worksheets for cell in sheet._cells.values() if cell.value is None and
                 formula_text(edited[sheet.title].cell(cell.row, cell.column).value) is not None)
 
-    delivered_as = json.loads(os.environ.get("SKILL_OUTPUT_NAMES") or "{}").get(staged.name, staged.name)  # the name the runner will deliver it under
-    output = Path(os.environ["SKILL_OUTPUT_DIR"]) / delivered_as
+    output = Path(os.environ["SKILL_OUTPUT_DIR"]) / staged.name
     output.write_bytes(delivered)
     report = {
-        "delivered": delivered_as,
+        "delivered": staged.name,
         "formulas": {"supplied": formulas_before, "now": formulas_after, "replaced_by_a_value": len(applied.overwritten), "calculated_to_nothing": empty},
         "recalculated": {"engine": "LibreOffice", "errors_now": len(now_errors), "errors_supplied_with": len(original_errors),
                          "formulas_checked": recalc.get("formulas")},
