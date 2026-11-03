@@ -80,8 +80,8 @@ what the report shows. The check has no person to read for, so an app's live sou
 
 ## 3. Craft for an app
 
-For visual foundations, use `read_skill_resource` with `skill_name: "design"` and
-`resource_name: "references/design_basics.md"`. Read the reference when choosing the visual direction;
+For visual foundations, read the design skill's reference: `find` kind `skill` with the query `design`, then `read` it with `at` set to
+`skills/design/references/design_basics.md`. Read the reference when choosing the visual direction;
 apply the guidance relevant to this deliverable.
 
 For an app, add the layout to the plan: one sentence on how the eye travels and a rough text sketch of

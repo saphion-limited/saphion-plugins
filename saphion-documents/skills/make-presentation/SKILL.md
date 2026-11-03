@@ -55,8 +55,8 @@ decide or remember, and one sentence per slide. Then build.
 - Missing facts: use what the person supplied or the tools returned for figures, quotes, client
   names and logos. A missing fact is a bracketed placeholder, listed in your reply.
 
-For visual foundations, use `read_skill_resource` with `skill_name: "design"` and
-`resource_name: "references/design_basics.md"`. Read the reference when choosing the visual direction;
+For visual foundations, read the design skill's reference: `find` kind `skill` with the query `design`, then `read` it with `at` set to
+`skills/design/references/design_basics.md`. Read the reference when choosing the visual direction;
 apply the guidance relevant to this deliverable.
 
 For a deck, plan the look in the same comments as the storyline and define the theme once, on the slide

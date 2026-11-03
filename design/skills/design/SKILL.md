@@ -38,8 +38,8 @@ brief's real content throughout, not stand-in text.
 - Use the data the person gave or a tool returned; where an example is asked for, label it as an
   example.
 
-For visual foundations, use `read_skill_resource` with `skill_name: "design"` and
-`resource_name: "references/design_basics.md"`. Read the reference when choosing the visual direction;
+For visual foundations, read the design skill's reference: `find` kind `skill` with the query `design`, then `read` it with `at` set to
+`skills/design/references/design_basics.md`. Read the reference when choosing the visual direction;
 apply the guidance relevant to this deliverable.
 
 ## 3. Plan the layout, then test the plan

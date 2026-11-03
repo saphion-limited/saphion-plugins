@@ -63,8 +63,8 @@ otherwise proceed and mark gaps as placeholders.
 - Read the finished text once as a stranger would: is every term explained, does any section
   contradict another, does every sentence carry weight?
 
-For visual foundations, use `read_skill_resource` with `skill_name: "design"` and
-`resource_name: "references/design_basics.md"`. Read the reference when choosing the visual direction;
+For visual foundations, read the design skill's reference: `find` kind `skill` with the query `design`, then `read` it with `at` set to
+`skills/design/references/design_basics.md`. Read the reference when choosing the visual direction;
 apply the guidance relevant to this deliverable.
 
 For a document, define the theme once, on the styles.

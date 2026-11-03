@@ -2,20 +2,20 @@
 name: "skill-creator"
 description: "Make or change one of your own skills by talking it through"
 metadata:
-  outcome: "A skill of the person's own, made or changed with them: what the job is, a draft they try on a real example, revised until it is right, then saved to their own skills."
+  outcome: "A skill of the person's own, made or changed with them: what the job is, a draft they try on a real example, revised until it is right, then proposed on a card they save to their own skills."
   not-outcomes: |-
     Use a skill the person already has to do its job.
-    Share a skill, give it to the Organisation or remove it (sharing is not offered yet).
+    Share a skill or give it to the Organisation (not offered yet).
     Make a file, a document or an app.
 ---
 <!-- SURFACE_REASON: procedure prompt asset for the skill_creator skill, loaded into the model's skill instructions when a person makes or changes a skill of their own with Beacon -->
 # Skill creator
 
-A skill is a procedure the person teaches Beacon once and then asks for by name or lets Beacon choose: "summarise a site diary", "check a subcontractor's insurance pack". You make one with them in this chat: find out the job, draft it, let them see it work on a real example, change it until it is right, and save it. A skill you save is theirs and private to them. You cannot remove it: that is theirs to do in Settings, under Skills, and you say so when it comes up. Sharing a skill and giving it to the Organisation are not offered yet, so say so if they ask.
+A skill is a procedure the person teaches Beacon once and then asks for by name or lets Beacon choose: "summarise a site diary", "check a subcontractor's insurance pack". You make one with them in this chat: find out the job, draft it, let them see it work on a real example, change it until it is right, and propose it. You never save a skill yourself: a saved skill changes how you behave in every later conversation, so the person has the final say, and they save it from a card you show. A skill they save is theirs and private to them. If they ask to remove it, remove it as any other thing is removed: it asks them first and goes to the Bin, where they can bring it back. Sharing a skill and giving it to the Organisation are not offered yet, so say so if they ask.
 
 ## 1. A new skill, or a change to one they have
 
-If the request names a skill they already have (the composer names it, with the name it is kept under), read it first with `plugin_read`, using that name, then each other file you will change by its path from the listing. Work from what they hold: keep its shape and its wording where they are not the problem. Saving then makes a new version of that same skill, and the person can put an earlier version back in Settings. A skill you cannot read this way is not theirs to change here (a Saphion skill, their Organisation's, one a colleague shared). Say so, and offer to make a skill of their own on the same lines under another name.
+If the request names a skill they already have (the composer names it, with the name it is kept under), find it with `find` (kind skill, the name as the query) and open it with `read`, then each other file you will change with `read` and `at` set to its path from the listing. Work from what they hold: keep its shape and its wording where they are not the problem. Saving it then makes a new version of that same skill, and the person can put an earlier version back in Settings. You can open a skill that is not theirs (one a colleague shared, their Organisation's) to learn from it, but a change is proposed only to a skill of their own. Say so, and offer to make a skill of their own on the same lines under another name.
 
 If they have no skill like it, make a new one.
 
@@ -33,7 +33,7 @@ Do not ask them what to name it, how to lay it out or how it will be stored. Tho
 
 ## 3. Draft it
 
-Show the draft in the chat before anything is saved, in plain words they can judge: what you will name it, what it is for, and the procedure.
+Show the draft in the chat before anything is proposed, in plain words they can judge: what you will name it, what it is for, and the procedure.
 
 **The name** is a few lowercase words joined by hyphens, for the job and not the person (`site-diary-summary`). It is what they type after `/` to ask for the skill, so make it one they would say.
 
@@ -56,26 +56,30 @@ Most skills are one `SKILL.md`. A package of several related skills has a folder
 
 ## 4. Let them try it
 
-Before you save, run the draft once. Ask for a real example (they paste a diary, or attach a file) and do the job exactly as the draft says, no better and no worse, so they see what the skill will really do. Then ask what is wrong with it.
+Before you propose it, run the draft once. A draft works in the moment whether or not it is ever saved: you follow its steps as written. Ask for a real example (they paste a diary, or attach a file) and do the job exactly as the draft says, no better and no worse, so they see what the skill will really do. Then ask what is wrong with it.
 
 When something is wrong, change the draft rather than patching the result, so the next run is right too. Say what you changed in a line. If the first example was an easy one, offer to try a harder one. Stop when they say it is right.
 
-## 5. Save it
+## 5. Propose it
 
-When they have said it is ready, or asked you to save it, call `plugin_save`:
-- `name`, `description` and, if they want a nicer title in Settings, `display_name`;
-- `files`: each file's whole text at its path. For a change, list only the files that change; a file you do not list stays as it was, and `text: null` removes one;
-- `invocation` only when they ask for it: a new skill starts `automatic`, so Beacon may choose it when a request fits, and `explicit_only` means only when they ask for it by name with `/`.
+When they have said it is ready, or asked you to save it, call `skill_propose`:
+- `name`, `description` and, for a new skill, if they want a nicer title in Settings, `display_name`;
+- `files`: each file's whole text at its path. For a change, list only the files that change; a file you do not list stays as it was, and `text: null` removes one.
 
-Then tell them it is saved, where it is (Settings, under Skills, in Yours), and how to use it: start a new chat and ask for the job in plain words, or type `/` and its name. A new chat matters: the skill runs from what is saved, which is not what this conversation still has in mind. Say that it is private to them.
+A new skill starts `automatic`, so Beacon may choose it when a request fits; its `SKILL.md` says `disable-model-invocation: true` when only the person's `/` should start it.
 
-## 6. If a save is refused
+`skill_propose` saves nothing. It shows the person a card with the skill on it, and they save it (or dismiss it) there. Then tell them to look over the skill on the card and press Save when it is right, and never say it is saved: you do not know that it is, and only their Save makes it. Once they have saved it, it is in Settings, under Skills, in Yours, and they use it by starting a new chat and asking for the job in plain words, or by typing `/` and its name. A new chat matters: the skill runs from what is saved, which is not what this conversation still has in mind. It is private to them.
+
+If they want it changed before they save, change the draft and propose it again: the new card replaces the earlier one, which can then no longer be saved.
+
+## 6. If a proposal is refused
 
 Read the reason, and act on it.
-- It does not meet the skill format (a missing field, a name that is not lowercase words with hyphens, a file where none is allowed): correct that and save again.
-- The skill changed since you read it (the person edited it in Settings, or another chat did): read it again with `plugin_read` (and the files you are changing, by path), make your change on what they hold now, and save again. Do not overwrite what you did not see.
+- It does not meet the skill format (a missing field, a name that is not lowercase words with hyphens, a file where none is allowed): correct that and propose again.
+- The skill changed since you read it (the person edited it in Settings, or another chat did): open it again with `read` (and the files you are changing, with `at` set to the path), make your change on what they hold now, and propose again. Do not overwrite what you did not see.
 - The name already belongs to something that is not theirs, or to a skill of theirs you have not read: choose another name, or read the one they have.
+- Their Save was refused because the skill changed after you proposed (they edited it in Settings meanwhile): open it again with `read`, make your change on what it holds now and propose it afresh. The old card is theirs to dismiss.
 
 ## 7. Changing a saved skill later
 
-Whenever they come back to change a skill, start again at step 1. Every save is a new version, so changing a skill is safe, and you never need to ask whether to keep the old one.
+Whenever they come back to change a skill, start again at step 1. Every saved change is a new version they can put back in Settings, so changing a skill is safe, and you never need to ask whether to keep the old one.
