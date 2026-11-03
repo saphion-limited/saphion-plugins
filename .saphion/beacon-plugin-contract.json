@@ -7028,25 +7028,6 @@
     "type": "object"
    }
   },
-  "person_read": {
-   "choices": {},
-   "doors": [
-    "routed"
-   ],
-   "family": "calendars",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "continuation_ref": {
-      "type": "string"
-     }
-    },
-    "required": [
-     "continuation_ref"
-    ],
-    "type": "object"
-   }
-  },
   "place_lookup": {
    "choices": {},
    "doors": [
