@@ -5,7 +5,8 @@ folder is one plugin (`.claude-plugin/plugin.json`, `skills/<name>/SKILL.md`, sc
 
 | Plugin | What it does |
 | --- | --- |
-| `saphion-documents` | Word and PDF files, spreadsheets and presentations, and documents inside Saphion |
+| `saphion-documents` | Built in: Word and PDF files, spreadsheets and presentations, and documents inside Saphion |
+| `deep-research` | Research a question across several sources and get a cited report with its sources |
 | `design` | Palette, type and layout for pages, dashboards and single-file apps |
 | `rams` | Risk assessments and method statements from an Organisation's own template |
 | `tenders` | A source-grounded tender response prepared from a tender pack |

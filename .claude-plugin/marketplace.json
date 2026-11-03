@@ -4,14 +4,24 @@
     "name": "Saphion"
   },
   "metadata": {
-    "description": "Saphion's own plugins for Beacon: documents and files, design, RAMS, tenders and the skill creator."
+    "description": "Saphion's own plugins for Beacon: documents and files, deep research, design, RAMS, tenders and the skill creator."
   },
   "plugins": [
+    {
+      "name": "deep-research",
+      "source": "./deep-research",
+      "description": "Research a question properly across many sources and get a cited report that takes a position.",
+      "version": "1.0.0",
+      "category": "Documents and files",
+      "author": {
+        "name": "Saphion"
+      }
+    },
     {
       "name": "design",
       "source": "./design",
       "description": "Palette, type and layout for pages and dashboards, and polished single-file apps for the side pane.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "Design",
       "author": {
         "name": "Saphion"
@@ -30,8 +40,8 @@
     {
       "name": "saphion-documents",
       "source": "./saphion-documents",
-      "description": "Word and PDF files, spreadsheets and presentations to download or send.",
-      "version": "1.1.4",
+      "description": "Word and PDF files, spreadsheets and presentations Beacon makes and edits by itself.",
+      "version": "1.2.0",
       "category": "Documents and files",
       "author": {
         "name": "Saphion"

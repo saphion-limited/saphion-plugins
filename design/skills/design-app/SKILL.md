@@ -1,6 +1,7 @@
 ---
 name: "design-app"
 description: "Polished single-file HTML apps and pages for the side pane, design included"
+user-invocable: false
 metadata:
   outcome: "A polished, substantial single-file HTML app or page for the side pane: designed for its subject, clear hierarchy, light and dark themes, every state, accessible, and honest about its data."
   not-outcomes: |-

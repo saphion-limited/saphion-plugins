@@ -1,0 +1,14 @@
+{
+  "name": "deep-research",
+  "displayName": "Deep research",
+  "version": "1.0.0",
+  "description": "Research a question properly across many sources and get a cited report that takes a position.",
+  "author": {
+    "name": "Saphion"
+  },
+  "category": "Documents and files",
+  "default": "on",
+  "featured": true,
+  "updatedAt": "2026-11-02T23:30:00Z",
+  "firstPublishedAt": "2026-11-02T23:30:00Z"
+}

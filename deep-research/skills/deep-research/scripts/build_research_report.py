@@ -12,7 +12,7 @@ It writes nothing, and names every fault, unless all of these hold:
 
 * a title (`# `), then the sections in `##` and `###`; no Sources section (the host adds it from what was cited);
 * every sentence of a finding carries a citation, and so does every list item, every body row of a table and every table cell that holds a
-  figure. The findings are every section except `Question`, `Method` and `What could not be established` (and what sits under them);
+  figure. The findings are every section except `Question`, `What this means`, `Method` and `What could not be established` (and what sits under them);
 * the findings cite at least one source: a report nothing was read for is not written.
 
 It never styles a file. It writes `<name>.docx.md`, the VERIFIED Markdown of the report, and `<name>-bundle.zip` holding that and
@@ -33,7 +33,7 @@ from collections import Counter
 OPEN, CLOSE = "\ue000", "\ue001"
 SOURCES_FILE = "cited_sources.json"
 #: Sections that state no finding. Their text still has no web address or link; it needs no citation.
-NO_FINDING = ("question", "method", "what could not be established")
+NO_FINDING = ("question", "what this means", "method", "what could not be established")
 RUN = re.compile(rf"((?:\s*{OPEN}\d+{CLOSE})+)|\*\*(.+?)\*\*|\*(.+?)\*")
 TOKEN = re.compile(rf"{OPEN}(\d+){CLOSE}")
 SENTENCE_END = re.compile(rf"(?<=[.!?])((?:\s*{OPEN}\d+{CLOSE})*)(?=\s|$)")

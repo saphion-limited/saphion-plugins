@@ -1,6 +1,7 @@
 ---
 name: "edit-word-document"
 description: "Change a Word (.docx) file the person supplied: a clause, comments or tracked changes, with everything else left as it was"
+user-invocable: false
 metadata:
   outcome: "A Word (.docx) file the person supplied, changed and returned: a clause reworded, comments added, changes tracked as a redline, with its styles, its own comments and its existing tracked changes intact."
   not-outcomes: |-

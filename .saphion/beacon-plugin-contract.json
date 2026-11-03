@@ -1,6 +1,11 @@
 {
  "bindings": [
   {
+   "command": "deep-research",
+   "plugin": "deep-research",
+   "scope": "platform"
+  },
+  {
    "command": "design",
    "plugin": "design",
    "scope": "platform"
@@ -48,11 +53,6 @@
   },
   {
    "command": "make-spreadsheet",
-   "plugin": "saphion-documents",
-   "scope": "platform"
-  },
-  {
-   "command": "research-report",
    "plugin": "saphion-documents",
    "scope": "platform"
   },

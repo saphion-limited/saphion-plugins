@@ -1,6 +1,7 @@
 ---
 name: "design"
 description: "Palette, type and layout for a Saphion page, dashboard or other visual work that no file or app skill covers"
+user-invocable: false
 metadata:
   outcome: "The visual design of a page, dashboard or other visual work that Saphion AI makes for people to look at, with a palette, type and layout chosen for its subject and audience, planned, built and critiqued."
   not-outcomes: |-

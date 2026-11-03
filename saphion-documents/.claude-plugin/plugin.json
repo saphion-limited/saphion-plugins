@@ -1,14 +1,14 @@
 {
   "name": "saphion-documents",
   "displayName": "Saphion documents",
-  "version": "1.1.4",
-  "description": "Word and PDF files, spreadsheets and presentations to download or send.",
+  "version": "1.2.0",
+  "description": "Word and PDF files, spreadsheets and presentations Beacon makes and edits by itself.",
   "author": {
     "name": "Saphion"
   },
   "category": "Documents and files",
   "default": "on",
-  "featured": true,
-  "updatedAt": "2026-11-02T22:00:00Z",
+  "featured": false,
+  "updatedAt": "2026-11-02T23:30:00Z",
   "firstPublishedAt": "2026-11-01T00:00:00Z"
 }

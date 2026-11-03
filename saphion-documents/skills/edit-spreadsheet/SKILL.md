@@ -1,6 +1,7 @@
 ---
 name: "edit-spreadsheet"
 description: "Change an Excel workbook the person supplied: add rows, change an input or add a summary, with its formulas, formatting and sheets kept"
+user-invocable: false
 metadata:
   outcome: "An Excel workbook (.xlsx) the person supplied, changed and returned: rows added, an input changed or a summary sheet added, with every formula kept and recalculated, and its formatting, named cells and sheets as they were."
   not-outcomes: |-

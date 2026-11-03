@@ -1,6 +1,7 @@
 ---
 name: "edit-pdf"
 description: "Fill in a PDF form, join PDFs into one, take pages out of a PDF or turn its pages"
+user-invocable: false
 metadata:
   outcome: "A PDF the person supplied, changed and returned: a form's fields filled in, several PDFs joined in the order asked, chosen pages taken out as their own files, or chosen pages turned, every output read back and looked at."
   not-outcomes: |-
