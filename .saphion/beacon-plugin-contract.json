@@ -2038,12 +2038,6 @@
     "type": "object"
    }
   },
-  "change_view": {
-   "doors": [
-    "beacon"
-   ],
-   "family": "host"
-  },
   "closing_question": {
    "choices": {},
    "doors": [
@@ -2258,38 +2252,6 @@
     "required": [
      "change"
     ],
-    "type": "object"
-   }
-  },
-  "conversation_search": {
-   "choices": {},
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "memory",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "continuation_ref": {
-      "type": "string"
-     },
-     "from_day": {
-      "default": "",
-      "type": "string"
-     },
-     "project_continuation_ref": {
-      "type": "string"
-     },
-     "query": {
-      "default": "",
-      "type": "string"
-     },
-     "to_day": {
-      "default": "",
-      "type": "string"
-     }
-    },
     "type": "object"
    }
   },
@@ -2850,12 +2812,6 @@
    }
   },
   "declare_scheduled_task_result": {
-   "doors": [
-    "beacon"
-   ],
-   "family": "host"
-  },
-  "do_on_screen": {
    "doors": [
     "beacon"
    ],
@@ -5116,104 +5072,41 @@
     "type": "object"
    }
   },
-  "legislation_read": {
-   "choices": {},
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "legislation",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "reference": {
-      "maxLength": 300,
-      "minLength": 3,
-      "type": "string"
-     }
-    },
-    "required": [
-     "reference"
-    ],
-    "type": "object"
-   }
-  },
-  "legislation_search": {
-   "choices": {
-    "legislation_type": [
-     "all",
-     "anaw",
-     "asc",
-     "asp",
-     "nia",
-     "nisr",
-     "primary",
-     "secondary",
-     "ssi",
-     "ukpga",
-     "uksi",
-     "wsi"
-    ],
-    "search_field": [
-     "text",
-     "title"
-    ]
-   },
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "legislation",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "include_revoked": {
-      "default": false,
-      "type": "boolean"
-     },
-     "legislation_type": {
-      "default": "all",
-      "enum": [
-       "all",
-       "primary",
-       "secondary",
-       "ukpga",
-       "uksi",
-       "asp",
-       "ssi",
-       "asc",
-       "anaw",
-       "wsi",
-       "nia",
-       "nisr"
-      ],
-      "type": "string"
-     },
-     "query": {
-      "maxLength": 200,
-      "minLength": 1,
-      "type": "string"
-     },
-     "search_field": {
-      "default": "text",
-      "enum": [
-       "text",
-       "title"
-      ],
-      "type": "string"
-     }
-    },
-    "required": [
-     "query"
-    ],
-    "type": "object"
-   }
-  },
   "load_skill": {
    "doors": [
     "beacon"
    ],
    "family": "host"
+  },
+  "memory_append": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "memory",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "if_version": {
+      "type": "string"
+     },
+     "text": {
+      "maxLength": 8000,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "if_version",
+     "text",
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
   },
   "memory_delete": {
    "choices": {},
@@ -5237,6 +5130,25 @@
     "type": "object"
    }
   },
+  "memory_list": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "memory",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "query": {
+      "default": "",
+      "maxLength": 400,
+      "type": "string"
+     }
+    },
+    "type": "object"
+   }
+  },
   "memory_read": {
    "choices": {},
    "doors": [
@@ -5256,7 +5168,7 @@
     "type": "object"
    }
   },
-  "memory_save": {
+  "memory_str_replace": {
    "choices": {},
    "doors": [
     "beacon",
@@ -5267,6 +5179,44 @@
     "additionalProperties": false,
     "properties": {
      "continuation_ref": {
+      "type": "string"
+     },
+     "if_version": {
+      "type": "string"
+     },
+     "new_text": {
+      "maxLength": 8000,
+      "type": "string"
+     },
+     "old_text": {
+      "maxLength": 8000,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "if_version",
+     "old_text",
+     "new_text",
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "memory_write": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "memory",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "if_version": {
       "type": "string"
      },
      "pinned": {
@@ -5288,25 +5238,9 @@
       "type": "string"
      }
     },
-    "type": "object"
-   }
-  },
-  "memory_search": {
-   "choices": {},
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "memory",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "query": {
-      "default": "",
-      "maxLength": 400,
-      "type": "string"
-     }
-    },
+    "required": [
+     "if_version"
+    ],
     "type": "object"
    }
   },
@@ -8354,12 +8288,6 @@
    }
   },
   "read_skill_resource": {
-   "doors": [
-    "beacon"
-   ],
-   "family": "host"
-  },
-  "read_view": {
    "doors": [
     "beacon"
    ],
