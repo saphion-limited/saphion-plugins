@@ -2387,6 +2387,7 @@
      "create",
      "update",
      "widget_add",
+     "widget_add_preset",
      "widget_move",
      "widget_remove",
      "widget_update"
@@ -2539,31 +2540,10 @@
        },
        {
         "additionalProperties": false,
-        "allOf": [
-         {
-          "oneOf": [
-           {
-            "required": [
-             "from_preset"
-            ]
-           },
-           {
-            "required": [
-             "kind",
-             "title",
-             "settings"
-            ]
-           }
-          ]
-         }
-        ],
         "properties": {
          "act": {
           "const": "widget_add",
           "type": "string"
-         },
-         "from_preset": {
-          "$ref": "#/$defs/WidgetPresetStart"
          },
          "kind": {
           "$ref": "#/$defs/Identifier"
@@ -2582,6 +2562,34 @@
          }
         },
         "required": [
+         "kind",
+         "title",
+         "settings",
+         "act"
+        ],
+        "type": "object"
+       },
+       {
+        "additionalProperties": false,
+        "properties": {
+         "act": {
+          "const": "widget_add_preset",
+          "type": "string"
+         },
+         "from_preset": {
+          "$ref": "#/$defs/WidgetPresetStart"
+         },
+         "place": {
+          "$ref": "#/$defs/WidgetPlaceByReference"
+         },
+         "title": {
+          "maxLength": 160,
+          "minLength": 1,
+          "type": "string"
+         }
+        },
+        "required": [
+         "from_preset",
          "act"
         ],
         "type": "object"
@@ -4321,6 +4329,132 @@
   },
   "find": {
    "choices": {
+    "direction": [
+     "asc",
+     "desc"
+    ],
+    "kind": [
+     "any",
+     "archive",
+     "attachment",
+     "automation",
+     "bin",
+     "board",
+     "dashboard",
+     "document",
+     "file",
+     "form",
+     "generated_document",
+     "home",
+     "landing",
+     "person",
+     "project",
+     "run",
+     "scheduled_task",
+     "team",
+     "team_today"
+    ],
+    "product": [
+     "crm"
+    ]
+   },
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "codeact",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "by": {
+      "type": "string"
+     },
+     "day": {
+      "type": "string"
+     },
+     "kind": {
+      "enum": [
+       "any",
+       "archive",
+       "attachment",
+       "automation",
+       "bin",
+       "board",
+       "dashboard",
+       "document",
+       "file",
+       "form",
+       "generated_document",
+       "home",
+       "landing",
+       "person",
+       "project",
+       "run",
+       "scheduled_task",
+       "team",
+       "team_today"
+      ],
+      "type": "string"
+     },
+     "person_gives_work": {
+      "type": "boolean"
+     },
+     "product": {
+      "default": "",
+      "enum": [
+       "crm"
+      ],
+      "type": "string"
+     },
+     "project_counts": {
+      "type": "boolean"
+     },
+     "query": {
+      "default": "",
+      "maxLength": 500,
+      "type": "string"
+     },
+     "record_class": {
+      "maxLength": 170,
+      "type": "string"
+     },
+     "rule": {
+      "type": "string"
+     },
+     "sort": {
+      "additionalProperties": false,
+      "properties": {
+       "direction": {
+        "enum": [
+         "asc",
+         "desc"
+        ],
+        "type": "string"
+       },
+       "field": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "field"
+      ],
+      "type": "object"
+     },
+     "whose": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+     },
+     "within": {
+      "maxLength": 200,
+      "type": "string"
+     }
+    },
+    "type": "object"
+   }
+  },
+  "find_records": {
+   "choices": {
     "clock": [
      "now",
      "today"
@@ -4332,27 +4466,8 @@
     "kind": [
      "all",
      "any",
-     "archive",
-     "attachment",
-     "automation",
-     "bin",
-     "board",
      "condition",
-     "dashboard",
-     "document",
-     "file",
-     "form",
-     "generated_document",
-     "home",
-     "landing",
-     "not",
-     "person",
-     "project",
-     "record",
-     "run",
-     "scheduled_task",
-     "team",
-     "team_today"
+     "not"
     ],
     "operator": [
      "date_after",
@@ -4379,8 +4494,9 @@
     "person": [
      "current"
     ],
-    "product": [
-     "crm"
+    "state": [
+     "closed",
+     "open"
     ],
     "team": [
      "current"
@@ -4647,9 +4763,6 @@
     },
     "additionalProperties": false,
     "properties": {
-     "by": {
-      "type": "string"
-     },
      "columns": {
       "items": {
        "maxLength": 128,
@@ -4659,47 +4772,6 @@
       "maxItems": 24,
       "type": "array"
      },
-     "day": {
-      "type": "string"
-     },
-     "kind": {
-      "enum": [
-       "any",
-       "archive",
-       "attachment",
-       "automation",
-       "bin",
-       "board",
-       "dashboard",
-       "document",
-       "file",
-       "form",
-       "generated_document",
-       "home",
-       "landing",
-       "person",
-       "project",
-       "record",
-       "run",
-       "scheduled_task",
-       "team",
-       "team_today"
-      ],
-      "type": "string"
-     },
-     "person_gives_work": {
-      "type": "boolean"
-     },
-     "product": {
-      "default": "",
-      "enum": [
-       "crm"
-      ],
-      "type": "string"
-     },
-     "project_counts": {
-      "type": "boolean"
-     },
      "query": {
       "default": "",
       "maxLength": 500,
@@ -4707,9 +4779,6 @@
      },
      "record_class": {
       "maxLength": 170,
-      "type": "string"
-     },
-     "rule": {
       "type": "string"
      },
      "sort": {
@@ -4731,19 +4800,42 @@
       ],
       "type": "object"
      },
+     "state": {
+      "enum": [
+       "open",
+       "closed"
+      ],
+      "type": "string"
+     },
      "where": {
       "$ref": "#/$defs/SemanticFilterInput"
      },
      "whose": {
-      "maxLength": 256,
-      "minLength": 1,
-      "type": "string"
+      "anyOf": [
+       {
+        "enum": [
+         "mine",
+         "my_team",
+         "my_projects",
+         "anyone"
+        ],
+        "type": "string"
+       },
+       {
+        "maxLength": 256,
+        "minLength": 1,
+        "type": "string"
+       }
+      ]
      },
      "within": {
       "maxLength": 200,
       "type": "string"
      }
     },
+    "required": [
+     "record_class"
+    ],
     "type": "object"
    }
   },
@@ -6933,6 +7025,25 @@
       "type": "string"
      }
     },
+    "type": "object"
+   }
+  },
+  "person_read": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "calendars",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
     "type": "object"
    }
   },
@@ -9743,6 +9854,10 @@
     "person": [
      "current"
     ],
+    "state": [
+     "closed",
+     "open"
+    ],
     "team": [
      "current"
     ],
@@ -10053,8 +10168,18 @@
       ],
       "type": "object"
      },
+     "state": {
+      "enum": [
+       "open",
+       "closed"
+      ],
+      "type": "string"
+     },
      "where": {
       "$ref": "#/$defs/SemanticFilterInput"
+     },
+     "whose": {
+      "type": "string"
      },
      "within": {
       "maxLength": 200,
