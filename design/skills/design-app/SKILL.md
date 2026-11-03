@@ -14,14 +14,14 @@ metadata:
 
 You are making a polished single-file HTML app or page that opens in Saphion's side pane: a
 calculator, an explorer of figures, a timeline, a dashboard, a briefing page, a small tool. You
-make it with `generateSandboxedUi`. This procedure carries the design and the mechanics of a good
+make it with `app_change` (`create`). This procedure carries the design and the mechanics of a good
 one (section 3 is the look). A quick throwaway app does not need it; a person who asks for something polished, presentable or
 substantial does. A dashboard of the Organisation's data is built with the dashboard procedure beside this one: that carries the
 data, this carries the page.
 
-To change an app already made (here or in an earlier chat: `find` it, then `read` it), use `app_edit` for
-targeted changes or pass `replaces` for a rewrite. Never make a second copy. `read` with view `versions` lists the versions an app
-keeps and `app_edit` with `restore` puts one back.
+An app already made, here or in an earlier chat, is changed in place with `app_change`: `find` it, `read` it, then its `edit` takes `edits` for a small
+change and its `rewrite` the whole new `html`. A second copy is never the answer. `read` with view `versions` lists the versions an app keeps and
+the `restore` change puts one back. `app_delete` puts an app into the Bin once the person confirms.
 
 After each write the result carries a check report: the app was run as the pane runs it, its
 selects and tabs were used once, and what it raised (uncaught errors, console errors) and drew
@@ -121,8 +121,8 @@ What follows is what an app needs beyond that.
 
 An app that shows the Organisation's own figures declares sources and draws what the host reads for
 whoever has it open; the declaration format, the `saphionData` calls and their states are the host
-contract in the `generateSandboxedUi` description. Do the reads yourself first, with the acts you
-would normally use, to learn what comes back; then declare the same act and arguments and design the
+contract in the `app_change` description. Do the reads yourself first, with the `find` or `read` you
+would normally use, to learn what comes back; then declare the same call and arguments and design the
 drawing from what it returned.
 
 - **Per person.** Each viewer's read uses their access, so two people may see different rows or a
@@ -137,8 +137,8 @@ drawing from what it returned.
 - **Name everything.** A source reads as whoever opens the app, with no conversation behind it: name
   the Project or class it reads.
 - **Data that recurs is the app's own data.** A daily summary or a status you work out is not typed
-  into the app or regenerated: write entries with `app_data_write` (the same key replaces its entry;
-  use the date) and draw them newest first with their `written_at` as "as of". Design the app once;
+  into the app or regenerated: `set` entries with `app_data_change` (the same key replaces its entry;
+  use the date; `update` sets fields into one) and draw them newest first with their `written_at` as "as of". Design the app once;
   later turns and scheduled runs only write data.
 
 ## 6. The person's files
@@ -161,7 +161,7 @@ declared as the host contract describes; never write its bytes into the document
 ## 7. Dependencies
 
 The sandbox loads `three`, `d3`, `chart.js/auto` and `gsap` by bare name, and a scene helper
-(`saphion/scene3d`), as described with `generateSandboxedUi`. Fonts are the system's or any
+(`saphion/scene3d`), as described with `app_change`. Fonts are the system's or any
 Google Fonts family, loaded with a `<link>` and followed by a system fallback in the stack. Nothing
 else is available and nothing can be installed. Per-person settings (a best score, a
 preference) are kept with `saphionStorage`, never `localStorage`: Saphion keeps them for this person and this app, and

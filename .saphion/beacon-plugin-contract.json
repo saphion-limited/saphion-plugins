@@ -359,6 +359,386 @@
     "type": "object"
    }
   },
+  "app_change": {
+   "choices": {
+    "act": [
+     "create",
+     "edit",
+     "restore",
+     "rewrite"
+    ]
+   },
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "visualisations",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "change": {
+      "discriminator": {
+       "propertyName": "act"
+      },
+      "oneOf": [
+       {
+        "additionalProperties": false,
+        "properties": {
+         "act": {
+          "const": "create",
+          "type": "string"
+         },
+         "html": {
+          "type": "string"
+         },
+         "title": {
+          "maxLength": 150,
+          "type": "string"
+         }
+        },
+        "required": [
+         "title",
+         "html",
+         "act"
+        ],
+        "type": "object"
+       },
+       {
+        "additionalProperties": false,
+        "properties": {
+         "act": {
+          "const": "edit",
+          "type": "string"
+         },
+         "edits": {
+          "items": {
+           "additionalProperties": false,
+           "properties": {
+            "new": {
+             "type": "string"
+            },
+            "old": {
+             "minLength": 1,
+             "type": "string"
+            }
+           },
+           "required": [
+            "old",
+            "new"
+           ],
+           "type": "object"
+          },
+          "maxItems": 50,
+          "minItems": 1,
+          "type": "array"
+         }
+        },
+        "required": [
+         "edits",
+         "act"
+        ],
+        "type": "object"
+       },
+       {
+        "additionalProperties": false,
+        "properties": {
+         "act": {
+          "const": "rewrite",
+          "type": "string"
+         },
+         "html": {
+          "type": "string"
+         },
+         "title": {
+          "maxLength": 150,
+          "type": "string"
+         }
+        },
+        "required": [
+         "html",
+         "act"
+        ],
+        "type": "object"
+       },
+       {
+        "additionalProperties": false,
+        "properties": {
+         "act": {
+          "const": "restore",
+          "type": "string"
+         },
+         "version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+         }
+        },
+        "required": [
+         "version",
+         "act"
+        ],
+        "type": "object"
+       }
+      ]
+     },
+     "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "change"
+    ],
+    "type": "object"
+   }
+  },
+  "app_data_change": {
+   "choices": {
+    "act": [
+     "batch",
+     "delete",
+     "set",
+     "update"
+    ],
+    "do": [
+     "delete",
+     "set",
+     "update"
+    ]
+   },
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "visualisations",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "change": {
+      "discriminator": {
+       "propertyName": "act"
+      },
+      "oneOf": [
+       {
+        "additionalProperties": false,
+        "properties": {
+         "act": {
+          "const": "set",
+          "type": "string"
+         },
+         "collection": {
+          "maxLength": 40,
+          "minLength": 1,
+          "type": "string"
+         },
+         "key": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+         },
+         "value": {
+          "additionalProperties": true,
+          "type": "object"
+         }
+        },
+        "required": [
+         "collection",
+         "key",
+         "value",
+         "act"
+        ],
+        "type": "object"
+       },
+       {
+        "additionalProperties": false,
+        "properties": {
+         "act": {
+          "const": "update",
+          "type": "string"
+         },
+         "collection": {
+          "maxLength": 40,
+          "minLength": 1,
+          "type": "string"
+         },
+         "key": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+         },
+         "value": {
+          "additionalProperties": true,
+          "minProperties": 1,
+          "type": "object"
+         }
+        },
+        "required": [
+         "collection",
+         "key",
+         "value",
+         "act"
+        ],
+        "type": "object"
+       },
+       {
+        "additionalProperties": false,
+        "properties": {
+         "act": {
+          "const": "delete",
+          "type": "string"
+         },
+         "collection": {
+          "maxLength": 40,
+          "minLength": 1,
+          "type": "string"
+         },
+         "key": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+         }
+        },
+        "required": [
+         "collection",
+         "key",
+         "act"
+        ],
+        "type": "object"
+       },
+       {
+        "additionalProperties": false,
+        "properties": {
+         "act": {
+          "const": "batch",
+          "type": "string"
+         },
+         "operations": {
+          "items": {
+           "discriminator": {
+            "propertyName": "do"
+           },
+           "oneOf": [
+            {
+             "additionalProperties": false,
+             "properties": {
+              "collection": {
+               "maxLength": 40,
+               "minLength": 1,
+               "type": "string"
+              },
+              "do": {
+               "const": "set",
+               "type": "string"
+              },
+              "key": {
+               "maxLength": 200,
+               "minLength": 1,
+               "type": "string"
+              },
+              "value": {
+               "additionalProperties": true,
+               "type": "object"
+              }
+             },
+             "required": [
+              "do",
+              "collection",
+              "key",
+              "value"
+             ],
+             "type": "object"
+            },
+            {
+             "additionalProperties": false,
+             "properties": {
+              "collection": {
+               "maxLength": 40,
+               "minLength": 1,
+               "type": "string"
+              },
+              "do": {
+               "const": "update",
+               "type": "string"
+              },
+              "key": {
+               "maxLength": 200,
+               "minLength": 1,
+               "type": "string"
+              },
+              "value": {
+               "additionalProperties": true,
+               "minProperties": 1,
+               "type": "object"
+              }
+             },
+             "required": [
+              "do",
+              "collection",
+              "key",
+              "value"
+             ],
+             "type": "object"
+            },
+            {
+             "additionalProperties": false,
+             "properties": {
+              "collection": {
+               "maxLength": 40,
+               "minLength": 1,
+               "type": "string"
+              },
+              "do": {
+               "const": "delete",
+               "type": "string"
+              },
+              "key": {
+               "maxLength": 200,
+               "minLength": 1,
+               "type": "string"
+              }
+             },
+             "required": [
+              "do",
+              "collection",
+              "key"
+             ],
+             "type": "object"
+            }
+           ]
+          },
+          "maxItems": 50,
+          "minItems": 1,
+          "type": "array"
+         }
+        },
+        "required": [
+         "operations",
+         "act"
+        ],
+        "type": "object"
+       }
+      ]
+     },
+     "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "change",
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "app_data_read": {
    "choices": {},
    "doors": [
@@ -375,81 +755,25 @@
      },
      "continuation_ref": {
       "type": "string"
-     }
-    },
-    "required": [
-     "continuation_ref"
-    ],
-    "type": "object"
-   }
-  },
-  "app_data_write": {
-   "choices": {},
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "visualisations",
-   "schema": {
-    "additionalProperties": false,
-    "allOf": [
-     {
-      "oneOf": [
-       {
-        "required": [
-         "value"
-        ]
-       },
-       {
-        "properties": {
-         "remove": {
-          "const": true
-         }
-        },
-        "required": [
-         "remove"
-        ]
-       }
-      ]
-     }
-    ],
-    "properties": {
-     "collection": {
-      "maxLength": 40,
-      "minLength": 1,
-      "type": "string"
-     },
-     "continuation_ref": {
-      "type": "string"
-     },
-     "description": {
-      "maxLength": 240,
-      "minLength": 1,
-      "type": "string"
      },
      "key": {
       "maxLength": 200,
       "minLength": 1,
       "type": "string"
      },
-     "remove": {
-      "default": false,
-      "type": "boolean"
-     },
-     "value": {
-      "additionalProperties": true,
-      "type": "object"
+     "text": {
+      "maxLength": 400,
+      "minLength": 1,
+      "type": "string"
      }
     },
     "required": [
-     "collection",
-     "key",
      "continuation_ref"
     ],
     "type": "object"
    }
   },
-  "app_edit": {
+  "app_delete": {
    "choices": {},
    "doors": [
     "beacon"
@@ -457,60 +781,8 @@
    "family": "visualisations",
    "schema": {
     "additionalProperties": false,
-    "allOf": [
-     {
-      "oneOf": [
-       {
-        "properties": {
-         "edits": {
-          "minItems": 1
-         }
-        },
-        "required": [
-         "edits"
-        ]
-       },
-       {
-        "required": [
-         "restore"
-        ]
-       }
-      ]
-     }
-    ],
     "properties": {
      "continuation_ref": {
-      "type": "string"
-     },
-     "description": {
-      "maxLength": 240,
-      "minLength": 1,
-      "type": "string"
-     },
-     "edits": {
-      "items": {
-       "additionalProperties": false,
-       "properties": {
-        "new": {
-         "type": "string"
-        },
-        "old": {
-         "minLength": 1,
-         "type": "string"
-        }
-       },
-       "required": [
-        "old",
-        "new"
-       ],
-       "type": "object"
-      },
-      "maxItems": 50,
-      "type": "array"
-     },
-     "restore": {
-      "maxLength": 64,
-      "minLength": 1,
       "type": "string"
      }
     },
@@ -653,18 +925,6 @@
      "lead_in",
      "decisions"
     ],
-    "type": "object"
-   }
-  },
-  "attachment_list": {
-   "choices": {},
-   "doors": [
-    "routed"
-   ],
-   "family": "conversation_attachments",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {},
     "type": "object"
    }
   },
@@ -3458,7 +3718,6 @@
      "all",
      "any",
      "archive",
-     "attachment",
      "automation",
      "bin",
      "board",
@@ -3474,8 +3733,7 @@
      "record",
      "run",
      "scheduled_task",
-     "team",
-     "team_today"
+     "team"
     ],
     "operator": [
      "date_after",
@@ -3789,7 +4047,6 @@
       "enum": [
        "any",
        "archive",
-       "attachment",
        "automation",
        "bin",
        "board",
@@ -3803,8 +4060,7 @@
        "record",
        "run",
        "scheduled_task",
-       "team",
-       "team_today"
+       "team"
       ],
       "type": "string"
      },
@@ -3852,6 +4108,9 @@
       ],
       "type": "object"
      },
+     "team_today": {
+      "type": "boolean"
+     },
      "where": {
       "$ref": "#/$defs/SemanticFilterInput"
      },
@@ -3882,6 +4141,11 @@
    "schema": {
     "additionalProperties": false,
     "properties": {
+     "held_by": {
+      "default": "",
+      "maxLength": 64,
+      "type": "string"
+     },
      "kind": {
       "maxLength": 64,
       "type": "string"
@@ -4018,39 +4282,6 @@
     },
     "required": [
      "change"
-    ],
-    "type": "object"
-   }
-  },
-  "generateSandboxedUi": {
-   "choices": {},
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "visualisations",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "description": {
-      "maxLength": 240,
-      "minLength": 1,
-      "type": "string"
-     },
-     "html": {
-      "type": "string"
-     },
-     "replaces_continuation_ref": {
-      "type": "string"
-     },
-     "title": {
-      "maxLength": 150,
-      "type": "string"
-     }
-    },
-    "required": [
-     "title",
-     "html"
     ],
     "type": "object"
    }
