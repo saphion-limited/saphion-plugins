@@ -22,7 +22,7 @@ data, this carries the page.
 
 An app already made, here or in an earlier chat, is changed in place with `app_change`: `find` it, `read` it, then its `edit` takes `edits` for a small
 change and its `rewrite` the whole new `html`. A second copy is never the answer. `read` with view `versions` lists the versions an app keeps and
-the `restore` change puts one back. The `delete` change puts an app into the Bin once the person confirms.
+the `restore` change puts one back. The `delete` change puts an app into the Bin at once, and the person can restore it.
 
 After each write the result carries a check report: the app was run as the pane runs it, its
 selects and tabs were used once, and what it raised (uncaught errors, console errors) and drew
