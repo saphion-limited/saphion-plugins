@@ -1,6 +1,6 @@
 ---
 name: "write-document"
-description: "A document that lives inside Saphion: the default when someone asks for a document and names no file format"
+description: "A document that lives inside Saphion: the default when someone asks for a document and names no file format. For a document: call document_change create first, alone, before any search; then read document_guide."
 user-invocable: false
 metadata:
   outcome: "A document that lives in Saphion, written or changed: outlined first, filled one section at a time, edited in place without overwriting the person's own changes, and answered in its comment threads."
