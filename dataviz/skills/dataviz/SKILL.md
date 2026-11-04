@@ -116,7 +116,7 @@ tokens. Say so, and never claim more than the report shows.
 
 ## Non-negotiables
 
-- One y-axis. Two scales on one plot invent a link between the series: draw two charts, or index both to 100 on one axis.
+- One y-axis. Two scales on one plot suggest a link between the series: draw two charts, or index both to 100 on one axis.
 - Colour follows the entity: a series keeps its colour when others are filtered out.
 - Never a rainbow, never a ramp on nominal categories, never a hue past the palette's seven.
 - Status colours are reserved for a state, with an icon and a word.
