@@ -31,7 +31,7 @@ response identity. The Document holds the questions and answers; there is no sep
 questionnaire or drafting record.
 
 Draft the Overview and narrative answers directly into the Document through read
-and document_change (act edit). Use relevant current Project material, the files the person can open,
+and document_change (act edit; document_guide, topics index and editing, says how). Use relevant current Project material, the files the person can open,
 feedback and guidance. Record actual citations beside claims and make missing evidence,
 assumptions and contradictory evidence explicit. Keep within stated limits; supplier facts, signatures, prices and commercial figures come only from
 the evidence. Typed declarations, choices,
