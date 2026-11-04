@@ -8,6 +8,7 @@ metadata:
     Write the text in the conversation.
     Prepare a RAMS held in the Risk and Method Statements product.
     Make a presentation or a spreadsheet.
+  hand-over-write-document: "A document asked for without naming a file format, even one to email or print: the write-document skill makes it in Saphion."
   hand-over-edit-word-document: "Change a Word file the person supplied, or add comments or tracked changes to any Word file."
   hand-over-edit-pdf: "Fill in, join, take pages out of or turn the pages of a PDF the person supplied."
 ---

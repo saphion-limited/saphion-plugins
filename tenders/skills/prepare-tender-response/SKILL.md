@@ -6,6 +6,7 @@ metadata:
   not-outcomes: |-
     Answer a general procurement question or summarise a document without preparing a response.
     Submit a bid to a buyer or approve answers on the person's behalf.
+    A Word or PDF document that is not a Tender response, or a document that lives in Saphion.
 ---
 <!-- SURFACE_REASON: the shipped skill that prepares a Bid's one tender response Document from its tender pack -->
 # Prepare a tender response

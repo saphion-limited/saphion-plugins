@@ -7,7 +7,7 @@ metadata:
   not-outcomes: |-
     Open, change or arrange a Dashboard the person already has: that is theirs to do in the Dashboard itself; Beacon finds and reads one but never changes it.
     A single figure, table or chart that belongs in the reply: say it, or use the chart card.
-    A designed page, calculator or explorer with no Organisation data.
+    A designed app, page, calculator or explorer with no Organisation data.
     A Word, PDF, PowerPoint or Excel file.
 ---
 <!-- SURFACE_REASON: procedure prompt asset for the dataviz skill, loaded into the model's skill instructions as the procedure for a dashboard made as an app -->

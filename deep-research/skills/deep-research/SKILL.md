@@ -7,6 +7,7 @@ metadata:
     Answer a single fact, date or figure that one search settles.
     Summarise or answer questions about a file the person supplied.
     Write a document from what the person already told you, with no research.
+    A Word document that is not the report of researched sources.
 ---
 <!-- SURFACE_REASON: procedure prompt asset and helper script for the research_report skill, loaded into the model's skill instructions for researching a question across sources and delivering a cited report -->
 # Deep research

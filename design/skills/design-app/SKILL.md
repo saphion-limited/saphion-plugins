@@ -7,6 +7,7 @@ metadata:
   not-outcomes: |-
     A quick or throwaway app, calculator or widget where no polish was asked for.
     Figures, tables, charts, records or places that Saphion already shows natively.
+    A dashboard of the Organisation's own data, which is built live from it.
     Make a Word, PDF, PowerPoint or Excel file.
 ---
 <!-- SURFACE_REASON: procedure prompt asset for the design_app skill, loaded into the model's skill instructions for polished single-file apps -->

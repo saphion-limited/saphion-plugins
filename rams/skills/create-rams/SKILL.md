@@ -6,6 +6,7 @@ metadata:
   not-outcomes: |-
     Provide an ordinary safety briefing, checklist, explanation or guidance.
     Draft ordinary chat content merely because its subject overlaps workplace safety.
+    A Word or PDF document that is not a RAMS, or a document that lives in Saphion.
 ---
 <!-- SURFACE_REASON: procedure prompt asset for the create_rams skill, loaded into the model's skill instructions for making a RAMS record and its Word document from the Organisation's own template -->
 # Create a RAMS
