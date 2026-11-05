@@ -41,7 +41,9 @@ discussed.* and, separately, any support that was agreed, said as the support an
 
 If the conversation turned into a disciplinary, grievance or capability matter (a warning, an allegation, a complaint, a performance
 procedure), open the recap with the line: *This is not the record of a formal disciplinary, grievance or capability meeting. Those need their
-own notice and written record (Acas Code of Practice).*
+own notice and written record (Acas Code of Practice).* Then leave the matter's detail out: not the wording of a warning, an allegation,
+a complaint, what either said about it, or any judgement of conduct or performance. Write only *A formal matter was raised; it is for the
+formal process.* in the section it came up in, and keep the rest of the check-in as usual.
 
 ## How it reads
 
