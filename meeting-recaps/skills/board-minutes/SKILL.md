@@ -6,7 +6,7 @@ metadata:
   outcome: "Formal minutes of one board or committee meeting from its transcript or notes, by agenda item, in impartial reported speech, recording what was decided and why, ready for the chair to approve and sign."
   not-outcomes: |-
     An informal recap or catch-up notes of a meeting.
-    A construction progress, design team or client meeting record.
+    A client meeting, project update or other meeting record that does not need formal minutes.
     Advice on company law or on how to run a board meeting.
 ---
 <!-- SURFACE_REASON: procedure prompt asset for the board_minutes skill, the formal board and committee minutes recap style, loaded into the recap of a Notetaker meeting and into a conversation that asks for board or committee minutes -->

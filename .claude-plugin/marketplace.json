@@ -40,8 +40,8 @@
     {
       "name": "meeting-recaps",
       "source": "./meeting-recaps",
-      "description": "Recap styles for meetings: a general recap, formal board and committee minutes, and progress, design team and client meetings.",
-      "version": "1.0.0",
+      "description": "Recap styles for meetings: a general recap, board and committee minutes, one-to-ones, project and team updates, client meetings, sales calls and interviews.",
+      "version": "2.0.0",
       "category": "Documents and files",
       "author": {
         "name": "Saphion"
@@ -50,8 +50,8 @@
     {
       "name": "rams",
       "source": "./rams",
-      "description": "Risk assessments and method statements made from your Organisation's own template.",
-      "version": "1.0.0",
+      "description": "Risk assessments and method statements written from your Organisation's own two Word templates and Hazard library.",
+      "version": "1.1.1",
       "category": "Bids and safety",
       "author": {
         "name": "Saphion"
