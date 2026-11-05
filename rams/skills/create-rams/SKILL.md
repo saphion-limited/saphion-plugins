@@ -52,7 +52,7 @@ aid: the job's arrangements within the Organisation's standing wording.
 
 - **Fixed parts:** the Organisation's standing wording, kept exactly as the template has it.
 - **Facts:** the author, the date, the company, the client, the site address, the nearest A&E. Saphion fills them.
-- **Site parts:** sign-on and signature lines, the dynamic risk assessment, revision rows: left blank, completed on site.
+- **By-hand parts:** sign-on and signature lines, the dynamic risk assessment, revision rows: left exactly as the template has them, completed by hand.
 - **A fact you were not given:** write `==to confirm==` with what is needed, never a guess.
 
 ## Review before you answer
@@ -65,7 +65,7 @@ Work through this list and fix what fails before answering:
 - [ ] The PPE ticked matches the hazards; the PPE labels are unchanged.
 - [ ] The method covers the whole scope, step by step, in order.
 - [ ] Library hazards are used word for word where they fit.
-- [ ] No fixed, fact or site part was written; every unknown fact is marked to confirm.
+- [ ] No fixed, fact or by-hand part was written; every unknown fact is marked to confirm.
 
 ## In a conversation
 
