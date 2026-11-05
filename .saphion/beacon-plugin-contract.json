@@ -21,6 +21,31 @@
    "scope": "platform"
   },
   {
+   "command": "board-minutes",
+   "plugin": "meeting-recaps",
+   "scope": "platform"
+  },
+  {
+   "command": "client-meeting",
+   "plugin": "meeting-recaps",
+   "scope": "platform"
+  },
+  {
+   "command": "design-team-meeting",
+   "plugin": "meeting-recaps",
+   "scope": "platform"
+  },
+  {
+   "command": "meeting-recap",
+   "plugin": "meeting-recaps",
+   "scope": "platform"
+  },
+  {
+   "command": "progress-meeting",
+   "plugin": "meeting-recaps",
+   "scope": "platform"
+  },
+  {
    "command": "create-rams",
    "plugin": "rams",
    "product": "rams",
