@@ -41,7 +41,7 @@
       "name": "meeting-recaps",
       "source": "./meeting-recaps",
       "description": "Recap styles for meetings: a general recap, board and committee minutes, one-to-ones, project and team updates, client meetings, sales calls and interviews.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "category": "Documents and files",
       "author": {
         "name": "Saphion"

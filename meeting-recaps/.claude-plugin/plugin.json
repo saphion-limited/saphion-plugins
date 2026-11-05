@@ -1,7 +1,7 @@
 {
   "name": "meeting-recaps",
   "displayName": "Meeting recaps",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Recap styles for meetings: a general recap, board and committee minutes, one-to-ones, project and team updates, client meetings, sales calls and interviews.",
   "author": {
     "name": "Saphion"
@@ -9,6 +9,6 @@
   "category": "Documents and files",
   "default": "on",
   "featured": false,
-  "updatedAt": "2026-11-05T22:15:22Z",
+  "updatedAt": "2026-11-05T22:50:22Z",
   "firstPublishedAt": "2026-11-05T13:43:14Z"
 }
