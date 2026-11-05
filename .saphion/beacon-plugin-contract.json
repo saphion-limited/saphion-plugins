@@ -1385,6 +1385,27 @@
         "continuation_ref"
        ]
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "test": {
+         "enum": [
+          "run_once"
+         ]
+        }
+       },
+       "required": [
+        "test"
+       ]
+      },
+      "then": {
+       "properties": {
+        "record_continuation_refs": {
+         "maxItems": 1
+        }
+       }
+      }
      }
     ],
     "properties": {
@@ -2639,12 +2660,10 @@
          "propertyNames": {
           "enum": [
            "kind",
-           "source_continuation_ref"
+           "board_continuation_ref",
+           "record_class"
           ]
-         },
-         "required": [
-          "source_continuation_ref"
-         ]
+         }
         }
        },
        {
@@ -2721,6 +2740,11 @@
        }
       ],
       "properties": {
+       "board_continuation_ref": {
+        "maxLength": 200,
+        "minLength": 1,
+        "type": "string"
+       },
        "connection_id": {
         "maxLength": 200,
         "minLength": 1,
@@ -2762,14 +2786,14 @@
         "minItems": 1,
         "type": "array"
        },
-       "selector": {
-        "additionalProperties": true,
-        "type": "object"
-       },
-       "source_continuation_ref": {
+       "record_class": {
         "maxLength": 200,
         "minLength": 1,
         "type": "string"
+       },
+       "selector": {
+        "additionalProperties": true,
+        "type": "object"
        }
       },
       "required": [
@@ -2794,6 +2818,9 @@
    "schema": {
     "additionalProperties": false,
     "properties": {
+     "board_continuation_ref": {
+      "type": "string"
+     },
      "connection_groups": {
       "items": {
        "additionalProperties": false,
@@ -2842,9 +2869,6 @@
      "resource_class": {
       "default": "",
       "maxLength": 200,
-      "type": "string"
-     },
-     "source_continuation_ref": {
       "type": "string"
      },
      "steps": {
@@ -3184,13 +3208,13 @@
        "propertyNames": {
         "enum": [
          "act",
-         "source_continuation_ref",
+         "kept_continuation_ref",
          "template_continuation_ref",
          "template_name"
         ]
        },
        "required": [
-        "source_continuation_ref"
+        "kept_continuation_ref"
        ]
       }
      },
@@ -3274,6 +3298,9 @@
      "into_continuation_ref": {
       "type": "string"
      },
+     "kept_continuation_ref": {
+      "type": "string"
+     },
      "name": {
       "maxLength": 120,
       "minLength": 1,
@@ -3304,9 +3331,6 @@
      },
      "section_id": {
       "$ref": "#/$defs/Identifier"
-     },
-     "source_continuation_ref": {
-      "type": "string"
      },
      "start_on": {
       "default": "",
@@ -3378,7 +3402,6 @@
      "any",
      "calendar",
      "condition",
-     "dashboard",
      "form",
      "kanban",
      "not",
@@ -4031,7 +4054,6 @@
      "kind": {
       "enum": [
        "table",
-       "dashboard",
        "kanban",
        "calendar",
        "timeline",
@@ -5045,6 +5067,7 @@
         "enum": [
          "act",
          "description",
+         "title",
          "continuation_ref",
          "operations",
          "put_back_previous"
@@ -5655,6 +5678,43 @@
     "type": "object"
    }
   },
+  "document_template_list": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "boards",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "query": {
+      "default": "",
+      "maxLength": 200,
+      "type": "string"
+     }
+    },
+    "type": "object"
+   }
+  },
+  "document_template_read": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "boards",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "execute_code": {
    "choices": {},
    "doors": [
@@ -6043,6 +6103,7 @@
      "condition",
      "dashboard",
      "document",
+     "document_template",
      "file",
      "form",
      "generated_document",
@@ -6511,6 +6572,7 @@
        "board",
        "dashboard",
        "document",
+       "document_template",
        "file",
        "form",
        "generated_document",
@@ -9091,7 +9153,18 @@
         "type": "string"
        },
        "description": {
-        "type": "string"
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "items": {
+           "additionalProperties": true,
+           "type": "object"
+          },
+          "type": "array"
+         }
+        ]
        },
        "fields": {
         "additionalProperties": {
@@ -9111,9 +9184,6 @@
        },
        "location": {
         "$ref": "#/$defs/ProjectLocationInput"
-       },
-       "phase": {
-        "type": "string"
        },
        "value": {
         "type": "number"
@@ -9229,7 +9299,18 @@
         "type": "string"
        },
        "description": {
-        "type": "string"
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "items": {
+           "additionalProperties": true,
+           "type": "object"
+          },
+          "type": "array"
+         }
+        ]
        },
        "fields": {
         "additionalProperties": {
@@ -9963,6 +10044,46 @@
    "family": "codeact",
    "schema": {
     "additionalProperties": false,
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "view": {
+         "enum": [
+          "search"
+         ]
+        }
+       },
+       "required": [
+        "view"
+       ]
+      },
+      "then": {
+       "required": [
+        "text"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "view": {
+         "enum": [
+          "block"
+         ]
+        }
+       },
+       "required": [
+        "view"
+       ]
+      },
+      "then": {
+       "required": [
+        "at"
+       ]
+      }
+     }
+    ],
     "properties": {
      "at": {
       "maxLength": 160,
@@ -11578,6 +11699,92 @@
    "family": "sharing",
    "schema": {
     "additionalProperties": false,
+    "allOf": [
+     {
+      "anyOf": [
+       {
+        "properties": {
+         "add_people_continuation_refs": {
+          "minItems": 1
+         }
+        },
+        "required": [
+         "add_people_continuation_refs"
+        ]
+       },
+       {
+        "properties": {
+         "add_teams_continuation_refs": {
+          "minItems": 1
+         }
+        },
+        "required": [
+         "add_teams_continuation_refs"
+        ]
+       },
+       {
+        "properties": {
+         "remove_people_continuation_refs": {
+          "minItems": 1
+         }
+        },
+        "required": [
+         "remove_people_continuation_refs"
+        ]
+       },
+       {
+        "properties": {
+         "remove_teams_continuation_refs": {
+          "minItems": 1
+         }
+        },
+        "required": [
+         "remove_teams_continuation_refs"
+        ]
+       },
+       {
+        "properties": {
+         "unfilled": {
+          "const": true
+         }
+        },
+        "required": [
+         "unfilled"
+        ]
+       }
+      ]
+     },
+     {
+      "if": {
+       "properties": {
+        "unfilled": {
+         "enum": [
+          true
+         ]
+        }
+       },
+       "required": [
+        "unfilled"
+       ]
+      },
+      "then": {
+       "properties": {
+        "add_people_continuation_refs": {
+         "maxItems": 0
+        },
+        "add_teams_continuation_refs": {
+         "maxItems": 0
+        },
+        "remove_people_continuation_refs": {
+         "maxItems": 0
+        },
+        "remove_teams_continuation_refs": {
+         "maxItems": 0
+        }
+       }
+      }
+     }
+    ],
     "properties": {
      "add_people_continuation_refs": {
       "items": {
@@ -12781,7 +12988,7 @@
             "schedule",
             "model",
             "effort",
-            "target_continuation_ref",
+            "task_target_continuation_ref",
             "notifications"
            ]
           }
@@ -12819,7 +13026,7 @@
           },
           {
            "required": [
-            "target_continuation_ref"
+            "task_target_continuation_ref"
            ]
           },
           {
@@ -12871,7 +13078,7 @@
      "schedule": {
       "$ref": "#/$defs/TaskSchedule"
      },
-     "target_continuation_ref": {
+     "task_target_continuation_ref": {
       "type": "string"
      }
     },
