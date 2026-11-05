@@ -69,6 +69,7 @@ Work through this list and fix what fails before answering:
 
 ## In a conversation
 
-A RAMS is written by Saphion's RAMS writer, never in chat, a file or a Document by you. Send the person to **New RAMS**
-in RAMS: they describe the job and may choose its Project. To change a RAMS that exists, it is an ordinary Document: open
+A RAMS is written by Saphion's RAMS writer, never in chat, a file or a Document by you, and you never start one: it is a paid
+write from the Organisation's RAMS pool, so only the person starts it, with **New RAMS** in RAMS. When asked for one, help them say the
+job (what, where, when, who, its Project) and send them to New RAMS to write it. To change a RAMS that exists, it is an ordinary Document: open
 it with `read` and edit it with `document_change`, following this procedure for what a RAMS holds.
