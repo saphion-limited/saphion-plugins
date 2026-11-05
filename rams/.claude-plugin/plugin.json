@@ -1,14 +1,14 @@
 {
   "name": "rams",
   "displayName": "RAMS",
-  "version": "1.0.0",
-  "description": "Risk assessments and method statements made from your Organisation's own template.",
+  "version": "1.1.0",
+  "description": "Risk assessments and method statements written from your Organisation's own two Word templates and Hazard library.",
   "author": {
     "name": "Saphion"
   },
   "category": "Bids and safety",
   "default": "on",
   "featured": false,
-  "updatedAt": "2026-11-01T00:00:00Z",
+  "updatedAt": "2026-11-05T18:20:24Z",
   "firstPublishedAt": "2026-11-01T00:00:00Z"
 }
