@@ -9,6 +9,7 @@ folder is one plugin (`.claude-plugin/plugin.json`, `skills/<name>/SKILL.md`, sc
 | `dataviz` | Ask for a dashboard and get an app: figures worked out in code from your own data |
 | `deep-research` | Research a question across several sources and get a cited report with its sources |
 | `design` | Palette, type and layout for pages and single-file apps |
+| `meeting-recaps` | Meeting recap styles: a general recap, board and committee minutes, progress, design team and client meetings |
 | `rams` | Risk assessments and method statements from an Organisation's own template |
 | `tenders` | A source-grounded tender response prepared from a tender pack |
 | `skill-creator` | Make or change your own skills by talking the job through with Beacon |

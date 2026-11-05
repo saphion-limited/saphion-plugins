@@ -4,7 +4,7 @@
     "name": "Saphion"
   },
   "metadata": {
-    "description": "Saphion's own plugins for Beacon: documents and files, deep research, design, RAMS, tenders and the skill creator."
+    "description": "Saphion's own plugins for Beacon: documents and files, deep research, design, RAMS, tenders, meeting recaps and the skill creator."
   },
   "plugins": [
     {
@@ -33,6 +33,16 @@
       "description": "Palette, type and layout for pages, and polished single-file apps for the side pane.",
       "version": "1.1.0",
       "category": "Design",
+      "author": {
+        "name": "Saphion"
+      }
+    },
+    {
+      "name": "meeting-recaps",
+      "source": "./meeting-recaps",
+      "description": "Recap styles for meetings: a general recap, formal board and committee minutes, and progress, design team and client meetings.",
+      "version": "1.0.0",
+      "category": "Documents and files",
       "author": {
         "name": "Saphion"
       }
