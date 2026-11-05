@@ -1,0 +1,14 @@
+{
+  "name": "meeting-recaps",
+  "displayName": "Meeting recaps",
+  "version": "1.0.0",
+  "description": "Recap styles for meetings: a general recap, formal board and committee minutes, and progress, design team and client meetings.",
+  "author": {
+    "name": "Saphion"
+  },
+  "category": "Documents and files",
+  "default": "on",
+  "featured": false,
+  "updatedAt": "2026-11-05T18:00:00Z",
+  "firstPublishedAt": "2026-11-05T18:00:00Z"
+}
