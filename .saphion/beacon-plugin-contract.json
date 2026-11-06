@@ -31,7 +31,7 @@
    "scope": "platform"
   },
   {
-   "command": "design-team-meeting",
+   "command": "interview",
    "plugin": "meeting-recaps",
    "scope": "platform"
   },
@@ -41,7 +41,17 @@
    "scope": "platform"
   },
   {
-   "command": "progress-meeting",
+   "command": "one-to-one-meeting",
+   "plugin": "meeting-recaps",
+   "scope": "platform"
+  },
+  {
+   "command": "project-team-update",
+   "plugin": "meeting-recaps",
+   "scope": "platform"
+  },
+  {
+   "command": "sales-call",
    "plugin": "meeting-recaps",
    "scope": "platform"
   },
@@ -1520,7 +1530,6 @@
      "independent_group",
      "on_schedule",
      "organisation",
-     "platform_event",
      "product",
      "product_event",
      "project",
@@ -2515,31 +2524,6 @@
           "event_key"
          ]
         }
-       },
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "enum": [
-            "platform_event"
-           ]
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "propertyNames": {
-          "enum": [
-           "kind",
-           "event_keys"
-          ]
-         },
-         "required": [
-          "event_keys"
-         ]
-        }
        }
       ],
       "properties": {
@@ -2572,14 +2556,6 @@
         "maxLength": 200,
         "minLength": 1,
         "type": "string"
-       },
-       "event_keys": {
-        "items": {
-         "type": "string"
-        },
-        "maxItems": 10,
-        "minItems": 1,
-        "type": "array"
        },
        "expected_class": {
         "pattern": "^[a-z][a-z0-9_]{0,63}$",
@@ -2622,7 +2598,6 @@
          "record_absent",
          "connection_event",
          "product_event",
-         "platform_event",
          "becomes_behind",
          "back_on_track"
         ],
@@ -5558,66 +5533,6 @@
     "type": "object"
    }
   },
-  "document_generate": {
-   "choices": {},
-   "doors": [
-    "beacon"
-   ],
-   "family": "documents",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "answers": {
-      "additionalProperties": {
-       "anyOf": [
-        {
-         "type": "string"
-        },
-        {
-         "type": "integer"
-        },
-        {
-         "type": "number"
-        },
-        {
-         "type": "boolean"
-        },
-        {
-         "items": {
-          "type": "string"
-         },
-         "type": "array"
-        }
-       ]
-      },
-      "type": "object"
-     },
-     "continuation_ref": {
-      "type": "string"
-     },
-     "description": {
-      "maxLength": 240,
-      "minLength": 1,
-      "type": "string"
-     },
-     "sections": {
-      "additionalProperties": {
-       "maxLength": 20000,
-       "type": "string"
-      },
-      "type": "object"
-     },
-     "template": {
-      "maxLength": 160,
-      "type": "string"
-     }
-    },
-    "required": [
-     "continuation_ref"
-    ],
-    "type": "object"
-   }
-  },
   "document_guide": {
    "choices": {},
    "doors": [
@@ -5653,7 +5568,7 @@
     "view": [
      "block",
      "comments",
-     "outline",
+     "document",
      "search",
      "since_rev"
     ]
@@ -5686,51 +5601,14 @@
       "type": "string"
      },
      "view": {
-      "default": "outline",
+      "default": "document",
       "enum": [
-       "outline",
+       "document",
        "since_rev",
        "block",
        "search",
        "comments"
       ],
-      "type": "string"
-     }
-    },
-    "required": [
-     "continuation_ref"
-    ],
-    "type": "object"
-   }
-  },
-  "document_template_list": {
-   "choices": {},
-   "doors": [
-    "routed"
-   ],
-   "family": "boards",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "query": {
-      "default": "",
-      "maxLength": 200,
-      "type": "string"
-     }
-    },
-    "type": "object"
-   }
-  },
-  "document_template_read": {
-   "choices": {},
-   "doors": [
-    "routed"
-   ],
-   "family": "boards",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "continuation_ref": {
       "type": "string"
      }
     },
@@ -6128,7 +6006,6 @@
      "condition",
      "dashboard",
      "document",
-     "document_template",
      "file",
      "form",
      "generated_document",
@@ -6597,7 +6474,6 @@
        "board",
        "dashboard",
        "document",
-       "document_template",
        "file",
        "form",
        "generated_document",
@@ -12312,8 +12188,7 @@
       "type": "array"
      },
      "limit": {
-      "default": 25,
-      "maximum": 100,
+      "maximum": 250,
       "minimum": 1,
       "type": "integer"
      },
