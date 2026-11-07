@@ -114,9 +114,10 @@
   }
  ],
  "ceilings": {
-  "package_bytes": 31457280,
+  "package_bytes": 30000000,
   "package_files": 200,
   "skill_body_characters": 20000,
+  "skill_compatibility_characters": 500,
   "skill_description_characters": 1024,
   "skill_name_characters": 64
  },
@@ -140,11 +141,14 @@
      "oldest"
     ],
     "product": [
-     "crm"
+     "crm",
+     "rams"
     ],
     "window": [
+     "last_30_days",
      "last_3_months",
      "last_7_days",
+     "last_90_days",
      "last_month",
      "this_financial_year",
      "this_month",
@@ -163,8 +167,17 @@
     "allOf": [
      {
       "if": {
-       "required": [
-        "reference"
+       "anyOf": [
+        {
+         "required": [
+          "reference"
+         ]
+        },
+        {
+         "required": [
+          "anchor_continuation_ref"
+         ]
+        }
        ]
       },
       "then": {
@@ -232,8 +245,17 @@
      {
       "if": {
        "not": {
-        "required": [
-         "reference"
+        "anyOf": [
+         {
+          "required": [
+           "reference"
+          ]
+         },
+         {
+          "required": [
+           "anchor_continuation_ref"
+          ]
+         }
         ]
        }
       },
@@ -252,11 +274,6 @@
          },
          {
           "required": [
-           "anchor_continuation_ref"
-          ]
-         },
-         {
-          "required": [
            "per_target"
           ]
          }
@@ -266,6 +283,11 @@
      },
      {
       "if": {
+       "not": {
+        "required": [
+         "anchor_continuation_ref"
+        ]
+       },
        "properties": {
         "with_changes": {
          "const": true
@@ -292,6 +314,11 @@
      },
      {
       "if": {
+       "not": {
+        "required": [
+         "anchor_continuation_ref"
+        ]
+       },
        "properties": {
         "reference": {
          "minItems": 2
@@ -342,8 +369,19 @@
      },
      {
       "if": {
+       "anyOf": [
+        {
+         "required": [
+          "reference"
+         ]
+        },
+        {
+         "required": [
+          "anchor_continuation_ref"
+         ]
+        }
+       ],
        "required": [
-        "reference",
         "limit"
        ]
       },
@@ -479,6 +517,7 @@
      "product": {
       "default": "",
       "enum": [
+       "rams",
        "crm"
       ],
       "type": "string"
@@ -505,6 +544,7 @@
         "comment.replied",
         "comment.edited",
         "comment.deleted",
+        "page.mentioned",
         "email.linked",
         "phase.changed",
         "review.requested",
@@ -517,6 +557,8 @@
         "scheduled_task.ran",
         "conversation.reminded",
         "conversation.reminder_failed",
+        "page.reminded",
+        "page.reminder_failed",
         "scheduled_task.run_opened",
         "automation.notified",
         "automation.run_needs_attention",
@@ -556,6 +598,7 @@
         "reminder.due_soon",
         "reminder.overdue",
         "plan.starts_late",
+        "plan.ready_to_start",
         "plan.replanned",
         "plan.cannot_fit",
         "reminder.request_chase",
@@ -620,6 +663,8 @@
        "this_quarter",
        "this_financial_year",
        "last_7_days",
+       "last_30_days",
+       "last_90_days",
        "last_3_months",
        "trailing_12_months"
       ],
@@ -1855,10 +1900,26 @@
            ]
           }
          }
+        },
+        {
+         "anyOf": [
+          {
+           "required": [
+            "continuation_ref"
+           ]
+          },
+          {
+           "properties": {
+            "steps": {
+             "minItems": 1
+            }
+           },
+           "required": [
+            "steps"
+           ]
+          }
+         ]
         }
-       ],
-       "required": [
-        "continuation_ref"
        ]
       }
      },
@@ -2657,6 +2718,18 @@
          ]
         },
         "then": {
+         "anyOf": [
+          {
+           "required": [
+            "board_continuation_ref"
+           ]
+          },
+          {
+           "required": [
+            "record_class"
+           ]
+          }
+         ],
          "propertyNames": {
           "enum": [
            "kind",
@@ -2960,8 +3033,7 @@
          "name",
          "record_class",
          "table_name",
-         "project_continuation_ref",
-         "private"
+         "project_continuation_ref"
         ]
        },
        "required": [
@@ -3125,13 +3197,13 @@
        "propertyNames": {
         "enum": [
          "act",
-         "project_continuation_ref",
          "board_continuation_ref",
-         "to_organisation"
+         "destination_continuation_ref"
         ]
        },
        "required": [
-        "board_continuation_ref"
+        "board_continuation_ref",
+        "destination_continuation_ref"
        ]
       }
      },
@@ -3181,13 +3253,13 @@
        "propertyNames": {
         "enum": [
          "act",
-         "board_continuation_ref",
          "start_on",
+         "template_continuation_ref",
          "into_continuation_ref"
         ]
        },
        "required": [
-        "board_continuation_ref"
+        "template_continuation_ref"
        ]
       }
      },
@@ -3205,11 +3277,26 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "not": {
+          "properties": {
+           "template_name": {
+            "minLength": 1
+           }
+          },
+          "required": [
+           "template_continuation_ref",
+           "template_name"
+          ]
+         }
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
-         "kept_continuation_ref",
          "template_continuation_ref",
+         "kept_continuation_ref",
          "template_name"
         ]
        },
@@ -3295,6 +3382,9 @@
      "board_continuation_ref": {
       "type": "string"
      },
+     "destination_continuation_ref": {
+      "type": "string"
+     },
      "into_continuation_ref": {
       "type": "string"
      },
@@ -3315,10 +3405,6 @@
       "maximum": 9007199254740991,
       "minimum": 0,
       "type": "integer"
-     },
-     "private": {
-      "const": true,
-      "type": "boolean"
      },
      "project_continuation_ref": {
       "type": "string"
@@ -3349,10 +3435,6 @@
       "default": "",
       "maxLength": 255,
       "type": "string"
-     },
-     "to_organisation": {
-      "const": true,
-      "type": "boolean"
      }
     },
     "required": [
@@ -3444,8 +3526,10 @@
      "current"
     ],
     "window": [
+     "last_30_days",
      "last_3_months",
      "last_7_days",
+     "last_90_days",
      "last_month",
      "last_quarter",
      "last_week",
@@ -3757,6 +3841,8 @@
                  "this_year",
                  "this_financial_year",
                  "last_7_days",
+                 "last_30_days",
+                 "last_90_days",
                  "last_3_months",
                  "trailing_12_months",
                  "next_days",
@@ -3911,7 +3997,6 @@
         ]
        },
        "required": [
-        "board_continuation_ref",
         "view_continuation_ref"
        ]
       }
@@ -3926,14 +4011,7 @@
       "type": "string"
      },
      "board_continuation_ref": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ]
+      "type": "string"
      },
      "config": {
       "properties": {
@@ -4072,19 +4150,11 @@
       "type": "boolean"
      },
      "view_continuation_ref": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ]
+      "type": "string"
      }
     },
     "required": [
-     "act",
-     "board_continuation_ref"
+     "act"
     ],
     "type": "object"
    }
@@ -4102,27 +4172,6 @@
    "family": "files",
    "schema": {
     "additionalProperties": false,
-    "allOf": [
-     {
-      "if": {
-       "required": [
-        "render_pages"
-       ]
-      },
-      "then": {
-       "properties": {
-        "checks": {
-         "contains": {
-          "const": "render_pages"
-         }
-        }
-       },
-       "required": [
-        "checks"
-       ]
-      }
-     }
-    ],
     "properties": {
      "checks": {
       "default": [],
@@ -4213,6 +4262,7 @@
   "calendar_read": {
    "choices": {
     "when": [
+     "last_30_days",
      "last_7_days",
      "last_month",
      "last_week",
@@ -4282,7 +4332,8 @@
        "last_month",
        "this_month",
        "next_month",
-       "last_7_days"
+       "last_7_days",
+       "last_30_days"
       ],
       "type": "string"
      }
@@ -4432,6 +4483,22 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "anyOf": [
+          {
+           "required": [
+            "continuation_ref"
+           ]
+          },
+          {
+           "required": [
+            "update_continuation_ref"
+           ]
+          }
+         ]
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -4440,10 +4507,7 @@
          "attachments",
          "update_continuation_ref"
         ]
-       },
-       "required": [
-        "continuation_ref"
-       ]
+       }
       }
      },
      {
@@ -4472,6 +4536,16 @@
            "required": [
             "block"
            ]
+          },
+          {
+           "properties": {
+            "whole_document": {
+             "const": true
+            }
+           },
+           "required": [
+            "whole_document"
+           ]
           }
          ]
         },
@@ -4481,6 +4555,20 @@
            "block"
           ]
          }
+        },
+        {
+         "anyOf": [
+          {
+           "required": [
+            "continuation_ref"
+           ]
+          },
+          {
+           "required": [
+            "thread"
+           ]
+          }
+         ]
         }
        ],
        "propertyNames": {
@@ -4490,12 +4578,10 @@
          "body",
          "thread",
          "block",
+         "whole_document",
          "quote"
         ]
-       },
-       "required": [
-        "continuation_ref"
-       ]
+       }
       }
      }
     ],
@@ -4542,11 +4628,701 @@
      },
      "update_continuation_ref": {
       "type": "string"
+     },
+     "whole_document": {
+      "const": true,
+      "type": "boolean"
      }
     },
     "required": [
      "act",
      "body"
+    ],
+    "type": "object"
+   }
+  },
+  "dashboard_change": {
+   "choices": {
+    "act": [
+     "card",
+     "create",
+     "write"
+    ],
+    "aggregation": [
+     "average",
+     "count",
+     "maximum",
+     "median",
+     "minimum",
+     "sum"
+    ],
+    "also_aggregation": [
+     "average",
+     "count",
+     "maximum",
+     "median",
+     "minimum",
+     "sum"
+    ],
+    "better": [
+     "down",
+     "up"
+    ],
+    "bucket": [
+     "day",
+     "month",
+     "quarter",
+     "week",
+     "year"
+    ],
+    "edit": [
+     "add",
+     "change",
+     "remove"
+    ],
+    "kind": [
+     "bars",
+     "budget",
+     "donut",
+     "figure",
+     "funnel",
+     "grid",
+     "heatmap",
+     "lines",
+     "matrix",
+     "progress",
+     "radar",
+     "radial",
+     "rank",
+     "scatter",
+     "shares",
+     "splitrows",
+     "statuslist",
+     "table",
+     "waterfall"
+    ],
+    "operator": [
+     "date_after",
+     "date_before",
+     "date_on",
+     "date_within",
+     "empty",
+     "is",
+     "is_not",
+     "none_of",
+     "not_empty",
+     "numeric_between",
+     "numeric_eq",
+     "numeric_gt",
+     "numeric_gte",
+     "numeric_lt",
+     "numeric_lte",
+     "one_of",
+     "text_contains",
+     "text_ends_with",
+     "text_not_contains",
+     "text_starts_with"
+    ],
+    "period": [
+     "dashboard",
+     "none",
+     "own"
+    ],
+    "show": [
+     "share",
+     "value"
+    ],
+    "sort_direction": [
+     "ascending",
+     "descending"
+    ],
+    "spark": [
+     "area",
+     "bar",
+     "line"
+    ],
+    "spark_at": [
+     "below",
+     "inline"
+    ],
+    "trend_window": [
+     "",
+     "last_30_days",
+     "last_3_months",
+     "last_7_days",
+     "last_90_days",
+     "last_month",
+     "this_financial_year",
+     "this_month",
+     "this_quarter",
+     "this_week",
+     "trailing_12_months"
+    ],
+    "window": [
+     "",
+     "last_30_days",
+     "last_3_months",
+     "last_7_days",
+     "last_90_days",
+     "last_month",
+     "this_financial_year",
+     "this_month",
+     "this_quarter",
+     "this_week",
+     "trailing_12_months"
+    ]
+   },
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "dashboards",
+   "schema": {
+    "$defs": {
+     "CardCondition": {
+      "additionalProperties": false,
+      "properties": {
+       "field": {
+        "maxLength": 128,
+        "minLength": 1,
+        "type": "string"
+       },
+       "operator": {
+        "enum": [
+         "is",
+         "is_not",
+         "one_of",
+         "none_of",
+         "numeric_eq",
+         "numeric_gt",
+         "numeric_gte",
+         "numeric_lt",
+         "numeric_lte",
+         "numeric_between",
+         "text_contains",
+         "text_not_contains",
+         "text_starts_with",
+         "text_ends_with",
+         "date_on",
+         "date_before",
+         "date_after",
+         "date_within",
+         "empty",
+         "not_empty"
+        ],
+        "type": "string"
+       },
+       "value": {}
+      },
+      "required": [
+       "field",
+       "operator",
+       "value"
+      ],
+      "type": "object"
+     }
+    },
+    "additionalProperties": false,
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "create"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "name",
+         "project_continuation_ref",
+         "program"
+        ]
+       },
+       "required": [
+        "name"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "write"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "program",
+         "continuation_ref"
+        ]
+       },
+       "required": [
+        "continuation_ref",
+        "program"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "card"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "allOf": [
+        {
+         "if": {
+          "properties": {
+           "edit": {
+            "enum": [
+             "add"
+            ]
+           }
+          },
+          "required": [
+           "edit"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "card"
+            ]
+           }
+          },
+          "required": [
+           "settings"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "edit": {
+            "enum": [
+             "change"
+            ]
+           }
+          },
+          "required": [
+           "edit"
+          ]
+         },
+         "then": {
+          "required": [
+           "card",
+           "settings"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "edit": {
+            "enum": [
+             "remove"
+            ]
+           }
+          },
+          "required": [
+           "edit"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "settings"
+            ]
+           }
+          },
+          "required": [
+           "card"
+          ]
+         }
+        }
+       ],
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref",
+         "edit",
+         "card",
+         "settings"
+        ]
+       },
+       "required": [
+        "continuation_ref",
+        "edit"
+       ]
+      }
+     }
+    ],
+    "properties": {
+     "act": {
+      "enum": [
+       "create",
+       "write",
+       "card"
+      ],
+      "type": "string"
+     },
+     "card": {
+      "maxLength": 128,
+      "minLength": 1,
+      "type": "string"
+     },
+     "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "edit": {
+      "enum": [
+       "add",
+       "change",
+       "remove"
+      ],
+      "type": "string"
+     },
+     "name": {
+      "maxLength": 120,
+      "minLength": 1,
+      "type": "string"
+     },
+     "program": {
+      "maxLength": 200000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "settings": {
+      "additionalProperties": false,
+      "properties": {
+       "aggregation": {
+        "enum": [
+         "count",
+         "sum",
+         "average",
+         "median",
+         "minimum",
+         "maximum"
+        ],
+        "type": "string"
+       },
+       "also_aggregation": {
+        "enum": [
+         "count",
+         "sum",
+         "average",
+         "median",
+         "minimum",
+         "maximum"
+        ],
+        "type": "string"
+       },
+       "also_conditions": {
+        "items": {
+         "$ref": "#/$defs/CardCondition"
+        },
+        "type": "array"
+       },
+       "also_date_field": {
+        "type": "string"
+       },
+       "also_label": {
+        "type": "string"
+       },
+       "also_measure": {
+        "type": "string"
+       },
+       "better": {
+        "enum": [
+         "up",
+         "down"
+        ],
+        "type": "string"
+       },
+       "bucket": {
+        "enum": [
+         "day",
+         "week",
+         "month",
+         "quarter",
+         "year"
+        ],
+        "type": "string"
+       },
+       "choice": {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       "conditions": {
+        "items": {
+         "$ref": "#/$defs/CardCondition"
+        },
+        "type": "array"
+       },
+       "date_field": {
+        "type": "string"
+       },
+       "done_field": {
+        "type": "string"
+       },
+       "done_value": {
+        "type": "string"
+       },
+       "fields": {
+        "items": {
+         "type": "string"
+        },
+        "type": "array"
+       },
+       "footer": {
+        "type": "string"
+       },
+       "group_by": {
+        "items": {
+         "type": "string"
+        },
+        "type": "array"
+       },
+       "groups": {
+        "maximum": 100,
+        "minimum": 1,
+        "type": "integer"
+       },
+       "icon": {
+        "type": "string"
+       },
+       "in_": {
+        "additionalProperties": {
+         "type": "string"
+        },
+        "type": "object"
+       },
+       "kind": {
+        "enum": [
+         "figure",
+         "bars",
+         "funnel",
+         "rank",
+         "grid",
+         "budget",
+         "lines",
+         "donut",
+         "shares",
+         "splitrows",
+         "heatmap",
+         "progress",
+         "table",
+         "statuslist",
+         "radial",
+         "matrix",
+         "radar",
+         "scatter",
+         "waterfall"
+        ],
+        "type": "string"
+       },
+       "label": {
+        "type": "string"
+       },
+       "limit": {
+        "maximum": 100,
+        "minimum": 1,
+        "type": "integer"
+       },
+       "measure": {
+        "type": "string"
+       },
+       "palette": {
+        "type": "string"
+       },
+       "period": {
+        "enum": [
+         "dashboard",
+         "own",
+         "none"
+        ],
+        "type": "string"
+       },
+       "planned_measure": {
+        "type": "string"
+       },
+       "segments": {
+        "items": {
+         "type": "string"
+        },
+        "type": "array"
+       },
+       "show": {
+        "enum": [
+         "value",
+         "share"
+        ],
+        "type": "string"
+       },
+       "sort_direction": {
+        "enum": [
+         "ascending",
+         "descending"
+        ],
+        "type": "string"
+       },
+       "sort_field": {
+        "type": "string"
+       },
+       "source": {
+        "type": "string"
+       },
+       "spark": {
+        "enum": [
+         "line",
+         "bar",
+         "area"
+        ],
+        "type": "string"
+       },
+       "spark_at": {
+        "enum": [
+         "inline",
+         "below"
+        ],
+        "type": "string"
+       },
+       "target": {
+        "type": "string"
+       },
+       "tinted": {
+        "type": "boolean"
+       },
+       "title": {
+        "type": "string"
+       },
+       "tone": {
+        "type": "string"
+       },
+       "trend": {
+        "type": "boolean"
+       },
+       "trend_window": {
+        "enum": [
+         "",
+         "this_week",
+         "last_month",
+         "this_month",
+         "this_quarter",
+         "this_financial_year",
+         "last_7_days",
+         "last_30_days",
+         "last_90_days",
+         "last_3_months",
+         "trailing_12_months"
+        ],
+        "type": "string"
+       },
+       "window": {
+        "enum": [
+         "",
+         "this_week",
+         "last_month",
+         "this_month",
+         "this_quarter",
+         "this_financial_year",
+         "last_7_days",
+         "last_30_days",
+         "last_90_days",
+         "last_3_months",
+         "trailing_12_months"
+        ],
+        "type": "string"
+       },
+       "x_label": {
+        "type": "string"
+       },
+       "y_label": {
+        "type": "string"
+       }
+      },
+      "type": "object"
+     }
+    },
+    "required": [
+     "act"
+    ],
+    "type": "object"
+   }
+  },
+  "dashboard_guide": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "dashboards",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "items": {
+      "items": {
+       "enum": [
+        "index",
+        "language",
+        "vocabulary",
+        "recipes",
+        "recipe:Sales pipeline",
+        "recipe:Pipeline changes",
+        "recipe:Project delivery",
+        "recipe:Delivery performance",
+        "recipe:Team workload",
+        "recipe:Bids and targets",
+        "recipe:Project portfolio",
+        "data"
+       ],
+       "type": "string"
+      },
+      "minItems": 1,
+      "type": "array"
+     }
+    },
+    "required": [
+     "items"
     ],
     "type": "object"
    }
@@ -4684,6 +5460,20 @@
         "list_name"
        ]
       }
+     },
+     {
+      "anyOf": [
+       {
+        "required": [
+         "resource_class"
+        ]
+       },
+       {
+        "required": [
+         "record_set_continuation_ref"
+        ]
+       }
+      ]
      }
     ],
     "properties": {
@@ -4738,9 +5528,6 @@
       "type": "string"
      }
     },
-    "required": [
-     "resource_class"
-    ],
     "type": "object"
    }
   },
@@ -4796,6 +5583,33 @@
      "edit",
      "from_questionnaire"
     ],
+    "aggregation": [
+     "average",
+     "count",
+     "maximum",
+     "median",
+     "minimum",
+     "sum"
+    ],
+    "also_aggregation": [
+     "average",
+     "count",
+     "maximum",
+     "median",
+     "minimum",
+     "sum"
+    ],
+    "better": [
+     "down",
+     "up"
+    ],
+    "bucket": [
+     "day",
+     "month",
+     "quarter",
+     "week",
+     "year"
+    ],
     "control": [
      "address",
      "artefact_only",
@@ -4813,6 +5627,27 @@
      "textarea",
      "url"
     ],
+    "kind": [
+     "bars",
+     "budget",
+     "donut",
+     "figure",
+     "funnel",
+     "grid",
+     "heatmap",
+     "lines",
+     "matrix",
+     "progress",
+     "radar",
+     "radial",
+     "rank",
+     "scatter",
+     "shares",
+     "splitrows",
+     "statuslist",
+     "table",
+     "waterfall"
+    ],
     "op": [
      "delete",
      "insert",
@@ -4820,6 +5655,76 @@
      "replace",
      "replace_section",
      "set"
+    ],
+    "operator": [
+     "date_after",
+     "date_before",
+     "date_on",
+     "date_within",
+     "empty",
+     "is",
+     "is_not",
+     "none_of",
+     "not_empty",
+     "numeric_between",
+     "numeric_eq",
+     "numeric_gt",
+     "numeric_gte",
+     "numeric_lt",
+     "numeric_lte",
+     "one_of",
+     "text_contains",
+     "text_ends_with",
+     "text_not_contains",
+     "text_starts_with"
+    ],
+    "period": [
+     "dashboard",
+     "none",
+     "own"
+    ],
+    "show": [
+     "share",
+     "value"
+    ],
+    "sort_direction": [
+     "ascending",
+     "descending"
+    ],
+    "spark": [
+     "area",
+     "bar",
+     "line"
+    ],
+    "spark_at": [
+     "below",
+     "inline"
+    ],
+    "trend_window": [
+     "",
+     "last_30_days",
+     "last_3_months",
+     "last_7_days",
+     "last_90_days",
+     "last_month",
+     "this_financial_year",
+     "this_month",
+     "this_quarter",
+     "this_week",
+     "trailing_12_months"
+    ],
+    "window": [
+     "",
+     "last_30_days",
+     "last_3_months",
+     "last_7_days",
+     "last_90_days",
+     "last_month",
+     "this_financial_year",
+     "this_month",
+     "this_quarter",
+     "this_week",
+     "trailing_12_months"
     ]
    },
    "doors": [
@@ -4829,22 +5734,45 @@
    "family": "pages",
    "schema": {
     "$defs": {
-     "PageChart": {
+     "CardCondition": {
       "additionalProperties": false,
       "properties": {
-       "config": {
-        "additionalProperties": true,
-        "type": "object"
-       },
-       "title": {
-        "maxLength": 160,
+       "field": {
+        "maxLength": 128,
         "minLength": 1,
         "type": "string"
-       }
+       },
+       "operator": {
+        "enum": [
+         "is",
+         "is_not",
+         "one_of",
+         "none_of",
+         "numeric_eq",
+         "numeric_gt",
+         "numeric_gte",
+         "numeric_lt",
+         "numeric_lte",
+         "numeric_between",
+         "text_contains",
+         "text_not_contains",
+         "text_starts_with",
+         "text_ends_with",
+         "date_on",
+         "date_before",
+         "date_after",
+         "date_within",
+         "empty",
+         "not_empty"
+        ],
+        "type": "string"
+       },
+       "value": {}
       },
       "required": [
-       "title",
-       "config"
+       "field",
+       "operator",
+       "value"
       ],
       "type": "object"
      },
@@ -5041,13 +5969,22 @@
         {
          "oneOf": [
           {
-           "properties": {
-            "operations": {
-             "minItems": 1
+           "anyOf": [
+            {
+             "properties": {
+              "operations": {
+               "minItems": 1
+              }
+             },
+             "required": [
+              "operations"
+             ]
+            },
+            {
+             "required": [
+              "title"
+             ]
             }
-           },
-           "required": [
-            "operations"
            ]
           },
           {
@@ -5196,10 +6133,7 @@
           "propertyNames": {
            "not": {
             "enum": [
-             "preset",
-             "chart",
-             "size",
-             "settings",
+             "card",
              "text",
              "find",
              "cell"
@@ -5217,10 +6151,7 @@
            "not": {
             "enum": [
              "markdown",
-             "preset",
-             "chart",
-             "size",
-             "settings"
+             "card"
             ]
            }
           }
@@ -5238,6 +6169,139 @@
           "required": [
            "op"
           ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "replace_section",
+             "delete",
+             "move",
+             "set"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "required": [
+           "block"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "replace"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "anyOf": [
+           {
+            "required": [
+             "block"
+            ]
+           },
+           {
+            "required": [
+             "find"
+            ]
+           }
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "insert",
+             "move"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "required": [
+           "after"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "set"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "required": [
+           "attrs"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "replace"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "dependentRequired": {
+           "find": [
+            "text"
+           ]
+          }
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "insert",
+             "delete",
+             "move"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "const": "find"
+           }
+          }
          }
         }
        ],
@@ -5258,6 +6322,257 @@
          "saphion.issued_references": true,
          "type": "string"
         },
+        "card": {
+         "additionalProperties": false,
+         "properties": {
+          "aggregation": {
+           "enum": [
+            "count",
+            "sum",
+            "average",
+            "median",
+            "minimum",
+            "maximum"
+           ],
+           "type": "string"
+          },
+          "also_aggregation": {
+           "enum": [
+            "count",
+            "sum",
+            "average",
+            "median",
+            "minimum",
+            "maximum"
+           ],
+           "type": "string"
+          },
+          "also_conditions": {
+           "items": {
+            "$ref": "#/$defs/CardCondition"
+           },
+           "type": "array"
+          },
+          "also_date_field": {
+           "type": "string"
+          },
+          "also_label": {
+           "type": "string"
+          },
+          "also_measure": {
+           "type": "string"
+          },
+          "better": {
+           "enum": [
+            "up",
+            "down"
+           ],
+           "type": "string"
+          },
+          "bucket": {
+           "enum": [
+            "day",
+            "week",
+            "month",
+            "quarter",
+            "year"
+           ],
+           "type": "string"
+          },
+          "choice": {
+           "additionalProperties": true,
+           "type": "object"
+          },
+          "conditions": {
+           "items": {
+            "$ref": "#/$defs/CardCondition"
+           },
+           "type": "array"
+          },
+          "date_field": {
+           "type": "string"
+          },
+          "done_field": {
+           "type": "string"
+          },
+          "done_value": {
+           "type": "string"
+          },
+          "fields": {
+           "items": {
+            "type": "string"
+           },
+           "type": "array"
+          },
+          "footer": {
+           "type": "string"
+          },
+          "group_by": {
+           "items": {
+            "type": "string"
+           },
+           "type": "array"
+          },
+          "groups": {
+           "maximum": 100,
+           "minimum": 1,
+           "type": "integer"
+          },
+          "icon": {
+           "type": "string"
+          },
+          "in_": {
+           "additionalProperties": {
+            "type": "string"
+           },
+           "type": "object"
+          },
+          "kind": {
+           "enum": [
+            "figure",
+            "bars",
+            "funnel",
+            "rank",
+            "grid",
+            "budget",
+            "lines",
+            "donut",
+            "shares",
+            "splitrows",
+            "heatmap",
+            "progress",
+            "table",
+            "statuslist",
+            "radial",
+            "matrix",
+            "radar",
+            "scatter",
+            "waterfall"
+           ],
+           "type": "string"
+          },
+          "label": {
+           "type": "string"
+          },
+          "limit": {
+           "maximum": 100,
+           "minimum": 1,
+           "type": "integer"
+          },
+          "measure": {
+           "type": "string"
+          },
+          "palette": {
+           "type": "string"
+          },
+          "period": {
+           "enum": [
+            "dashboard",
+            "own",
+            "none"
+           ],
+           "type": "string"
+          },
+          "planned_measure": {
+           "type": "string"
+          },
+          "segments": {
+           "items": {
+            "type": "string"
+           },
+           "type": "array"
+          },
+          "show": {
+           "enum": [
+            "value",
+            "share"
+           ],
+           "type": "string"
+          },
+          "sort_direction": {
+           "enum": [
+            "ascending",
+            "descending"
+           ],
+           "type": "string"
+          },
+          "sort_field": {
+           "type": "string"
+          },
+          "source": {
+           "type": "string"
+          },
+          "spark": {
+           "enum": [
+            "line",
+            "bar",
+            "area"
+           ],
+           "type": "string"
+          },
+          "spark_at": {
+           "enum": [
+            "inline",
+            "below"
+           ],
+           "type": "string"
+          },
+          "target": {
+           "type": "string"
+          },
+          "tinted": {
+           "type": "boolean"
+          },
+          "title": {
+           "type": "string"
+          },
+          "tone": {
+           "type": "string"
+          },
+          "trend": {
+           "type": "boolean"
+          },
+          "trend_window": {
+           "enum": [
+            "",
+            "this_week",
+            "last_month",
+            "this_month",
+            "this_quarter",
+            "this_financial_year",
+            "last_7_days",
+            "last_30_days",
+            "last_90_days",
+            "last_3_months",
+            "trailing_12_months"
+           ],
+           "type": "string"
+          },
+          "window": {
+           "enum": [
+            "",
+            "this_week",
+            "last_month",
+            "this_month",
+            "this_quarter",
+            "this_financial_year",
+            "last_7_days",
+            "last_30_days",
+            "last_90_days",
+            "last_3_months",
+            "trailing_12_months"
+           ],
+           "type": "string"
+          },
+          "x_label": {
+           "type": "string"
+          },
+          "y_label": {
+           "type": "string"
+          }
+         },
+         "type": "object"
+        },
         "cell": {
          "items": {
           "type": "integer"
@@ -5265,9 +6580,6 @@
          "maxItems": 2,
          "minItems": 2,
          "type": "array"
-        },
-        "chart": {
-         "$ref": "#/$defs/PageChart"
         },
         "find": {
          "maxLength": 4000,
@@ -5291,18 +6603,6 @@
           "move",
           "set"
          ],
-         "type": "string"
-        },
-        "preset": {
-         "maxLength": 80,
-         "type": "string"
-        },
-        "settings": {
-         "additionalProperties": true,
-         "type": "object"
-        },
-        "size": {
-         "maxLength": 24,
          "type": "string"
         },
         "text": {
@@ -5843,15 +7143,9 @@
   },
   "file_list": {
    "choices": {
-    "sort": [
-     "added asc",
-     "added desc",
-     "modified asc",
-     "modified desc",
-     "name asc",
-     "name desc",
-     "size asc",
-     "size desc"
+    "direction": [
+     "asc",
+     "desc"
     ]
    },
    "doors": [
@@ -5859,6 +7153,29 @@
    ],
    "family": "organisation_reach",
    "schema": {
+    "$defs": {
+     "FileSortInput": {
+      "additionalProperties": false,
+      "properties": {
+       "direction": {
+        "enum": [
+         "asc",
+         "desc"
+        ],
+        "type": "string"
+       },
+       "field": {
+        "maxLength": 128,
+        "minLength": 1,
+        "type": "string"
+       }
+      },
+      "required": [
+       "field"
+      ],
+      "type": "object"
+     }
+    },
     "additionalProperties": false,
     "properties": {
      "project_continuation_ref": {
@@ -5870,17 +7187,7 @@
       "type": "string"
      },
      "sort": {
-      "enum": [
-       "name asc",
-       "name desc",
-       "size asc",
-       "size desc",
-       "modified asc",
-       "modified desc",
-       "added asc",
-       "added desc"
-      ],
-      "type": "string"
+      "$ref": "#/$defs/FileSortInput"
      }
     },
     "type": "object"
@@ -5912,6 +7219,82 @@
       "type": "string"
      }
     },
+    "type": "object"
+   }
+  },
+  "file_template_fill": {
+   "choices": {},
+   "doors": [
+    "codeact"
+   ],
+   "family": "files",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "template_continuation_ref": {
+      "type": "string"
+     },
+     "title": {
+      "default": "",
+      "maxLength": 120,
+      "type": "string"
+     },
+     "values": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "part": {
+         "maxLength": 64,
+         "minLength": 1,
+         "type": "string"
+        },
+        "rows": {
+         "items": {
+          "items": {
+           "type": "string"
+          },
+          "type": "array"
+         },
+         "maxItems": 500,
+         "type": "array"
+        },
+        "words": {
+         "maxLength": 20000,
+         "type": "string"
+        }
+       },
+       "required": [
+        "part"
+       ],
+       "type": "object"
+      },
+      "maxItems": 500,
+      "type": "array"
+     }
+    },
+    "required": [
+     "values",
+     "template_continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "file_template_read": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "files",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
     "type": "object"
    }
   },
@@ -6045,14 +7428,17 @@
      "current"
     ],
     "product": [
-     "crm"
+     "crm",
+     "rams"
     ],
     "team": [
      "current"
     ],
     "window": [
+     "last_30_days",
      "last_3_months",
      "last_7_days",
+     "last_90_days",
      "last_month",
      "last_quarter",
      "last_week",
@@ -6366,6 +7752,8 @@
                  "this_year",
                  "this_financial_year",
                  "last_7_days",
+                 "last_30_days",
+                 "last_90_days",
                  "last_3_months",
                  "trailing_12_months",
                  "next_days",
@@ -6494,6 +7882,7 @@
      "product": {
       "default": "",
       "enum": [
+       "rams",
        "crm"
       ],
       "type": "string"
@@ -10041,6 +11430,7 @@
      "create",
      "create_many",
      "delete",
+     "move_dependent_dates",
      "restore",
      "update",
      "void"
@@ -10090,20 +11480,37 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "anyOf": [
+          {
+           "required": [
+            "resource_class"
+           ]
+          },
+          {
+           "required": [
+            "record_set_continuation_ref"
+           ]
+          },
+          {
+           "required": [
+            "follows_continuation_ref"
+           ]
+          }
+         ]
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
          "resource_class",
          "record_set_continuation_ref",
          "values",
-         "follows_continuation_ref",
-         "follows_link_kind",
-         "follows_update_continuation_ref",
-         "follows_reason"
+         "follows_continuation_ref"
         ]
        },
        "required": [
-        "resource_class",
         "values"
        ]
       }
@@ -10148,6 +11555,49 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "else": {
+          "properties": {
+           "records": {
+            "items": {
+             "properties": {
+              "source_id": {
+               "maxLength": 0
+              }
+             }
+            }
+           }
+          }
+         },
+         "if": {
+          "properties": {
+           "list_name": {
+            "minLength": 1
+           }
+          },
+          "required": [
+           "list_name"
+          ]
+         },
+         "then": {
+          "properties": {
+           "records": {
+            "items": {
+             "properties": {
+              "source_id": {
+               "minLength": 1
+              }
+             },
+             "required": [
+              "source_id"
+             ]
+            }
+           }
+          }
+         }
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -10229,6 +11679,29 @@
         ]
        }
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "move_dependent_dates"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "record_continuation_refs",
+         "apply"
+        ]
+       }
+      }
      }
     ],
     "properties": {
@@ -10239,24 +11712,16 @@
        "create_many",
        "restore",
        "void",
-       "delete"
+       "delete",
+       "move_dependent_dates"
       ],
       "type": "string"
      },
+     "apply": {
+      "default": false,
+      "type": "boolean"
+     },
      "follows_continuation_ref": {
-      "type": "string"
-     },
-     "follows_link_kind": {
-      "default": "",
-      "maxLength": 80,
-      "type": "string"
-     },
-     "follows_reason": {
-      "default": "",
-      "maxLength": 2000,
-      "type": "string"
-     },
-     "follows_update_continuation_ref": {
       "type": "string"
      },
      "history": {
@@ -10729,7 +12194,6 @@
         }
        },
        "required": [
-        "field_continuation_ref",
         "choice_continuation_ref",
         "name"
        ]
@@ -10764,7 +12228,6 @@
         }
        },
        "required": [
-        "field_continuation_ref",
         "choice_continuation_ref"
        ]
       }
@@ -10798,7 +12261,6 @@
         }
        },
        "required": [
-        "field_continuation_ref",
         "choice_continuation_ref",
         "ordinal"
        ]
@@ -10833,7 +12295,6 @@
         }
        },
        "required": [
-        "field_continuation_ref",
         "choice_continuation_ref"
        ]
       }
@@ -10864,13 +12325,12 @@
         }
        },
        "required": [
-        "field_continuation_ref",
         "choice_continuation_ref"
        ]
       }
      },
      {
-      "oneOf": [
+      "anyOf": [
        {
         "required": [
          "resource_class"
@@ -10879,6 +12339,16 @@
        {
         "required": [
          "board_continuation_ref"
+        ]
+       },
+       {
+        "required": [
+         "field_continuation_ref"
+        ]
+       },
+       {
+        "required": [
+         "choice_continuation_ref"
         ]
        }
       ]
@@ -11258,24 +12728,9 @@
       },
       "then": {
        "required": [
-        "field_continuation_ref",
         "choice_continuation_ref"
        ]
       }
-     },
-     {
-      "oneOf": [
-       {
-        "required": [
-         "resource_class"
-        ]
-       },
-       {
-        "required": [
-         "board_continuation_ref"
-        ]
-       }
-      ]
      }
     ],
     "properties": {
@@ -11293,12 +12748,6 @@
       "type": "string"
      },
      "field_continuation_ref": {
-      "type": "string"
-     },
-     "resource_class": {
-      "maxLength": 64,
-      "minLength": 1,
-      "pattern": "^[^:\\s]+$",
       "type": "string"
      }
     },
@@ -11780,8 +13229,10 @@
      "current"
     ],
     "window": [
+     "last_30_days",
      "last_3_months",
      "last_7_days",
+     "last_90_days",
      "last_month",
      "last_quarter",
      "last_week",
@@ -12094,6 +13545,8 @@
                  "this_year",
                  "this_financial_year",
                  "last_7_days",
+                 "last_30_days",
+                 "last_90_days",
                  "last_3_months",
                  "trailing_12_months",
                  "next_days",
@@ -12231,9 +13684,6 @@
       "type": "string"
      }
     },
-    "required": [
-     "record_class"
-    ],
     "type": "object"
    }
   },

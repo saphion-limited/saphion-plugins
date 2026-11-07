@@ -3,12 +3,12 @@ name: "dataviz"
 description: "Build a dashboard as an app, only when the person asks for an app or the data is not Saphion's: work out its figures in code, then publish one app that draws them"
 user-invocable: false
 metadata:
-  outcome: "A dashboard made as an app because the person asked for an app or its data is not Saphion's: its figures worked out in code, checked, drawn honestly (the right form for each figure, Saphion's own validated colours, labelled, dated, hover, a table view, light and dark, every state) and kept live or written as the app's own data."
+  outcome: "A dashboard made as an app because the person asked for an app or its data is not Saphion's: figures worked out in code, checked, drawn honestly, kept live or written as the app's own data."
   not-outcomes: |-
-    A dashboard, scorecard, KPI page or chart over Saphion's own data (the Organisation's Projects, Actions, records, Boards, targets): that is a Saphion Dashboard made with `dashboard_change`, or a widget in the Document the person is in made with `document_change`'s `card`. Not an app.
-    Open, change or arrange a Dashboard the person already has: that is `dashboard_change` on the Dashboard.
-    A single figure, table or chart that belongs in the reply: say it, or use a chart or table widget.
-    A designed app, page, calculator or explorer with no Organisation data.
+    A dashboard, scorecard, KPI page or chart over Saphion's own data (Projects, Actions, records, Boards): a Saphion Dashboard made with `dashboard_change`, or a widget in the Document the person is in made with `document_change`'s `card`. Not an app.
+    Open, change or arrange a Dashboard the person already has: `dashboard_change`.
+    A single figure, table or chart for the reply: say it, or use a chart or table widget.
+    A designed app, page or calculator with no Organisation data.
     A Word, PDF, PowerPoint or Excel file.
 ---
 <!-- SURFACE_REASON: procedure prompt asset for the dataviz skill, loaded into the model's skill instructions as the procedure for a dashboard made as an app -->
