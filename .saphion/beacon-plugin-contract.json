@@ -4644,8 +4644,10 @@
   "dashboard_change": {
    "choices": {
     "act": [
+     "archive",
      "card",
      "create",
+     "delete",
      "write"
     ],
     "aggregation": [
@@ -4983,6 +4985,58 @@
         "edit"
        ]
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "delete"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref"
+        ]
+       },
+       "required": [
+        "continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "archive"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref"
+        ]
+       },
+       "required": [
+        "continuation_ref"
+       ]
+      }
      }
     ],
     "properties": {
@@ -4990,7 +5044,9 @@
       "enum": [
        "create",
        "write",
-       "card"
+       "card",
+       "delete",
+       "archive"
       ],
       "type": "string"
      },
