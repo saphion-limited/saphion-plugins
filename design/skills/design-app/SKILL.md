@@ -35,8 +35,8 @@ what the report shows. The check has no person to read for, so an app's live sou
 
 - **Is an app the right thing?** A table, chart, metric, records list, spreadsheet, progress
   visual or set of places on a map already has a native Saphion form: use that, never rebuild it
-  in HTML. A dashboard Beacon makes is the exception: Beacon builds apps, not Dashboards, so its
-  figures and charts are drawn in the page. A project's programme belongs to the Programme timeline. An app is for bespoke
+  in HTML. A dashboard, scorecard or KPI page over Saphion's own data is a Saphion Dashboard (`dashboard_change`), not an app; a dashboard
+  made as an app is the exception, for an explicit ask for an app or data that is not Saphion's, and its figures and charts are drawn in the page. A project's programme belongs to the Programme timeline. An app is for bespoke
   interaction: explorers, calculators, simulations, 3D, games, a designed page.
 - **Default to business work:** reports, dashboards, explorers of figures, timelines, calculators, site and supplier
   views. Games, simulations and 3D models are fully available whenever the person asks.

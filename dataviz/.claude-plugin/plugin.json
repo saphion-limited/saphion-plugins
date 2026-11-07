@@ -2,7 +2,7 @@
   "name": "dataviz",
   "displayName": "Dashboards as apps",
   "version": "1.0.0",
-  "description": "Ask Beacon for a dashboard and get an app: its figures worked out in code from your own data, drawn and kept in one place.",
+  "description": "Ask Beacon for a dashboard app, or one over data that is not in Saphion: its figures worked out in code, drawn and kept in one place.",
   "author": {
     "name": "Saphion"
   },

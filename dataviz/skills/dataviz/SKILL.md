@@ -1,22 +1,24 @@
 ---
 name: "dataviz"
-description: "Build a dashboard as an app: work out its figures in code, then publish one app that draws them"
+description: "Build a dashboard as an app, only when the person asks for an app or the data is not Saphion's: work out its figures in code, then publish one app that draws them"
 user-invocable: false
 metadata:
-  outcome: "A dashboard the person asked for, made as one app: its figures worked out in code from the Organisation's real data, checked, drawn honestly (the right form for each figure, Saphion's own validated colours, labelled, dated, hover, a table view, light and dark, every state) and kept live or written as the app's own data."
+  outcome: "A dashboard made as an app because the person asked for an app or its data is not Saphion's: its figures worked out in code, checked, drawn honestly (the right form for each figure, Saphion's own validated colours, labelled, dated, hover, a table view, light and dark, every state) and kept live or written as the app's own data."
   not-outcomes: |-
-    Open, change or arrange a Dashboard the person already has: that is theirs to do in the Dashboard itself; Beacon finds and reads one but never changes it.
-    A single figure, table or chart that belongs in the reply: say it, or use the chart card.
+    A dashboard, scorecard, KPI page or chart over Saphion's own data (the Organisation's Projects, Actions, records, Boards, targets): that is a Saphion Dashboard made with `dashboard_change`, or a widget in the Document the person is in made with `document_change`'s `card`. Not an app.
+    Open, change or arrange a Dashboard the person already has: that is `dashboard_change` on the Dashboard.
+    A single figure, table or chart that belongs in the reply: say it, or use a chart or table widget.
     A designed app, page, calculator or explorer with no Organisation data.
     A Word, PDF, PowerPoint or Excel file.
 ---
 <!-- SURFACE_REASON: procedure prompt asset for the dataviz skill, loaded into the model's skill instructions as the procedure for a dashboard made as an app -->
 # Build a dashboard as an app
 
-Beacon builds apps, not Dashboards. The Dashboard product is a place people build by hand (New, then Dashboard); Beacon can
-`find` and `read` one but has no way to make or change one. A person who asks you for a dashboard, a scorecard or "a view of the
-numbers" gets an app, made once and kept. Say that in one plain line the first time ("I'll build it as an app"), and never call
-the result a Dashboard. The app tool's description carries the sandbox and the live-data contract; the app design rules carry the page
+A dashboard, scorecard, KPI page or chart over Saphion's own data is a Saphion Dashboard: make or change it with `dashboard_change`
+(read `dashboard_guide` first; it holds the craft), or, when the person is in a Document, add a widget to that Document with
+`document_change`'s `card`. Beacon reads one with `read`. This procedure is only for a dashboard made as an app: the person explicitly
+asked for an app, or the data is not Saphion's (figures or a file they gave you). If neither is so, stop here and make the Dashboard.
+Say it in one plain line the first time ("I'll build it as an app"), and never call the app a Dashboard. The app tool's description carries the sandbox and the live-data contract; the app design rules carry the page
 (tokens, states, controls); this procedure carries the data and the chart craft. Its files are read on demand: `read` the reference this skill's load gave, with `at` set to
 `references/<name>.md`: `palette.md` is needed by every build; the others are named at the step
 that uses them.

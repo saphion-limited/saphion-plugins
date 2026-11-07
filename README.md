@@ -6,7 +6,7 @@ folder is one plugin (`.claude-plugin/plugin.json`, `skills/<name>/SKILL.md`, sc
 | Plugin | What it does |
 | --- | --- |
 | `saphion-documents` | Built in: Word and PDF files, spreadsheets and presentations, and documents inside Saphion |
-| `dataviz` | Ask for a dashboard and get an app: figures worked out in code from your own data |
+| `dataviz` | A dashboard made as an app, when you ask for an app or the data is not in Saphion: figures worked out in code |
 | `deep-research` | Research a question across several sources and get a cited report with its sources |
 | `design` | Palette, type and layout for pages and single-file apps |
 | `meeting-recaps` | Meeting recap styles: a general recap, board and committee minutes, one-to-ones, project and team updates, client meetings, sales calls and interviews |
