@@ -161,6 +161,63 @@ def _frontmatter(text: str) -> tuple[dict[str, str], str] | None:
     return fields, text[match.end():]
 
 
+def _scalar(value: str) -> str:
+    if value[:1] == '"':
+        try:
+            return json.loads(value)
+        except ValueError:
+            return value.strip('"')
+    return value.strip("'").replace("''", "'") if value[:1] == "'" else value
+
+
+def _metadata(text: str) -> dict[str, str]:
+    """The standard's ``metadata`` mapping of a SKILL.md as text: a quoted or plain value, or a ``|`` block kept one line per line (as
+    ``not-outcomes`` is). Only the shapes a skill's metadata is written in; ``packages`` is the full YAML reader, and a test holds the two equal."""
+    match = _FRONT.match(text)
+    lines = match.group(1).splitlines() if match else []
+    start = next((i + 1 for i, line in enumerate(lines) if line.rstrip() == "metadata:"), None)
+    indent = lambda line: len(line) - len(line.lstrip())
+    found: dict[str, str] = {}
+    if start is None:
+        return found
+    rest = []
+    for line in lines[start:]:
+        if line.strip() and indent(line) == 0:
+            break
+        rest.append(line)
+    base = min((indent(line) for line in rest if line.strip()), default=0)
+    index = 0
+    while index < len(rest):
+        field = _FIELD.match(rest[index].strip()) if indent(rest[index]) == base else None
+        index += 1
+        if not field:
+            continue
+        key, value = field.group(1), field.group(2).strip()
+        block = []
+        while index < len(rest) and (not rest[index].strip() or indent(rest[index]) > base):
+            block.append(rest[index].strip())
+            index += 1
+        found[key] = "\n".join(block).strip() if value[:1] in ("|", ">") else _scalar(value)
+    return found
+
+
+def advert(description: str, outcome: str, not_outcomes: Iterable[str]) -> str:
+    """The line Beacon is told about a skill it may choose: the ONE composition (the runtime's ``skills_provider`` calls it too), so the
+    length judged here is the length the framework validates when a turn lists the skill."""
+    return f"{description} Outcome: {outcome} Not for: {' '.join(not_outcomes)}"
+
+
+def advert_of(description: str, text: str) -> str:
+    """A SKILL.md's advert at its longest, every hand-over offered (a person is told only the hand-overs whose skill they are offered); the plain
+    description where it declares no outcome (a skill Beacon does not choose)."""
+    meta = _metadata(text)
+    if not (meta.get("outcome") and meta.get("not-outcomes")):
+        return description
+    said = [line.strip() for line in meta["not-outcomes"].splitlines() if line.strip()]
+    said += [value.strip() for key, value in meta.items() if key.startswith("hand-over-")]
+    return advert(description, meta["outcome"].strip(), said)
+
+
 def _skill_files(files: Mapping[str, bytes]) -> list[str]:
     return sorted(path for path in files if path == SKILL_FILE
                   or (path.startswith("skills/") and path.endswith("/" + SKILL_FILE) and path.count("/") == 2))
@@ -232,8 +289,13 @@ def check_skill(where: str, text: str, contract: Mapping, known: set[str] | None
     name, description = fields.get("name", ""), fields.get("description", "")
     if not _NAME.match(name) or len(name) > ceilings["skill_name_characters"]:
         refused.append(f"{where}: name {name!r} must be lowercase letters, numbers and single hyphens, at most {ceilings['skill_name_characters']} characters.")
-    if not description or len(description) > ceilings["skill_description_characters"]:
-        refused.append(f"{where}: its description is {len(description)} characters; it needs one of at most {ceilings['skill_description_characters']}.")
+    if not description:
+        refused.append(f"{where}: it needs a description.")
+    elif (told := len(advert_of(description, text))) > ceilings["skill_description_characters"]:
+        refused.append(f"{where}: Beacon is told {told} characters about it (its description, outcome and what it is not for, every hand-over included); "
+                       f"the framework allows {ceilings['skill_description_characters']}.")
+    if len(fields.get("compatibility", "")) > ceilings["skill_compatibility_characters"]:
+        refused.append(f"{where}: its compatibility is {len(fields['compatibility'])} characters; at most {ceilings['skill_compatibility_characters']}.")
     if not body.strip() or len(body) > ceilings["skill_body_characters"]:
         refused.append(f"{where}: its body is {len(body):,} characters; a skill's body holds 1 to {ceilings['skill_body_characters']:,}.")
     refused += _allowed_tools(where, fields.get("allowed-tools", ""), tools)
