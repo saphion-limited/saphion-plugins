@@ -2986,6 +2986,7 @@
      "archive",
      "create",
      "delete",
+     "duplicate",
      "move",
      "place_record",
      "rename",
@@ -3214,6 +3215,31 @@
        "properties": {
         "act": {
          "enum": [
+          "duplicate"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "board_continuation_ref"
+        ]
+       },
+       "required": [
+        "board_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "move"
          ]
         }
@@ -3391,6 +3417,7 @@
        "create",
        "section",
        "rename",
+       "duplicate",
        "move",
        "place_record",
        "apply_template",
@@ -4678,6 +4705,7 @@
      "card",
      "create",
      "delete",
+     "move",
      "rename",
      "write"
     ],
@@ -5052,6 +5080,34 @@
        "properties": {
         "act": {
          "enum": [
+          "move"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref",
+         "destination_continuation_ref"
+        ]
+       },
+       "required": [
+        "continuation_ref",
+        "destination_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "delete"
          ]
         }
@@ -5107,6 +5163,7 @@
        "write",
        "rename",
        "card",
+       "move",
        "delete",
        "archive"
       ],
@@ -5123,6 +5180,9 @@
      "description": {
       "maxLength": 240,
       "minLength": 1,
+      "type": "string"
+     },
+     "destination_continuation_ref": {
       "type": "string"
      },
      "edit": {
@@ -5704,7 +5764,8 @@
      "create",
      "delete",
      "edit",
-     "from_questionnaire"
+     "from_questionnaire",
+     "move"
     ],
     "aggregation": [
      "average",
@@ -6171,6 +6232,33 @@
        "properties": {
         "act": {
          "enum": [
+          "move"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref",
+         "destination_continuation_ref"
+        ]
+       },
+       "required": [
+        "destination_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "delete"
          ]
         }
@@ -6219,6 +6307,7 @@
        "create",
        "edit",
        "from_questionnaire",
+       "move",
        "delete",
        "archive"
       ],
@@ -6230,6 +6319,9 @@
      "description": {
       "maxLength": 240,
       "minLength": 1,
+      "type": "string"
+     },
+     "destination_continuation_ref": {
       "type": "string"
      },
      "note": {
@@ -6351,7 +6443,6 @@
           "properties": {
            "op": {
             "enum": [
-             "insert",
              "move"
             ]
            }
@@ -6363,6 +6454,87 @@
          "then": {
           "required": [
            "after"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "insert"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "anyOf": [
+           {
+            "required": [
+             "after"
+            ]
+           },
+           {
+            "required": [
+             "block",
+             "row"
+            ]
+           },
+           {
+            "required": [
+             "block",
+             "column"
+            ]
+           }
+          ]
+         }
+        },
+        {
+         "else": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "row",
+             "column"
+            ]
+           }
+          }
+         },
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "insert",
+             "delete"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         }
+        },
+        {
+         "else": {
+          "propertyNames": {
+           "not": {
+            "const": "cells"
+           }
+          }
+         },
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "insert"
+            ]
+           }
+          },
+          "required": [
+           "op"
           ]
          }
         },
@@ -6711,6 +6883,17 @@
          "minItems": 2,
          "type": "array"
         },
+        "cells": {
+         "items": {
+          "type": "string"
+         },
+         "maxItems": 200,
+         "type": "array"
+        },
+        "column": {
+         "minimum": 0,
+         "type": "integer"
+        },
         "find": {
          "maxLength": 4000,
          "minLength": 1,
@@ -6734,6 +6917,10 @@
           "set"
          ],
          "type": "string"
+        },
+        "row": {
+         "minimum": 0,
+         "type": "integer"
         },
         "text": {
          "maxLength": 100000,
@@ -7158,6 +7345,7 @@
     "act": [
      "archive",
      "delete",
+     "move",
      "restore"
     ]
    },
@@ -7182,9 +7370,45 @@
        ]
       },
       "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "file_continuation_ref",
+         "version"
+        ]
+       },
        "required": [
         "file_continuation_ref",
         "version"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "move"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "file_continuation_ref",
+         "destination_continuation_ref"
+        ]
+       },
+       "required": [
+        "file_continuation_ref",
+        "destination_continuation_ref"
        ]
       }
      },
@@ -7245,6 +7469,7 @@
      "act": {
       "enum": [
        "restore",
+       "move",
        "delete",
        "archive"
       ],
@@ -7253,6 +7478,9 @@
      "description": {
       "maxLength": 240,
       "minLength": 1,
+      "type": "string"
+     },
+     "destination_continuation_ref": {
       "type": "string"
      },
      "file_continuation_ref": {
@@ -10493,9 +10721,15 @@
   "project_change": {
    "choices": {
     "act": [
+     "add_tab",
      "archive",
      "create",
+     "remove_tab",
      "update"
+    ],
+    "kind": [
+     "project",
+     "workspace"
     ]
    },
    "doors": [
@@ -10632,6 +10866,7 @@
         "enum": [
          "act",
          "name",
+         "kind",
          "facts",
          "offer"
         ]
@@ -10674,6 +10909,60 @@
        "properties": {
         "act": {
          "enum": [
+          "add_tab"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "item_continuation_ref"
+        ]
+       },
+       "required": [
+        "continuation_ref",
+        "item_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "remove_tab"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "item_continuation_ref"
+        ]
+       },
+       "required": [
+        "continuation_ref",
+        "item_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "archive"
          ]
         }
@@ -10700,6 +10989,8 @@
       "enum": [
        "create",
        "update",
+       "add_tab",
+       "remove_tab",
        "archive"
       ],
       "type": "string"
@@ -10765,6 +11056,17 @@
      },
      "facts": {
       "$ref": "#/$defs/ProjectStartingFactsInput"
+     },
+     "item_continuation_ref": {
+      "type": "string"
+     },
+     "kind": {
+      "default": "project",
+      "enum": [
+       "project",
+       "workspace"
+      ],
+      "type": "string"
      },
      "name": {
       "maxLength": 255,
@@ -10848,7 +11150,6 @@
         "enum": [
          "act",
          "description",
-         "name",
          "text",
          "continuation_ref"
         ]
