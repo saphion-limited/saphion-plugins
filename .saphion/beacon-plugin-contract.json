@@ -13829,6 +13829,9 @@
         ],
         "type": "string"
        },
+       "phone": {
+        "type": "boolean"
+       },
        "popup": {
         "type": "boolean"
        },
