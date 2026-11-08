@@ -5239,6 +5239,9 @@
         ],
         "type": "string"
        },
+       "person_field": {
+        "type": "string"
+       },
        "planned_measure": {
         "type": "string"
        },
@@ -6535,6 +6538,9 @@
             "own",
             "none"
            ],
+           "type": "string"
+          },
+          "person_field": {
            "type": "string"
           },
           "planned_measure": {
