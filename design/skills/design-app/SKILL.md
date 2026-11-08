@@ -120,10 +120,26 @@ What follows is what an app needs beyond that.
 ## 5. Live Saphion data
 
 An app that shows the Organisation's own figures declares sources and draws what the host reads for
-whoever has it open; the declaration format, the `saphionData` calls and their states are the host
-contract in the `app_change` description. Do the reads yourself first, with the `find` or `read` you
-would normally use, to learn what comes back; then declare the same call and arguments and design the
-drawing from what it returned.
+whoever has it open. Do the reads yourself first, with the `find` or `read` you would normally use, to learn what comes back; then
+declare the same call and arguments and design the drawing from what it returned.
+
+**The sources block.** Declare each source once, in one block, as the call you just made: the arguments of your `find` (`"find"`) or of
+your `read` (`"read"`: its `reference`, `view`, `at`, `text`):
+`<script type="application/saphion-sources+json">{"opps": {"find": {"kind": "record", "record_class": "opportunity"}, "rows": 500}}</script>`
+(`label` optional, else the source's name; `rows` optional, within the tool's limit). The host reads each source as the person
+viewing it, with their own access. `saphionData.get(name)` is `{status, data, message, read_at, has_more, total}` (status loading,
+refreshing, ok, refused, not_connected or error; `message` says why), `saphionData.onData((name, state) => draw())` runs on every change,
+`saphionData.refresh(name)` reads again (only when the person acts; never poll). `data` is what your own call returned. A source may also
+state `act` and `args` for a read-only act of a connected system you have already used (an Outlook email list): the host reads it through
+whoever opens the app's own connection, never yours, so a viewer who has not connected that system gets `not_connected` and its `message`
+(the pane offers them Connect); draw that `message` in that section. `act` is the name of your own tool and `args` are the inputs it takes,
+except what only a conversation holds: a well-known choice (`"folder_ref": "inbox"`) works, an issued reference is refused; the Outlook
+calendar takes `start` and `end` (or `day`). A source names everything it reads, a Project included (`args.project`); one that omits it is
+refused. A `data-field` is a dotted path in `data`.
+
+**The app's own data.** What recurs (a daily summary) is written by Beacon, or a scheduled run, with `app_data_change`, and the app declares
+the collection in the same block: `{"summary": {"label": "Daily summary", "app_data": "summaries", "rows": 30}}` (no `find`, no `act`).
+`saphionData.get("summary").data` is `{collection, entries, written_at}`: `entries` are `{key, value, written_at, written_by}` newest first.
 
 - **Per person.** Each viewer's read uses their access, so two people may see different rows or a
   refusal. Write the app so that is a normal state.
@@ -143,8 +159,11 @@ drawing from what it returned.
 
 ## 6. The person's files
 
-A drawing, photograph or CSV the person attached, or an Organisation file, is used by reference,
-declared as the host contract describes; never write its bytes into the document.
+A drawing, photograph or CSV the person attached, or an Organisation file, is used by reference; never write its bytes into the document.
+Declare each file once, in one block, by the reference you hold: `<script type="application/saphion-files+json">{"plan": {"label": "Site
+drawing", "ref": "attachment-1"}}</script>`, where `ref` is the continuation_ref of an attached file or of an Organisation file, of the kinds and sizes the tool names (not a PDF). In the page `await saphionFiles.url("plan")` is an object URL for an
+`<img>` or CSS background and `await saphionFiles.text("data")` is a CSV's text, each read once; they reject with the reason when the person
+opening the app may not read the file.
 
 - **The viewer's own access.** The file is fetched as whoever opens the app, never your copy: an
   attachment belongs to its uploader, so a colleague gets a refusal. A refused or failed promise
@@ -160,8 +179,13 @@ declared as the host contract describes; never write its bytes into the document
 
 ## 7. Dependencies
 
-The sandbox loads `three`, `d3`, `chart.js/auto` and `gsap` by bare name, and a scene helper
-(`saphion/scene3d`), as described with `app_change`. Fonts are the system's or any
+Libraries resolve by bare name in a `<script type="module">` (top-level await works): import('three'),
+import('three/examples/jsm/controls/OrbitControls.js'), import('d3'), import('chart.js/auto') and import('gsap'): pinned local assets; do not
+import remote URLs. For a 3D scene, `const {createStage} = await import('saphion/scene3d')` gives a ready stage (renderer, camera, orbit
+controls, lights, ground, resize, loop): `createStage(container, {camera:{position,target}})` returns {THREE, scene, camera,
+pickable(object, data), onPick(fn), onFrame(fn), resetView(), label(text, [x,y,z])}. An app has no basemap, tiles, geocoding or routing.
+Per-person settings are read and written with `await saphionStorage.get(key)`, `.set(key, jsonValue)`, `.remove(key)` and `.keys()`: async, JSON
+values, kept per person for this app (within the tool's limit), rejecting with the reason when refused. Fonts are the system's or any
 Google Fonts family, loaded with a `<link>` and followed by a system fallback in the stack. Nothing
 else is available and nothing can be installed. Per-person settings (a best score, a
 preference) are kept with `saphionStorage`, never `localStorage`: Saphion keeps them for this person and this app, and
