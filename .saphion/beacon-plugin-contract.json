@@ -4653,6 +4653,7 @@
     "aggregation": [
      "average",
      "count",
+     "distinct",
      "maximum",
      "median",
      "minimum",
@@ -4661,6 +4662,7 @@
     "also_aggregation": [
      "average",
      "count",
+     "distinct",
      "maximum",
      "median",
      "minimum",
@@ -5090,6 +5092,7 @@
        "aggregation": {
         "enum": [
          "count",
+         "distinct",
          "sum",
          "average",
          "median",
@@ -5101,6 +5104,7 @@
        "also_aggregation": {
         "enum": [
          "count",
+         "distinct",
          "sum",
          "average",
          "median",
@@ -5642,6 +5646,7 @@
     "aggregation": [
      "average",
      "count",
+     "distinct",
      "maximum",
      "median",
      "minimum",
@@ -5650,6 +5655,7 @@
     "also_aggregation": [
      "average",
      "count",
+     "distinct",
      "maximum",
      "median",
      "minimum",
@@ -6384,6 +6390,7 @@
           "aggregation": {
            "enum": [
             "count",
+            "distinct",
             "sum",
             "average",
             "median",
@@ -6395,6 +6402,7 @@
           "also_aggregation": {
            "enum": [
             "count",
+            "distinct",
             "sum",
             "average",
             "median",
