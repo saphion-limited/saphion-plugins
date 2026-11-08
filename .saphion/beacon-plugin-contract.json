@@ -5502,6 +5502,10 @@
       },
       "minItems": 1,
       "type": "array"
+     },
+     "source": {
+      "maxLength": 300,
+      "type": "string"
      }
     },
     "required": [
@@ -5763,9 +5767,11 @@
      "archive",
      "create",
      "delete",
+     "duplicate_tab",
      "edit",
      "from_questionnaire",
-     "move"
+     "move",
+     "move_tab"
     ],
     "aggregation": [
      "average",
@@ -5920,6 +5926,21 @@
    "family": "pages",
    "schema": {
     "$defs": {
+     "ActionSettings": {
+      "additionalProperties": false,
+      "properties": {
+       "due": {
+        "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+        "type": "string"
+       },
+       "owner": {
+        "maxLength": 200,
+        "minLength": 1,
+        "type": "string"
+       }
+      },
+      "type": "object"
+     },
      "CardCondition": {
       "additionalProperties": false,
       "properties": {
@@ -6259,6 +6280,54 @@
        "properties": {
         "act": {
          "enum": [
+          "move_tab"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref",
+         "under_continuation_ref",
+         "position"
+        ]
+       }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "duplicate_tab"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref"
+        ]
+       }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "delete"
          ]
         }
@@ -6308,6 +6377,8 @@
        "edit",
        "from_questionnaire",
        "move",
+       "move_tab",
+       "duplicate_tab",
        "delete",
        "archive"
       ],
@@ -6452,8 +6523,26 @@
           ]
          },
          "then": {
-          "required": [
-           "after"
+          "anyOf": [
+           {
+            "required": [
+             "after"
+            ]
+           },
+           {
+            "required": [
+             "block",
+             "row",
+             "to"
+            ]
+           },
+           {
+            "required": [
+             "block",
+             "column",
+             "to"
+            ]
+           }
           ]
          }
         },
@@ -6508,7 +6597,8 @@
            "op": {
             "enum": [
              "insert",
-             "delete"
+             "delete",
+             "move"
             ]
            }
           },
@@ -6535,6 +6625,58 @@
           },
           "required": [
            "op"
+          ]
+         }
+        },
+        {
+         "else": {
+          "propertyNames": {
+           "not": {
+            "const": "to"
+           }
+          }
+         },
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "move"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         }
+        },
+        {
+         "else": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "image_continuation_ref",
+             "caption"
+            ]
+           }
+          }
+         },
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "insert"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         }
+        },
+        {
+         "dependentRequired": {
+          "caption": [
+           "image_continuation_ref"
           ]
          }
         },
@@ -6600,9 +6742,33 @@
            }
           }
          }
+        },
+        {
+         "else": {
+          "propertyNames": {
+           "not": {
+            "const": "action"
+           }
+          }
+         },
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "set"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         }
         }
        ],
        "properties": {
+        "action": {
+         "$ref": "#/$defs/ActionSettings"
+        },
         "after": {
          "maxLength": 160,
          "minLength": 1,
@@ -6617,6 +6783,11 @@
          "maxLength": 160,
          "minLength": 1,
          "saphion.issued_references": true,
+         "type": "string"
+        },
+        "caption": {
+         "maxLength": 2000,
+         "minLength": 1,
          "type": "string"
         },
         "card": {
@@ -6899,6 +7070,11 @@
          "minLength": 1,
          "type": "string"
         },
+        "image_continuation_ref": {
+         "maxLength": 2048,
+         "minLength": 1,
+         "type": "string"
+        },
         "markdown": {
          "type": "string"
         },
@@ -6925,6 +7101,10 @@
         "text": {
          "maxLength": 100000,
          "type": "string"
+        },
+        "to": {
+         "minimum": 0,
+         "type": "integer"
         }
        },
        "required": [
@@ -6947,6 +7127,10 @@
      },
      "overview": {
       "type": "string"
+     },
+     "position": {
+      "minimum": 0,
+      "type": "integer"
      },
      "project_continuation_ref": {
       "type": "string"
@@ -7141,6 +7325,9 @@
      "title": {
       "maxLength": 240,
       "minLength": 1,
+      "type": "string"
+     },
+     "under_continuation_ref": {
       "type": "string"
      }
     },
@@ -10799,51 +10986,6 @@
        "kind"
       ],
       "type": "object"
-     },
-     "ProjectStartingFactsInput": {
-      "additionalProperties": false,
-      "properties": {
-       "client": {
-        "type": "string"
-       },
-       "description": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "items": {
-           "additionalProperties": true,
-           "type": "object"
-          },
-          "type": "array"
-         }
-        ]
-       },
-       "fields": {
-        "additionalProperties": {
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "number"
-          }
-         ]
-        },
-        "type": "object"
-       },
-       "lead": {
-        "type": "string"
-       },
-       "location": {
-        "$ref": "#/$defs/ProjectLocationInput"
-       },
-       "value": {
-        "type": "number"
-       }
-      },
-      "type": "object"
      }
     },
     "additionalProperties": false,
@@ -11055,7 +11197,49 @@
       "type": "string"
      },
      "facts": {
-      "$ref": "#/$defs/ProjectStartingFactsInput"
+      "additionalProperties": false,
+      "properties": {
+       "client": {
+        "type": "string"
+       },
+       "description": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "items": {
+           "additionalProperties": true,
+           "type": "object"
+          },
+          "type": "array"
+         }
+        ]
+       },
+       "fields": {
+        "additionalProperties": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "number"
+          }
+         ]
+        },
+        "type": "object"
+       },
+       "lead": {
+        "type": "string"
+       },
+       "location": {
+        "$ref": "#/$defs/ProjectLocationInput"
+       },
+       "value": {
+        "type": "number"
+       }
+      },
+      "type": "object"
      },
      "item_continuation_ref": {
       "type": "string"
