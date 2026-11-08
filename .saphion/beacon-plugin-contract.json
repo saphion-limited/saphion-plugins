@@ -545,6 +545,7 @@
         "comment.edited",
         "comment.deleted",
         "page.mentioned",
+        "page.written",
         "email.linked",
         "phase.changed",
         "review.requested",
@@ -2987,6 +2988,7 @@
      "delete",
      "move",
      "place_record",
+     "rename",
      "save_template",
      "section"
     ],
@@ -3185,6 +3187,33 @@
        "properties": {
         "act": {
          "enum": [
+          "rename"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "name",
+         "board_continuation_ref"
+        ]
+       },
+       "required": [
+        "board_continuation_ref",
+        "name"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "move"
          ]
         }
@@ -3361,6 +3390,7 @@
       "enum": [
        "create",
        "section",
+       "rename",
        "move",
        "place_record",
        "apply_template",
@@ -4648,6 +4678,7 @@
      "card",
      "create",
      "delete",
+     "rename",
      "write"
     ],
     "aggregation": [
@@ -4889,6 +4920,34 @@
        "properties": {
         "act": {
          "enum": [
+          "rename"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "name",
+         "continuation_ref"
+        ]
+       },
+       "required": [
+        "continuation_ref",
+        "name"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "card"
          ]
         }
@@ -5046,6 +5105,7 @@
       "enum": [
        "create",
        "write",
+       "rename",
        "card",
        "delete",
        "archive"
@@ -10792,10 +10852,7 @@
          "text",
          "continuation_ref"
         ]
-       },
-       "required": [
-        "continuation_ref"
-       ]
+       }
       }
      }
     ],
