@@ -7769,6 +7769,10 @@
       "default": "",
       "maxLength": 1000,
       "type": "string"
+     },
+     "whole_organisation": {
+      "default": false,
+      "type": "boolean"
      }
     },
     "type": "object"
