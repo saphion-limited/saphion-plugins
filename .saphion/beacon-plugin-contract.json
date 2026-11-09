@@ -7754,6 +7754,21 @@
    "family": "organisation_reach",
    "schema": {
     "additionalProperties": false,
+    "allOf": [
+     {
+      "not": {
+       "properties": {
+        "whole_organisation": {
+         "const": true
+        }
+       },
+       "required": [
+        "project_continuation_ref",
+        "whole_organisation"
+       ]
+      }
+     }
+    ],
     "properties": {
      "file_continuation_refs": {
       "items": {
