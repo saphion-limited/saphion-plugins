@@ -10936,7 +10936,6 @@
     "act": [
      "add_tab",
      "archive",
-     "arrange_tabs",
      "create",
      "remove_tab",
      "update"
@@ -11199,33 +11198,6 @@
        "properties": {
         "act": {
          "enum": [
-          "arrange_tabs"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "continuation_ref",
-         "order"
-        ]
-       },
-       "required": [
-        "continuation_ref",
-        "order"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
           "archive"
          ]
         }
@@ -11254,7 +11226,6 @@
        "update",
        "add_tab",
        "remove_tab",
-       "arrange_tabs",
        "archive"
       ],
       "type": "string"
@@ -11381,16 +11352,6 @@
      },
      "offer": {
       "$ref": "#/$defs/ProjectOfferReference"
-     },
-     "order": {
-      "items": {
-       "maxLength": 300,
-       "minLength": 3,
-       "type": "string"
-      },
-      "maxItems": 100,
-      "minItems": 1,
-      "type": "array"
      },
      "read_from": {
       "maxLength": 300,
