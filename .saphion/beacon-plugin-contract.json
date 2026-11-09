@@ -11004,6 +11004,31 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "if": {
+          "properties": {
+           "kind": {
+            "enum": [
+             "workspace"
+            ]
+           }
+          },
+          "required": [
+           "kind"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "offer"
+            ]
+           }
+          }
+         }
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -11060,16 +11085,37 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "oneOf": [
+          {
+           "required": [
+            "item_continuation_ref"
+           ]
+          },
+          {
+           "properties": {
+            "section": {
+             "minLength": 1
+            }
+           },
+           "required": [
+            "section"
+           ]
+          }
+         ]
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
          "continuation_ref",
-         "item_continuation_ref"
+         "item_continuation_ref",
+         "section"
         ]
        },
        "required": [
-        "continuation_ref",
-        "item_continuation_ref"
+        "continuation_ref"
        ]
       }
      },
@@ -11087,16 +11133,37 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "oneOf": [
+          {
+           "required": [
+            "item_continuation_ref"
+           ]
+          },
+          {
+           "properties": {
+            "section": {
+             "minLength": 1
+            }
+           },
+           "required": [
+            "section"
+           ]
+          }
+         ]
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
          "continuation_ref",
-         "item_continuation_ref"
+         "item_continuation_ref",
+         "section"
         ]
        },
        "required": [
-        "continuation_ref",
-        "item_continuation_ref"
+        "continuation_ref"
        ]
       }
      },
@@ -11263,6 +11330,11 @@
      "read_from": {
       "maxLength": 300,
       "minLength": 1,
+      "type": "string"
+     },
+     "section": {
+      "default": "",
+      "maxLength": 64,
       "type": "string"
      }
     },
