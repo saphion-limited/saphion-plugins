@@ -6097,18 +6097,25 @@
       "then": {
        "allOf": [
         {
-         "oneOf": [
-          {
-           "required": [
-            "outline"
-           ]
-          },
-          {
-           "required": [
-            "starter"
-           ]
-          }
-         ]
+         "else": {
+          "oneOf": [
+           {
+            "required": [
+             "outline"
+            ]
+           },
+           {
+            "required": [
+             "starter"
+            ]
+           }
+          ]
+         },
+         "if": {
+          "required": [
+           "tab_of_continuation_ref"
+          ]
+         }
         },
         {
          "dependentRequired": {
