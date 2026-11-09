@@ -1,7 +1,7 @@
 {
   "name": "saphion-documents",
   "displayName": "Saphion documents",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Word and PDF files, spreadsheets and presentations Beacon makes and edits by itself.",
   "author": {
     "name": "Saphion"
