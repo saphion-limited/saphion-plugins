@@ -12138,7 +12138,6 @@
    "choices": {
     "act": [
      "create",
-     "create_many",
      "delete",
      "move_dependent_dates",
      "restore",
@@ -12153,26 +12152,7 @@
    "family": "organisation_records",
    "schema": {
     "$defs": {
-     "JsonValue": {},
-     "StageHistoryEntry": {
-      "additionalProperties": false,
-      "properties": {
-       "entered_on": {
-        "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
-        "type": "string"
-       },
-       "stage": {
-        "maxLength": 120,
-        "minLength": 1,
-        "type": "string"
-       }
-      },
-      "required": [
-       "stage",
-       "entered_on"
-      ],
-      "type": "object"
-     }
+     "JsonValue": {}
     },
     "additionalProperties": false,
     "allOf": [
@@ -12248,78 +12228,6 @@
        },
        "required": [
         "updates"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "create_many"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "allOf": [
-        {
-         "else": {
-          "properties": {
-           "records": {
-            "items": {
-             "properties": {
-              "source_id": {
-               "maxLength": 0
-              }
-             }
-            }
-           }
-          }
-         },
-         "if": {
-          "properties": {
-           "list_name": {
-            "minLength": 1
-           }
-          },
-          "required": [
-           "list_name"
-          ]
-         },
-         "then": {
-          "properties": {
-           "records": {
-            "items": {
-             "properties": {
-              "source_id": {
-               "minLength": 1
-              }
-             },
-             "required": [
-              "source_id"
-             ]
-            }
-           }
-          }
-         }
-        }
-       ],
-       "propertyNames": {
-        "enum": [
-         "act",
-         "history",
-         "idempotency_key",
-         "list_name",
-         "records"
-        ]
-       },
-       "required": [
-        "idempotency_key",
-        "records"
        ]
       }
      },
@@ -12419,7 +12327,6 @@
       "enum": [
        "create",
        "update",
-       "create_many",
        "restore",
        "void",
        "delete",
@@ -12438,17 +12345,6 @@
       "default": false,
       "type": "boolean"
      },
-     "idempotency_key": {
-      "maxLength": 100,
-      "minLength": 1,
-      "pattern": "^\\S+$",
-      "type": "string"
-     },
-     "list_name": {
-      "default": "",
-      "maxLength": 200,
-      "type": "string"
-     },
      "record_continuation_refs": {
       "items": {
        "type": "string"
@@ -12458,57 +12354,6 @@
      },
      "record_set_continuation_ref": {
       "type": "string"
-     },
-     "records": {
-      "items": {
-       "additionalProperties": false,
-       "properties": {
-        "created_on": {
-         "default": "",
-         "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$",
-         "type": "string"
-        },
-        "ref": {
-         "default": "",
-         "maxLength": 64,
-         "pattern": "^[A-Za-z0-9_.-]*$",
-         "type": "string"
-        },
-        "resource_class": {
-         "maxLength": 64,
-         "minLength": 1,
-         "pattern": "^[^:\\s]+$",
-         "type": "string"
-        },
-        "source_id": {
-         "default": "",
-         "maxLength": 200,
-         "type": "string"
-        },
-        "stage_history": {
-         "items": {
-          "$ref": "#/$defs/StageHistoryEntry"
-         },
-         "maxItems": 100,
-         "type": "array"
-        },
-        "values": {
-         "additionalProperties": {
-          "$ref": "#/$defs/JsonValue"
-         },
-         "minProperties": 1,
-         "type": "object"
-        }
-       },
-       "required": [
-        "resource_class",
-        "values"
-       ],
-       "type": "object"
-      },
-      "maxItems": 200,
-      "minItems": 1,
-      "type": "array"
      },
      "resource_class": {
       "maxLength": 64,
@@ -12615,7 +12460,23 @@
         },
         "stage_history": {
          "items": {
-          "$ref": "#/$defs/StageHistoryEntry"
+          "additionalProperties": false,
+          "properties": {
+           "entered_on": {
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "type": "string"
+           },
+           "stage": {
+            "maxLength": 120,
+            "minLength": 1,
+            "type": "string"
+           }
+          },
+          "required": [
+           "stage",
+           "entered_on"
+          ],
+          "type": "object"
          },
          "maxItems": 100,
          "type": "array"
@@ -12623,7 +12484,6 @@
        },
        "type": "object"
       },
-      "maxItems": 100,
       "minItems": 1,
       "type": "array"
      },
