@@ -10928,12 +10928,29 @@
      "add_tab",
      "archive",
      "create",
+     "duplicate",
      "remove_tab",
      "update"
+    ],
+    "audience": [
+     "private",
+     "shared"
     ],
     "kind": [
      "project",
      "workspace"
+    ],
+    "principal_kind": [
+     "person",
+     "project",
+     "role",
+     "team"
+    ],
+    "role": [
+     "contributor",
+     "editor",
+     "manager",
+     "viewer"
     ]
    },
    "doors": [
@@ -11189,6 +11206,35 @@
        "properties": {
         "act": {
          "enum": [
+          "duplicate"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "name",
+         "continuation_ref",
+         "include_actions",
+         "fields",
+         "initial_access"
+        ]
+       },
+       "required": [
+        "continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "archive"
          ]
         }
@@ -11217,6 +11263,7 @@
        "update",
        "add_tab",
        "remove_tab",
+       "duplicate",
        "archive"
       ],
       "type": "string"
@@ -11324,6 +11371,120 @@
        }
       },
       "type": "object"
+     },
+     "fields": {
+      "additionalProperties": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "number"
+        }
+       ]
+      },
+      "maxProperties": 64,
+      "type": "object"
+     },
+     "include_actions": {
+      "default": false,
+      "type": "boolean"
+     },
+     "initial_access": {
+      "anyOf": [
+       {
+        "additionalProperties": false,
+        "properties": {
+         "audience": {
+          "default": "shared",
+          "enum": [
+           "private",
+           "shared"
+          ],
+          "type": "string"
+         },
+         "grants": {
+          "default": [],
+          "items": {
+           "additionalProperties": false,
+           "properties": {
+            "capabilities": {
+             "default": [],
+             "items": {
+              "enum": [
+               "manage_automations",
+               "create_projects",
+               "create_workspaces",
+               "use_notetaker",
+               "manage_projects",
+               "change_due_dates",
+               "view_contacts",
+               "create_contacts",
+               "edit_contacts",
+               "view_companies",
+               "create_companies",
+               "edit_companies",
+               "turn_off_notifications",
+               "see_people_work",
+               "see_availability",
+               "see_workload",
+               "see_activity",
+               "manage_team_members",
+               "invite_people",
+               "remove_people",
+               "view_every_project",
+               "comment_on_every_project",
+               "edit_every_project",
+               "manage_fields",
+               "manage_templates",
+               "share_with_organisation",
+               "manage_billing"
+              ],
+              "type": "string"
+             },
+             "type": "array"
+            },
+            "principal_id": {
+             "maxLength": 255,
+             "minLength": 1,
+             "type": "string"
+            },
+            "principal_kind": {
+             "enum": [
+              "person",
+              "team",
+              "role",
+              "project"
+             ],
+             "type": "string"
+            },
+            "role": {
+             "enum": [
+              "manager",
+              "editor",
+              "contributor",
+              "viewer"
+             ],
+             "type": "string"
+            }
+           },
+           "required": [
+            "principal_kind",
+            "principal_id",
+            "role"
+           ],
+           "type": "object"
+          },
+          "maxItems": 100,
+          "type": "array"
+         }
+        },
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ]
      },
      "item_continuation_ref": {
       "type": "string"
