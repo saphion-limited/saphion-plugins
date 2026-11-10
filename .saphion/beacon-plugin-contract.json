@@ -7813,25 +7813,6 @@
     "type": "object"
    }
   },
-  "file_template_delete": {
-   "choices": {},
-   "doors": [
-    "beacon"
-   ],
-   "family": "files",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "continuation_ref": {
-      "type": "string"
-     }
-    },
-    "required": [
-     "continuation_ref"
-    ],
-    "type": "object"
-   }
-  },
   "file_template_fill": {
    "choices": {},
    "doors": [
@@ -13733,6 +13714,10 @@
   },
   "record_field_change": {
    "choices": {
+    "act": [
+     "delete",
+     "edit"
+    ],
     "action": [
      "add",
      "choice_add",
@@ -13753,6 +13738,10 @@
      "in_progress",
      "review",
      "todo"
+    ],
+    "edit": [
+     "everyone",
+     "restricted"
     ],
     "meaning": [
      "lost",
@@ -13789,6 +13778,10 @@
      "timeline",
      "updated",
      "updated_by"
+    ],
+    "view": [
+     "everyone",
+     "restricted"
     ]
    },
    "doors": [
@@ -13802,549 +13795,689 @@
      {
       "if": {
        "properties": {
-        "action": {
+        "act": {
          "enum": [
-          "add"
+          "edit"
          ]
         }
        },
        "required": [
-        "action"
+        "act"
        ]
       },
       "then": {
-       "propertyNames": {
-        "not": {
-         "enum": [
-          "field_continuation_ref",
-          "with_values",
-          "choice_continuation_ref",
-          "name",
-          "colour",
-          "category",
-          "meaning",
-          "probability",
-          "forecast"
-         ]
-        }
-       },
-       "required": [
-        "field"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "action": {
-         "enum": [
-          "update"
-         ]
-        }
-       },
-       "required": [
-        "action"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "not": {
-         "enum": [
-          "ordinal",
-          "with_values",
-          "choice_continuation_ref",
-          "name",
-          "colour",
-          "category",
-          "meaning",
-          "probability",
-          "forecast"
-         ]
-        }
-       },
-       "required": [
-        "field",
-        "field_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "action": {
-         "enum": [
-          "move"
-         ]
-        }
-       },
-       "required": [
-        "action"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "not": {
-         "enum": [
-          "field",
-          "with_values",
-          "choice_continuation_ref",
-          "name",
-          "colour",
-          "category",
-          "meaning",
-          "probability",
-          "forecast"
-         ]
-        }
-       },
-       "required": [
-        "field_continuation_ref",
-        "ordinal"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "action": {
-         "enum": [
-          "duplicate"
-         ]
-        }
-       },
-       "required": [
-        "action"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "not": {
-         "enum": [
-          "choice_continuation_ref",
-          "name",
-          "colour",
-          "category",
-          "meaning",
-          "probability",
-          "forecast"
-         ]
-        }
-       },
-       "required": [
-        "field_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "action": {
-         "enum": [
-          "choice_add"
-         ]
-        }
-       },
-       "required": [
-        "action"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "not": {
-         "enum": [
-          "field",
-          "ordinal",
-          "with_values",
-          "choice_continuation_ref"
-         ]
-        }
-       },
-       "required": [
-        "field_continuation_ref",
-        "name"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "action": {
-         "enum": [
-          "choice_rename"
-         ]
-        }
-       },
-       "required": [
-        "action"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "not": {
-         "enum": [
-          "field",
-          "ordinal",
-          "with_values",
-          "colour",
-          "category",
-          "meaning",
-          "probability",
-          "forecast"
-         ]
-        }
-       },
-       "required": [
-        "choice_continuation_ref",
-        "name"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "action": {
-         "enum": [
-          "choice_colour"
-         ]
-        }
-       },
-       "required": [
-        "action"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "not": {
-         "enum": [
-          "field",
-          "ordinal",
-          "with_values",
-          "name",
-          "category",
-          "meaning",
-          "probability",
-          "forecast"
-         ]
-        }
-       },
-       "required": [
-        "choice_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "action": {
-         "enum": [
-          "choice_move"
-         ]
-        }
-       },
-       "required": [
-        "action"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "not": {
-         "enum": [
-          "field",
-          "with_values",
-          "name",
-          "colour",
-          "category",
-          "meaning",
-          "probability",
-          "forecast"
-         ]
-        }
-       },
-       "required": [
-        "choice_continuation_ref",
-        "ordinal"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "action": {
-         "enum": [
-          "choice_duplicate"
-         ]
-        }
-       },
-       "required": [
-        "action"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "not": {
-         "enum": [
-          "field",
-          "ordinal",
-          "with_values",
-          "colour",
-          "category",
-          "meaning",
-          "probability",
-          "forecast"
-         ]
-        }
-       },
-       "required": [
-        "choice_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "action": {
-         "enum": [
-          "choice_update"
-         ]
-        }
-       },
-       "required": [
-        "action"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "not": {
-         "enum": [
-          "field",
-          "ordinal",
-          "with_values",
-          "name",
-          "colour"
-         ]
-        }
-       },
-       "required": [
-        "choice_continuation_ref"
-       ]
-      }
-     },
-     {
-      "anyOf": [
-       {
-        "required": [
-         "resource_class"
-        ]
-       },
-       {
-        "required": [
-         "board_continuation_ref"
-        ]
-       },
-       {
-        "required": [
-         "field_continuation_ref"
-        ]
-       },
-       {
-        "required": [
-         "choice_continuation_ref"
-        ]
-       }
-      ]
-     },
-     {
-      "if": {
-       "properties": {
-        "action": {
-         "enum": [
-          "add"
-         ]
-        }
-       },
-       "required": [
-        "action"
-       ]
-      },
-      "then": {
-       "properties": {
-        "field": {
-         "allOf": [
-          {
-           "if": {
-            "properties": {
-             "type": {
-              "enum": [
-               "status"
-              ]
-             }
-            },
-            "required": [
-             "type"
+       "allOf": [
+        {
+         "if": {
+          "properties": {
+           "action": {
+            "enum": [
+             "add"
             ]
-           },
-           "then": {
-            "anyOf": [
+           }
+          },
+          "required": [
+           "action"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "field_continuation_ref",
+             "with_values",
+             "choice_continuation_ref",
+             "name",
+             "colour",
+             "category",
+             "meaning",
+             "probability",
+             "forecast",
+             "view",
+             "view_roles",
+             "view_people_continuation_refs",
+             "view_teams_continuation_refs",
+             "edit",
+             "edit_roles",
+             "edit_people_continuation_refs",
+             "edit_teams_continuation_refs"
+            ]
+           }
+          },
+          "required": [
+           "field"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "action": {
+            "enum": [
+             "update"
+            ]
+           }
+          },
+          "required": [
+           "action"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "ordinal",
+             "with_values",
+             "choice_continuation_ref",
+             "name",
+             "colour",
+             "category",
+             "meaning",
+             "probability",
+             "forecast"
+            ]
+           }
+          },
+          "required": [
+           "field_continuation_ref"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "action": {
+            "enum": [
+             "move"
+            ]
+           }
+          },
+          "required": [
+           "action"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "field",
+             "with_values",
+             "choice_continuation_ref",
+             "name",
+             "colour",
+             "category",
+             "meaning",
+             "probability",
+             "forecast",
+             "view",
+             "view_roles",
+             "view_people_continuation_refs",
+             "view_teams_continuation_refs",
+             "edit",
+             "edit_roles",
+             "edit_people_continuation_refs",
+             "edit_teams_continuation_refs"
+            ]
+           }
+          },
+          "required": [
+           "field_continuation_ref",
+           "ordinal"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "action": {
+            "enum": [
+             "duplicate"
+            ]
+           }
+          },
+          "required": [
+           "action"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "choice_continuation_ref",
+             "name",
+             "colour",
+             "category",
+             "meaning",
+             "probability",
+             "forecast",
+             "view",
+             "view_roles",
+             "view_people_continuation_refs",
+             "view_teams_continuation_refs",
+             "edit",
+             "edit_roles",
+             "edit_people_continuation_refs",
+             "edit_teams_continuation_refs"
+            ]
+           }
+          },
+          "required": [
+           "field_continuation_ref"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "action": {
+            "enum": [
+             "choice_add"
+            ]
+           }
+          },
+          "required": [
+           "action"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "field",
+             "ordinal",
+             "with_values",
+             "choice_continuation_ref",
+             "view",
+             "view_roles",
+             "view_people_continuation_refs",
+             "view_teams_continuation_refs",
+             "edit",
+             "edit_roles",
+             "edit_people_continuation_refs",
+             "edit_teams_continuation_refs"
+            ]
+           }
+          },
+          "required": [
+           "field_continuation_ref",
+           "name"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "action": {
+            "enum": [
+             "choice_rename"
+            ]
+           }
+          },
+          "required": [
+           "action"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "field",
+             "ordinal",
+             "with_values",
+             "colour",
+             "category",
+             "meaning",
+             "probability",
+             "forecast",
+             "view",
+             "view_roles",
+             "view_people_continuation_refs",
+             "view_teams_continuation_refs",
+             "edit",
+             "edit_roles",
+             "edit_people_continuation_refs",
+             "edit_teams_continuation_refs"
+            ]
+           }
+          },
+          "required": [
+           "choice_continuation_ref",
+           "name"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "action": {
+            "enum": [
+             "choice_colour"
+            ]
+           }
+          },
+          "required": [
+           "action"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "field",
+             "ordinal",
+             "with_values",
+             "name",
+             "category",
+             "meaning",
+             "probability",
+             "forecast",
+             "view",
+             "view_roles",
+             "view_people_continuation_refs",
+             "view_teams_continuation_refs",
+             "edit",
+             "edit_roles",
+             "edit_people_continuation_refs",
+             "edit_teams_continuation_refs"
+            ]
+           }
+          },
+          "required": [
+           "choice_continuation_ref"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "action": {
+            "enum": [
+             "choice_move"
+            ]
+           }
+          },
+          "required": [
+           "action"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "field",
+             "with_values",
+             "name",
+             "colour",
+             "category",
+             "meaning",
+             "probability",
+             "forecast",
+             "view",
+             "view_roles",
+             "view_people_continuation_refs",
+             "view_teams_continuation_refs",
+             "edit",
+             "edit_roles",
+             "edit_people_continuation_refs",
+             "edit_teams_continuation_refs"
+            ]
+           }
+          },
+          "required": [
+           "choice_continuation_ref",
+           "ordinal"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "action": {
+            "enum": [
+             "choice_duplicate"
+            ]
+           }
+          },
+          "required": [
+           "action"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "field",
+             "ordinal",
+             "with_values",
+             "colour",
+             "category",
+             "meaning",
+             "probability",
+             "forecast",
+             "view",
+             "view_roles",
+             "view_people_continuation_refs",
+             "view_teams_continuation_refs",
+             "edit",
+             "edit_roles",
+             "edit_people_continuation_refs",
+             "edit_teams_continuation_refs"
+            ]
+           }
+          },
+          "required": [
+           "choice_continuation_ref"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "action": {
+            "enum": [
+             "choice_update"
+            ]
+           }
+          },
+          "required": [
+           "action"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "field",
+             "ordinal",
+             "with_values",
+             "name",
+             "colour",
+             "view",
+             "view_roles",
+             "view_people_continuation_refs",
+             "view_teams_continuation_refs",
+             "edit",
+             "edit_roles",
+             "edit_people_continuation_refs",
+             "edit_teams_continuation_refs"
+            ]
+           }
+          },
+          "required": [
+           "choice_continuation_ref"
+          ]
+         }
+        },
+        {
+         "anyOf": [
+          {
+           "required": [
+            "resource_class"
+           ]
+          },
+          {
+           "required": [
+            "board_continuation_ref"
+           ]
+          },
+          {
+           "required": [
+            "field_continuation_ref"
+           ]
+          },
+          {
+           "required": [
+            "choice_continuation_ref"
+           ]
+          }
+         ]
+        },
+        {
+         "if": {
+          "properties": {
+           "action": {
+            "enum": [
+             "add"
+            ]
+           }
+          },
+          "required": [
+           "action"
+          ]
+         },
+         "then": {
+          "properties": {
+           "field": {
+            "allOf": [
              {
-              "required": [
-               "options"
-              ]
+              "if": {
+               "properties": {
+                "type": {
+                 "enum": [
+                  "status"
+                 ]
+                }
+               },
+               "required": [
+                "type"
+               ]
+              },
+              "then": {
+               "anyOf": [
+                {
+                 "required": [
+                  "options"
+                 ]
+                },
+                {
+                 "required": [
+                  "choiceList"
+                 ]
+                }
+               ],
+               "properties": {
+                "choiceList": {
+                 "minLength": 1,
+                 "type": "string"
+                },
+                "options": {
+                 "items": {
+                  "minLength": 1,
+                  "type": "string"
+                 },
+                 "minItems": 1,
+                 "type": "array"
+                }
+               }
+              }
              },
              {
-              "required": [
-               "choiceList"
-              ]
+              "if": {
+               "properties": {
+                "type": {
+                 "enum": [
+                  "connect"
+                 ]
+                }
+               },
+               "required": [
+                "type"
+               ]
+              },
+              "then": {
+               "properties": {
+                "to": {
+                 "minLength": 1,
+                 "type": "string"
+                }
+               },
+               "required": [
+                "to"
+               ]
+              }
+             },
+             {
+              "if": {
+               "properties": {
+                "type": {
+                 "enum": [
+                  "mirror",
+                  "rollup"
+                 ]
+                }
+               },
+               "required": [
+                "type"
+               ]
+              },
+              "then": {
+               "properties": {
+                "derive": {
+                 "minProperties": 1,
+                 "type": "object"
+                }
+               },
+               "required": [
+                "derive"
+               ]
+              }
+             },
+             {
+              "if": {
+               "properties": {
+                "type": {
+                 "enum": [
+                  "formula"
+                 ]
+                }
+               },
+               "required": [
+                "type"
+               ]
+              },
+              "then": {
+               "properties": {
+                "formula": {
+                 "properties": {
+                  "expression": {
+                   "minLength": 1,
+                   "type": "string"
+                  }
+                 },
+                 "required": [
+                  "expression"
+                 ],
+                 "type": "object"
+                }
+               },
+               "required": [
+                "formula"
+               ]
+              }
+             },
+             {
+              "if": {
+               "properties": {
+                "type": {
+                 "enum": [
+                  "button"
+                 ]
+                }
+               },
+               "required": [
+                "type"
+               ]
+              },
+              "then": {
+               "properties": {
+                "button": {
+                 "properties": {
+                  "automationId": {
+                   "minLength": 1,
+                   "type": "string"
+                  },
+                  "label": {
+                   "minLength": 1,
+                   "type": "string"
+                  }
+                 },
+                 "required": [
+                  "label",
+                  "automationId"
+                 ],
+                 "type": "object"
+                }
+               },
+               "required": [
+                "button"
+               ]
+              }
              }
             ],
-            "properties": {
-             "choiceList": {
-              "minLength": 1,
-              "type": "string"
-             },
-             "options": {
-              "items": {
-               "minLength": 1,
-               "type": "string"
-              },
-              "minItems": 1,
-              "type": "array"
-             }
-            }
-           }
-          },
-          {
-           "if": {
-            "properties": {
-             "type": {
-              "enum": [
-               "connect"
-              ]
-             }
-            },
             "required": [
+             "label",
              "type"
-            ]
-           },
-           "then": {
-            "properties": {
-             "to": {
-              "minLength": 1,
-              "type": "string"
-             }
-            },
-            "required": [
-             "to"
-            ]
-           }
-          },
-          {
-           "if": {
-            "properties": {
-             "type": {
-              "enum": [
-               "mirror",
-               "rollup"
-              ]
-             }
-            },
-            "required": [
-             "type"
-            ]
-           },
-           "then": {
-            "properties": {
-             "derive": {
-              "minProperties": 1,
-              "type": "object"
-             }
-            },
-            "required": [
-             "derive"
-            ]
-           }
-          },
-          {
-           "if": {
-            "properties": {
-             "type": {
-              "enum": [
-               "formula"
-              ]
-             }
-            },
-            "required": [
-             "type"
-            ]
-           },
-           "then": {
-            "properties": {
-             "formula": {
-              "properties": {
-               "expression": {
-                "minLength": 1,
-                "type": "string"
-               }
-              },
-              "required": [
-               "expression"
-              ],
-              "type": "object"
-             }
-            },
-            "required": [
-             "formula"
-            ]
-           }
-          },
-          {
-           "if": {
-            "properties": {
-             "type": {
-              "enum": [
-               "button"
-              ]
-             }
-            },
-            "required": [
-             "type"
-            ]
-           },
-           "then": {
-            "properties": {
-             "button": {
-              "properties": {
-               "automationId": {
-                "minLength": 1,
-                "type": "string"
-               },
-               "label": {
-                "minLength": 1,
-                "type": "string"
-               }
-              },
-              "required": [
-               "label",
-               "automationId"
-              ],
-              "type": "object"
-             }
-            },
-            "required": [
-             "button"
             ]
            }
           }
-         ],
-         "required": [
-          "label",
-          "type"
+         }
+        }
+       ],
+       "required": [
+        "action"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "delete"
          ]
         }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "allOf": [
+        {
+         "anyOf": [
+          {
+           "required": [
+            "field_continuation_ref"
+           ]
+          },
+          {
+           "required": [
+            "choice_continuation_ref"
+           ]
+          }
+         ]
+        }
+       ],
+       "propertyNames": {
+        "enum": [
+         "act",
+         "field_continuation_ref",
+         "choice_continuation_ref",
+         "resource_class",
+         "board_continuation_ref"
+        ]
        }
       }
      }
     ],
     "properties": {
+     "act": {
+      "enum": [
+       "edit",
+       "delete"
+      ],
+      "type": "string"
+     },
      "action": {
       "enum": [
        "add",
@@ -14381,6 +14514,38 @@
      "colour": {
       "pattern": "^#[0-9A-Fa-f]{6}$",
       "type": "string"
+     },
+     "edit": {
+      "enum": [
+       "everyone",
+       "restricted"
+      ],
+      "type": "string"
+     },
+     "edit_people_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 100,
+      "type": "array"
+     },
+     "edit_roles": {
+      "items": {
+       "enum": [
+        "admin",
+        "member"
+       ],
+       "type": "string"
+      },
+      "maxItems": 2,
+      "type": "array"
+     },
+     "edit_teams_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 50,
+      "type": "array"
      },
      "field": {
       "additionalProperties": true,
@@ -14463,245 +14628,6 @@
       "pattern": "^[^:\\s]+$",
       "type": "string"
      },
-     "with_values": {
-      "type": "boolean"
-     }
-    },
-    "required": [
-     "action"
-    ],
-    "type": "object"
-   }
-  },
-  "record_field_remove": {
-   "choices": {
-    "action": [
-     "choice_delete",
-     "remove"
-    ]
-   },
-   "doors": [
-    "beacon"
-   ],
-   "family": "organisation_records",
-   "schema": {
-    "additionalProperties": false,
-    "allOf": [
-     {
-      "if": {
-       "properties": {
-        "action": {
-         "enum": [
-          "remove"
-         ]
-        }
-       },
-       "required": [
-        "action"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "not": {
-         "enum": [
-          "choice_continuation_ref"
-         ]
-        }
-       },
-       "required": [
-        "field_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "action": {
-         "enum": [
-          "choice_delete"
-         ]
-        }
-       },
-       "required": [
-        "action"
-       ]
-      },
-      "then": {
-       "required": [
-        "choice_continuation_ref"
-       ]
-      }
-     }
-    ],
-    "properties": {
-     "action": {
-      "enum": [
-       "remove",
-       "choice_delete"
-      ],
-      "type": "string"
-     },
-     "board_continuation_ref": {
-      "type": "string"
-     },
-     "choice_continuation_ref": {
-      "type": "string"
-     },
-     "field_continuation_ref": {
-      "type": "string"
-     }
-    },
-    "required": [
-     "action"
-    ],
-    "type": "object"
-   }
-  },
-  "record_field_settings": {
-   "choices": {
-    "action": [
-     "update"
-    ],
-    "edit": [
-     "everyone",
-     "restricted"
-    ],
-    "type": [
-     "address",
-     "autonumber",
-     "button",
-     "checkbox",
-     "connect",
-     "created",
-     "created_by",
-     "date",
-     "duration",
-     "email",
-     "files",
-     "formula",
-     "link",
-     "mirror",
-     "money",
-     "number",
-     "percent",
-     "person",
-     "phone",
-     "rating",
-     "rich_text",
-     "rollup",
-     "status",
-     "tags",
-     "text",
-     "timeline",
-     "updated",
-     "updated_by"
-    ],
-    "view": [
-     "everyone",
-     "restricted"
-    ]
-   },
-   "doors": [
-    "beacon"
-   ],
-   "family": "organisation_records",
-   "schema": {
-    "additionalProperties": false,
-    "allOf": [
-     {
-      "required": [
-       "field_continuation_ref",
-       "field"
-      ]
-     }
-    ],
-    "properties": {
-     "action": {
-      "const": "update",
-      "type": "string"
-     },
-     "board_continuation_ref": {
-      "type": "string"
-     },
-     "choice_continuation_ref": {
-      "type": "string"
-     },
-     "edit": {
-      "enum": [
-       "everyone",
-       "restricted"
-      ],
-      "type": "string"
-     },
-     "edit_people_continuation_refs": {
-      "items": {
-       "type": "string"
-      },
-      "maxItems": 100,
-      "type": "array"
-     },
-     "edit_roles": {
-      "items": {
-       "enum": [
-        "admin",
-        "member"
-       ],
-       "type": "string"
-      },
-      "maxItems": 2,
-      "type": "array"
-     },
-     "edit_teams_continuation_refs": {
-      "items": {
-       "type": "string"
-      },
-      "maxItems": 50,
-      "type": "array"
-     },
-     "field": {
-      "additionalProperties": true,
-      "properties": {
-       "include_time": {
-        "type": "boolean"
-       },
-       "type": {
-        "enum": [
-         "text",
-         "rich_text",
-         "number",
-         "money",
-         "percent",
-         "rating",
-         "duration",
-         "status",
-         "tags",
-         "person",
-         "date",
-         "timeline",
-         "checkbox",
-         "link",
-         "email",
-         "phone",
-         "files",
-         "address",
-         "connect",
-         "mirror",
-         "rollup",
-         "formula",
-         "button",
-         "created",
-         "updated",
-         "created_by",
-         "updated_by",
-         "autonumber"
-        ]
-       }
-      },
-      "type": "object"
-     },
-     "field_continuation_ref": {
-      "type": "string"
-     },
      "view": {
       "enum": [
        "everyone",
@@ -14733,10 +14659,13 @@
       },
       "maxItems": 50,
       "type": "array"
+     },
+     "with_values": {
+      "type": "boolean"
      }
     },
     "required": [
-     "action"
+     "act"
     ],
     "type": "object"
    }
