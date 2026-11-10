@@ -8004,9 +8004,11 @@
      "generated_document",
      "invitation",
      "not",
+     "permission",
      "person",
      "project",
      "record",
+     "role",
      "run",
      "scheduled_task",
      "skill",
@@ -8477,9 +8479,11 @@
        "form",
        "generated_document",
        "invitation",
+       "permission",
        "person",
        "project",
        "record",
+       "role",
        "run",
        "scheduled_task",
        "skill",
@@ -8877,6 +8881,12 @@
   },
   "member_change": {
    "choices": {
+    "access_level": [
+     "contributor",
+     "editor",
+     "manager",
+     "viewer"
+    ],
     "account_type": [
      "admin",
      "member"
@@ -8885,24 +8895,49 @@
      "add_people",
      "answer_team_invitation",
      "change_member",
+     "change_permission",
+     "change_role",
+     "create_permission",
+     "create_role",
      "deactivate_member",
+     "hide_permission",
      "invitation_link",
      "invite",
      "my_name",
      "notetaker_minutes",
+     "permission_holders",
      "reactivate_member",
      "remove_member",
      "remove_my_picture",
      "remove_people",
      "resend_invitation",
+     "retire_role",
      "seat_level",
      "send_prepared_invitations",
      "withdraw_invitation"
+    ],
+    "holders": [
+     "add",
+     "remove",
+     "set"
+    ],
+    "kind_of_record": [
+     "client",
+     "crm_bid_submission",
+     "deal",
+     "lead",
+     "organisation",
+     "project",
+     "team"
     ],
     "level": [
      "max",
      "pro",
      "standard"
+    ],
+    "product_level": [
+     "editor",
+     "manager"
     ],
     "role": [
      "member",
@@ -9016,7 +9051,11 @@
         "enum": [
          "act",
          "invitations",
-         "send"
+         "send",
+         "join_team_continuation_ref",
+         "permission_continuation_refs",
+         "products",
+         "product_level"
         ]
        },
        "required": [
@@ -9091,6 +9130,10 @@
        "propertyNames": {
         "enum": [
          "act",
+         "join_team_continuation_ref",
+         "permission_continuation_refs",
+         "products",
+         "product_level",
          "email",
          "account_type"
         ]
@@ -9322,11 +9365,225 @@
         "person_continuation_ref"
        ]
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "create_permission"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "name",
+         "about",
+         "base_continuation_ref",
+         "powers",
+         "holder_people_continuation_refs",
+         "holder_teams_continuation_refs"
+        ]
+       },
+       "required": [
+        "base_continuation_ref",
+        "name"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "change_permission"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "name",
+         "about",
+         "powers",
+         "holder_people_continuation_refs",
+         "holder_teams_continuation_refs",
+         "permission_continuation_ref",
+         "token"
+        ]
+       },
+       "required": [
+        "permission_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "hide_permission"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "permission_continuation_ref",
+         "token",
+         "hidden"
+        ]
+       },
+       "required": [
+        "permission_continuation_ref",
+        "hidden"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "permission_holders"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "holder_people_continuation_refs",
+         "holder_teams_continuation_refs",
+         "permission_continuation_ref",
+         "token",
+         "holders"
+        ]
+       },
+       "required": [
+        "permission_continuation_ref",
+        "holders"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "create_role"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "name",
+         "kind_of_record",
+         "access_level",
+         "inherits"
+        ]
+       },
+       "required": [
+        "name",
+        "kind_of_record"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "change_role"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "name",
+         "access_level",
+         "role_continuation_ref"
+        ]
+       },
+       "required": [
+        "role_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "retire_role"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "role_continuation_ref"
+        ]
+       },
+       "required": [
+        "role_continuation_ref"
+       ]
+      }
      }
     ],
     "properties": {
+     "about": {
+      "maxLength": 500,
+      "type": "string"
+     },
      "accept": {
       "type": "boolean"
+     },
+     "access_level": {
+      "enum": [
+       "viewer",
+       "contributor",
+       "editor",
+       "manager"
+      ],
+      "type": "string"
      },
      "account_type": {
       "default": "member",
@@ -9353,8 +9610,18 @@
        "my_name",
        "remove_my_picture",
        "reactivate_member",
-       "remove_member"
+       "remove_member",
+       "create_permission",
+       "change_permission",
+       "hide_permission",
+       "permission_holders",
+       "create_role",
+       "change_role",
+       "retire_role"
       ],
+      "type": "string"
+     },
+     "base_continuation_ref": {
       "type": "string"
      },
      "continuation_ref": {
@@ -9368,6 +9635,35 @@
      "first_name": {
       "maxLength": 80,
       "type": "string"
+     },
+     "hidden": {
+      "type": "boolean"
+     },
+     "holder_people_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 500,
+      "type": "array"
+     },
+     "holder_teams_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 500,
+      "type": "array"
+     },
+     "holders": {
+      "enum": [
+       "add",
+       "remove",
+       "set"
+      ],
+      "type": "string"
+     },
+     "inherits": {
+      "default": false,
+      "type": "boolean"
      },
      "invitation_continuation_ref": {
       "type": "string"
@@ -9399,6 +9695,21 @@
       "minItems": 1,
       "type": "array"
      },
+     "join_team_continuation_ref": {
+      "type": "string"
+     },
+     "kind_of_record": {
+      "enum": [
+       "project",
+       "deal",
+       "lead",
+       "crm_bid_submission",
+       "client",
+       "team",
+       "organisation"
+      ],
+      "type": "string"
+     },
      "last_name": {
       "maxLength": 80,
       "type": "string"
@@ -9419,6 +9730,11 @@
       "maxLength": 30,
       "type": "string"
      },
+     "name": {
+      "maxLength": 120,
+      "minLength": 1,
+      "type": "string"
+     },
      "people_continuation_refs": {
       "items": {
        "type": "string"
@@ -9427,8 +9743,44 @@
       "minItems": 1,
       "type": "array"
      },
+     "permission_continuation_ref": {
+      "type": "string"
+     },
+     "permission_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 100,
+      "type": "array"
+     },
      "person_continuation_ref": {
       "type": "string"
+     },
+     "powers": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 80,
+      "type": "array"
+     },
+     "product_level": {
+      "default": "editor",
+      "enum": [
+       "editor",
+       "manager"
+      ],
+      "type": "string"
+     },
+     "products": {
+      "items": {
+       "enum": [
+        "rams",
+        "crm"
+       ],
+       "type": "string"
+      },
+      "maxItems": 50,
+      "type": "array"
      },
      "role": {
       "default": "member",
@@ -9438,11 +9790,19 @@
       ],
       "type": "string"
      },
+     "role_continuation_ref": {
+      "type": "string"
+     },
      "send": {
       "default": true,
       "type": "boolean"
      },
      "successor_continuation_ref": {
+      "type": "string"
+     },
+     "token": {
+      "maxLength": 128,
+      "minLength": 1,
       "type": "string"
      }
     },
@@ -11280,6 +11640,43 @@
       "type": "string"
      }
     },
+    "type": "object"
+   }
+  },
+  "permission_list": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "calendars",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "query": {
+      "default": "",
+      "maxLength": 200,
+      "type": "string"
+     }
+    },
+    "type": "object"
+   }
+  },
+  "permission_read": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "calendars",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
     "type": "object"
    }
   },
@@ -15121,6 +15518,43 @@
     "type": "object"
    }
   },
+  "role_list": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "calendars",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "query": {
+      "default": "",
+      "maxLength": 200,
+      "type": "string"
+     }
+    },
+    "type": "object"
+   }
+  },
+  "role_read": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "calendars",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "scheduled_task_read": {
    "choices": {},
    "doors": [
@@ -16213,10 +16647,10 @@
      },
      "role": {
       "enum": [
-       "manager",
-       "editor",
+       "viewer",
        "contributor",
-       "viewer"
+       "editor",
+       "manager"
       ],
       "type": "string"
      },
