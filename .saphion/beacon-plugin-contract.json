@@ -8002,6 +8002,7 @@
      "file",
      "form",
      "generated_document",
+     "invitation",
      "not",
      "person",
      "project",
@@ -8475,6 +8476,7 @@
        "file",
        "form",
        "generated_document",
+       "invitation",
        "person",
        "project",
        "record",
@@ -8824,6 +8826,43 @@
     "type": "object"
    }
   },
+  "invitation_list": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "calendars",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "query": {
+      "default": "",
+      "maxLength": 200,
+      "type": "string"
+     }
+    },
+    "type": "object"
+   }
+  },
+  "invitation_read": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "calendars",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "link_preview": {
    "doors": [
     "beacon"
@@ -8847,6 +8886,7 @@
      "answer_team_invitation",
      "change_member",
      "deactivate_member",
+     "invitation_link",
      "invite",
      "my_name",
      "notetaker_minutes",
@@ -8854,7 +8894,10 @@
      "remove_member",
      "remove_my_picture",
      "remove_people",
-     "seat_level"
+     "resend_invitation",
+     "seat_level",
+     "send_prepared_invitations",
+     "withdraw_invitation"
     ],
     "level": [
      "max",
@@ -8979,6 +9022,103 @@
        "required": [
         "invitations"
        ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "resend_invitation"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "invitation_continuation_ref"
+        ]
+       },
+       "required": [
+        "invitation_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "withdraw_invitation"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "invitation_continuation_ref"
+        ]
+       },
+       "required": [
+        "invitation_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "invitation_link"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "email",
+         "account_type"
+        ]
+       },
+       "required": [
+        "email"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "send_prepared_invitations"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act"
+        ]
+       }
       }
      },
      {
@@ -9189,6 +9329,7 @@
       "type": "boolean"
      },
      "account_type": {
+      "default": "member",
       "enum": [
        "member",
        "admin"
@@ -9201,6 +9342,10 @@
        "remove_people",
        "seat_level",
        "invite",
+       "resend_invitation",
+       "withdraw_invitation",
+       "invitation_link",
+       "send_prepared_invitations",
        "answer_team_invitation",
        "change_member",
        "deactivate_member",
@@ -9215,8 +9360,16 @@
      "continuation_ref": {
       "type": "string"
      },
+     "email": {
+      "maxLength": 320,
+      "minLength": 3,
+      "type": "string"
+     },
      "first_name": {
       "maxLength": 80,
+      "type": "string"
+     },
+     "invitation_continuation_ref": {
       "type": "string"
      },
      "invitations": {
