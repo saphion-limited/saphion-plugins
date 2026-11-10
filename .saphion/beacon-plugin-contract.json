@@ -8003,6 +8003,7 @@
      "form",
      "generated_document",
      "invitation",
+     "memory",
      "not",
      "permission",
      "person",
@@ -8479,6 +8480,7 @@
        "form",
        "generated_document",
        "invitation",
+       "memory",
        "permission",
        "person",
        "project",
@@ -9812,8 +9814,16 @@
     "type": "object"
    }
   },
-  "memory_append": {
-   "choices": {},
+  "memory": {
+   "choices": {
+    "act": [
+     "create",
+     "delete",
+     "insert",
+     "str_replace",
+     "update"
+    ]
+   },
    "doors": [
     "beacon",
     "codeact"
@@ -9821,7 +9831,189 @@
    "family": "memory",
    "schema": {
     "additionalProperties": false,
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "create"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "topic",
+         "summary",
+         "text"
+        ]
+       },
+       "required": [
+        "topic",
+        "summary",
+        "text"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "update"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "allOf": [
+        {
+         "anyOf": [
+          {
+           "required": [
+            "topic"
+           ]
+          },
+          {
+           "required": [
+            "summary"
+           ]
+          },
+          {
+           "required": [
+            "text"
+           ]
+          },
+          {
+           "required": [
+            "pinned"
+           ]
+          }
+         ]
+        }
+       ],
+       "propertyNames": {
+        "enum": [
+         "act",
+         "topic",
+         "summary",
+         "text",
+         "continuation_ref",
+         "if_version",
+         "pinned"
+        ]
+       },
+       "required": [
+        "continuation_ref",
+        "if_version"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "str_replace"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "if_version",
+         "old_str",
+         "new_str"
+        ]
+       },
+       "required": [
+        "continuation_ref",
+        "if_version",
+        "old_str"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "insert"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "if_version",
+         "insert_text"
+        ]
+       },
+       "required": [
+        "continuation_ref",
+        "if_version",
+        "insert_text"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "delete"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "note_continuation_refs"
+        ]
+       },
+       "required": [
+        "note_continuation_refs"
+       ]
+      }
+     }
+    ],
     "properties": {
+     "act": {
+      "enum": [
+       "create",
+       "update",
+       "str_replace",
+       "insert",
+       "delete"
+      ],
+      "type": "string"
+     },
      "continuation_ref": {
       "type": "string"
      },
@@ -9829,29 +10021,16 @@
       "pattern": "^v([1-9][0-9]{0,8})$",
       "type": "string"
      },
-     "text": {
+     "insert_text": {
       "maxLength": 8000,
       "minLength": 1,
       "type": "string"
-     }
-    },
-    "required": [
-     "if_version",
-     "text",
-     "continuation_ref"
-    ],
-    "type": "object"
-   }
-  },
-  "memory_delete": {
-   "choices": {},
-   "doors": [
-    "beacon"
-   ],
-   "family": "memory",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
+     },
+     "new_str": {
+      "default": "",
+      "maxLength": 8000,
+      "type": "string"
+     },
      "note_continuation_refs": {
       "items": {
        "type": "string"
@@ -9859,10 +10038,33 @@
       "maxItems": 50,
       "minItems": 1,
       "type": "array"
+     },
+     "old_str": {
+      "maxLength": 8000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "pinned": {
+      "type": "boolean"
+     },
+     "summary": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "text": {
+      "maxLength": 8000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "topic": {
+      "maxLength": 160,
+      "minLength": 1,
+      "type": "string"
      }
     },
     "required": [
-     "note_continuation_refs"
+     "act"
     ],
     "type": "object"
    }
@@ -9870,8 +10072,7 @@
   "memory_list": {
    "choices": {},
    "doors": [
-    "beacon",
-    "codeact"
+    "routed"
    ],
    "family": "memory",
    "schema": {
@@ -9901,145 +10102,6 @@
     },
     "required": [
      "continuation_ref"
-    ],
-    "type": "object"
-   }
-  },
-  "memory_str_replace": {
-   "choices": {},
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "memory",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "continuation_ref": {
-      "type": "string"
-     },
-     "if_version": {
-      "pattern": "^v([1-9][0-9]{0,8})$",
-      "type": "string"
-     },
-     "new_text": {
-      "maxLength": 8000,
-      "type": "string"
-     },
-     "old_text": {
-      "maxLength": 8000,
-      "minLength": 1,
-      "type": "string"
-     }
-    },
-    "required": [
-     "if_version",
-     "old_text",
-     "new_text",
-     "continuation_ref"
-    ],
-    "type": "object"
-   }
-  },
-  "memory_write": {
-   "choices": {
-    "if_version": [
-     "new"
-    ]
-   },
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "memory",
-   "schema": {
-    "additionalProperties": false,
-    "allOf": [
-     {
-      "else": {
-       "anyOf": [
-        {
-         "required": [
-          "topic"
-         ]
-        },
-        {
-         "required": [
-          "summary"
-         ]
-        },
-        {
-         "required": [
-          "text"
-         ]
-        },
-        {
-         "required": [
-          "pinned"
-         ]
-        }
-       ],
-       "required": [
-        "continuation_ref"
-       ]
-      },
-      "if": {
-       "properties": {
-        "if_version": {
-         "enum": [
-          "new"
-         ]
-        }
-       },
-       "required": [
-        "if_version"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "not": {
-         "enum": [
-          "continuation_ref"
-         ]
-        }
-       },
-       "required": [
-        "topic",
-        "summary",
-        "text"
-       ]
-      }
-     }
-    ],
-    "properties": {
-     "continuation_ref": {
-      "type": "string"
-     },
-     "if_version": {
-      "pattern": "^(?:v([1-9][0-9]{0,8})|new)$",
-      "type": "string"
-     },
-     "pinned": {
-      "type": "boolean"
-     },
-     "summary": {
-      "maxLength": 240,
-      "minLength": 1,
-      "type": "string"
-     },
-     "text": {
-      "maxLength": 8000,
-      "minLength": 1,
-      "type": "string"
-     },
-     "topic": {
-      "maxLength": 160,
-      "minLength": 1,
-      "type": "string"
-     }
-    },
-    "required": [
-     "if_version"
     ],
     "type": "object"
    }
