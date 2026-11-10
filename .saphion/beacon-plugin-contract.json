@@ -1529,6 +1529,7 @@
     "act": [
      "create",
      "delete",
+     "resume",
      "update"
     ],
     "change": [
@@ -1926,6 +1927,31 @@
        "properties": {
         "act": {
          "enum": [
+          "resume"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref"
+        ]
+       },
+       "required": [
+        "continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "delete"
          ]
         }
@@ -1952,6 +1978,7 @@
       "enum": [
        "create",
        "update",
+       "resume",
        "delete"
       ],
       "type": "string"
@@ -7786,6 +7813,25 @@
     "type": "object"
    }
   },
+  "file_template_delete": {
+   "choices": {},
+   "doors": [
+    "beacon"
+   ],
+   "family": "files",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "file_template_fill": {
    "choices": {},
    "doors": [
@@ -8789,6 +8835,469 @@
     "beacon"
    ],
    "family": "host"
+  },
+  "member_change": {
+   "choices": {
+    "account_type": [
+     "admin",
+     "member"
+    ],
+    "act": [
+     "add_people",
+     "answer_team_invitation",
+     "change_member",
+     "deactivate_member",
+     "invite",
+     "my_name",
+     "notetaker_minutes",
+     "reactivate_member",
+     "remove_member",
+     "remove_my_picture",
+     "remove_people",
+     "seat_level"
+    ],
+    "level": [
+     "max",
+     "pro",
+     "standard"
+    ],
+    "role": [
+     "member",
+     "owner"
+    ]
+   },
+   "doors": [
+    "beacon"
+   ],
+   "family": "calendars",
+   "schema": {
+    "additionalProperties": false,
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "add_people"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "people_continuation_refs",
+         "role"
+        ]
+       },
+       "required": [
+        "continuation_ref",
+        "people_continuation_refs"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "remove_people"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "people_continuation_refs"
+        ]
+       },
+       "required": [
+        "continuation_ref",
+        "people_continuation_refs"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "seat_level"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "person_continuation_ref",
+         "level"
+        ]
+       },
+       "required": [
+        "person_continuation_ref",
+        "level"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "invite"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "invitations",
+         "send"
+        ]
+       },
+       "required": [
+        "invitations"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "answer_team_invitation"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "accept"
+        ]
+       },
+       "required": [
+        "continuation_ref",
+        "accept"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "change_member"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "person_continuation_ref",
+         "account_type"
+        ]
+       },
+       "required": [
+        "person_continuation_ref",
+        "account_type"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "deactivate_member"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "person_continuation_ref",
+         "successor_continuation_ref"
+        ]
+       },
+       "required": [
+        "person_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "notetaker_minutes"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "person_continuation_ref",
+         "minutes"
+        ]
+       },
+       "required": [
+        "person_continuation_ref",
+        "minutes"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "my_name"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "first_name",
+         "last_name",
+         "mobile"
+        ]
+       }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "remove_my_picture"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act"
+        ]
+       }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "reactivate_member"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "person_continuation_ref"
+        ]
+       },
+       "required": [
+        "person_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "remove_member"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "person_continuation_ref"
+        ]
+       },
+       "required": [
+        "person_continuation_ref"
+       ]
+      }
+     }
+    ],
+    "properties": {
+     "accept": {
+      "type": "boolean"
+     },
+     "account_type": {
+      "enum": [
+       "member",
+       "admin"
+      ],
+      "type": "string"
+     },
+     "act": {
+      "enum": [
+       "add_people",
+       "remove_people",
+       "seat_level",
+       "invite",
+       "answer_team_invitation",
+       "change_member",
+       "deactivate_member",
+       "notetaker_minutes",
+       "my_name",
+       "remove_my_picture",
+       "reactivate_member",
+       "remove_member"
+      ],
+      "type": "string"
+     },
+     "continuation_ref": {
+      "type": "string"
+     },
+     "first_name": {
+      "maxLength": 80,
+      "type": "string"
+     },
+     "invitations": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "account_type": {
+         "default": "member",
+         "enum": [
+          "member",
+          "admin"
+         ],
+         "type": "string"
+        },
+        "email": {
+         "maxLength": 320,
+         "minLength": 3,
+         "type": "string"
+        }
+       },
+       "required": [
+        "email"
+       ],
+       "type": "object"
+      },
+      "maxItems": 50,
+      "minItems": 1,
+      "type": "array"
+     },
+     "last_name": {
+      "maxLength": 80,
+      "type": "string"
+     },
+     "level": {
+      "enum": [
+       "standard",
+       "pro",
+       "max"
+      ],
+      "type": "string"
+     },
+     "minutes": {
+      "minimum": 0,
+      "type": "integer"
+     },
+     "mobile": {
+      "maxLength": 30,
+      "type": "string"
+     },
+     "people_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 500,
+      "minItems": 1,
+      "type": "array"
+     },
+     "person_continuation_ref": {
+      "type": "string"
+     },
+     "role": {
+      "default": "member",
+      "enum": [
+       "member",
+       "owner"
+      ],
+      "type": "string"
+     },
+     "send": {
+      "default": true,
+      "type": "boolean"
+     },
+     "successor_continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "act"
+    ],
+    "type": "object"
+   }
   },
   "memory_append": {
    "choices": {},
@@ -10932,21 +11441,11 @@
      "remove_tab",
      "update"
     ],
-    "audience": [
-     "private",
-     "shared"
-    ],
     "kind": [
      "project",
      "workspace"
     ],
-    "principal_kind": [
-     "person",
-     "project",
-     "role",
-     "team"
-    ],
-    "role": [
+    "share_role": [
      "contributor",
      "editor",
      "manager",
@@ -11222,7 +11721,10 @@
          "continuation_ref",
          "include_actions",
          "fields",
-         "initial_access"
+         "share_people_continuation_refs",
+         "share_teams_continuation_refs",
+         "share_capabilities",
+         "share_role"
         ]
        },
        "required": [
@@ -11320,6 +11822,10 @@
        },
        "name": {
         "type": "string"
+       },
+       "value": {
+        "minimum": 0,
+        "type": "number"
        }
       },
       "type": "object"
@@ -11367,6 +11873,7 @@
         "$ref": "#/$defs/ProjectLocationInput"
        },
        "value": {
+        "minimum": 0,
         "type": "number"
        }
       },
@@ -11389,102 +11896,6 @@
      "include_actions": {
       "default": false,
       "type": "boolean"
-     },
-     "initial_access": {
-      "anyOf": [
-       {
-        "additionalProperties": false,
-        "properties": {
-         "audience": {
-          "default": "shared",
-          "enum": [
-           "private",
-           "shared"
-          ],
-          "type": "string"
-         },
-         "grants": {
-          "default": [],
-          "items": {
-           "additionalProperties": false,
-           "properties": {
-            "capabilities": {
-             "default": [],
-             "items": {
-              "enum": [
-               "manage_automations",
-               "create_projects",
-               "create_workspaces",
-               "use_notetaker",
-               "manage_projects",
-               "change_due_dates",
-               "view_contacts",
-               "create_contacts",
-               "edit_contacts",
-               "view_companies",
-               "create_companies",
-               "edit_companies",
-               "turn_off_notifications",
-               "see_people_work",
-               "see_availability",
-               "see_workload",
-               "see_activity",
-               "manage_team_members",
-               "invite_people",
-               "remove_people",
-               "view_every_project",
-               "comment_on_every_project",
-               "edit_every_project",
-               "manage_fields",
-               "manage_templates",
-               "share_with_organisation",
-               "manage_billing"
-              ],
-              "type": "string"
-             },
-             "type": "array"
-            },
-            "principal_id": {
-             "maxLength": 255,
-             "minLength": 1,
-             "type": "string"
-            },
-            "principal_kind": {
-             "enum": [
-              "person",
-              "team",
-              "role",
-              "project"
-             ],
-             "type": "string"
-            },
-            "role": {
-             "enum": [
-              "manager",
-              "editor",
-              "contributor",
-              "viewer"
-             ],
-             "type": "string"
-            }
-           },
-           "required": [
-            "principal_kind",
-            "principal_id",
-            "role"
-           ],
-           "type": "object"
-          },
-          "maxItems": 100,
-          "type": "array"
-         }
-        },
-        "type": "object"
-       },
-       {
-        "type": "null"
-       }
-      ]
      },
      "item_continuation_ref": {
       "type": "string"
@@ -11514,6 +11925,35 @@
       "default": "",
       "maxLength": 64,
       "type": "string"
+     },
+     "share_capabilities": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array"
+     },
+     "share_people_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 100,
+      "type": "array"
+     },
+     "share_role": {
+      "enum": [
+       "manager",
+       "editor",
+       "contributor",
+       "viewer"
+      ],
+      "type": "string"
+     },
+     "share_teams_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 100,
+      "type": "array"
      }
     },
     "required": [
@@ -13477,6 +13917,182 @@
     "type": "object"
    }
   },
+  "record_field_settings": {
+   "choices": {
+    "action": [
+     "update"
+    ],
+    "edit": [
+     "everyone",
+     "restricted"
+    ],
+    "type": [
+     "address",
+     "autonumber",
+     "button",
+     "checkbox",
+     "connect",
+     "created",
+     "created_by",
+     "date",
+     "duration",
+     "email",
+     "files",
+     "formula",
+     "link",
+     "mirror",
+     "money",
+     "number",
+     "percent",
+     "person",
+     "phone",
+     "rating",
+     "rich_text",
+     "rollup",
+     "status",
+     "tags",
+     "text",
+     "timeline",
+     "updated",
+     "updated_by"
+    ],
+    "view": [
+     "everyone",
+     "restricted"
+    ]
+   },
+   "doors": [
+    "beacon"
+   ],
+   "family": "organisation_records",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "action": {
+      "const": "update",
+      "type": "string"
+     },
+     "board_continuation_ref": {
+      "type": "string"
+     },
+     "choice_continuation_ref": {
+      "type": "string"
+     },
+     "edit": {
+      "enum": [
+       "everyone",
+       "restricted"
+      ],
+      "type": "string"
+     },
+     "edit_people_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 100,
+      "type": "array"
+     },
+     "edit_roles": {
+      "items": {
+       "enum": [
+        "admin",
+        "member"
+       ],
+       "type": "string"
+      },
+      "maxItems": 2,
+      "type": "array"
+     },
+     "edit_teams_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 50,
+      "type": "array"
+     },
+     "field": {
+      "additionalProperties": true,
+      "properties": {
+       "include_time": {
+        "type": "boolean"
+       },
+       "type": {
+        "enum": [
+         "text",
+         "rich_text",
+         "number",
+         "money",
+         "percent",
+         "rating",
+         "duration",
+         "status",
+         "tags",
+         "person",
+         "date",
+         "timeline",
+         "checkbox",
+         "link",
+         "email",
+         "phone",
+         "files",
+         "address",
+         "connect",
+         "mirror",
+         "rollup",
+         "formula",
+         "button",
+         "created",
+         "updated",
+         "created_by",
+         "updated_by",
+         "autonumber"
+        ]
+       }
+      },
+      "type": "object"
+     },
+     "field_continuation_ref": {
+      "type": "string"
+     },
+     "view": {
+      "enum": [
+       "everyone",
+       "restricted"
+      ],
+      "type": "string"
+     },
+     "view_people_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 100,
+      "type": "array"
+     },
+     "view_roles": {
+      "items": {
+       "enum": [
+        "admin",
+        "member"
+       ],
+       "type": "string"
+      },
+      "maxItems": 2,
+      "type": "array"
+     },
+     "view_teams_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 50,
+      "type": "array"
+     }
+    },
+    "required": [
+     "action"
+    ],
+    "type": "object"
+   }
+  },
   "record_fields": {
    "choices": {},
    "doors": [
@@ -15130,6 +15746,345 @@
     "type": "object"
    }
   },
+  "sharing_change": {
+   "choices": {
+    "act": [
+     "answer_request",
+     "form_access",
+     "give",
+     "hand_to_organisation",
+     "invited",
+     "join",
+     "organisation",
+     "place",
+     "stop_sharing_chat",
+     "transfer",
+     "withdraw"
+    ],
+    "mode": [
+     "anyone",
+     "invited"
+    ],
+    "role": [
+     "contributor",
+     "editor",
+     "manager",
+     "viewer"
+    ]
+   },
+   "doors": [
+    "beacon"
+   ],
+   "family": "sharing",
+   "schema": {
+    "additionalProperties": false,
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "give",
+          "withdraw"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "resource_continuation_ref",
+         "people_continuation_refs",
+         "teams_continuation_refs",
+         "role",
+         "capabilities",
+         "unassign",
+         "hand_over_to_continuation_ref"
+        ]
+       },
+       "required": [
+        "resource_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "organisation",
+          "place",
+          "invited"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "resource_continuation_ref"
+        ]
+       },
+       "required": [
+        "resource_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "join"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "resource_continuation_ref"
+        ]
+       },
+       "required": [
+        "resource_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "transfer"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "resource_continuation_ref",
+         "person_continuation_ref"
+        ]
+       },
+       "required": [
+        "resource_continuation_ref",
+        "person_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "hand_to_organisation"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "resource_continuation_ref"
+        ]
+       },
+       "required": [
+        "resource_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "form_access"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "form_continuation_ref",
+         "mode",
+         "invitees"
+        ]
+       },
+       "required": [
+        "form_continuation_ref",
+        "mode"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "stop_sharing_chat"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act"
+        ]
+       }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "answer_request"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "resource_continuation_ref",
+         "person_continuation_ref",
+         "accepted"
+        ]
+       },
+       "required": [
+        "resource_continuation_ref",
+        "person_continuation_ref",
+        "accepted"
+       ]
+      }
+     }
+    ],
+    "properties": {
+     "accepted": {
+      "type": "boolean"
+     },
+     "act": {
+      "enum": [
+       "give",
+       "withdraw",
+       "organisation",
+       "place",
+       "invited",
+       "join",
+       "transfer",
+       "hand_to_organisation",
+       "form_access",
+       "stop_sharing_chat",
+       "answer_request"
+      ],
+      "type": "string"
+     },
+     "capabilities": {
+      "items": {
+       "enum": [
+        "manage_automations",
+        "manage_projects"
+       ],
+       "type": "string"
+      },
+      "maxItems": 8,
+      "type": "array"
+     },
+     "form_continuation_ref": {
+      "type": "string"
+     },
+     "hand_over_to_continuation_ref": {
+      "type": "string"
+     },
+     "invitees": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 500,
+      "type": "array"
+     },
+     "mode": {
+      "enum": [
+       "anyone",
+       "invited"
+      ],
+      "type": "string"
+     },
+     "people_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 1024,
+      "type": "array"
+     },
+     "person_continuation_ref": {
+      "type": "string"
+     },
+     "resource_continuation_ref": {
+      "type": "string"
+     },
+     "role": {
+      "enum": [
+       "manager",
+       "editor",
+       "contributor",
+       "viewer"
+      ],
+      "type": "string"
+     },
+     "teams_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 1024,
+      "type": "array"
+     },
+     "unassign": {
+      "default": false,
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "act"
+    ],
+    "type": "object"
+   }
+  },
   "show_widget": {
    "doors": [
     "beacon"
@@ -15312,6 +16267,53 @@
     },
     "required": [
      "skills"
+    ],
+    "type": "object"
+   }
+  },
+  "support_request": {
+   "choices": {
+    "kind": [
+     "bug",
+     "feature_request",
+     "other",
+     "question"
+    ]
+   },
+   "doors": [
+    "beacon"
+   ],
+   "family": "support",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "area": {
+      "maxLength": 64,
+      "type": "string"
+     },
+     "description": {
+      "default": "",
+      "maxLength": 5000,
+      "type": "string"
+     },
+     "kind": {
+      "enum": [
+       "bug",
+       "feature_request",
+       "question",
+       "other"
+      ],
+      "type": "string"
+     },
+     "summary": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "summary",
+     "kind"
     ],
     "type": "object"
    }
