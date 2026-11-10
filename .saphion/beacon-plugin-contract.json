@@ -14607,6 +14607,14 @@
    "family": "organisation_records",
    "schema": {
     "additionalProperties": false,
+    "allOf": [
+     {
+      "required": [
+       "field_continuation_ref",
+       "field"
+      ]
+     }
+    ],
     "properties": {
      "action": {
       "const": "update",
@@ -16471,6 +16479,32 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "anyOf": [
+          {
+           "properties": {
+            "people_continuation_refs": {
+             "minItems": 1
+            }
+           },
+           "required": [
+            "people_continuation_refs"
+           ]
+          },
+          {
+           "properties": {
+            "teams_continuation_refs": {
+             "minItems": 1
+            }
+           },
+           "required": [
+            "teams_continuation_refs"
+           ]
+          }
+         ]
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
