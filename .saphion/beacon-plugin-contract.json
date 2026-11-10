@@ -1540,11 +1540,7 @@
     "decision": [
      "change_accepted",
      "change_proposed",
-     "change_rejected",
-     "stage_accepted",
-     "stage_returned",
-     "stage_withdrawn",
-     "work_reported"
+     "change_rejected"
     ],
     "every": [
      "day",
@@ -2605,10 +2601,6 @@
        },
        "decision": {
         "enum": [
-         "work_reported",
-         "stage_accepted",
-         "stage_returned",
-         "stage_withdrawn",
          "change_proposed",
          "change_accepted",
          "change_rejected"
@@ -10508,8 +10500,7 @@
      "forbidden",
      "missing",
      "pending",
-     "refused",
-     "reported"
+     "refused"
     ]
    },
    "doors": [
@@ -10527,7 +10518,6 @@
       "enum": [
        "done",
        "already_done",
-       "reported",
        "changed",
        "refused",
        "missing",
@@ -12028,7 +12018,6 @@
      "missing",
      "pending",
      "refused",
-     "reported",
      "retired",
      "search",
      "skipped",
@@ -12108,7 +12097,6 @@
        "versions",
        "done",
        "already_done",
-       "reported",
        "changed",
        "refused",
        "missing",
@@ -13386,11 +13374,9 @@
   "record_review": {
    "choices": {
     "act": [
-     "accept",
      "decide_change",
      "propose_change",
-     "report_complete",
-     "return"
+     "report_complete"
     ]
    },
    "doors": [
@@ -13401,37 +13387,6 @@
    "schema": {
     "additionalProperties": false,
     "allOf": [
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "accept",
-          "return"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "stage",
-         "note",
-         "signing_as",
-         "names",
-         "continuation_ref"
-        ]
-       },
-       "required": [
-        "continuation_ref",
-        "stage"
-       ]
-      }
-     },
      {
       "if": {
        "properties": {
@@ -13515,8 +13470,6 @@
     "properties": {
      "act": {
       "enum": [
-       "accept",
-       "return",
        "propose_change",
        "decide_change",
        "report_complete"
@@ -13554,16 +13507,6 @@
       "minItems": 1,
       "type": "array"
      },
-     "names": {
-      "default": "",
-      "maxLength": 200,
-      "type": "string"
-     },
-     "note": {
-      "default": "",
-      "maxLength": 2000,
-      "type": "string"
-     },
      "proposals": {
       "items": {
        "additionalProperties": false,
@@ -13592,16 +13535,6 @@
       "maxItems": 64,
       "minItems": 1,
       "type": "array"
-     },
-     "signing_as": {
-      "default": "",
-      "maxLength": 200,
-      "type": "string"
-     },
-     "stage": {
-      "maxLength": 200,
-      "minLength": 1,
-      "type": "string"
      }
     },
     "required": [
