@@ -16469,8 +16469,7 @@
        "properties": {
         "act": {
          "enum": [
-          "give",
-          "withdraw"
+          "give"
          ]
         }
        },
@@ -16512,7 +16511,61 @@
          "people_continuation_refs",
          "teams_continuation_refs",
          "role",
-         "capabilities",
+         "capabilities"
+        ]
+       },
+       "required": [
+        "resource_continuation_ref",
+        "role"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "withdraw"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "allOf": [
+        {
+         "anyOf": [
+          {
+           "properties": {
+            "people_continuation_refs": {
+             "minItems": 1
+            }
+           },
+           "required": [
+            "people_continuation_refs"
+           ]
+          },
+          {
+           "properties": {
+            "teams_continuation_refs": {
+             "minItems": 1
+            }
+           },
+           "required": [
+            "teams_continuation_refs"
+           ]
+          }
+         ]
+        }
+       ],
+       "propertyNames": {
+        "enum": [
+         "act",
+         "resource_continuation_ref",
+         "people_continuation_refs",
+         "teams_continuation_refs",
          "unassign",
          "hand_over_to_continuation_ref"
         ]
