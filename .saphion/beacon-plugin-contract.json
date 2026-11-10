@@ -1404,6 +1404,8 @@
    "choices": {
     "action": [
      "cancel",
+     "renew_policy",
+     "resolve_step",
      "run_again",
      "run_now",
      "start_new"
@@ -1434,6 +1436,14 @@
        ]
       },
       "then": {
+       "propertyNames": {
+        "not": {
+         "enum": [
+          "effect",
+          "happened"
+         ]
+        }
+       },
        "required": [
         "continuation_ref"
        ]
@@ -1446,7 +1456,37 @@
          "enum": [
           "cancel",
           "run_again",
-          "start_new"
+          "start_new",
+          "renew_policy"
+         ]
+        }
+       },
+       "required": [
+        "action"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "not": {
+         "enum": [
+          "record_continuation_refs",
+          "test",
+          "effect",
+          "happened"
+         ]
+        }
+       },
+       "required": [
+        "continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "action": {
+         "enum": [
+          "resolve_step"
          ]
         }
        },
@@ -1464,6 +1504,8 @@
         }
        },
        "required": [
+        "effect",
+        "happened",
         "continuation_ref"
        ]
       }
@@ -1496,12 +1538,22 @@
        "run_now",
        "cancel",
        "run_again",
-       "start_new"
+       "start_new",
+       "renew_policy",
+       "resolve_step"
       ],
       "type": "string"
      },
      "continuation_ref": {
       "type": "string"
+     },
+     "effect": {
+      "maxLength": 512,
+      "minLength": 1,
+      "type": "string"
+     },
+     "happened": {
+      "type": "boolean"
      },
      "record_continuation_refs": {
       "items": {
@@ -3004,6 +3056,7 @@
     "act": [
      "apply_template",
      "archive",
+     "baseline",
      "create",
      "delete",
      "duplicate",
@@ -3316,6 +3369,31 @@
        "properties": {
         "act": {
          "enum": [
+          "baseline"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "board_continuation_ref"
+        ]
+       },
+       "required": [
+        "board_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "apply_template"
          ]
         }
@@ -3440,6 +3518,7 @@
        "duplicate",
        "move",
        "place_record",
+       "baseline",
        "apply_template",
        "save_template",
        "delete",
@@ -3543,7 +3622,10 @@
    "choices": {
     "act": [
      "add",
-     "configure"
+     "configure",
+     "delete",
+     "make_default",
+     "order"
     ],
     "bucket": [
      "month",
@@ -4077,13 +4159,94 @@
         "view_continuation_ref"
        ]
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "order"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "board_continuation_ref",
+         "view_continuation_refs"
+        ]
+       },
+       "required": [
+        "view_continuation_refs"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "make_default"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "board_continuation_ref",
+         "view_continuation_ref"
+        ]
+       },
+       "required": [
+        "view_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "delete"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "board_continuation_ref",
+         "view_continuation_ref"
+        ]
+       },
+       "required": [
+        "view_continuation_ref"
+       ]
+      }
      }
     ],
     "properties": {
      "act": {
       "enum": [
        "add",
-       "configure"
+       "configure",
+       "order",
+       "make_default",
+       "delete"
       ],
       "type": "string"
      },
@@ -4228,6 +4391,14 @@
      },
      "view_continuation_ref": {
       "type": "string"
+     },
+     "view_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 500,
+      "minItems": 1,
+      "type": "array"
      }
     },
     "required": [
@@ -4535,6 +4706,12 @@
    "choices": {
     "act": [
      "comment",
+     "delete",
+     "edit",
+     "pin",
+     "react",
+     "react_block",
+     "resolve",
      "update"
     ]
    },
@@ -4584,7 +4761,10 @@
          "attachments",
          "update_continuation_ref"
         ]
-       }
+       },
+       "required": [
+        "body"
+       ]
       }
      },
      {
@@ -4658,7 +4838,203 @@
          "whole_document",
          "quote"
         ]
+       },
+       "required": [
+        "body"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "edit"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "body",
+         "update_continuation_ref"
+        ]
+       },
+       "required": [
+        "update_continuation_ref",
+        "body"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "delete"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "update_continuation_ref"
+        ]
+       },
+       "required": [
+        "update_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "pin"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "update_continuation_ref",
+         "pinned"
+        ]
+       },
+       "required": [
+        "update_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "react"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "update_continuation_ref",
+         "emoji"
+        ]
+       },
+       "required": [
+        "update_continuation_ref",
+        "emoji"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "resolve"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "allOf": [
+        {
+         "anyOf": [
+          {
+           "required": [
+            "continuation_ref"
+           ]
+          },
+          {
+           "required": [
+            "thread"
+           ]
+          }
+         ]
+        },
+        {
+         "anyOf": [
+          {
+           "required": [
+            "thread"
+           ]
+          },
+          {
+           "required": [
+            "thread"
+           ]
+          }
+         ]
+        }
+       ],
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "thread",
+         "resolved"
+        ]
        }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "react_block"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "block",
+         "quote",
+         "emoji"
+        ]
+       },
+       "required": [
+        "continuation_ref",
+        "block",
+        "emoji"
+       ]
       }
      }
     ],
@@ -4666,7 +5042,13 @@
      "act": {
       "enum": [
        "update",
-       "comment"
+       "comment",
+       "edit",
+       "delete",
+       "pin",
+       "react",
+       "resolve",
+       "react_block"
       ],
       "type": "string"
      },
@@ -4692,10 +5074,23 @@
      "continuation_ref": {
       "type": "string"
      },
+     "emoji": {
+      "maxLength": 32,
+      "minLength": 1,
+      "type": "string"
+     },
+     "pinned": {
+      "default": true,
+      "type": "boolean"
+     },
      "quote": {
       "maxLength": 2000,
       "minLength": 1,
       "type": "string"
+     },
+     "resolved": {
+      "default": true,
+      "type": "boolean"
      },
      "thread": {
       "maxLength": 170,
@@ -4712,8 +5107,7 @@
      }
     },
     "required": [
-     "act",
-     "body"
+     "act"
     ],
     "type": "object"
    }
@@ -4725,8 +5119,11 @@
      "card",
      "create",
      "delete",
+     "duplicate",
      "move",
+     "put_back",
      "rename",
+     "reset",
      "write"
     ],
     "aggregation": [
@@ -4996,6 +5393,84 @@
        "properties": {
         "act": {
          "enum": [
+          "put_back"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref"
+        ]
+       },
+       "required": [
+        "continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "reset"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref"
+        ]
+       },
+       "required": [
+        "continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "duplicate"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref"
+        ]
+       },
+       "required": [
+        "continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "card"
          ]
         }
@@ -5182,6 +5657,9 @@
        "create",
        "write",
        "rename",
+       "put_back",
+       "reset",
+       "duplicate",
        "card",
        "move",
        "delete",
@@ -5787,11 +6265,13 @@
      "archive",
      "create",
      "delete",
+     "duplicate",
      "duplicate_tab",
      "edit",
      "from_questionnaire",
      "move",
-     "move_tab"
+     "move_tab",
+     "name_tab"
     ],
     "aggregation": [
      "average",
@@ -6355,6 +6835,56 @@
        "properties": {
         "act": {
          "enum": [
+          "duplicate"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref"
+        ]
+       }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "name_tab"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref",
+         "tab_name"
+        ]
+       },
+       "required": [
+        "tab_name"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "delete"
          ]
         }
@@ -6406,6 +6936,8 @@
        "move",
        "move_tab",
        "duplicate_tab",
+       "duplicate",
+       "name_tab",
        "delete",
        "archive"
       ],
@@ -7346,6 +7878,10 @@
       "minLength": 1,
       "type": "string"
      },
+     "tab_name": {
+      "maxLength": 240,
+      "type": "string"
+     },
      "tab_of_continuation_ref": {
       "type": "string"
      },
@@ -7559,6 +8095,7 @@
     "act": [
      "archive",
      "delete",
+     "duplicate",
      "move",
      "restore"
     ]
@@ -7631,6 +8168,32 @@
        "properties": {
         "act": {
          "enum": [
+          "duplicate"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "file_continuation_ref"
+        ]
+       },
+       "required": [
+        "file_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "delete"
          ]
         }
@@ -7684,6 +8247,7 @@
       "enum": [
        "restore",
        "move",
+       "duplicate",
        "delete",
        "archive"
       ],
@@ -12131,6 +12695,7 @@
      "add_tab",
      "archive",
      "create",
+     "decide_proposal",
      "duplicate",
      "remove_tab",
      "update"
@@ -12295,6 +12860,35 @@
        "required": [
         "continuation_ref",
         "changes"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "decide_proposal"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "fact",
+         "accept"
+        ]
+       },
+       "required": [
+        "continuation_ref",
+        "fact",
+        "accept"
        ]
       }
      },
@@ -12517,10 +13111,14 @@
      }
     ],
     "properties": {
+     "accept": {
+      "type": "boolean"
+     },
      "act": {
       "enum": [
        "create",
        "update",
+       "decide_proposal",
        "add_tab",
        "remove_tab",
        "duplicate",
@@ -12589,6 +13187,11 @@
       "type": "object"
      },
      "continuation_ref": {
+      "type": "string"
+     },
+     "fact": {
+      "maxLength": 200,
+      "minLength": 1,
       "type": "string"
      },
      "facts": {
@@ -13489,12 +14092,25 @@
   "record_change": {
    "choices": {
     "act": [
+     "choose_company",
      "create",
      "delete",
+     "look_up_company",
      "move_dependent_dates",
+     "refresh_logo",
+     "reject_company",
+     "remove_logo",
+     "repeat",
      "restore",
      "update",
      "void"
+    ],
+    "cadence": [
+     "day",
+     "fortnight",
+     "month",
+     "none",
+     "week"
     ]
    },
    "doors": [
@@ -13672,6 +14288,81 @@
         ]
        }
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "choose_company",
+          "reject_company",
+          "look_up_company"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "record_continuation_refs",
+         "domain",
+         "replace"
+        ]
+       }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "remove_logo",
+          "refresh_logo"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "record_continuation_refs"
+        ]
+       }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "repeat"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "record_continuation_refs",
+         "cadence"
+        ]
+       },
+       "required": [
+        "cadence"
+       ]
+      }
      }
     ],
     "properties": {
@@ -13682,13 +14373,34 @@
        "restore",
        "void",
        "delete",
-       "move_dependent_dates"
+       "move_dependent_dates",
+       "choose_company",
+       "reject_company",
+       "look_up_company",
+       "remove_logo",
+       "refresh_logo",
+       "repeat"
       ],
       "type": "string"
      },
      "apply": {
       "default": false,
       "type": "boolean"
+     },
+     "cadence": {
+      "enum": [
+       "day",
+       "week",
+       "month",
+       "fortnight",
+       "none"
+      ],
+      "type": "string"
+     },
+     "domain": {
+      "default": "",
+      "maxLength": 253,
+      "type": "string"
      },
      "follows_continuation_ref": {
       "type": "string"
@@ -13706,6 +14418,10 @@
      },
      "record_set_continuation_ref": {
       "type": "string"
+     },
+     "replace": {
+      "default": false,
+      "type": "boolean"
      },
      "resource_class": {
       "maxLength": 64,
@@ -15019,7 +15735,9 @@
     "act": [
      "decide_change",
      "propose_change",
-     "report_complete"
+     "receive",
+     "report_complete",
+     "start_work"
     ]
    },
    "doors": [
@@ -15108,6 +15826,56 @@
         "continuation_ref"
        ]
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "start_work"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref"
+        ]
+       },
+       "required": [
+        "continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "receive"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref"
+        ]
+       },
+       "required": [
+        "continuation_ref"
+       ]
+      }
      }
     ],
     "properties": {
@@ -15115,7 +15883,9 @@
       "enum": [
        "propose_change",
        "decide_change",
-       "report_complete"
+       "report_complete",
+       "start_work",
+       "receive"
       ],
       "type": "string"
      },
@@ -15287,14 +16057,14 @@
       "items": {
        "type": "string"
       },
-      "maxItems": 50,
+      "maxItems": 200,
       "type": "array"
      },
      "add_teams_continuation_refs": {
       "items": {
        "type": "string"
       },
-      "maxItems": 20,
+      "maxItems": 50,
       "type": "array"
      },
      "record_continuation_ref": {
@@ -15304,14 +16074,14 @@
       "items": {
        "type": "string"
       },
-      "maxItems": 50,
+      "maxItems": 200,
       "type": "array"
      },
      "remove_teams_continuation_refs": {
       "items": {
        "type": "string"
       },
-      "maxItems": 20,
+      "maxItems": 50,
       "type": "array"
      },
      "role": {
@@ -17278,6 +18048,13 @@
       "maxLength": 5000,
       "type": "string"
      },
+     "file_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 20,
+      "type": "array"
+     },
      "kind": {
       "enum": [
        "bug",
@@ -17410,7 +18187,8 @@
      "archive",
      "create",
      "delete",
-     "rename"
+     "rename",
+     "update"
     ]
    },
    "doors": [
@@ -17439,7 +18217,11 @@
         "enum": [
          "act",
          "name",
-         "description"
+         "description",
+         "mark",
+         "colour",
+         "member_continuation_refs",
+         "owner_continuation_refs"
         ]
        },
        "required": [
@@ -17471,6 +18253,35 @@
        "required": [
         "continuation_ref",
         "name"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "update"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "mark",
+         "colour",
+         "owner_continuation_refs",
+         "continuation_ref"
+        ]
+       },
+       "required": [
+        "continuation_ref"
        ]
       }
      },
@@ -17530,9 +18341,14 @@
       "enum": [
        "create",
        "rename",
+       "update",
        "delete",
        "archive"
       ],
+      "type": "string"
+     },
+     "colour": {
+      "maxLength": 7,
       "type": "string"
      },
      "continuation_ref": {
@@ -17542,10 +18358,28 @@
       "maxLength": 280,
       "type": "string"
      },
+     "mark": {
+      "maxLength": 40,
+      "type": "string"
+     },
+     "member_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 500,
+      "type": "array"
+     },
      "name": {
       "maxLength": 80,
       "minLength": 1,
       "type": "string"
+     },
+     "owner_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 500,
+      "type": "array"
      }
     },
     "required": [
