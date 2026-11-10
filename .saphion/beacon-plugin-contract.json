@@ -9395,6 +9395,37 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "anyOf": [
+          {
+           "required": [
+            "name"
+           ]
+          },
+          {
+           "required": [
+            "about"
+           ]
+          },
+          {
+           "required": [
+            "powers"
+           ]
+          },
+          {
+           "required": [
+            "holder_people_continuation_refs"
+           ]
+          },
+          {
+           "required": [
+            "holder_teams_continuation_refs"
+           ]
+          }
+         ]
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -9454,6 +9485,47 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "if": {
+          "properties": {
+           "holders": {
+            "enum": [
+             "add",
+             "remove"
+            ]
+           }
+          },
+          "required": [
+           "holders"
+          ]
+         },
+         "then": {
+          "anyOf": [
+           {
+            "properties": {
+             "holder_people_continuation_refs": {
+              "minItems": 1
+             }
+            },
+            "required": [
+             "holder_people_continuation_refs"
+            ]
+           },
+           {
+            "properties": {
+             "holder_teams_continuation_refs": {
+              "minItems": 1
+             }
+            },
+            "required": [
+             "holder_teams_continuation_refs"
+            ]
+           }
+          ]
+         }
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -9739,6 +9811,7 @@
      },
      "mobile": {
       "maxLength": 30,
+      "pattern": "^(?:\\+?(?:[\\s().-]*\\d){7,15}[\\s().-]*|)$",
       "type": "string"
      },
      "name": {
@@ -12335,6 +12408,70 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "if": {
+          "required": [
+           "share_role"
+          ]
+         },
+         "then": {
+          "anyOf": [
+           {
+            "properties": {
+             "share_people_continuation_refs": {
+              "minItems": 1
+             }
+            },
+            "required": [
+             "share_people_continuation_refs"
+            ]
+           },
+           {
+            "properties": {
+             "share_teams_continuation_refs": {
+              "minItems": 1
+             }
+            },
+            "required": [
+             "share_teams_continuation_refs"
+            ]
+           }
+          ]
+         }
+        },
+        {
+         "if": {
+          "anyOf": [
+           {
+            "properties": {
+             "share_people_continuation_refs": {
+              "minItems": 1
+             }
+            },
+            "required": [
+             "share_people_continuation_refs"
+            ]
+           },
+           {
+            "properties": {
+             "share_teams_continuation_refs": {
+              "minItems": 1
+             }
+            },
+            "required": [
+             "share_teams_continuation_refs"
+            ]
+           }
+          ]
+         },
+         "then": {
+          "required": [
+           "share_role"
+          ]
+         }
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -12549,6 +12686,10 @@
      },
      "share_capabilities": {
       "items": {
+       "enum": [
+        "manage_projects",
+        "manage_automations"
+       ],
        "type": "string"
       },
       "type": "array"
@@ -14417,6 +14558,154 @@
             "required": [
              "label",
              "type"
+            ]
+           }
+          }
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "action": {
+            "enum": [
+             "update"
+            ]
+           }
+          },
+          "required": [
+           "action"
+          ]
+         },
+         "then": {
+          "anyOf": [
+           {
+            "properties": {
+             "field": {
+              "minProperties": 1
+             }
+            },
+            "required": [
+             "field"
+            ]
+           },
+           {
+            "required": [
+             "view"
+            ]
+           },
+           {
+            "properties": {
+             "view_roles": {
+              "minItems": 1
+             }
+            },
+            "required": [
+             "view_roles"
+            ]
+           },
+           {
+            "properties": {
+             "view_people_continuation_refs": {
+              "minItems": 1
+             }
+            },
+            "required": [
+             "view_people_continuation_refs"
+            ]
+           },
+           {
+            "properties": {
+             "view_teams_continuation_refs": {
+              "minItems": 1
+             }
+            },
+            "required": [
+             "view_teams_continuation_refs"
+            ]
+           },
+           {
+            "required": [
+             "edit"
+            ]
+           },
+           {
+            "properties": {
+             "edit_roles": {
+              "minItems": 1
+             }
+            },
+            "required": [
+             "edit_roles"
+            ]
+           },
+           {
+            "properties": {
+             "edit_people_continuation_refs": {
+              "minItems": 1
+             }
+            },
+            "required": [
+             "edit_people_continuation_refs"
+            ]
+           },
+           {
+            "properties": {
+             "edit_teams_continuation_refs": {
+              "minItems": 1
+             }
+            },
+            "required": [
+             "edit_teams_continuation_refs"
+            ]
+           }
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "view": {
+            "enum": [
+             "everyone"
+            ]
+           }
+          },
+          "required": [
+           "view"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "view_roles",
+             "view_people_continuation_refs",
+             "view_teams_continuation_refs"
+            ]
+           }
+          }
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "edit": {
+            "enum": [
+             "everyone"
+            ]
+           }
+          },
+          "required": [
+           "edit"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "edit_roles",
+             "edit_people_continuation_refs",
+             "edit_teams_continuation_refs"
             ]
            }
           }
