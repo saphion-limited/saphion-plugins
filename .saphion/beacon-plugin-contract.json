@@ -9177,6 +9177,7 @@
    "choices": {
     "act": [
      "create",
+     "switch",
      "update"
     ],
     "mode": [
@@ -9246,15 +9247,46 @@
         "continuation_ref"
        ]
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "switch"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "active"
+        ]
+       },
+       "required": [
+        "continuation_ref",
+        "active"
+       ]
+      }
      }
     ],
     "properties": {
      "act": {
       "enum": [
        "create",
-       "update"
+       "update",
+       "switch"
       ],
       "type": "string"
+     },
+     "active": {
+      "type": "boolean"
      },
      "board_continuation_ref": {
       "type": "string"
@@ -12312,6 +12344,244 @@
     },
     "required": [
      "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "organisation_settings": {
+   "choices": {
+    "act": [
+     "action_addon",
+     "company_details",
+     "currency",
+     "financial_year",
+     "memory_policy",
+     "notification_retention"
+    ],
+    "addon": [
+     "programme",
+     "provider_turnaround"
+    ]
+   },
+   "doors": [
+    "beacon"
+   ],
+   "family": "organisation_authority",
+   "schema": {
+    "additionalProperties": false,
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "currency"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "currency"
+        ]
+       },
+       "required": [
+        "currency"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "financial_year"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "month"
+        ]
+       },
+       "required": [
+        "month"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "notification_retention"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "days"
+        ]
+       },
+       "required": [
+        "days"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "company_details"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "trade",
+         "phone",
+         "website",
+         "timezone"
+        ]
+       }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "memory_policy"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "enabled"
+        ]
+       },
+       "required": [
+        "enabled"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "action_addon"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "addon",
+         "on"
+        ]
+       },
+       "required": [
+        "addon",
+        "on"
+       ]
+      }
+     }
+    ],
+    "properties": {
+     "act": {
+      "enum": [
+       "currency",
+       "financial_year",
+       "notification_retention",
+       "company_details",
+       "memory_policy",
+       "action_addon"
+      ],
+      "type": "string"
+     },
+     "addon": {
+      "enum": [
+       "programme",
+       "provider_turnaround"
+      ],
+      "type": "string"
+     },
+     "currency": {
+      "maxLength": 3,
+      "minLength": 3,
+      "type": "string"
+     },
+     "days": {
+      "maximum": 365,
+      "minimum": 7,
+      "type": "integer"
+     },
+     "enabled": {
+      "type": "boolean"
+     },
+     "month": {
+      "maximum": 12,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "on": {
+      "type": "boolean"
+     },
+     "phone": {
+      "maxLength": 30,
+      "type": "string"
+     },
+     "timezone": {
+      "maxLength": 80,
+      "type": "string"
+     },
+     "trade": {
+      "maxLength": 120,
+      "type": "string"
+     },
+     "website": {
+      "maxLength": 200,
+      "type": "string"
+     }
+    },
+    "required": [
+     "act"
     ],
     "type": "object"
    }
