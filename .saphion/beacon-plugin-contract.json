@@ -5992,7 +5992,6 @@
         "recipe:Project delivery",
         "recipe:Delivery performance",
         "recipe:Team workload",
-        "recipe:Bids and targets",
         "recipe:Project portfolio",
         "data"
        ],
@@ -10350,10 +10349,10 @@
        "project",
        "deal",
        "lead",
-       "crm_bid_submission",
        "client",
        "team",
-       "organisation"
+       "organisation",
+       "crm_bid_submission"
       ],
       "type": "string"
      },
