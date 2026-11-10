@@ -13844,6 +13844,32 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "anyOf": [
+          {
+           "required": [
+            "trade"
+           ]
+          },
+          {
+           "required": [
+            "phone"
+           ]
+          },
+          {
+           "required": [
+            "website"
+           ]
+          },
+          {
+           "required": [
+            "timezone"
+           ]
+          }
+         ]
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
