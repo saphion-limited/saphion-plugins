@@ -565,6 +565,7 @@
         "automation.run_needs_attention",
         "automation.rule_paused",
         "automation.tool_approval_requested",
+        "automation.approval_requested",
         "scheduled_round.held",
         "connection.reconnect_required",
         "access.invited",
