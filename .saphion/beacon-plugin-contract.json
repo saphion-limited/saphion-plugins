@@ -12581,10 +12581,10 @@
      },
      "share_role": {
       "enum": [
-       "manager",
-       "editor",
+       "viewer",
        "contributor",
-       "viewer"
+       "editor",
+       "manager"
       ],
       "type": "string"
      },
