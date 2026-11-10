@@ -14293,9 +14293,7 @@
        "properties": {
         "act": {
          "enum": [
-          "choose_company",
-          "reject_company",
-          "look_up_company"
+          "choose_company"
          ]
         }
        },
@@ -14311,7 +14309,37 @@
          "domain",
          "replace"
         ]
-       }
+       },
+       "required": [
+        "record_continuation_refs",
+        "domain"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "reject_company",
+          "look_up_company"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "record_continuation_refs"
+        ]
+       },
+       "required": [
+        "record_continuation_refs"
+       ]
       }
      },
      {
@@ -14334,7 +14362,10 @@
          "act",
          "record_continuation_refs"
         ]
-       }
+       },
+       "required": [
+        "record_continuation_refs"
+       ]
       }
      },
      {
@@ -14359,6 +14390,7 @@
         ]
        },
        "required": [
+        "record_continuation_refs",
         "cadence"
        ]
       }
@@ -14397,8 +14429,8 @@
       "type": "string"
      },
      "domain": {
-      "default": "",
       "maxLength": 253,
+      "minLength": 1,
       "type": "string"
      },
      "follows_continuation_ref": {
@@ -18348,6 +18380,7 @@
      },
      "colour": {
       "maxLength": 7,
+      "pattern": "^(#[0-9a-fA-F]{6})?$",
       "type": "string"
      },
      "continuation_ref": {
