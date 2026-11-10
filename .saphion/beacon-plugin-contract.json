@@ -8902,6 +8902,8 @@
      "create_permission",
      "create_role",
      "deactivate_member",
+     "delete_permission",
+     "delete_role",
      "hide_permission",
      "invitation_link",
      "invite",
@@ -8913,7 +8915,6 @@
      "remove_my_picture",
      "remove_people",
      "resend_invitation",
-     "retire_role",
      "seat_level",
      "send_prepared_invitations",
      "withdraw_invitation"
@@ -9493,6 +9494,32 @@
        "properties": {
         "act": {
          "enum": [
+          "delete_permission"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "permission_continuation_ref",
+         "token"
+        ]
+       },
+       "required": [
+        "permission_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "create_role"
          ]
         }
@@ -9549,7 +9576,7 @@
        "properties": {
         "act": {
          "enum": [
-          "retire_role"
+          "delete_role"
          ]
         }
        },
@@ -9617,9 +9644,10 @@
        "change_permission",
        "hide_permission",
        "permission_holders",
+       "delete_permission",
        "create_role",
        "change_role",
-       "retire_role"
+       "delete_role"
       ],
       "type": "string"
      },
