@@ -609,9 +609,6 @@
         "plugin.updated",
         "plugin.reverted",
         "plugin.offered",
-        "document.generated",
-        "document.regenerated",
-        "document.failed",
         "import.completed",
         "conversation.shared",
         "conversation.unshared",
@@ -9137,7 +9134,6 @@
      "document",
      "file",
      "form",
-     "generated_document",
      "invitation",
      "item_invitation",
      "memory",
@@ -9615,7 +9611,6 @@
        "document",
        "file",
        "form",
-       "generated_document",
        "invitation",
        "item_invitation",
        "memory",
@@ -10121,25 +10116,6 @@
     },
     "required": [
      "act"
-    ],
-    "type": "object"
-   }
-  },
-  "generated_document_read": {
-   "choices": {},
-   "doors": [
-    "routed"
-   ],
-   "family": "documents",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "continuation_ref": {
-      "type": "string"
-     }
-    },
-    "required": [
-     "continuation_ref"
     ],
     "type": "object"
    }
