@@ -7443,6 +7443,43 @@
          }
         },
         {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "insert"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "else": {
+           "propertyNames": {
+            "not": {
+             "const": "block"
+            }
+           }
+          },
+          "if": {
+           "anyOf": [
+            {
+             "required": [
+              "row"
+             ]
+            },
+            {
+             "required": [
+              "column"
+             ]
+            }
+           ]
+          }
+         }
+        },
+        {
          "else": {
           "propertyNames": {
            "not": {
@@ -9639,6 +9676,10 @@
        "template"
       ],
       "type": "string"
+     },
+     "limit": {
+      "minimum": 1,
+      "type": "integer"
      },
      "person_gives_work": {
       "type": "boolean"
@@ -14443,27 +14484,6 @@
        ]
       },
       "then": {
-       "allOf": [
-        {
-         "anyOf": [
-          {
-           "required": [
-            "mark"
-           ]
-          },
-          {
-           "required": [
-            "colour"
-           ]
-          },
-          {
-           "required": [
-            "product_description"
-           ]
-          }
-         ]
-        }
-       ],
        "propertyNames": {
         "enum": [
          "act",
