@@ -15968,6 +15968,7 @@
      "create",
      "decide_proposal",
      "duplicate",
+     "order_tabs",
      "remove_tab",
      "reset_default_tabs",
      "restore",
@@ -16272,6 +16273,34 @@
        "properties": {
         "act": {
          "enum": [
+          "order_tabs"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref",
+         "order"
+        ]
+       },
+       "required": [
+        "continuation_ref",
+        "order"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "use_tabs_as_default"
          ]
         }
@@ -16480,6 +16509,7 @@
        "decide_proposal",
        "add_tab",
        "remove_tab",
+       "order_tabs",
        "use_tabs_as_default",
        "reset_default_tabs",
        "duplicate",
@@ -16643,6 +16673,16 @@
      },
      "offer": {
       "$ref": "#/$defs/ProjectOfferReference"
+     },
+     "order": {
+      "items": {
+       "maxLength": 300,
+       "minLength": 1,
+       "type": "string"
+      },
+      "maxItems": 100,
+      "minItems": 1,
+      "type": "array"
      },
      "read_from": {
       "maxLength": 300,
