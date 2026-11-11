@@ -13546,7 +13546,7 @@
       "items": {
        "type": "string"
       },
-      "maxItems": 500,
+      "maxItems": 10000,
       "minItems": 1,
       "type": "array"
      },
