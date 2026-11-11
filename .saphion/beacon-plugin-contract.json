@@ -17077,6 +17077,7 @@
      "created",
      "data",
      "done",
+     "emails",
      "failed",
      "forbidden",
      "history",
@@ -17178,7 +17179,8 @@
        "unchanged",
        "skipped",
        "retired",
-       "snapshot"
+       "snapshot",
+       "emails"
       ],
       "type": "string"
      }
@@ -17196,6 +17198,7 @@
      "choose_company",
      "create",
      "delete",
+     "file_from_email",
      "look_up_company",
      "move_dependent_dates",
      "refresh_logo",
@@ -17212,6 +17215,10 @@
      "month",
      "none",
      "week"
+    ],
+    "if_name_taken": [
+     "keep_both",
+     "replace"
     ],
     "visibility": [
      "item",
@@ -17528,6 +17535,32 @@
         "email_continuation_ref"
        ]
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "file_from_email"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "attachment_continuation_ref",
+         "if_name_taken"
+        ]
+       },
+       "required": [
+        "attachment_continuation_ref"
+       ]
+      }
      }
     ],
     "properties": {
@@ -17545,13 +17578,18 @@
        "remove_logo",
        "refresh_logo",
        "repeat",
-       "attach_email"
+       "attach_email",
+       "file_from_email"
       ],
       "type": "string"
      },
      "apply": {
       "default": false,
       "type": "boolean"
+     },
+     "attachment_continuation_ref": {
+      "minLength": 1,
+      "type": "string"
      },
      "cadence": {
       "enum": [
@@ -17578,6 +17616,13 @@
      "history": {
       "default": false,
       "type": "boolean"
+     },
+     "if_name_taken": {
+      "enum": [
+       "replace",
+       "keep_both"
+      ],
+      "type": "string"
      },
      "record_continuation_refs": {
       "items": {
@@ -17743,6 +17788,25 @@
     },
     "required": [
      "act"
+    ],
+    "type": "object"
+   }
+  },
+  "record_emails_read": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "organisation_records",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
     ],
     "type": "object"
    }
