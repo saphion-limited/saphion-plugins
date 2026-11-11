@@ -154,7 +154,9 @@
      "this_month",
      "this_quarter",
      "this_week",
-     "trailing_12_months"
+     "today",
+     "trailing_12_months",
+     "yesterday"
     ]
    },
    "doors": [
@@ -661,6 +663,8 @@
      },
      "window": {
       "enum": [
+       "today",
+       "yesterday",
        "this_week",
        "last_month",
        "this_month",
@@ -5454,7 +5458,9 @@
      "this_month",
      "this_quarter",
      "this_week",
-     "trailing_12_months"
+     "today",
+     "trailing_12_months",
+     "yesterday"
     ],
     "window": [
      "",
@@ -5467,7 +5473,9 @@
      "this_month",
      "this_quarter",
      "this_week",
-     "trailing_12_months"
+     "today",
+     "trailing_12_months",
+     "yesterday"
     ]
    },
    "doors": [
@@ -6167,6 +6175,8 @@
        "trend_window": {
         "enum": [
          "",
+         "today",
+         "yesterday",
          "this_week",
          "last_month",
          "this_month",
@@ -6183,6 +6193,8 @@
        "window": {
         "enum": [
          "",
+         "today",
+         "yesterday",
          "this_week",
          "last_month",
          "this_month",
@@ -6654,7 +6666,9 @@
      "this_month",
      "this_quarter",
      "this_week",
-     "trailing_12_months"
+     "today",
+     "trailing_12_months",
+     "yesterday"
     ],
     "window": [
      "",
@@ -6667,7 +6681,9 @@
      "this_month",
      "this_quarter",
      "this_week",
-     "trailing_12_months"
+     "today",
+     "trailing_12_months",
+     "yesterday"
     ]
    },
    "doors": [
@@ -7907,6 +7923,8 @@
           "trend_window": {
            "enum": [
             "",
+            "today",
+            "yesterday",
             "this_week",
             "last_month",
             "this_month",
@@ -7923,6 +7941,8 @@
           "window": {
            "enum": [
             "",
+            "today",
+            "yesterday",
             "this_week",
             "last_month",
             "this_month",
