@@ -13976,6 +13976,34 @@
    ],
    "family": "organisation_authority",
    "schema": {
+    "$defs": {
+     "_BaselineFields": {
+      "additionalProperties": false,
+      "properties": {
+       "finish": {
+        "maxLength": 64,
+        "minLength": 1,
+        "type": "string"
+       },
+       "set": {
+        "maxLength": 64,
+        "minLength": 1,
+        "type": "string"
+       },
+       "start": {
+        "maxLength": 64,
+        "minLength": 1,
+        "type": "string"
+       }
+      },
+      "required": [
+       "start",
+       "finish",
+       "set"
+      ],
+      "type": "object"
+     }
+    },
     "additionalProperties": false,
     "allOf": [
      {
@@ -14539,12 +14567,12 @@
        "propertyNames": {
         "enum": [
          "act",
-         "resource_class",
+         "class_continuation_ref",
          "identity"
         ]
        },
        "required": [
-        "resource_class",
+        "class_continuation_ref",
         "identity"
        ]
       }
@@ -14566,12 +14594,12 @@
        "propertyNames": {
         "enum": [
          "act",
-         "resource_class",
+         "class_continuation_ref",
          "numbering"
         ]
        },
        "required": [
-        "resource_class"
+        "class_continuation_ref"
        ]
       }
      },
@@ -14592,14 +14620,14 @@
        "propertyNames": {
         "enum": [
          "act",
-         "resource_class",
+         "class_continuation_ref",
          "start",
          "finish",
          "baseline"
         ]
        },
        "required": [
-        "resource_class",
+        "class_continuation_ref",
         "start",
         "finish"
        ]
@@ -14696,37 +14724,12 @@
       "type": "string"
      },
      "baseline": {
-      "anyOf": [
-       {
-        "additionalProperties": false,
-        "properties": {
-         "finish": {
-          "maxLength": 64,
-          "type": "string"
-         },
-         "set": {
-          "maxLength": 64,
-          "type": "string"
-         },
-         "start": {
-          "maxLength": 64,
-          "type": "string"
-         }
-        },
-        "required": [
-         "start",
-         "finish",
-         "set"
-        ],
-        "type": "object"
-       },
-       {
-        "const": "new",
-        "type": "string"
-       }
-      ]
+      "$ref": "#/$defs/_BaselineFields"
      },
      "choice_list_continuation_ref": {
+      "type": "string"
+     },
+     "class_continuation_ref": {
       "type": "string"
      },
      "colour": {
@@ -14901,12 +14904,6 @@
       },
       "maxItems": 80,
       "type": "array"
-     },
-     "resource_class": {
-      "maxLength": 64,
-      "minLength": 1,
-      "pattern": "^[^:\\s]+$",
-      "type": "string"
      },
      "skill_id": {
       "maxLength": 256,
