@@ -8732,6 +8732,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "file_continuation_ref",
          "name",
          "purpose"
@@ -8759,6 +8760,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref"
         ]
        },
@@ -8784,6 +8786,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "marking"
         ]
@@ -8811,6 +8814,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref"
         ]
        },
@@ -8836,6 +8840,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref"
         ]
        },
@@ -8857,6 +8862,11 @@
       "type": "string"
      },
      "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "file_continuation_ref": {
@@ -10160,6 +10170,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "invitations",
          "send",
          "join_team_continuation_ref",
@@ -10190,6 +10201,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "invitation_continuation_ref"
         ]
        },
@@ -10215,6 +10227,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "invitation_continuation_ref"
         ]
        },
@@ -10240,6 +10253,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "join_team_continuation_ref",
          "permission_continuation_refs",
          "products",
@@ -10269,7 +10283,8 @@
       "then": {
        "propertyNames": {
         "enum": [
-         "act"
+         "act",
+         "description"
         ]
        }
       }
@@ -10292,6 +10307,11 @@
        "link",
        "send_prepared"
       ],
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "email": {
@@ -12584,6 +12604,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "resource_continuation_ref"
         ]
        },
@@ -12609,6 +12630,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "resource_continuation_ref"
         ]
        },
@@ -12634,6 +12656,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "resource_continuation_ref"
         ]
        },
@@ -12659,6 +12682,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "resources_continuation_refs"
         ]
        },
@@ -12683,7 +12707,8 @@
       "then": {
        "propertyNames": {
         "enum": [
-         "act"
+         "act",
+         "description"
         ]
        }
       }
@@ -12705,6 +12730,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "resource_continuation_ref"
         ]
        },
@@ -12730,6 +12756,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "notification_continuation_ref"
         ]
        },
@@ -12755,6 +12782,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "notification_continuation_ref"
         ]
        },
@@ -12780,6 +12808,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "notification_continuation_ref"
         ]
        },
@@ -12805,6 +12834,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "cleared_continuation_ref"
         ]
        },
@@ -12856,6 +12886,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "choices",
          "daily_digest",
          "weekly_digest"
@@ -12934,6 +12965,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "dnd",
          "status_emoji",
          "status_text",
@@ -13175,6 +13207,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "group",
          "theme",
          "text_scale",
@@ -13236,6 +13269,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "first_name",
          "last_name",
          "mobile"
@@ -13259,7 +13293,8 @@
       "then": {
        "propertyNames": {
         "enum": [
-         "act"
+         "act",
+         "description"
         ]
        }
       }
@@ -13281,6 +13316,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "use_account_signatory",
          "signatory",
          "reviewer",
@@ -13306,6 +13342,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "account",
          "mailbox",
          "email_instructions"
@@ -13387,6 +13424,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "account",
          "signature_on",
          "signature_html",
@@ -13524,6 +13562,11 @@
        "default",
        "compact"
       ],
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "dnd": {
