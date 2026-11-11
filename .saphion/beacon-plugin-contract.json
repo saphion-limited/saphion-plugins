@@ -10633,7 +10633,17 @@
      "notetaker_minutes",
      "reactivate",
      "remove",
-     "seat_level"
+     "seat_level",
+     "working_hours"
+    ],
+    "day": [
+     "friday",
+     "monday",
+     "saturday",
+     "sunday",
+     "thursday",
+     "tuesday",
+     "wednesday"
     ],
     "level": [
      "max",
@@ -10816,6 +10826,34 @@
         "minutes"
        ]
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "working_hours"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "person_continuation_ref",
+         "working_week"
+        ]
+       },
+       "required": [
+        "person_continuation_ref",
+        "working_week"
+       ]
+      }
      }
     ],
     "properties": {
@@ -10833,7 +10871,8 @@
        "reactivate",
        "remove",
        "seat_level",
-       "notetaker_minutes"
+       "notetaker_minutes",
+       "working_hours"
       ],
       "type": "string"
      },
@@ -10877,6 +10916,38 @@
      },
      "teams_successor_continuation_ref": {
       "type": "string"
+     },
+     "working_week": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "day": {
+         "enum": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday",
+          "saturday",
+          "sunday"
+         ],
+         "type": "string"
+        },
+        "hours": {
+         "exclusiveMinimum": 0,
+         "maximum": 14.0,
+         "multipleOf": 0.25,
+         "type": "number"
+        }
+       },
+       "required": [
+        "day",
+        "hours"
+       ],
+       "type": "object"
+      },
+      "maxItems": 7,
+      "type": "array"
      }
     },
     "required": [
@@ -12731,6 +12802,15 @@
      "DD/MM/YYYY",
      "YYYY-MM-DD"
     ],
+    "day": [
+     "friday",
+     "monday",
+     "saturday",
+     "sunday",
+     "thursday",
+     "tuesday",
+     "wednesday"
+    ],
     "density": [
      "comfortable",
      "compact",
@@ -13256,6 +13336,7 @@
              "date_format",
              "confirm_review_before_finalising",
              "calendar_time_scale",
+             "working_week",
              "preferred_name",
              "job_title",
              "instructions",
@@ -13326,6 +13407,7 @@
              "date_format",
              "confirm_review_before_finalising",
              "calendar_time_scale",
+             "working_week",
              "voice",
              "turn_mode",
              "language"
@@ -13360,6 +13442,7 @@
              "date_format",
              "confirm_review_before_finalising",
              "calendar_time_scale",
+             "working_week",
              "preferred_name",
              "job_title",
              "instructions"
@@ -13417,6 +13500,11 @@
           },
           {
            "required": [
+            "working_week"
+           ]
+          },
+          {
+           "required": [
             "preferred_name"
            ]
           },
@@ -13462,6 +13550,7 @@
          "date_format",
          "confirm_review_before_finalising",
          "calendar_time_scale",
+         "working_week",
          "preferred_name",
          "job_title",
          "instructions",
@@ -14021,6 +14110,38 @@
      },
      "weekly_digest": {
       "type": "boolean"
+     },
+     "working_week": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "day": {
+         "enum": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday",
+          "saturday",
+          "sunday"
+         ],
+         "type": "string"
+        },
+        "hours": {
+         "exclusiveMinimum": 0,
+         "maximum": 14.0,
+         "multipleOf": 0.25,
+         "type": "number"
+        }
+       },
+       "required": [
+        "day",
+        "hours"
+       ],
+       "type": "object"
+      },
+      "maxItems": 7,
+      "type": "array"
      }
     },
     "required": [
