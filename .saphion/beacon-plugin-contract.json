@@ -1852,8 +1852,9 @@
        "propertyNames": {
         "enum": [
          "act",
-         "name",
          "description",
+         "name",
+         "rule_description",
          "importance",
          "trigger",
          "trigger_source",
@@ -1903,7 +1904,7 @@
             },
             {
              "required": [
-              "description"
+              "rule_description"
              ]
             },
             {
@@ -1994,6 +1995,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref"
         ]
        },
@@ -2019,6 +2021,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref"
         ]
        },
@@ -2044,6 +2047,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref"
         ]
        },
@@ -2068,6 +2072,8 @@
       "type": "string"
      },
      "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "enabled": {
@@ -2344,6 +2350,9 @@
       "type": "object"
      },
      "name": {
+      "type": "string"
+     },
+     "rule_description": {
       "type": "string"
      },
      "schedule": {
@@ -14197,6 +14206,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "currency"
         ]
        },
@@ -14222,6 +14232,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "month"
         ]
        },
@@ -14247,6 +14258,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "days"
         ]
        },
@@ -14298,6 +14310,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "trade",
          "phone",
          "website",
@@ -14323,6 +14336,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "enabled"
         ]
        },
@@ -14348,6 +14362,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "addon",
          "on"
         ]
@@ -14375,6 +14390,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "working_days"
         ]
        },
@@ -14400,6 +14416,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "skill_id"
         ]
        },
@@ -14425,10 +14442,11 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "presented_product",
          "mark",
          "colour",
-         "description"
+         "product_description"
         ]
        },
        "required": [
@@ -14453,6 +14471,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "kind"
         ]
        },
@@ -14478,6 +14497,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "required",
          "connected",
          "field_settings"
@@ -14505,6 +14525,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "target_continuation_ref",
          "year_start",
          "monthly_amounts",
@@ -14536,6 +14557,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "target_continuation_ref",
          "starts"
         ]
@@ -14563,6 +14585,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "export_continuation_ref",
          "design"
         ]
@@ -14590,6 +14613,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "export_continuation_ref"
         ]
        },
@@ -14615,6 +14639,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "export_continuation_ref"
         ]
        },
@@ -14640,6 +14665,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "export_continuation_ref",
          "file_continuation_ref"
         ]
@@ -14667,6 +14693,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "product_continuation_ref",
          "draft_continuation_ref"
         ]
@@ -14693,6 +14720,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "product_continuation_ref",
          "draft_continuation_ref"
         ]
@@ -14719,6 +14747,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "product_continuation_ref"
         ]
        },
@@ -14744,6 +14773,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "class_continuation_ref",
          "identity"
         ]
@@ -14771,6 +14801,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "class_continuation_ref",
          "numbering"
         ]
@@ -14797,6 +14828,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "class_continuation_ref",
          "start",
          "finish",
@@ -14827,6 +14859,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "choice_list_continuation_ref",
          "name",
          "options"
@@ -14851,6 +14884,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "choice_list_continuation_ref"
         ]
        }
@@ -14911,6 +14945,7 @@
      },
      "colour": {
       "maxLength": 7,
+      "pattern": "^(|#[0-9A-Fa-f]{6})$",
       "type": "string"
      },
      "connected": {
@@ -14931,7 +14966,8 @@
       "type": "integer"
      },
      "description": {
-      "maxLength": 500,
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "design": {
@@ -15060,6 +15096,7 @@
      },
      "phone": {
       "maxLength": 30,
+      "pattern": "^(|\\+?[\\s().-]*(\\d[\\s().-]*){7,15})$",
       "type": "string"
      },
      "presented_product": {
@@ -15068,6 +15105,10 @@
       "type": "string"
      },
      "product_continuation_ref": {
+      "type": "string"
+     },
+     "product_description": {
+      "maxLength": 500,
       "type": "string"
      },
      "required": {
@@ -15100,6 +15141,7 @@
      },
      "timezone": {
       "maxLength": 80,
+      "pattern": "^(UTC|[A-Z][A-Za-z_]+(/[A-Za-z0-9_+-]+)+)$",
       "type": "string"
      },
      "trade": {
@@ -15108,6 +15150,7 @@
      },
      "website": {
       "maxLength": 200,
+      "pattern": "^(|(?:https?://)?(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\\.)+[A-Za-z]{2,24}(?:[/?#]\\S*)?)$",
       "type": "string"
      },
      "working_days": {
@@ -21874,7 +21917,7 @@
     "additionalProperties": false,
     "properties": {
      "description": {
-      "maxLength": 2000,
+      "maxLength": 240,
       "minLength": 1,
       "type": "string"
      },
@@ -21917,11 +21960,16 @@
       "minLength": 1,
       "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
       "type": "string"
+     },
+     "skill_description": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "type": "string"
      }
     },
     "required": [
      "name",
-     "description"
+     "skill_description"
     ],
     "type": "object"
    }
@@ -22052,8 +22100,8 @@
       "type": "string"
      },
      "description": {
-      "default": "",
-      "maxLength": 5000,
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "file_continuation_refs": {
@@ -22070,6 +22118,11 @@
        "question",
        "other"
       ],
+      "type": "string"
+     },
+     "request_description": {
+      "default": "",
+      "maxLength": 5000,
       "type": "string"
      },
      "summary": {
@@ -22232,8 +22285,9 @@
        "propertyNames": {
         "enum": [
          "act",
-         "name",
          "description",
+         "name",
+         "team_description",
          "mark",
          "colour",
          "member_continuation_refs",
@@ -22262,6 +22316,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "name",
          "continuation_ref"
         ]
@@ -22290,6 +22345,7 @@
         "enum": [
          "act",
          "description",
+         "team_description",
          "mark",
          "colour",
          "owner_continuation_refs",
@@ -22318,6 +22374,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref"
         ]
        },
@@ -22343,6 +22400,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref"
         ]
        },
@@ -22368,6 +22426,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref"
         ]
        },
@@ -22393,6 +22452,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "people_continuation_refs",
          "role"
@@ -22421,6 +22481,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "people_continuation_refs"
         ]
@@ -22448,6 +22509,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "accept"
         ]
@@ -22486,7 +22548,8 @@
       "type": "string"
      },
      "description": {
-      "maxLength": 280,
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "mark": {
@@ -22526,6 +22589,10 @@
        "member",
        "owner"
       ],
+      "type": "string"
+     },
+     "team_description": {
+      "maxLength": 280,
       "type": "string"
      }
     },
