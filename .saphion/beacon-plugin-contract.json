@@ -10938,16 +10938,19 @@
          ],
          "type": "string"
         },
-        "hours": {
-         "exclusiveMinimum": 0,
-         "maximum": 14.0,
-         "multipleOf": 0.25,
-         "type": "number"
+        "end": {
+         "pattern": "^(?:[01][0-9]|2[0-3]):(?:00|15|30|45)$",
+         "type": "string"
+        },
+        "start": {
+         "pattern": "^(?:[01][0-9]|2[0-3]):(?:00|15|30|45)$",
+         "type": "string"
         }
        },
        "required": [
         "day",
-        "hours"
+        "start",
+        "end"
        ],
        "type": "object"
       },
@@ -14132,16 +14135,19 @@
          ],
          "type": "string"
         },
-        "hours": {
-         "exclusiveMinimum": 0,
-         "maximum": 14.0,
-         "multipleOf": 0.25,
-         "type": "number"
+        "end": {
+         "pattern": "^(?:[01][0-9]|2[0-3]):(?:00|15|30|45)$",
+         "type": "string"
+        },
+        "start": {
+         "pattern": "^(?:[01][0-9]|2[0-3]):(?:00|15|30|45)$",
+         "type": "string"
         }
        },
        "required": [
         "day",
-        "hours"
+        "start",
+        "end"
        ],
        "type": "object"
       },
