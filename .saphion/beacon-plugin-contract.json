@@ -17655,7 +17655,8 @@
    "choices": {
     "act": [
      "delete",
-     "edit"
+     "edit",
+     "restore"
     ],
     "action": [
      "add",
@@ -18510,6 +18511,33 @@
          }
         }
        ],
+       "propertyNames": {
+        "enum": [
+         "act",
+         "action",
+         "field_continuation_ref",
+         "field",
+         "ordinal",
+         "with_values",
+         "choice_continuation_ref",
+         "name",
+         "colour",
+         "category",
+         "meaning",
+         "probability",
+         "forecast",
+         "resource_class",
+         "board_continuation_ref",
+         "view",
+         "view_roles",
+         "view_people_continuation_refs",
+         "view_teams_continuation_refs",
+         "edit",
+         "edit_roles",
+         "edit_people_continuation_refs",
+         "edit_teams_continuation_refs"
+        ]
+       },
        "required": [
         "action"
        ]
@@ -18555,13 +18583,53 @@
         ]
        }
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "restore"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "allOf": [
+        {
+         "anyOf": [
+          {
+           "required": [
+            "resting_field_continuation_ref"
+           ]
+          },
+          {
+           "required": [
+            "resting_project_field_continuation_ref"
+           ]
+          }
+         ]
+        }
+       ],
+       "propertyNames": {
+        "enum": [
+         "act",
+         "resting_field_continuation_ref",
+         "resting_project_field_continuation_ref"
+        ]
+       }
+      }
      }
     ],
     "properties": {
      "act": {
       "enum": [
        "edit",
-       "delete"
+       "delete",
+       "restore"
       ],
       "type": "string"
      },
@@ -18713,6 +18781,12 @@
       "maxLength": 64,
       "minLength": 1,
       "pattern": "^[^:\\s]+$",
+      "type": "string"
+     },
+     "resting_field_continuation_ref": {
+      "type": "string"
+     },
+     "resting_project_field_continuation_ref": {
       "type": "string"
      },
      "view": {
