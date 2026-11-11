@@ -3087,10 +3087,12 @@
      "create",
      "delete",
      "duplicate",
+     "make_template",
      "move",
      "place_record",
      "rename",
      "restore",
+     "restore_template",
      "save_template",
      "section"
     ],
@@ -3491,6 +3493,30 @@
        "properties": {
         "act": {
          "enum": [
+          "make_template"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "template_continuation_ref",
+         "template_name",
+         "template_table_name"
+        ]
+       }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "delete"
          ]
         }
@@ -3560,6 +3586,31 @@
         "board_continuation_ref"
        ]
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "restore_template"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "resting_template_continuation_ref"
+        ]
+       },
+       "required": [
+        "resting_template_continuation_ref"
+       ]
+      }
      }
     ],
     "properties": {
@@ -3574,9 +3625,11 @@
        "baseline",
        "apply_template",
        "save_template",
+       "make_template",
        "delete",
        "archive",
-       "restore"
+       "restore",
+       "restore_template"
       ],
       "type": "string"
      },
@@ -3625,6 +3678,9 @@
      "record_continuation_ref": {
       "type": "string"
      },
+     "resting_template_continuation_ref": {
+      "type": "string"
+     },
      "section_id": {
       "$ref": "#/$defs/Identifier"
      },
@@ -3644,6 +3700,11 @@
      "template_name": {
       "default": "",
       "maxLength": 255,
+      "type": "string"
+     },
+     "template_table_name": {
+      "maxLength": 255,
+      "minLength": 1,
       "type": "string"
      }
     },
@@ -4766,6 +4827,7 @@
      "react",
      "react_block",
      "resolve",
+     "restore",
      "update"
     ]
    },
@@ -4957,6 +5019,32 @@
        "properties": {
         "act": {
          "enum": [
+          "restore"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref",
+         "update_continuation_ref"
+        ]
+       },
+       "required": [
+        "update_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "pin"
          ]
         }
@@ -5099,6 +5187,7 @@
        "comment",
        "edit",
        "delete",
+       "restore",
        "pin",
        "react",
        "resolve",
@@ -13800,15 +13889,43 @@
    "choices": {
     "act": [
      "action_addon",
+     "choice_list",
      "company_details",
+     "configuration_discard",
+     "configuration_publish",
+     "configuration_put_back",
      "currency",
+     "delete_choice_list",
+     "export_design",
+     "export_master",
+     "export_publish",
+     "export_put_back",
      "financial_year",
      "memory_policy",
-     "notification_retention"
+     "notification_retention",
+     "product_presentation",
+     "project_intake",
+     "recap_style",
+     "remove_identity_image",
+     "remove_targets",
+     "targets",
+     "type_identity",
+     "type_reference",
+     "type_window",
+     "working_week"
     ],
     "addon": [
      "programme",
      "provider_turnaround"
+    ],
+    "identity": [
+     "none",
+     "organisation",
+     "person"
+    ],
+    "kind": [
+     "icon",
+     "logo"
     ]
    },
    "doors": [
@@ -13995,6 +14112,501 @@
         "on"
        ]
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "working_week"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "working_days"
+        ]
+       },
+       "required": [
+        "working_days"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "recap_style"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "skill_id"
+        ]
+       },
+       "required": [
+        "skill_id"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "product_presentation"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "presented_product",
+         "mark",
+         "colour",
+         "description"
+        ]
+       },
+       "required": [
+        "presented_product"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "remove_identity_image"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "kind"
+        ]
+       },
+       "required": [
+        "kind"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "project_intake"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "required",
+         "connected",
+         "field_settings"
+        ]
+       }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "targets"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "target_continuation_ref",
+         "year_start",
+         "monthly_amounts",
+         "annual_goal"
+        ]
+       },
+       "required": [
+        "target_continuation_ref",
+        "year_start",
+        "monthly_amounts",
+        "annual_goal"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "remove_targets"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "target_continuation_ref",
+         "remove_year_start",
+         "starts"
+        ]
+       },
+       "required": [
+        "target_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "export_design"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "export_continuation_ref",
+         "design"
+        ]
+       },
+       "required": [
+        "export_continuation_ref",
+        "design"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "export_publish"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "export_continuation_ref"
+        ]
+       },
+       "required": [
+        "export_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "export_put_back"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "export_continuation_ref"
+        ]
+       },
+       "required": [
+        "export_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "export_master"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "export_continuation_ref",
+         "file_continuation_ref"
+        ]
+       },
+       "required": [
+        "export_continuation_ref",
+        "file_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "configuration_publish"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "product_continuation_ref",
+         "draft_continuation_ref"
+        ]
+       },
+       "required": [
+        "draft_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "configuration_discard"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "product_continuation_ref",
+         "draft_continuation_ref"
+        ]
+       },
+       "required": [
+        "draft_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "configuration_put_back"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "product_continuation_ref"
+        ]
+       },
+       "required": [
+        "product_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "type_identity"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "resource_class",
+         "identity"
+        ]
+       },
+       "required": [
+        "resource_class",
+        "identity"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "type_reference"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "resource_class",
+         "numbering"
+        ]
+       },
+       "required": [
+        "resource_class"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "type_window"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "resource_class",
+         "start",
+         "finish",
+         "baseline"
+        ]
+       },
+       "required": [
+        "resource_class",
+        "start",
+        "finish"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "choice_list"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "choice_list_continuation_ref",
+         "name",
+         "options"
+        ]
+       }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "delete_choice_list"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "choice_list_continuation_ref"
+        ]
+       }
+      }
      }
     ],
     "properties": {
@@ -14005,7 +14617,26 @@
        "notification_retention",
        "company_details",
        "memory_policy",
-       "action_addon"
+       "action_addon",
+       "working_week",
+       "recap_style",
+       "product_presentation",
+       "remove_identity_image",
+       "project_intake",
+       "targets",
+       "remove_targets",
+       "export_design",
+       "export_publish",
+       "export_put_back",
+       "export_master",
+       "configuration_publish",
+       "configuration_discard",
+       "configuration_put_back",
+       "type_identity",
+       "type_reference",
+       "type_window",
+       "choice_list",
+       "delete_choice_list"
       ],
       "type": "string"
      },
@@ -14015,6 +14646,56 @@
        "provider_turnaround"
       ],
       "type": "string"
+     },
+     "annual_goal": {
+      "maxLength": 40,
+      "minLength": 1,
+      "type": "string"
+     },
+     "baseline": {
+      "anyOf": [
+       {
+        "additionalProperties": false,
+        "properties": {
+         "finish": {
+          "maxLength": 64,
+          "type": "string"
+         },
+         "set": {
+          "maxLength": 64,
+          "type": "string"
+         },
+         "start": {
+          "maxLength": 64,
+          "type": "string"
+         }
+        },
+        "required": [
+         "start",
+         "finish",
+         "set"
+        ],
+        "type": "object"
+       },
+       {
+        "const": "new",
+        "type": "string"
+       }
+      ]
+     },
+     "choice_list_continuation_ref": {
+      "type": "string"
+     },
+     "colour": {
+      "maxLength": 7,
+      "type": "string"
+     },
+     "connected": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "maxProperties": 8,
+      "type": "object"
      },
      "currency": {
       "maxLength": 3,
@@ -14026,19 +14707,182 @@
       "minimum": 7,
       "type": "integer"
      },
+     "description": {
+      "maxLength": 500,
+      "type": "string"
+     },
+     "design": {
+      "additionalProperties": true,
+      "type": "object"
+     },
+     "draft_continuation_ref": {
+      "type": "string"
+     },
      "enabled": {
       "type": "boolean"
+     },
+     "export_continuation_ref": {
+      "type": "string"
+     },
+     "field_settings": {
+      "additionalProperties": {
+       "additionalProperties": false,
+       "properties": {
+        "default": {},
+        "enabled": {
+         "type": "boolean"
+        },
+        "show_on_create": {
+         "type": "boolean"
+        }
+       },
+       "type": "object"
+      },
+      "type": "object"
+     },
+     "file_continuation_ref": {
+      "type": "string"
+     },
+     "finish": {
+      "maxLength": 64,
+      "minLength": 1,
+      "type": "string"
+     },
+     "identity": {
+      "enum": [
+       "person",
+       "organisation",
+       "none"
+      ],
+      "type": "string"
+     },
+     "kind": {
+      "enum": [
+       "logo",
+       "icon"
+      ],
+      "type": "string"
+     },
+     "mark": {
+      "maxLength": 40,
+      "type": "string"
      },
      "month": {
       "maximum": 12,
       "minimum": 1,
       "type": "integer"
      },
+     "monthly_amounts": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 12,
+      "minItems": 12,
+      "type": "array"
+     },
+     "name": {
+      "maxLength": 120,
+      "minLength": 1,
+      "type": "string"
+     },
+     "numbering": {
+      "additionalProperties": false,
+      "properties": {
+       "digits": {
+        "maximum": 9,
+        "minimum": 1,
+        "type": "integer"
+       },
+       "prefix": {
+        "maxLength": 8,
+        "type": "string"
+       }
+      },
+      "required": [
+       "prefix",
+       "digits"
+      ],
+      "type": "object"
+     },
      "on": {
       "type": "boolean"
      },
+     "options": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "colour": {
+         "maxLength": 7,
+         "type": "string"
+        },
+        "id": {
+         "default": "",
+         "maxLength": 64,
+         "type": "string"
+        },
+        "label": {
+         "maxLength": 120,
+         "minLength": 1,
+         "type": "string"
+        }
+       },
+       "required": [
+        "label"
+       ],
+       "type": "object"
+      },
+      "maxItems": 500,
+      "minItems": 1,
+      "type": "array"
+     },
      "phone": {
       "maxLength": 30,
+      "type": "string"
+     },
+     "presented_product": {
+      "maxLength": 80,
+      "minLength": 1,
+      "type": "string"
+     },
+     "product_continuation_ref": {
+      "type": "string"
+     },
+     "remove_year_start": {
+      "maxLength": 10,
+      "minLength": 10,
+      "type": "string"
+     },
+     "required": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 80,
+      "type": "array"
+     },
+     "resource_class": {
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[^:\\s]+$",
+      "type": "string"
+     },
+     "skill_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+     },
+     "start": {
+      "maxLength": 64,
+      "minLength": 1,
+      "type": "string"
+     },
+     "starts": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 1000,
+      "type": "array"
+     },
+     "target_continuation_ref": {
       "type": "string"
      },
      "timezone": {
@@ -14051,6 +14895,28 @@
      },
      "website": {
       "maxLength": 200,
+      "type": "string"
+     },
+     "working_days": {
+      "items": {
+       "enum": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday"
+       ],
+       "type": "string"
+      },
+      "maxItems": 7,
+      "minItems": 1,
+      "type": "array"
+     },
+     "year_start": {
+      "maxLength": 10,
+      "minLength": 10,
       "type": "string"
      }
     },
@@ -14807,6 +15673,7 @@
      "decide_proposal",
      "duplicate",
      "remove_tab",
+     "restore",
      "update"
     ],
     "kind": [
@@ -15217,6 +16084,31 @@
         "continuation_ref"
        ]
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "restore"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "continuation_ref"
+        ]
+       },
+       "required": [
+        "continuation_ref"
+       ]
+      }
      }
     ],
     "properties": {
@@ -15231,7 +16123,8 @@
        "add_tab",
        "remove_tab",
        "duplicate",
-       "archive"
+       "archive",
+       "restore"
       ],
       "type": "string"
      },
@@ -16203,6 +17096,7 @@
   "record_change": {
    "choices": {
     "act": [
+     "attach_email",
      "choose_company",
      "create",
      "delete",
@@ -16222,6 +17116,10 @@
      "month",
      "none",
      "week"
+    ],
+    "visibility": [
+     "item",
+     "private"
     ]
    },
    "doors": [
@@ -16506,6 +17404,34 @@
         "cadence"
        ]
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "attach_email"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "record_continuation_refs",
+         "email_continuation_ref",
+         "visibility"
+        ]
+       },
+       "required": [
+        "record_continuation_refs",
+        "email_continuation_ref"
+       ]
+      }
      }
     ],
     "properties": {
@@ -16522,7 +17448,8 @@
        "look_up_company",
        "remove_logo",
        "refresh_logo",
-       "repeat"
+       "repeat",
+       "attach_email"
       ],
       "type": "string"
      },
@@ -16542,6 +17469,10 @@
      },
      "domain": {
       "maxLength": 253,
+      "minLength": 1,
+      "type": "string"
+     },
+     "email_continuation_ref": {
       "minLength": 1,
       "type": "string"
      },
@@ -16704,6 +17635,14 @@
       },
       "minProperties": 1,
       "type": "object"
+     },
+     "visibility": {
+      "default": "item",
+      "enum": [
+       "item",
+       "private"
+      ],
+      "type": "string"
      }
     },
     "required": [
@@ -18758,7 +19697,8 @@
     "act": [
      "change",
      "create",
-     "delete"
+     "delete",
+     "restore"
     ],
     "kind_of_record": [
      "client",
@@ -18874,6 +19814,31 @@
         "role_continuation_ref"
        ]
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "restore"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "role_continuation_ref"
+        ]
+       },
+       "required": [
+        "role_continuation_ref"
+       ]
+      }
      }
     ],
     "properties": {
@@ -18890,7 +19855,8 @@
       "enum": [
        "create",
        "change",
-       "delete"
+       "delete",
+       "restore"
       ],
       "type": "string"
      },
