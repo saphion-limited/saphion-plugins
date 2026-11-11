@@ -1395,6 +1395,11 @@
       "pattern": "^(?:today|yesterday|\\d{4}-\\d{2}-\\d{2})?$",
       "type": "string"
      },
+     "name_words": {
+      "default": "",
+      "maxLength": 500,
+      "type": "string"
+     },
      "project_continuation_ref": {
       "type": "string"
      },
@@ -3071,8 +3076,33 @@
       "type": "array"
      },
      "trigger_kind": {
-      "default": "",
-      "type": "string"
+      "anyOf": [
+       {
+        "enum": [
+         "record_created",
+         "record_changed",
+         "field_changed",
+         "assigned",
+         "date_arrives",
+         "on_schedule",
+         "review_decided",
+         "dependency_met",
+         "becomes_eligible",
+         "button_clicked",
+         "record_absent",
+         "connection_event",
+         "product_event",
+         "becomes_behind",
+         "back_on_track"
+        ],
+        "type": "string"
+       },
+       {
+        "const": "",
+        "type": "string"
+       }
+      ],
+      "default": ""
      }
     },
     "type": "object"
@@ -6350,6 +6380,16 @@
         "required": [
          "file_ref"
         ]
+       },
+       {
+        "properties": {
+         "file_continuation_ref": {
+          "minLength": 1
+         }
+        },
+        "required": [
+         "file_continuation_ref"
+        ]
        }
       ]
      },
@@ -6387,13 +6427,27 @@
        ]
       },
       "then": {
-       "properties": {
-        "file_ref": {
-         "minLength": 1
+       "anyOf": [
+        {
+         "properties": {
+          "file_ref": {
+           "minLength": 1
+          }
+         },
+         "required": [
+          "file_ref"
+         ]
+        },
+        {
+         "properties": {
+          "file_continuation_ref": {
+           "minLength": 1
+          }
+         },
+         "required": [
+          "file_continuation_ref"
+         ]
         }
-       },
-       "required": [
-        "file_ref"
        ]
       }
      },
@@ -6423,6 +6477,9 @@
      }
     ],
     "properties": {
+     "file_continuation_ref": {
+      "type": "string"
+     },
      "file_ref": {
       "default": "",
       "type": "string"
@@ -9108,58 +9165,6 @@
     },
     "required": [
      "continuation_ref"
-    ],
-    "type": "object"
-   }
-  },
-  "file_upload_link": {
-   "choices": {},
-   "doors": [
-    "beacon"
-   ],
-   "family": "organisation_records",
-   "schema": {
-    "additionalProperties": false,
-    "allOf": [
-     {
-      "else": {
-       "properties": {
-        "file_name": {
-         "pattern": "\\.(?:[cC][sS][vV]|[jJ][sS][oO][nN]|[mM][pP][pP]|[mM][pP][xX]|[pP][pP]|[xX][eE][rR]|[xX][lL][sS][xX]|[xX][mM][lL])$"
-        }
-       }
-      },
-      "if": {
-       "required": [
-        "destination_continuation_ref"
-       ]
-      },
-      "then": {
-       "properties": {
-        "file_name": {
-         "pattern": "\\.(?:[cC][sS][sS]|[cC][sS][vV]|[dD][oO][cC]|[dD][oO][cC][mM]|[dD][oO][cC][xX]|[gG][iI][fF]|[hH][tT][mM][lL]|[jJ][pP][eE][gG]|[jJ][pP][gG]|[jJ][sS]|[jJ][sS][oO][nN]|[jJ][sS][xX]|[lL][oO][gG]|[mM][dD]|[oO][dD][pP]|[oO][dD][sS]|[oO][dD][tT]|[pP][dD][fF]|[pP][nN][gG]|[pP][pP][tT][xX]|[pP][yY]|[rR][tT][fF]|[sS][vV][gG]|[tT][sS]|[tT][sS][xX]|[tT][xX][tT]|[wW][eE][bB][pP]|[xX][lL][sS]|[xX][lL][sS][bB]|[xX][lL][sS][mM]|[xX][lL][sS][xX]|[xX][mM][lL]|[yY][aA][mM][lL]|[yY][mM][lL]|[zZ][iI][pP])$"
-        }
-       }
-      }
-     }
-    ],
-    "properties": {
-     "destination_continuation_ref": {
-      "type": "string"
-     },
-     "field": {
-      "default": "",
-      "maxLength": 120,
-      "type": "string"
-     },
-     "file_name": {
-      "maxLength": 255,
-      "minLength": 1,
-      "type": "string"
-     }
-    },
-    "required": [
-     "file_name"
     ],
     "type": "object"
    }
@@ -19820,8 +19825,7 @@
   "record_roles_set": {
    "choices": {},
    "doors": [
-    "beacon",
-    "codeact"
+    "beacon"
    ],
    "family": "sharing",
    "schema": {
@@ -20730,6 +20734,11 @@
     "additionalProperties": false,
     "properties": {
      "continuation_ref": {
+      "type": "string"
+     },
+     "query": {
+      "default": "",
+      "maxLength": 500,
       "type": "string"
      }
     },
