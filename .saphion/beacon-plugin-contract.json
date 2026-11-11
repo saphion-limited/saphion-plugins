@@ -10060,7 +10060,7 @@
   "hold_table": {
    "choices": {},
    "doors": [
-    "beacon"
+    "codeact"
    ],
    "family": "host",
    "schema": {
