@@ -12367,6 +12367,12 @@
      "unread_notifications",
      "unstar"
     ],
+    "channel": [
+     "email",
+     "phone",
+     "popup",
+     "push"
+    ],
     "date_format": [
      "DD MMM YYYY",
      "DD/MM/YYYY",
@@ -12376,6 +12382,29 @@
      "comfortable",
      "compact",
      "default"
+    ],
+    "event": [
+     "alert",
+     "assignment",
+     "comment",
+     "due_reminder",
+     "following",
+     "mention",
+     "overdue",
+     "reply",
+     "support",
+     "team_mention",
+     "waiting_on_you"
+    ],
+    "font": [
+     "Aptos",
+     "Arial",
+     "Calibri",
+     "Georgia",
+     "Segoe UI",
+     "Tahoma",
+     "Times New Roman",
+     "Verdana"
     ],
     "group": [
      "appearance",
@@ -13336,13 +13365,28 @@
        "additionalProperties": false,
        "properties": {
         "channel": {
-         "maxLength": 20,
-         "minLength": 1,
+         "enum": [
+          "phone",
+          "push",
+          "popup",
+          "email"
+         ],
          "type": "string"
         },
         "event": {
-         "maxLength": 40,
-         "minLength": 1,
+         "enum": [
+          "mention",
+          "team_mention",
+          "assignment",
+          "waiting_on_you",
+          "reply",
+          "support",
+          "comment",
+          "alert",
+          "following",
+          "due_reminder",
+          "overdue"
+         ],
          "type": "string"
         },
         "on": {
@@ -13395,6 +13439,7 @@
      },
      "dnd": {
       "maxLength": 40,
+      "pattern": "^(?:30m|1h|4h|today|tomorrow|this_week|off|\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}(?::\\d{2}(?:\\.\\d+)?)?(?:Z|[+-]\\d{2}:\\d{2}))$",
       "type": "string"
      },
      "email_instructions": {
@@ -13406,7 +13451,16 @@
       "type": "string"
      },
      "font": {
-      "maxLength": 40,
+      "enum": [
+       "Aptos",
+       "Calibri",
+       "Arial",
+       "Segoe UI",
+       "Verdana",
+       "Tahoma",
+       "Georgia",
+       "Times New Roman"
+      ],
       "type": "string"
      },
      "group": {
@@ -13489,6 +13543,7 @@
      "reviewer": {
       "default": "",
       "maxLength": 200,
+      "pattern": "^$|^[^\\s@.]+(\\.[^\\s@.]+)*@[^\\s@.]+(\\.[^\\s@.]+)+$",
       "type": "string"
      },
      "sidebar_density": {
@@ -13511,10 +13566,18 @@
       "type": "boolean"
      },
      "size": {
+      "enum": [
+       9,
+       10,
+       11,
+       12,
+       14
+      ],
       "type": "integer"
      },
      "status_clear_after": {
       "maxLength": 40,
+      "pattern": "^(?:30m|1h|4h|today|tomorrow|this_week|never|\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}(?::\\d{2}(?:\\.\\d+)?)?(?:Z|[+-]\\d{2}:\\d{2}))$",
       "type": "string"
      },
      "status_emoji": {
@@ -18941,6 +19004,13 @@
      "restore",
      "save"
     ],
+    "effort": [
+     "high",
+     "low",
+     "max",
+     "medium",
+     "xhigh"
+    ],
     "kind": [
      "after_runs",
      "never",
@@ -19690,8 +19760,13 @@
       "type": "string"
      },
      "effort": {
-      "maxLength": 40,
-      "minLength": 1,
+      "enum": [
+       "low",
+       "medium",
+       "high",
+       "xhigh",
+       "max"
+      ],
       "type": "string"
      },
      "enabled": {
