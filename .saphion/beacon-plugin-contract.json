@@ -512,7 +512,7 @@
      },
      "per_target": {
       "default": 5,
-      "maximum": 20,
+      "maximum": 50,
       "minimum": 1,
       "type": "integer"
      },
