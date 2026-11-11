@@ -1547,6 +1547,11 @@
      "continuation_ref": {
       "type": "string"
      },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
      "effect": {
       "maxLength": 512,
       "minLength": 1,
@@ -3136,6 +3141,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "name",
          "record_class",
          "table_name",
@@ -3273,6 +3279,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "name",
          "action",
          "section_id",
@@ -3303,6 +3310,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "name",
          "board_continuation_ref"
         ]
@@ -3330,6 +3338,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "board_continuation_ref"
         ]
        },
@@ -3355,6 +3364,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "board_continuation_ref",
          "destination_continuation_ref"
         ]
@@ -3382,6 +3392,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "section_id",
          "board_continuation_ref",
          "record_continuation_ref",
@@ -3411,6 +3422,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "board_continuation_ref"
         ]
        },
@@ -3436,6 +3448,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "start_on",
          "template_continuation_ref",
          "into_continuation_ref"
@@ -3478,6 +3491,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "template_continuation_ref",
          "kept_continuation_ref",
          "template_name"
@@ -3505,6 +3519,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "template_continuation_ref",
          "board_name",
          "template_table_name"
@@ -3532,6 +3547,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "board_continuation_ref"
         ]
        },
@@ -3557,6 +3573,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "board_continuation_ref"
         ]
        },
@@ -3582,6 +3599,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "board_continuation_ref"
         ]
        },
@@ -3607,6 +3625,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "resting_template_continuation_ref"
         ]
        },
@@ -3650,6 +3669,11 @@
      },
      "board_name": {
       "maxLength": 255,
+      "minLength": 1,
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
       "minLength": 1,
       "type": "string"
      },
@@ -4226,6 +4250,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "kind",
          "name",
          "shared",
@@ -4272,6 +4297,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "name",
          "config",
          "board_continuation_ref",
@@ -4300,6 +4326,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "board_continuation_ref",
          "view_continuation_refs"
         ]
@@ -4326,6 +4353,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "board_continuation_ref",
          "view_continuation_ref"
         ]
@@ -4352,6 +4380,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "board_continuation_ref",
          "view_continuation_ref"
         ]
@@ -4491,6 +4520,18 @@
        }
       },
       "type": "object"
+     },
+     "description": {
+      "anyOf": [
+       {
+        "maxLength": 240,
+        "minLength": 1,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
      },
      "kind": {
       "enum": [
@@ -4880,6 +4921,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "body",
          "attachments",
@@ -4955,6 +4997,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "body",
          "thread",
@@ -4985,6 +5028,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "body",
          "update_continuation_ref"
@@ -5013,6 +5057,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "update_continuation_ref"
         ]
@@ -5039,6 +5084,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "update_continuation_ref"
         ]
@@ -5065,6 +5111,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "update_continuation_ref",
          "pinned"
@@ -5092,6 +5139,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "update_continuation_ref",
          "emoji"
@@ -5150,6 +5198,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "thread",
          "resolved"
@@ -5174,6 +5223,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "block",
          "quote",
@@ -5223,6 +5273,11 @@
       "type": "string"
      },
      "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "emoji": {
@@ -6220,6 +6275,11 @@
     "additionalProperties": false,
     "properties": {
      "continuation_ref": {
+      "minLength": 1,
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
       "minLength": 1,
       "type": "string"
      }
@@ -8912,6 +8972,11 @@
    "schema": {
     "additionalProperties": false,
     "properties": {
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
      "template_continuation_ref": {
       "type": "string"
      },
@@ -9745,6 +9810,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "board_continuation_ref",
          "name",
          "mode"
@@ -9773,6 +9839,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "name",
          "continuation_ref",
          "body"
@@ -9800,6 +9867,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "active"
         ]
@@ -9827,6 +9895,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref"
         ]
        },
@@ -9852,6 +9921,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref"
         ]
        },
@@ -9877,6 +9947,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref"
         ]
        },
@@ -9902,6 +9973,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "record_continuation_ref",
          "answers"
@@ -9929,6 +10001,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "record_continuation_ref",
          "action_name",
@@ -9959,6 +10032,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "record_continuation_ref",
          "question",
@@ -10012,6 +10086,11 @@
       "type": "object"
      },
      "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "mode": {
@@ -10114,6 +10193,11 @@
    "schema": {
     "additionalProperties": false,
     "properties": {
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
      "format": {
       "enum": [
        "portrait",
@@ -10530,6 +10614,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "person_continuation_ref",
          "account_type"
         ]
@@ -10557,6 +10642,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "person_continuation_ref",
          "successor_continuation_ref",
          "actions_successor_continuation_ref",
@@ -10589,6 +10675,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "person_continuation_ref"
         ]
        },
@@ -10614,6 +10701,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "person_continuation_ref"
         ]
        },
@@ -10639,6 +10727,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "person_continuation_ref",
          "level"
         ]
@@ -10666,6 +10755,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "person_continuation_ref",
          "minutes"
         ]
@@ -10697,6 +10787,11 @@
       "type": "string"
      },
      "actions_successor_continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "holdings_successor_continuation_ref": {
@@ -10775,6 +10870,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "topic",
          "summary",
          "text"
@@ -10830,6 +10926,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "topic",
          "summary",
          "text",
@@ -10861,6 +10958,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "if_version",
          "old_str",
@@ -10891,6 +10989,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "if_version",
          "insert_text"
@@ -10920,6 +11019,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "note_continuation_refs"
         ]
        },
@@ -10941,6 +11041,11 @@
       "type": "string"
      },
      "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "if_version": {
@@ -11064,6 +11169,11 @@
      "continuation_ref": {
       "type": "string"
      },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
      "end": {
       "format": "date-time",
       "type": "string"
@@ -11115,6 +11225,11 @@
       "type": "string"
      },
      "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      }
     },
@@ -11257,6 +11372,11 @@
      "continuation_ref": {
       "type": "string"
      },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
      "response": {
       "enum": [
        "accept",
@@ -11301,6 +11421,11 @@
       "type": "string"
      },
      "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "end": {
@@ -11396,6 +11521,11 @@
      "continuation_ref": {
       "type": "string"
      },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
      "file_project_id": {
       "type": "string"
      },
@@ -11446,6 +11576,11 @@
      "continuation_ref": {
       "type": "string"
      },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
      "to": {
       "items": {
        "maxLength": 320,
@@ -11487,6 +11622,11 @@
       "type": "string"
      },
      "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "file_project_id": {
@@ -11642,6 +11782,11 @@
      "continuation_ref": {
       "type": "string"
      },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
      "flag": {
       "enum": [
        "flagged",
@@ -11678,6 +11823,11 @@
     "additionalProperties": false,
     "properties": {
      "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "destination_ref": {
@@ -11831,6 +11981,11 @@
       "minItems": 1,
       "type": "array"
      },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
      "file_project_id": {
       "type": "string"
      }
@@ -11898,6 +12053,11 @@
     "properties": {
      "continuation_ref": {
       "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
      }
     },
     "required": [
@@ -11952,6 +12112,11 @@
       "type": "string"
      },
      "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "file_project_id": {
@@ -12044,6 +12209,11 @@
      "continuation_ref": {
       "type": "string"
      },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
      "file_project_id": {
       "type": "string"
      }
@@ -12099,6 +12269,11 @@
        "fail",
        "replace"
       ],
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "fileName": {
@@ -12159,6 +12334,11 @@
     "additionalProperties": false,
     "properties": {
      "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "fileRef": {
@@ -12437,6 +12617,11 @@
        "text",
        "html"
       ],
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "reply_to_ref": {
@@ -13894,6 +14079,11 @@
    "schema": {
     "additionalProperties": false,
     "properties": {
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
      "record_continuation_refs": {
       "items": {
        "type": "string"
@@ -15046,6 +15236,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "name",
          "about",
          "base_continuation_ref",
@@ -15108,6 +15299,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "name",
          "about",
          "powers",
@@ -15139,6 +15331,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "permission_continuation_ref",
          "token",
          "hidden"
@@ -15208,6 +15401,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "holder_people_continuation_refs",
          "holder_teams_continuation_refs",
          "permission_continuation_ref",
@@ -15238,6 +15432,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "permission_continuation_ref",
          "token"
         ]
@@ -15264,6 +15459,11 @@
       "type": "string"
      },
      "base_continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "hidden": {
@@ -15691,6 +15891,11 @@
      }
     ],
     "properties": {
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
      "file_continuation_ref": {
       "type": "string"
      },
@@ -15847,6 +16052,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "name",
          "kind",
          "facts",
@@ -15875,6 +16081,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "changes",
          "read_from"
@@ -15903,6 +16110,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "fact",
          "accept"
@@ -15953,6 +16161,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "item_continuation_ref",
          "section"
@@ -16001,6 +16210,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "item_continuation_ref",
          "section"
@@ -16092,6 +16302,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "name",
          "continuation_ref",
          "include_actions",
@@ -16124,6 +16335,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref"
         ]
        },
@@ -16149,6 +16361,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref"
         ]
        },
@@ -16236,6 +16449,11 @@
       "type": "object"
      },
      "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "fact": {
@@ -16630,6 +16848,11 @@
       "type": "string"
      },
      "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "name": {
@@ -17278,6 +17501,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "resource_class",
          "record_set_continuation_ref",
          "values",
@@ -17306,6 +17530,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "history",
          "updates"
         ]
@@ -17354,6 +17579,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "record_continuation_refs",
          "selection_continuation_ref"
         ]
@@ -17377,6 +17603,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "record_continuation_refs"
         ]
        }
@@ -17399,6 +17626,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "record_continuation_refs",
          "apply"
         ]
@@ -17422,6 +17650,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "record_continuation_refs",
          "domain",
          "replace"
@@ -17451,6 +17680,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "record_continuation_refs"
         ]
        },
@@ -17477,6 +17707,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "record_continuation_refs"
         ]
        },
@@ -17502,6 +17733,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "record_continuation_refs",
          "cadence"
         ]
@@ -17529,6 +17761,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "record_continuation_refs",
          "email_continuation_ref",
          "visibility"
@@ -17557,6 +17790,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "attachment_continuation_ref",
          "if_name_taken"
         ]
@@ -17602,6 +17836,11 @@
        "fortnight",
        "none"
       ],
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "domain": {
@@ -18676,6 +18915,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "action",
          "field_continuation_ref",
          "field",
@@ -18738,6 +18978,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "field_continuation_ref",
          "choice_continuation_ref",
          "resource_class",
@@ -18763,6 +19004,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "resting_field_continuation_ref"
         ]
        },
@@ -18816,6 +19058,11 @@
      },
      "colour": {
       "pattern": "^#[0-9A-Fa-f]{6}$",
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "edit": {
@@ -19066,6 +19313,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "proposals"
         ]
@@ -19093,6 +19341,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref",
          "decisions"
         ]
@@ -19120,6 +19369,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref"
         ]
        },
@@ -19145,6 +19395,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref"
         ]
        },
@@ -19170,6 +19421,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref"
         ]
        },
@@ -19220,6 +19472,11 @@
       "maxItems": 64,
       "minItems": 1,
       "type": "array"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
      },
      "proposals": {
       "items": {
@@ -19367,6 +19624,11 @@
       },
       "maxItems": 50,
       "type": "array"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
      },
      "record_continuation_ref": {
       "type": "string"
@@ -19953,6 +20215,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "name",
          "kind_of_record",
          "access_level",
@@ -19999,6 +20262,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "name",
          "access_level",
          "role_continuation_ref"
@@ -20026,6 +20290,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "role_continuation_ref"
         ]
        },
@@ -20051,6 +20316,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "role_continuation_ref"
         ]
        },
@@ -20077,6 +20343,11 @@
        "delete",
        "restore"
       ],
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "inherits": {
@@ -20173,6 +20444,11 @@
     "additionalProperties": false,
     "properties": {
      "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      }
     },
@@ -20904,6 +21180,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref"
         ]
        }
@@ -20926,6 +21203,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "continuation_ref"
         ]
        }
@@ -20942,6 +21220,11 @@
       "type": "string"
      },
      "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "effort": {
@@ -21000,6 +21283,11 @@
     "properties": {
      "at": {
       "pattern": "^\\d{4}-\\d{2}-\\d{2}T([01]\\d|2[0-3]):[0-5]\\d$",
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
       "type": "string"
      },
      "message": {
@@ -21098,6 +21386,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "resource_continuation_ref",
          "people_continuation_refs",
          "teams_continuation_refs",
@@ -21154,6 +21443,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "resource_continuation_ref",
          "people_continuation_refs",
          "teams_continuation_refs",
@@ -21185,6 +21475,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "resource_continuation_ref"
         ]
        },
@@ -21210,6 +21501,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "resource_continuation_ref"
         ]
        },
@@ -21235,6 +21527,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "resource_continuation_ref",
          "person_continuation_ref"
         ]
@@ -21262,6 +21555,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "resource_continuation_ref"
         ]
        },
@@ -21287,6 +21581,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "form_continuation_ref",
          "mode",
          "invitees"
@@ -21315,6 +21610,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "item_invitation_continuation_ref",
          "accepted"
         ]
@@ -21342,6 +21638,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "form_continuation_ref",
          "purpose",
          "record_continuation_ref",
@@ -21373,6 +21670,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "form_continuation_ref",
          "link_continuation_ref"
         ]
@@ -21398,7 +21696,8 @@
       "then": {
        "propertyNames": {
         "enum": [
-         "act"
+         "act",
+         "description"
         ]
        }
       }
@@ -21420,6 +21719,7 @@
        "propertyNames": {
         "enum": [
          "act",
+         "description",
          "resource_continuation_ref",
          "person_continuation_ref",
          "accepted"
@@ -21466,6 +21766,11 @@
       },
       "maxItems": 8,
       "type": "array"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
      },
      "fields": {
       "items": {
@@ -21661,6 +21966,11 @@
       },
       "maxItems": 64,
       "type": "array"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
      },
      "input_continuation_refs": {
       "items": {
