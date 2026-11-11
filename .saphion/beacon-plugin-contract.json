@@ -540,6 +540,9 @@
         "record.restored",
         "record.deleted",
         "record.moved",
+        "file.version_saved",
+        "file.version_restored",
+        "file.moved",
         "comment.posted",
         "comment.replied",
         "comment.edited",
@@ -589,6 +592,7 @@
         "team.archived",
         "team.voided",
         "team.deleted",
+        "team.restored",
         "team.members_added",
         "team.members_invited",
         "team.members_removed",
@@ -14439,6 +14443,27 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "anyOf": [
+          {
+           "required": [
+            "mark"
+           ]
+          },
+          {
+           "required": [
+            "colour"
+           ]
+          },
+          {
+           "required": [
+            "product_description"
+           ]
+          }
+         ]
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -15944,8 +15969,10 @@
      "decide_proposal",
      "duplicate",
      "remove_tab",
+     "reset_default_tabs",
      "restore",
-     "update"
+     "update",
+     "use_tabs_as_default"
     ],
     "kind": [
      "project",
@@ -16245,6 +16272,58 @@
        "properties": {
         "act": {
          "enum": [
+          "use_tabs_as_default"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref"
+        ]
+       },
+       "required": [
+        "continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "reset_default_tabs"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "kind"
+        ]
+       },
+       "required": [
+        "kind"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "duplicate"
          ]
         }
@@ -16401,6 +16480,8 @@
        "decide_proposal",
        "add_tab",
        "remove_tab",
+       "use_tabs_as_default",
+       "reset_default_tabs",
        "duplicate",
        "archive",
        "restore"
