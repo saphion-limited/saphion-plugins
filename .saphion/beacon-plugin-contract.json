@@ -16332,7 +16332,9 @@
   "project_file_change": {
    "choices": {
     "act": [
+     "delete",
      "edit",
+     "restore",
      "write"
     ]
    },
@@ -16369,7 +16371,8 @@
         ]
        },
        "required": [
-        "name"
+        "name",
+        "text"
        ]
       }
      },
@@ -16394,6 +16397,55 @@
          "text",
          "continuation_ref"
         ]
+       },
+       "required": [
+        "text"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "delete"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref"
+        ]
+       }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "restore"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref"
+        ]
        }
       }
      }
@@ -16402,7 +16454,9 @@
      "act": {
       "enum": [
        "write",
-       "edit"
+       "edit",
+       "delete",
+       "restore"
       ],
       "type": "string"
      },
@@ -16432,8 +16486,7 @@
      }
     },
     "required": [
-     "act",
-     "text"
+     "act"
     ],
     "type": "object"
    }
