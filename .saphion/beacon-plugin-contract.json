@@ -3506,10 +3506,13 @@
         "enum": [
          "act",
          "template_continuation_ref",
-         "template_name",
+         "board_name",
          "template_table_name"
         ]
-       }
+       },
+       "required": [
+        "board_name"
+       ]
       }
      },
      {
@@ -3643,6 +3646,11 @@
       "type": "string"
      },
      "board_continuation_ref": {
+      "type": "string"
+     },
+     "board_name": {
+      "maxLength": 255,
+      "minLength": 1,
       "type": "string"
      },
      "destination_continuation_ref": {
@@ -14308,7 +14316,10 @@
          "connected",
          "field_settings"
         ]
-       }
+       },
+       "required": [
+        "required"
+       ]
       }
      },
      {
@@ -14360,12 +14371,12 @@
         "enum": [
          "act",
          "target_continuation_ref",
-         "remove_year_start",
          "starts"
         ]
        },
        "required": [
-        "target_continuation_ref"
+        "target_continuation_ref",
+        "starts"
        ]
       }
      },
@@ -14893,11 +14904,6 @@
      "product_continuation_ref": {
       "type": "string"
      },
-     "remove_year_start": {
-      "maxLength": 10,
-      "minLength": 10,
-      "type": "string"
-     },
      "required": {
       "items": {
        "type": "string"
@@ -14920,6 +14926,7 @@
        "type": "string"
       },
       "maxItems": 1000,
+      "minItems": 1,
       "type": "array"
      },
      "target_continuation_ref": {
@@ -17528,8 +17535,8 @@
         ]
        },
        "required": [
-        "record_continuation_refs",
-        "email_continuation_ref"
+        "email_continuation_ref",
+        "record_continuation_refs"
        ]
       }
      },
@@ -17585,7 +17592,6 @@
       "type": "boolean"
      },
      "attachment_continuation_ref": {
-      "minLength": 1,
       "type": "string"
      },
      "cadence": {
@@ -17604,7 +17610,6 @@
       "type": "string"
      },
      "email_continuation_ref": {
-      "minLength": 1,
       "type": "string"
      },
      "follows_continuation_ref": {
