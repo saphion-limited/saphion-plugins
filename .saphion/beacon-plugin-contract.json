@@ -18758,29 +18758,15 @@
        ]
       },
       "then": {
-       "allOf": [
-        {
-         "anyOf": [
-          {
-           "required": [
-            "resting_field_continuation_ref"
-           ]
-          },
-          {
-           "required": [
-            "resting_project_field_continuation_ref"
-           ]
-          }
-         ]
-        }
-       ],
        "propertyNames": {
         "enum": [
          "act",
-         "resting_field_continuation_ref",
-         "resting_project_field_continuation_ref"
+         "resting_field_continuation_ref"
         ]
-       }
+       },
+       "required": [
+        "resting_field_continuation_ref"
+       ]
       }
      }
     ],
@@ -18944,9 +18930,6 @@
       "type": "string"
      },
      "resting_field_continuation_ref": {
-      "type": "string"
-     },
-     "resting_project_field_continuation_ref": {
       "type": "string"
      },
      "view": {
