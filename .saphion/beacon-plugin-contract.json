@@ -612,6 +612,7 @@
         "plugin.created",
         "plugin.updated",
         "plugin.reverted",
+        "plugin.renamed",
         "plugin.offered",
         "import.completed",
         "conversation.shared",
