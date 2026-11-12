@@ -9255,6 +9255,11 @@
      "crm",
      "rams"
     ],
+    "status": [
+     "active",
+     "completed",
+     "paused"
+    ],
     "team": [
      "current"
     ],
@@ -9753,6 +9758,14 @@
        "field"
       ],
       "type": "object"
+     },
+     "status": {
+      "enum": [
+       "active",
+       "paused",
+       "completed"
+      ],
+      "type": "string"
      },
      "team_today": {
       "type": "boolean"
@@ -20732,20 +20745,67 @@
    }
   },
   "scheduled_task_read": {
-   "choices": {},
+   "choices": {
+    "direction": [
+     "asc",
+     "desc"
+    ],
+    "status": [
+     "active",
+     "completed",
+     "paused"
+    ]
+   },
    "doors": [
     "routed"
    ],
    "family": "scheduled_tasks",
    "schema": {
+    "$defs": {
+     "TaskSortInput": {
+      "additionalProperties": false,
+      "properties": {
+       "direction": {
+        "enum": [
+         "asc",
+         "desc"
+        ],
+        "type": "string"
+       },
+       "field": {
+        "maxLength": 128,
+        "minLength": 1,
+        "type": "string"
+       }
+      },
+      "required": [
+       "field"
+      ],
+      "type": "object"
+     }
+    },
     "additionalProperties": false,
     "properties": {
      "continuation_ref": {
       "type": "string"
      },
+     "project_continuation_ref": {
+      "type": "string"
+     },
      "query": {
       "default": "",
       "maxLength": 500,
+      "type": "string"
+     },
+     "sort": {
+      "$ref": "#/$defs/TaskSortInput"
+     },
+     "status": {
+      "enum": [
+       "active",
+       "paused",
+       "completed"
+      ],
       "type": "string"
      }
     },
