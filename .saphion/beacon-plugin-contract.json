@@ -22376,6 +22376,48 @@
     "type": "object"
    }
   },
+  "support_reply": {
+   "choices": {
+    "close_as": [
+     "done",
+     "not_changing"
+    ]
+   },
+   "doors": [
+    "beacon"
+   ],
+   "family": "support",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "close_as": {
+      "enum": [
+       "done",
+       "not_changing"
+      ],
+      "type": "string"
+     },
+     "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "message": {
+      "maxLength": 20000,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "message",
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "support_request": {
    "choices": {
     "kind": [
