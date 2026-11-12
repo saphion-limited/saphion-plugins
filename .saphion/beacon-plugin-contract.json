@@ -14328,7 +14328,6 @@
    "choices": {
     "act": [
      "action_addon",
-     "chat_recall",
      "choice_list",
      "company_details",
      "configuration_discard",
@@ -14539,32 +14538,6 @@
         "act": {
          "enum": [
           "memory_policy"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "enabled"
-        ]
-       },
-       "required": [
-        "enabled"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "chat_recall"
          ]
         }
        },
@@ -15139,7 +15112,6 @@
        "notification_retention",
        "company_details",
        "memory_policy",
-       "chat_recall",
        "action_addon",
        "working_week",
        "recap_style",
