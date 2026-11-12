@@ -3496,7 +3496,8 @@
          "description",
          "start_on",
          "template_continuation_ref",
-         "into_continuation_ref"
+         "into_continuation_ref",
+         "whole_template"
         ]
        },
        "required": [
@@ -3783,6 +3784,10 @@
       "maxLength": 255,
       "minLength": 1,
       "type": "string"
+     },
+     "whole_template": {
+      "default": false,
+      "type": "boolean"
      }
     },
     "required": [
