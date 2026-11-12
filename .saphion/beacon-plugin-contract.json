@@ -9206,6 +9206,7 @@
      "bin",
      "board",
      "condition",
+     "customer",
      "dashboard",
      "document",
      "file",
@@ -9683,6 +9684,7 @@
        "automation",
        "bin",
        "board",
+       "customer",
        "dashboard",
        "document",
        "file",
@@ -22315,6 +22317,27 @@
      "skill",
      "script"
     ],
+    "type": "object"
+   }
+  },
+  "staff_organisation_read": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "staff_organisations",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "query": {
+      "default": "",
+      "maxLength": 500,
+      "type": "string"
+     }
+    },
     "type": "object"
    }
   },
