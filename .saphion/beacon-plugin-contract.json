@@ -13358,6 +13358,7 @@
              "measurement_units",
              "date_format",
              "confirm_review_before_finalising",
+             "chat_recall",
              "calendar_time_scale",
              "working_week",
              "preferred_name",
@@ -13429,6 +13430,7 @@
              "measurement_units",
              "date_format",
              "confirm_review_before_finalising",
+             "chat_recall",
              "calendar_time_scale",
              "working_week",
              "voice",
@@ -13464,6 +13466,7 @@
              "measurement_units",
              "date_format",
              "confirm_review_before_finalising",
+             "chat_recall",
              "calendar_time_scale",
              "working_week",
              "preferred_name",
@@ -13514,6 +13517,11 @@
           {
            "required": [
             "confirm_review_before_finalising"
+           ]
+          },
+          {
+           "required": [
+            "chat_recall"
            ]
           },
           {
@@ -13572,6 +13580,7 @@
          "measurement_units",
          "date_format",
          "confirm_review_before_finalising",
+         "chat_recall",
          "calendar_time_scale",
          "working_week",
          "preferred_name",
@@ -13842,6 +13851,9 @@
        60
       ],
       "type": "integer"
+     },
+     "chat_recall": {
+      "type": "boolean"
      },
      "choices": {
       "items": {
@@ -14328,6 +14340,7 @@
    "choices": {
     "act": [
      "action_addon",
+     "chat_recall",
      "choice_list",
      "company_details",
      "configuration_discard",
@@ -14538,6 +14551,32 @@
         "act": {
          "enum": [
           "memory_policy"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "enabled"
+        ]
+       },
+       "required": [
+        "enabled"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "chat_recall"
          ]
         }
        },
@@ -15112,6 +15151,7 @@
        "notification_retention",
        "company_details",
        "memory_policy",
+       "chat_recall",
        "action_addon",
        "working_week",
        "recap_style",
