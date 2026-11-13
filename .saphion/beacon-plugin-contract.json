@@ -14455,6 +14455,24 @@
    "family": "organisation_authority",
    "schema": {
     "$defs": {
+     "WorkingDayHours": {
+      "additionalProperties": false,
+      "properties": {
+       "end": {
+        "pattern": "^(?:[01][0-9]|2[0-3]):(?:00|15|30|45)$",
+        "type": "string"
+       },
+       "start": {
+        "pattern": "^(?:[01][0-9]|2[0-3]):(?:00|15|30|45)$",
+        "type": "string"
+       }
+      },
+      "required": [
+       "start",
+       "end"
+      ],
+      "type": "object"
+     },
      "_BaselineFields": {
       "additionalProperties": false,
       "properties": {
@@ -14712,7 +14730,8 @@
         "enum": [
          "act",
          "description",
-         "working_days"
+         "working_days",
+         "day"
         ]
        },
        "required": [
@@ -15280,6 +15299,9 @@
      "currency": {
       "pattern": "^(AED|AFN|ALL|AMD|AOA|ARS|AUD|AWG|AZN|BAM|BBD|BDT|BHD|BIF|BMD|BND|BOB|BOV|BRL|BSD|BTN|BWP|BYN|BZD|CAD|CDF|CHE|CHF|CHW|CLF|CLP|CNY|COP|COU|CRC|CUP|CVE|CZK|DJF|DKK|DOP|DZD|EGP|ERN|ETB|EUR|FJD|FKP|GBP|GEL|GHS|GIP|GMD|GNF|GTQ|GYD|HKD|HNL|HTG|HUF|IDR|ILS|INR|IQD|IRR|ISK|JMD|JOD|JPY|KES|KGS|KHR|KMF|KPW|KRW|KWD|KYD|KZT|LAK|LBP|LKR|LRD|LSL|LYD|MAD|MDL|MGA|MKD|MMK|MNT|MOP|MRU|MUR|MVR|MWK|MXN|MXV|MYR|MZN|NAD|NGN|NIO|NOK|NPR|NZD|OMR|PAB|PEN|PGK|PHP|PKR|PLN|PYG|QAR|RON|RSD|RUB|RWF|SAR|SBD|SCR|SDG|SEK|SGD|SHP|SLE|SOS|SRD|SSP|STN|SVC|SYP|SZL|THB|TJS|TMT|TND|TOP|TRY|TTD|TWD|TZS|UAH|UGX|USD|USN|UYI|UYU|UYW|UZS|VED|VES|VND|VUV|WST|XAD|XAF|XAG|XAU|XBA|XBB|XBC|XBD|XCD|XCG|XDR|XOF|XPD|XPF|XPT|XSU|XTS|XUA|XXX|YER|ZAR|ZMW|ZWG|aed|afn|all|amd|aoa|ars|aud|awg|azn|bam|bbd|bdt|bhd|bif|bmd|bnd|bob|bov|brl|bsd|btn|bwp|byn|bzd|cad|cdf|che|chf|chw|clf|clp|cny|cop|cou|crc|cup|cve|czk|djf|dkk|dop|dzd|egp|ern|etb|eur|fjd|fkp|gbp|gel|ghs|gip|gmd|gnf|gtq|gyd|hkd|hnl|htg|huf|idr|ils|inr|iqd|irr|isk|jmd|jod|jpy|kes|kgs|khr|kmf|kpw|krw|kwd|kyd|kzt|lak|lbp|lkr|lrd|lsl|lyd|mad|mdl|mga|mkd|mmk|mnt|mop|mru|mur|mvr|mwk|mxn|mxv|myr|mzn|nad|ngn|nio|nok|npr|nzd|omr|pab|pen|pgk|php|pkr|pln|pyg|qar|ron|rsd|rub|rwf|sar|sbd|scr|sdg|sek|sgd|shp|sle|sos|srd|ssp|stn|svc|syp|szl|thb|tjs|tmt|tnd|top|try|ttd|twd|tzs|uah|ugx|usd|usn|uyi|uyu|uyw|uzs|ved|ves|vnd|vuv|wst|xad|xaf|xag|xau|xba|xbb|xbc|xbd|xcd|xcg|xdr|xof|xpd|xpf|xpt|xsu|xts|xua|xxx|yer|zar|zmw|zwg)$",
       "type": "string"
+     },
+     "day": {
+      "$ref": "#/$defs/WorkingDayHours"
      },
      "days": {
       "maximum": 365,
