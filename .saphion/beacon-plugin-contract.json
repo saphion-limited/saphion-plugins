@@ -14821,10 +14821,7 @@
          "working_days",
          "day"
         ]
-       },
-       "required": [
-        "working_days"
-       ]
+       }
       }
      },
      {
