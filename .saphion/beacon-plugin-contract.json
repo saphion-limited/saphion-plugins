@@ -19435,6 +19435,7 @@
         "enum": [
          "act",
          "description",
+         "resource_class",
          "resting_field_continuation_ref"
         ]
        },
