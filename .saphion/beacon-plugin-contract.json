@@ -12310,9 +12310,7 @@
         "saphionFolderRef"
        ]
       },
-      "required": [
-       "continuation_ref"
-      ]
+      "required": []
      },
      {
       "not": {
