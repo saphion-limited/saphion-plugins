@@ -6983,28 +6983,26 @@
       "then": {
        "allOf": [
         {
-         "else": {
-          "oneOf": [
+         "not": {
+          "anyOf": [
            {
             "required": [
-             "outline"
-            ]
-           },
-           {
-            "required": [
+             "outline",
              "starter"
             ]
            },
            {
             "required": [
+             "outline",
+             "markdown"
+            ]
+           },
+           {
+            "required": [
+             "starter",
              "markdown"
             ]
            }
-          ]
-         },
-         "if": {
-          "required": [
-           "tab_of_continuation_ref"
           ]
          }
         },
@@ -7032,12 +7030,6 @@
             {
              "required": [
               "project_continuation_ref"
-             ]
-            },
-            {
-             "required": [
-              "outline",
-              "markdown"
              ]
             }
            ]
