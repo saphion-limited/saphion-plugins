@@ -46,7 +46,8 @@ specific, short enough to read and right.
 Follow the template's sections in order. The method of working is the job in a logical sequence, numbered, each step
 with its controls, so a competent operative could follow it. Personnel: who supervises and who does the work, their
 competence. Equipment and access: what is used and how the work area is reached. Welfare, waste, fire and emergency, first
-aid: the job's arrangements within the Organisation's standing wording.
+aid: the job's arrangements within the Organisation's standing wording. The emergency arrangements always say how to call the
+emergency services (999 in the UK).
 
 ## What you never write
 
@@ -63,7 +64,7 @@ Work through this list and fix what fails before answering:
 - [ ] Every hazard has specific controls, in the hierarchy, PPE last.
 - [ ] Risk after is never above risk before.
 - [ ] The PPE ticked matches the hazards; the PPE labels are unchanged.
-- [ ] The method covers the whole scope, step by step, in order.
+- [ ] The method covers the whole scope, step by step, in order, and the emergency arrangements say how to call the emergency services.
 - [ ] Library hazards are used word for word where they fit.
 - [ ] No fixed, fact or by-hand part was written; every unknown fact is marked to confirm.
 
