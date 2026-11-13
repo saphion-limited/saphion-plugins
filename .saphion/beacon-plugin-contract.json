@@ -13694,12 +13694,7 @@
          "anyOf": [
           {
            "required": [
-            "first_name"
-           ]
-          },
-          {
-           "required": [
-            "last_name"
+            "full_name"
            ]
           },
           {
@@ -13714,8 +13709,7 @@
         "enum": [
          "act",
          "description",
-         "first_name",
-         "last_name",
+         "full_name",
          "mobile"
         ]
        }
@@ -14025,10 +14019,6 @@
       "maxLength": 12000,
       "type": "string"
      },
-     "first_name": {
-      "maxLength": 80,
-      "type": "string"
-     },
      "font": {
       "enum": [
        "Aptos",
@@ -14040,6 +14030,10 @@
        "Georgia",
        "Times New Roman"
       ],
+      "type": "string"
+     },
+     "full_name": {
+      "maxLength": 160,
       "type": "string"
      },
      "group": {
@@ -14073,10 +14067,6 @@
        "ja",
        "ko"
       ],
-      "type": "string"
-     },
-     "last_name": {
-      "maxLength": 80,
       "type": "string"
      },
      "mailbox": {
