@@ -12899,6 +12899,22 @@
      "popup",
      "push"
     ],
+    "chat_font": [
+     "default",
+     "dyslexic",
+     "interface",
+     "system"
+    ],
+    "chat_text_size": [
+     "large",
+     "medium",
+     "small"
+    ],
+    "chat_width": [
+     "medium",
+     "narrow",
+     "wide"
+    ],
     "date_format": [
      "DD MMM YYYY",
      "DD/MM/YYYY",
@@ -12960,6 +12976,10 @@
     "measurement_units": [
      "imperial",
      "metric"
+    ],
+    "motion": [
+     "reduced",
+     "system"
     ],
     "sidebar_density": [
      "comfortable",
@@ -13473,6 +13493,10 @@
              "accent",
              "density",
              "sidebar_density",
+             "chat_font",
+             "chat_text_size",
+             "chat_width",
+             "motion",
              "preferred_name",
              "job_title",
              "instructions",
@@ -13506,6 +13530,10 @@
              "accent",
              "density",
              "sidebar_density",
+             "chat_font",
+             "chat_text_size",
+             "chat_width",
+             "motion",
              "measurement_units",
              "date_format",
              "confirm_review_before_finalising",
@@ -13542,6 +13570,10 @@
              "accent",
              "density",
              "sidebar_density",
+             "chat_font",
+             "chat_text_size",
+             "chat_width",
+             "motion",
              "measurement_units",
              "date_format",
              "confirm_review_before_finalising",
@@ -13581,6 +13613,26 @@
           {
            "required": [
             "sidebar_density"
+           ]
+          },
+          {
+           "required": [
+            "chat_font"
+           ]
+          },
+          {
+           "required": [
+            "chat_text_size"
+           ]
+          },
+          {
+           "required": [
+            "chat_width"
+           ]
+          },
+          {
+           "required": [
+            "motion"
            ]
           },
           {
@@ -13656,6 +13708,10 @@
          "accent",
          "density",
          "sidebar_density",
+         "chat_font",
+         "chat_text_size",
+         "chat_width",
+         "motion",
          "measurement_units",
          "date_format",
          "confirm_review_before_finalising",
@@ -13925,8 +13981,33 @@
       ],
       "type": "integer"
      },
+     "chat_font": {
+      "enum": [
+       "default",
+       "interface",
+       "system",
+       "dyslexic"
+      ],
+      "type": "string"
+     },
      "chat_recall": {
       "type": "boolean"
+     },
+     "chat_text_size": {
+      "enum": [
+       "small",
+       "medium",
+       "large"
+      ],
+      "type": "string"
+     },
+     "chat_width": {
+      "enum": [
+       "narrow",
+       "medium",
+       "wide"
+      ],
+      "type": "string"
      },
      "choices": {
       "items": {
@@ -14084,6 +14165,13 @@
      "mobile": {
       "maxLength": 30,
       "pattern": "^(?:\\+?(?:[\\s().-]*\\d){7,15}[\\s().-]*|)$",
+      "type": "string"
+     },
+     "motion": {
+      "enum": [
+       "system",
+       "reduced"
+      ],
       "type": "string"
      },
      "notification_continuation_ref": {
