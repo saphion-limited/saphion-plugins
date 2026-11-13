@@ -6994,6 +6994,11 @@
             "required": [
              "starter"
             ]
+           },
+           {
+            "required": [
+             "markdown"
+            ]
            }
           ]
          },
@@ -7028,6 +7033,12 @@
              "required": [
               "project_continuation_ref"
              ]
+            },
+            {
+             "required": [
+              "outline",
+              "markdown"
+             ]
             }
            ]
           }
@@ -7040,6 +7051,7 @@
          "description",
          "title",
          "outline",
+         "markdown",
          "note",
          "starter",
          "project_continuation_ref",
@@ -7390,6 +7402,9 @@
       "type": "string"
      },
      "destination_continuation_ref": {
+      "type": "string"
+     },
+     "markdown": {
       "type": "string"
      },
      "note": {
