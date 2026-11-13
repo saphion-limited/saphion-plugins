@@ -4809,6 +4809,63 @@
    ],
    "family": "host"
   },
+  "chat_find": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "chat_recall",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "after": {
+      "default": "",
+      "maxLength": 64,
+      "type": "string"
+     },
+     "before": {
+      "default": "",
+      "maxLength": 64,
+      "type": "string"
+     },
+     "query": {
+      "default": "",
+      "maxLength": 500,
+      "type": "string"
+     }
+    },
+    "type": "object"
+   }
+  },
+  "chat_read": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "chat_recall",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "at": {
+      "default": "",
+      "maxLength": 160,
+      "type": "string"
+     },
+     "continuation_ref": {
+      "type": "string"
+     },
+     "text": {
+      "default": "",
+      "maxLength": 400,
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "closing_question": {
    "choices": {},
    "doors": [
@@ -9210,6 +9267,7 @@
      "automation",
      "bin",
      "board",
+     "chat",
      "condition",
      "customer",
      "dashboard",
@@ -9672,6 +9730,12 @@
     },
     "additionalProperties": false,
     "properties": {
+     "after": {
+      "type": "string"
+     },
+     "before": {
+      "type": "string"
+     },
      "by": {
       "type": "string"
      },
@@ -9694,6 +9758,7 @@
        "automation",
        "bin",
        "board",
+       "chat",
        "customer",
        "dashboard",
        "document",
