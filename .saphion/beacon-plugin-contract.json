@@ -17506,8 +17506,6 @@
     ],
     "properties": {
      "limit": {
-      "default": 25,
-      "maximum": 25,
       "minimum": 1,
       "type": "integer"
      },
