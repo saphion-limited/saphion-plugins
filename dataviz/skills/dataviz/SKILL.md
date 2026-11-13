@@ -111,7 +111,7 @@ a source, so a number can be traced; a refused or failed source says why where t
 
 After each write, the result carries the app tool's check report: the app run once, headless, in the light theme at the pane's width, its
 controls tried once, listing what it raised (uncaught errors, console errors) and drew wrong (invalid text such as NaN, a chart that drew
-nothing, labels overlapping or cut off). Fix what the report confirms, at most twice, then say what still fails. That report is the only look
+nothing, labels overlapping or cut off). Fix what the report confirms until it is clean, stopping only when a fix changes nothing, then say what still fails. That report is the only look
 you get: it is words, not a picture, it does not run dark, and its live sources stay `loading` (there is no person), so it proves the controls,
 the loading state and the page's structure, not how the live figures or the colours draw. Colour and dark mode rest on the validator and the
 tokens. Say so, and never claim more than the report shows.

@@ -27,7 +27,7 @@ the `restore` change puts one back. The `delete` change puts an app into the Bin
 After each write the result carries a check report: the app was run as the pane runs it, its
 selects and tabs were used once, and what it raised (uncaught errors, console errors) and drew
 wrong (NaN or undefined text, blank charts, overlapping or cut-off labels) is listed. Fix what
-the report confirms, at most twice, then say what still fails. Never claim the app works beyond
+the report confirms until it is clean, stopping only when a fix changes nothing, then say what still fails. Never claim the app works beyond
 what the report shows. The check has no person to read for, so an app's live sources stay
 `loading` in it: it proves the loading state and the controls, not how the figures draw. Say so.
 
