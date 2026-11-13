@@ -6125,7 +6125,24 @@
         "type": "string"
        },
        "done_value": {
-        "type": "string"
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "additionalProperties": false,
+          "properties": {
+           "finished": {
+            "const": true,
+            "type": "boolean"
+           }
+          },
+          "required": [
+           "finished"
+          ],
+          "type": "object"
+         }
+        ]
        },
        "fields": {
         "items": {
@@ -7911,7 +7928,24 @@
            "type": "string"
           },
           "done_value": {
-           "type": "string"
+           "anyOf": [
+            {
+             "type": "string"
+            },
+            {
+             "additionalProperties": false,
+             "properties": {
+              "finished": {
+               "const": true,
+               "type": "boolean"
+              }
+             },
+             "required": [
+              "finished"
+             ],
+             "type": "object"
+            }
+           ]
           },
           "fields": {
            "items": {
