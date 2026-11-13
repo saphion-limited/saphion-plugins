@@ -6332,7 +6332,11 @@
      "items": {
       "items": {
        "enum": [
-        "index",
+        "components",
+        "layout",
+        "figures",
+        "charts",
+        "queries",
         "language",
         "vocabulary",
         "recipes",
