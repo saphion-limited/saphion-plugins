@@ -61,7 +61,7 @@
       "name": "saphion-documents",
       "source": "./saphion-documents",
       "description": "Word and PDF files, spreadsheets and presentations Beacon makes and edits by itself.",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "category": "Documents and files",
       "author": {
         "name": "Saphion"
