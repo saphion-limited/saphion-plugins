@@ -8203,9 +8203,137 @@
        "properties": {
         "answer": {
          "additionalProperties": false,
+         "allOf": [
+          {
+           "if": {
+            "anyOf": [
+             {
+              "properties": {
+               "control": {
+                "enum": [
+                 "address",
+                 "artefact_only",
+                 "date",
+                 "document_reference",
+                 "email",
+                 "number",
+                 "rich_text",
+                 "tel",
+                 "text",
+                 "textarea",
+                 "url"
+                ]
+               }
+              },
+              "required": [
+               "control"
+              ]
+             },
+             {
+              "not": {
+               "required": [
+                "control"
+               ]
+              }
+             }
+            ]
+           },
+           "then": {
+            "propertyNames": {
+             "not": {
+              "enum": [
+               "options",
+               "allow_free_text",
+               "parts",
+               "max_items",
+               "confirm_statement"
+              ]
+             }
+            }
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "control": {
+              "enum": [
+               "checkbox"
+              ]
+             }
+            },
+            "required": [
+             "control"
+            ]
+           },
+           "then": {
+            "propertyNames": {
+             "not": {
+              "enum": [
+               "options",
+               "allow_free_text",
+               "parts",
+               "max_items"
+              ]
+             }
+            },
+            "required": [
+             "confirm_statement"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "control": {
+              "enum": [
+               "multiselect",
+               "select"
+              ]
+             }
+            },
+            "required": [
+             "control"
+            ]
+           },
+           "then": {
+            "propertyNames": {
+             "not": {
+              "enum": [
+               "parts",
+               "max_items",
+               "confirm_statement"
+              ]
+             }
+            }
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "control": {
+              "enum": [
+               "rows_select"
+              ]
+             }
+            },
+            "required": [
+             "control"
+            ]
+           },
+           "then": {
+            "propertyNames": {
+             "not": {
+              "enum": [
+               "options",
+               "confirm_statement"
+              ]
+             }
+            }
+           }
+          }
+         ],
          "properties": {
           "allow_free_text": {
-           "default": false,
            "type": "boolean"
           },
           "confirm_statement": {
@@ -8248,6 +8376,38 @@
           "parts": {
            "items": {
             "additionalProperties": false,
+            "allOf": [
+             {
+              "if": {
+               "properties": {
+                "control": {
+                 "enum": [
+                  "checkbox",
+                  "date",
+                  "email",
+                  "number",
+                  "tel",
+                  "text",
+                  "textarea",
+                  "url"
+                 ]
+                }
+               },
+               "required": [
+                "control"
+               ]
+              },
+              "then": {
+               "propertyNames": {
+                "not": {
+                 "enum": [
+                  "options"
+                 ]
+                }
+               }
+              }
+             }
+            ],
             "properties": {
              "control": {
               "default": "text",
@@ -10420,6 +10580,25 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "if": {
+          "required": [
+           "product_level"
+          ]
+         },
+         "then": {
+          "properties": {
+           "products": {
+            "minItems": 1
+           }
+          },
+          "required": [
+           "products"
+          ]
+         }
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -10503,6 +10682,25 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "if": {
+          "required": [
+           "product_level"
+          ]
+         },
+         "then": {
+          "properties": {
+           "products": {
+            "minItems": 1
+           }
+          },
+          "required": [
+           "products"
+          ]
+         }
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -10613,7 +10811,6 @@
       "type": "array"
      },
      "product_level": {
-      "default": "editor",
       "enum": [
        "editor",
        "manager"
