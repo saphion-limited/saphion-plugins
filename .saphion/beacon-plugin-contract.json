@@ -14552,6 +14552,30 @@
    "family": "organisation_authority",
    "schema": {
     "$defs": {
+     "AddressInput": {
+      "additionalProperties": false,
+      "properties": {
+       "addressLine1": {
+        "type": "string"
+       },
+       "addressLine2": {
+        "type": "string"
+       },
+       "city": {
+        "type": "string"
+       },
+       "country": {
+        "type": "string"
+       },
+       "county": {
+        "type": "string"
+       },
+       "postcode": {
+        "type": "string"
+       }
+      },
+      "type": "object"
+     },
      "WorkingDayHours": {
       "additionalProperties": false,
       "properties": {
@@ -14713,6 +14737,11 @@
            "required": [
             "timezone"
            ]
+          },
+          {
+           "required": [
+            "address"
+           ]
           }
          ]
         }
@@ -14724,7 +14753,8 @@
          "trade",
          "phone",
          "website",
-         "timezone"
+         "timezone",
+         "address"
         ]
        }
       }
@@ -15363,6 +15393,9 @@
        "provider_turnaround"
       ],
       "type": "string"
+     },
+     "address": {
+      "$ref": "#/$defs/AddressInput"
      },
      "annual_goal": {
       "maxLength": 40,
