@@ -6127,25 +6127,11 @@
        "done_field": {
         "type": "string"
        },
+       "done_finished": {
+        "type": "boolean"
+       },
        "done_value": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "additionalProperties": false,
-          "properties": {
-           "finished": {
-            "const": true,
-            "type": "boolean"
-           }
-          },
-          "required": [
-           "finished"
-          ],
-          "type": "object"
-         }
-        ]
+        "type": "string"
        },
        "fields": {
         "items": {
@@ -7930,25 +7916,11 @@
           "done_field": {
            "type": "string"
           },
+          "done_finished": {
+           "type": "boolean"
+          },
           "done_value": {
-           "anyOf": [
-            {
-             "type": "string"
-            },
-            {
-             "additionalProperties": false,
-             "properties": {
-              "finished": {
-               "const": true,
-               "type": "boolean"
-              }
-             },
-             "required": [
-              "finished"
-             ],
-             "type": "object"
-            }
-           ]
+           "type": "string"
           },
           "fields": {
            "items": {
