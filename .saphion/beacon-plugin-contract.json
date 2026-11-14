@@ -13979,7 +13979,6 @@
       "type": "string"
      },
      "auto_review": {
-      "default": true,
       "type": "boolean"
      },
      "calendar_time_scale": {
@@ -14207,7 +14206,6 @@
       "type": "array"
      },
      "reviewer": {
-      "default": "",
       "maxLength": 200,
       "pattern": "^$|^[^\\s@.]+(\\.[^\\s@.]+)*@[^\\s@.]+(\\.[^\\s@.]+)+$",
       "type": "string"
@@ -14220,7 +14218,6 @@
       "type": "string"
      },
      "signatory": {
-      "default": "",
       "maxLength": 200,
       "type": "string"
      },
@@ -14278,7 +14275,6 @@
       "type": "string"
      },
      "use_account_signatory": {
-      "default": true,
       "type": "boolean"
      },
      "voice": {
