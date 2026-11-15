@@ -1767,9 +1767,9 @@
       "then": {
        "allOf": [
         {
-         "if": {
-          "properties": {
-           "trigger": {
+         "properties": {
+          "trigger": {
+           "if": {
             "properties": {
              "kind": {
               "enum": [
@@ -1781,15 +1781,8 @@
             "required": [
              "kind"
             ]
-           }
-          },
-          "required": [
-           "trigger"
-          ]
-         },
-         "then": {
-          "properties": {
-           "trigger": {
+           },
+           "then": {
             "required": [
              "schedule"
             ]
