@@ -15609,8 +15609,6 @@
       "type": "string"
      },
      "colour": {
-      "maxLength": 7,
-      "pattern": "^(|#[0-9A-Fa-f]{6})$",
       "type": "string"
      },
      "connected": {
@@ -15738,7 +15736,6 @@
        "additionalProperties": false,
        "properties": {
         "colour": {
-         "maxLength": 7,
          "type": "string"
         },
         "id": {
@@ -19873,7 +19870,6 @@
       "type": "string"
      },
      "colour": {
-      "pattern": "^#[0-9A-Fa-f]{6}$",
       "type": "string"
      },
      "description": {
@@ -23451,8 +23447,6 @@
       "type": "string"
      },
      "colour": {
-      "maxLength": 7,
-      "pattern": "^(#[0-9a-fA-F]{6})?$",
       "type": "string"
      },
      "continuation_ref": {
