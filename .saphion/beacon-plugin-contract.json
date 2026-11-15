@@ -1796,6 +1796,60 @@
            "schedule"
           ]
          }
+        },
+        {
+         "if": {
+          "properties": {
+           "trigger": {
+            "not": {
+             "properties": {
+              "source": {
+               "properties": {
+                "kind": {
+                 "const": "records"
+                }
+               },
+               "required": [
+                "kind"
+               ]
+              }
+             },
+             "required": [
+              "source"
+             ]
+            },
+            "properties": {
+             "kind": {
+              "enum": [
+               "on_schedule",
+               "connection_event",
+               "product_event"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           }
+          },
+          "required": [
+           "trigger"
+          ]
+         },
+         "then": {
+          "anyOf": [
+           {
+            "required": [
+             "management"
+            ]
+           },
+           {
+            "required": [
+             "entry_context"
+            ]
+           }
+          ]
+         }
         }
        ],
        "propertyNames": {
