@@ -10558,9 +10558,13 @@
      "send_prepared",
      "withdraw"
     ],
-    "product_level": [
+    "level": [
      "editor",
      "manager"
+    ],
+    "product_key": [
+     "crm",
+     "rams"
     ]
    },
    "doors": [
@@ -10584,25 +10588,6 @@
        ]
       },
       "then": {
-       "allOf": [
-        {
-         "if": {
-          "required": [
-           "product_level"
-          ]
-         },
-         "then": {
-          "properties": {
-           "products": {
-            "minItems": 1
-           }
-          },
-          "required": [
-           "products"
-          ]
-         }
-        }
-       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -10611,8 +10596,7 @@
          "send",
          "join_team_continuation_ref",
          "permission_continuation_refs",
-         "products",
-         "product_level"
+         "product_access"
         ]
        },
        "required": [
@@ -10686,33 +10670,13 @@
        ]
       },
       "then": {
-       "allOf": [
-        {
-         "if": {
-          "required": [
-           "product_level"
-          ]
-         },
-         "then": {
-          "properties": {
-           "products": {
-            "minItems": 1
-           }
-          },
-          "required": [
-           "products"
-          ]
-         }
-        }
-       ],
        "propertyNames": {
         "enum": [
          "act",
          "description",
          "join_team_continuation_ref",
          "permission_continuation_refs",
-         "products",
-         "product_level",
+         "product_access",
          "email",
          "account_type"
         ]
@@ -10814,20 +10778,30 @@
       "maxItems": 100,
       "type": "array"
      },
-     "product_level": {
-      "enum": [
-       "editor",
-       "manager"
-      ],
-      "type": "string"
-     },
-     "products": {
+     "product_access": {
       "items": {
-       "enum": [
-        "rams",
-        "crm"
+       "additionalProperties": false,
+       "properties": {
+        "level": {
+         "default": "editor",
+         "enum": [
+          "editor",
+          "manager"
+         ],
+         "type": "string"
+        },
+        "product_key": {
+         "enum": [
+          "rams",
+          "crm"
+         ],
+         "type": "string"
+        }
+       },
+       "required": [
+        "product_key"
        ],
-       "type": "string"
+       "type": "object"
       },
       "maxItems": 50,
       "type": "array"
