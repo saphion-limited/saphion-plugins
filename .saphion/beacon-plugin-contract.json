@@ -1767,13 +1767,6 @@
       "then": {
        "allOf": [
         {
-         "else": {
-          "not": {
-           "required": [
-            "schedule"
-           ]
-          }
-         },
          "if": {
           "properties": {
            "trigger": {
@@ -1795,9 +1788,13 @@
           ]
          },
          "then": {
-          "required": [
-           "schedule"
-          ]
+          "properties": {
+           "trigger": {
+            "required": [
+             "schedule"
+            ]
+           }
+          }
          }
         },
         {
@@ -1863,7 +1860,6 @@
          "rule_description",
          "management",
          "entry_context",
-         "schedule",
          "trigger",
          "graph"
         ]
@@ -1917,11 +1913,6 @@
             {
              "required": [
               "entry_context"
-             ]
-            },
-            {
-             "required": [
-              "schedule"
              ]
             },
             {
@@ -2414,59 +2405,6 @@
      "rule_description": {
       "type": "string"
      },
-     "schedule": {
-      "additionalProperties": false,
-      "properties": {
-       "at": {
-        "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
-        "type": "string"
-       },
-       "day": {
-        "maximum": 31,
-        "minimum": 1,
-        "type": "integer"
-       },
-       "every": {
-        "enum": [
-         "day",
-         "week",
-         "month",
-         "quarter"
-        ],
-        "type": "string"
-       },
-       "interval_weeks": {
-        "maximum": 52,
-        "minimum": 1,
-        "type": "integer"
-       },
-       "next_working_day": {
-        "type": "boolean"
-       },
-       "starts_on": {
-        "type": "string"
-       },
-       "weekday": {
-        "enum": [
-         "monday",
-         "tuesday",
-         "wednesday",
-         "thursday",
-         "friday",
-         "saturday",
-         "sunday"
-        ],
-        "type": "string"
-       },
-       "working_days": {
-        "type": "boolean"
-       }
-      },
-      "required": [
-       "every"
-      ],
-      "type": "object"
-     },
      "steps": {
       "items": {
        "additionalProperties": false,
@@ -2682,8 +2620,30 @@
          "properties": {
           "kind": {
            "enum": [
+            "on_schedule"
+           ]
+          }
+         },
+         "required": [
+          "kind"
+         ]
+        },
+        "then": {
+         "propertyNames": {
+          "enum": [
+           "kind",
+           "source",
+           "schedule"
+          ]
+         }
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "kind": {
+           "enum": [
             "record_created",
-            "on_schedule",
             "dependency_met",
             "becomes_eligible",
             "button_clicked",
@@ -2850,7 +2810,8 @@
            "expected_class",
            "expected_record_set_id",
            "link_field",
-           "source"
+           "source",
+           "schedule"
           ]
          },
          "required": [
@@ -3391,6 +3352,59 @@
         "maxItems": 20,
         "minItems": 1,
         "type": "array"
+       },
+       "schedule": {
+        "additionalProperties": false,
+        "properties": {
+         "at": {
+          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+          "type": "string"
+         },
+         "day": {
+          "maximum": 31,
+          "minimum": 1,
+          "type": "integer"
+         },
+         "every": {
+          "enum": [
+           "day",
+           "week",
+           "month",
+           "quarter"
+          ],
+          "type": "string"
+         },
+         "interval_weeks": {
+          "maximum": 52,
+          "minimum": 1,
+          "type": "integer"
+         },
+         "next_working_day": {
+          "type": "boolean"
+         },
+         "starts_on": {
+          "type": "string"
+         },
+         "weekday": {
+          "enum": [
+           "monday",
+           "tuesday",
+           "wednesday",
+           "thursday",
+           "friday",
+           "saturday",
+           "sunday"
+          ],
+          "type": "string"
+         },
+         "working_days": {
+          "type": "boolean"
+         }
+        },
+        "required": [
+         "every"
+        ],
+        "type": "object"
        },
        "selector": {
         "additionalProperties": true,
