@@ -2342,6 +2342,155 @@
         },
         "step": {
          "additionalProperties": true,
+         "allOf": [
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "const": "act"
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "required": [
+             "primitive"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "const": "sequence"
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "required": [
+             "steps"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "const": "terminal"
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "properties": {
+             "outcome": {
+              "enum": [
+               "succeeded",
+               "nothing_matched",
+               "refused",
+               "failed",
+               "cancelled"
+              ]
+             }
+            },
+            "required": [
+             "outcome"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "const": "first_match"
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "required": [
+             "branches"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "const": "independent_group"
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "required": [
+             "branches"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "const": "wait"
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "required": [
+             "wait_kind"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "const": "for_each"
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "required": [
+             "snapshot",
+             "body"
+            ]
+           }
+          }
+         ],
+         "properties": {
+          "kind": {
+           "enum": [
+            "act",
+            "first_match",
+            "for_each",
+            "independent_group",
+            "sequence",
+            "terminal",
+            "wait"
+           ]
+          }
+         },
+         "required": [
+          "kind"
+         ],
          "type": "object"
         },
         "step_continuation_ref": {
