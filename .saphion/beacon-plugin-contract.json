@@ -2066,11 +2066,112 @@
      },
      "entry_context": {
       "additionalProperties": false,
-      "properties": {
-       "id": {
-        "maxLength": 200,
-        "type": "string"
+      "allOf": [
+       {
+        "if": {
+         "properties": {
+          "kind": {
+           "const": "project"
+          }
+         },
+         "required": [
+          "kind"
+         ]
+        },
+        "then": {
+         "properties": {
+          "id": {
+           "additionalProperties": false,
+           "properties": {
+            "name": {
+             "maxLength": 400,
+             "type": "string"
+            },
+            "project_continuation_ref": {
+             "maxLength": 200,
+             "minLength": 1,
+             "type": "string"
+            }
+           },
+           "required": [
+            "project_continuation_ref"
+           ],
+           "type": "object"
+          }
+         }
+        }
        },
+       {
+        "if": {
+         "properties": {
+          "kind": {
+           "const": "board"
+          }
+         },
+         "required": [
+          "kind"
+         ]
+        },
+        "then": {
+         "properties": {
+          "id": {
+           "additionalProperties": false,
+           "properties": {
+            "board_continuation_ref": {
+             "maxLength": 200,
+             "minLength": 1,
+             "type": "string"
+            },
+            "name": {
+             "maxLength": 400,
+             "type": "string"
+            }
+           },
+           "required": [
+            "board_continuation_ref"
+           ],
+           "type": "object"
+          }
+         }
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "kind": {
+           "const": "connection"
+          }
+         },
+         "required": [
+          "kind"
+         ]
+        },
+        "then": {
+         "properties": {
+          "id": {
+           "additionalProperties": false,
+           "properties": {
+            "connection_continuation_ref": {
+             "maxLength": 200,
+             "minLength": 1,
+             "type": "string"
+            },
+            "name": {
+             "maxLength": 400,
+             "type": "string"
+            }
+           },
+           "required": [
+            "connection_continuation_ref"
+           ],
+           "type": "object"
+          }
+         }
+        }
+       }
+      ],
+      "properties": {
+       "id": {},
        "kind": {
         "enum": [
          "project",
@@ -3168,9 +3269,22 @@
         "type": "object"
        },
        "connection_id": {
-        "maxLength": 200,
-        "minLength": 1,
-        "type": "string"
+        "additionalProperties": false,
+        "properties": {
+         "connection_continuation_ref": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+         },
+         "name": {
+          "maxLength": 400,
+          "type": "string"
+         }
+        },
+        "required": [
+         "connection_continuation_ref"
+        ],
+        "type": "object"
        },
        "date_field": {
         "pattern": "^[a-z][a-z0-9_]{0,63}$",
@@ -3254,7 +3368,22 @@
        },
        "projects": {
         "items": {
-         "type": "string"
+         "additionalProperties": false,
+         "properties": {
+          "name": {
+           "maxLength": 400,
+           "type": "string"
+          },
+          "project_continuation_ref": {
+           "maxLength": 200,
+           "minLength": 1,
+           "type": "string"
+          }
+         },
+         "required": [
+          "project_continuation_ref"
+         ],
+         "type": "object"
         },
         "maxItems": 20,
         "minItems": 1,
@@ -3379,9 +3508,22 @@
           "type": "string"
          },
          "connection_id": {
-          "maxLength": 200,
-          "minLength": 1,
-          "type": "string"
+          "additionalProperties": false,
+          "properties": {
+           "connection_continuation_ref": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+           },
+           "name": {
+            "maxLength": 400,
+            "type": "string"
+           }
+          },
+          "required": [
+           "connection_continuation_ref"
+          ],
+          "type": "object"
          },
          "event_key": {
           "maxLength": 200,
@@ -3413,7 +3555,22 @@
          },
          "projects": {
           "items": {
-           "type": "string"
+           "additionalProperties": false,
+           "properties": {
+            "name": {
+             "maxLength": 400,
+             "type": "string"
+            },
+            "project_continuation_ref": {
+             "maxLength": 200,
+             "minLength": 1,
+             "type": "string"
+            }
+           },
+           "required": [
+            "project_continuation_ref"
+           ],
+           "type": "object"
           },
           "maxItems": 20,
           "minItems": 1,
