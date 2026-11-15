@@ -1577,6 +1577,28 @@
         }
        }
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "action": {
+         "enum": [
+          "press_button"
+         ]
+        }
+       },
+       "required": [
+        "action"
+       ]
+      },
+      "then": {
+       "properties": {
+        "record_continuation_refs": {
+         "maxItems": 1,
+         "minItems": 1
+        }
+       }
+      }
      }
     ],
     "properties": {
