@@ -15268,6 +15268,10 @@
      "teal",
      "yellow"
     ],
+    "files": [
+     "combined",
+     "separate"
+    ],
     "identity": [
      "none",
      "organisation",
@@ -15276,6 +15280,12 @@
     "kind": [
      "icon",
      "logo"
+    ],
+    "table_style": [
+     "TableStyleLight9",
+     "TableStyleMedium2",
+     "TableStyleMedium4",
+     "TableStyleMedium9"
     ]
    },
    "doors": [
@@ -15303,6 +15313,91 @@
         "type": "string"
        },
        "postcode": {
+        "type": "string"
+       }
+      },
+      "type": "object"
+     },
+     "ExportDesign": {
+      "additionalProperties": false,
+      "properties": {
+       "files": {
+        "enum": [
+         "combined",
+         "separate"
+        ],
+        "type": "string"
+       },
+       "master": {
+        "pattern": "^([0-9a-f]{64})?$",
+        "type": "string"
+       },
+       "styles": {
+        "additionalProperties": false,
+        "properties": {
+         "body": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+         },
+         "caption": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+         },
+         "heading_1": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+         },
+         "heading_2": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+         },
+         "heading_3": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+         },
+         "list_bullet": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+         },
+         "list_number": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+         },
+         "table": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+         }
+        },
+        "required": [
+         "body",
+         "heading_1",
+         "heading_2",
+         "heading_3",
+         "list_bullet",
+         "list_number",
+         "table",
+         "caption"
+        ],
+        "type": "object"
+       },
+       "tab_colour": {
+        "type": "string"
+       },
+       "table_style": {
+        "enum": [
+         "TableStyleLight9",
+         "TableStyleMedium2",
+         "TableStyleMedium4",
+         "TableStyleMedium9"
+        ],
         "type": "string"
        }
       },
@@ -16147,10 +16242,17 @@
       "type": "string"
      },
      "connected": {
-      "additionalProperties": {
-       "type": "string"
+      "additionalProperties": false,
+      "properties": {
+       "actual_finish": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$",
+        "type": "string"
+       },
+       "actual_start": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$",
+        "type": "string"
+       }
       },
-      "maxProperties": 8,
       "type": "object"
      },
      "currency": {
@@ -16171,8 +16273,7 @@
       "type": "string"
      },
      "design": {
-      "additionalProperties": true,
-      "type": "object"
+      "$ref": "#/$defs/ExportDesign"
      },
      "draft_continuation_ref": {
       "type": "string"
