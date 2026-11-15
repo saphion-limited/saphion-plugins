@@ -11243,8 +11243,23 @@
       "type": "string"
      },
      "action_inputs": {
-      "additionalProperties": true,
-      "type": "object"
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "name": {
+         "maxLength": 64,
+         "minLength": 1,
+         "type": "string"
+        },
+        "value": {}
+       },
+       "required": [
+        "name",
+        "value"
+       ],
+       "type": "object"
+      },
+      "type": "array"
      },
      "action_name": {
       "maxLength": 64,
@@ -11255,8 +11270,24 @@
       "type": "boolean"
      },
      "answers": {
-      "additionalProperties": true,
-      "type": "object"
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "answer": {},
+        "question": {
+         "maxLength": 64,
+         "minLength": 1,
+         "type": "string"
+        }
+       },
+       "required": [
+        "question",
+        "answer"
+       ],
+       "type": "object"
+      },
+      "maxItems": 200,
+      "type": "array"
      },
      "board_continuation_ref": {
       "type": "string"
