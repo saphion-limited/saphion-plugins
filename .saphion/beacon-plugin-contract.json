@@ -9357,6 +9357,30 @@
      "mark",
      "propose_marking"
     ],
+    "as": [
+     "fact",
+     "fixed",
+     "hand",
+     "written"
+    ],
+    "body": [
+     "fixed",
+     "hand",
+     "written"
+    ],
+    "fact": [
+     "author_initials",
+     "author_name",
+     "author_role",
+     "client",
+     "issue_number",
+     "nearest_ae",
+     "organisation_address",
+     "organisation_name",
+     "project_name",
+     "site_address",
+     "today"
+    ],
     "purpose": [
      "rams_method_statement",
      "rams_risk_assessment"
@@ -9528,7 +9552,79 @@
       "type": "string"
      },
      "marking": {
-      "additionalProperties": true,
+      "additionalProperties": false,
+      "properties": {
+       "parts": {
+        "patternProperties": {
+         "^(?:[phf]\\d+|[ts]\\d+r\\d+c\\d+)$": {
+          "additionalProperties": false,
+          "properties": {
+           "as": {
+            "enum": [
+             "fixed",
+             "fact",
+             "written",
+             "hand"
+            ],
+            "type": "string"
+           },
+           "fact": {
+            "enum": [
+             "author_name",
+             "author_role",
+             "author_initials",
+             "today",
+             "organisation_name",
+             "organisation_address",
+             "project_name",
+             "site_address",
+             "client",
+             "nearest_ae",
+             "issue_number"
+            ],
+            "type": "string"
+           },
+           "text": {
+            "minLength": 1,
+            "type": "string"
+           }
+          },
+          "required": [
+           "as"
+          ],
+          "type": "object"
+         }
+        },
+        "type": "object"
+       },
+       "tables": {
+        "patternProperties": {
+         "^[ts]\\d+$": {
+          "additionalProperties": false,
+          "properties": {
+           "body": {
+            "enum": [
+             "fixed",
+             "written",
+             "hand"
+            ],
+            "type": "string"
+           },
+           "footer_rows": {
+            "minimum": 0,
+            "type": "integer"
+           },
+           "header_rows": {
+            "minimum": 0,
+            "type": "integer"
+           }
+          },
+          "type": "object"
+         }
+        },
+        "type": "object"
+       }
+      },
       "type": "object"
      },
      "name": {
