@@ -1684,21 +1684,31 @@
     ],
     "kind": [
      "act",
+     "all",
+     "any",
      "assigned",
      "back_on_track",
+     "became_assigned",
      "becomes_behind",
      "becomes_eligible",
      "board",
      "button_clicked",
+     "changed_from_to",
      "clock",
+     "collection_match",
+     "comparison",
      "connection",
      "connection_event",
+     "crossed_above",
+     "crossed_below",
      "date_arrives",
      "dependency_met",
      "field_changed",
      "first_match",
      "for_each",
      "independent_group",
+     "matching_count",
+     "not",
      "on_schedule",
      "organisation",
      "product",
@@ -2900,7 +2910,207 @@
       ],
       "properties": {
        "completed": {
-        "additionalProperties": true,
+        "allOf": [
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "const": "comparison"
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "required": [
+            "left",
+            "operator"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "const": "collection_match"
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "required": [
+            "collection",
+            "quantifier",
+            "member"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "const": "matching_count"
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "required": [
+            "collection",
+            "member",
+            "operator",
+            "expected"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "const": "changed_from_to"
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "required": [
+            "field",
+            "before",
+            "after"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "const": "became_assigned"
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "required": [
+            "field"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "const": "crossed_above"
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "required": [
+            "field",
+            "threshold"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "const": "crossed_below"
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "required": [
+            "field",
+            "threshold"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "const": "all"
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "required": [
+            "members"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "const": "any"
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "required": [
+            "members"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "const": "not"
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "required": [
+            "member"
+           ]
+          }
+         }
+        ],
+        "properties": {
+         "kind": {
+          "enum": [
+           "comparison",
+           "collection_match",
+           "matching_count",
+           "changed_from_to",
+           "became_assigned",
+           "crossed_above",
+           "crossed_below",
+           "all",
+           "any",
+           "not"
+          ]
+         }
+        },
+        "required": [
+         "kind"
+        ],
         "type": "object"
        },
        "connection_id": {
