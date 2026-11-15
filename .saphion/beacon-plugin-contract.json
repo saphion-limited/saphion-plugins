@@ -7301,6 +7301,46 @@
     "type": "object"
    }
   },
+  "data_source_list": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "discovery",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "place_continuation_ref": {
+      "type": "string"
+     },
+     "query": {
+      "default": "",
+      "maxLength": 200,
+      "type": "string"
+     }
+    },
+    "type": "object"
+   }
+  },
+  "data_source_read": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "discovery",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "declare_scheduled_task_result": {
    "doors": [
     "beacon"
