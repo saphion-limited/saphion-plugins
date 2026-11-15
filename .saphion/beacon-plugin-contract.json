@@ -13991,6 +13991,32 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "anyOf": [
+          {
+           "required": [
+            "use_account_signatory"
+           ]
+          },
+          {
+           "required": [
+            "signatory"
+           ]
+          },
+          {
+           "required": [
+            "reviewer"
+           ]
+          },
+          {
+           "required": [
+            "auto_review"
+           ]
+          }
+         ]
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
