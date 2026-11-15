@@ -1837,6 +1837,22 @@
             ]
            },
            {
+            "properties": {
+             "entry_context": {
+              "properties": {
+               "kind": {
+                "enum": [
+                 "project",
+                 "board",
+                 "organisation"
+                ]
+               }
+              },
+              "required": [
+               "kind"
+              ]
+             }
+            },
             "required": [
              "entry_context"
             ]
