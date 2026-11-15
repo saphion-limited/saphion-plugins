@@ -1418,6 +1418,7 @@
    "choices": {
     "action": [
      "cancel",
+     "press_button",
      "renew_policy",
      "resolve_step",
      "run_again",
@@ -1454,7 +1455,8 @@
         "not": {
          "enum": [
           "effect",
-          "happened"
+          "happened",
+          "button"
          ]
         }
        },
@@ -1486,7 +1488,8 @@
           "record_continuation_refs",
           "test",
           "effect",
-          "happened"
+          "happened",
+          "button"
          ]
         }
        },
@@ -1513,7 +1516,8 @@
         "not": {
          "enum": [
           "record_continuation_refs",
-          "test"
+          "test",
+          "button"
          ]
         }
        },
@@ -1521,6 +1525,35 @@
         "effect",
         "happened",
         "continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "action": {
+         "enum": [
+          "press_button"
+         ]
+        }
+       },
+       "required": [
+        "action"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "not": {
+         "enum": [
+          "test",
+          "effect",
+          "happened"
+         ]
+        }
+       },
+       "required": [
+        "button",
+        "record_continuation_refs"
        ]
       }
      },
@@ -1554,8 +1587,14 @@
        "run_again",
        "start_new",
        "renew_policy",
-       "resolve_step"
+       "resolve_step",
+       "press_button"
       ],
+      "type": "string"
+     },
+     "button": {
+      "maxLength": 200,
+      "minLength": 1,
       "type": "string"
      },
      "continuation_ref": {
@@ -1620,12 +1659,6 @@
      "month",
      "quarter",
      "week"
-    ],
-    "importance": [
-     "critical",
-     "high",
-     "low",
-     "normal"
     ],
     "kind": [
      "act",
@@ -1872,13 +1905,11 @@
          "description",
          "name",
          "rule_description",
-         "importance",
          "trigger",
          "trigger_source",
          "management",
          "entry_context",
          "schedule",
-         "model_selection",
          "graph"
         ]
        },
@@ -1926,11 +1957,6 @@
             },
             {
              "required": [
-              "importance"
-             ]
-            },
-            {
-             "required": [
               "trigger"
              ]
             },
@@ -1952,11 +1978,6 @@
             {
              "required": [
               "schedule"
-             ]
-            },
-            {
-             "required": [
-              "model_selection"
              ]
             },
             {
@@ -2272,15 +2293,6 @@
       ],
       "type": "object"
      },
-     "importance": {
-      "enum": [
-       "low",
-       "normal",
-       "high",
-       "critical"
-      ],
-      "type": "string"
-     },
      "management": {
       "additionalProperties": true,
       "allOf": [
@@ -2343,26 +2355,6 @@
       },
       "required": [
        "kind"
-      ],
-      "type": "object"
-     },
-     "model_selection": {
-      "additionalProperties": false,
-      "properties": {
-       "model": {
-        "maxLength": 160,
-        "minLength": 1,
-        "type": "string"
-       },
-       "reasoning_effort": {
-        "maxLength": 40,
-        "minLength": 1,
-        "type": "string"
-       }
-      },
-      "required": [
-       "model",
-       "reasoning_effort"
       ],
       "type": "object"
      },
@@ -3022,6 +3014,9 @@
      "board_continuation_ref": {
       "type": "string"
      },
+     "connection_continuation_ref": {
+      "type": "string"
+     },
      "connection_groups": {
       "items": {
        "additionalProperties": false,
@@ -3106,6 +3101,43 @@
        }
       ],
       "default": ""
+     },
+     "watch": {
+      "default": "",
+      "maxLength": 64,
+      "type": "string"
+     },
+     "watch_chosen": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "selection": {
+         "maxLength": 64,
+         "type": "string"
+        },
+        "value": {
+         "maxLength": 512,
+         "type": "string"
+        }
+       },
+       "required": [
+        "selection",
+        "value"
+       ],
+       "type": "object"
+      },
+      "maxItems": 10,
+      "type": "array"
+     },
+     "watch_search": {
+      "default": "",
+      "maxLength": 320,
+      "type": "string"
+     },
+     "watch_within": {
+      "default": "",
+      "maxLength": 512,
+      "type": "string"
      }
     },
     "type": "object"
