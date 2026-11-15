@@ -10858,6 +10858,17 @@
     "mode": [
      "create",
      "update"
+    ],
+    "op": [
+     "add_block",
+     "add_page",
+     "change_block",
+     "change_form",
+     "change_page",
+     "move_block",
+     "move_page",
+     "remove_block",
+     "remove_page"
     ]
    },
    "doors": [
@@ -10917,7 +10928,7 @@
          "description",
          "name",
          "continuation_ref",
-         "body"
+         "operations"
         ]
        },
        "required": [
@@ -11156,10 +11167,6 @@
      "board_continuation_ref": {
       "type": "string"
      },
-     "body": {
-      "additionalProperties": true,
-      "type": "object"
-     },
      "continuation_ref": {
       "type": "string"
      },
@@ -11180,6 +11187,301 @@
       "maxLength": 200,
       "minLength": 1,
       "type": "string"
+     },
+     "operations": {
+      "items": {
+       "additionalProperties": false,
+       "allOf": [
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "add_page"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "page",
+             "block"
+            ]
+           }
+          }
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "change_page"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "block",
+             "after"
+            ]
+           }
+          },
+          "required": [
+           "page",
+           "values"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "move_page"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "block",
+             "values"
+            ]
+           }
+          },
+          "required": [
+           "after",
+           "page"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "remove_page"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "block",
+             "after",
+             "values"
+            ]
+           }
+          },
+          "required": [
+           "page"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "add_block"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "block"
+            ]
+           }
+          },
+          "required": [
+           "page",
+           "values"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "change_block"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "page",
+             "after"
+            ]
+           }
+          },
+          "required": [
+           "block",
+           "values"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "move_block"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "values"
+            ]
+           }
+          },
+          "required": [
+           "after",
+           "block"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "remove_block"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "page",
+             "after",
+             "values"
+            ]
+           }
+          },
+          "required": [
+           "block"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "change_form"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "page",
+             "block",
+             "after"
+            ]
+           }
+          },
+          "required": [
+           "values"
+          ]
+         }
+        }
+       ],
+       "properties": {
+        "after": {
+         "maxLength": 64,
+         "minLength": 1,
+         "type": "string"
+        },
+        "block": {
+         "maxLength": 64,
+         "minLength": 1,
+         "type": "string"
+        },
+        "op": {
+         "enum": [
+          "add_page",
+          "change_page",
+          "move_page",
+          "remove_page",
+          "add_block",
+          "change_block",
+          "move_block",
+          "remove_block",
+          "change_form"
+         ],
+         "type": "string"
+        },
+        "page": {
+         "maxLength": 64,
+         "minLength": 1,
+         "type": "string"
+        },
+        "values": {
+         "additionalProperties": true,
+         "type": "object"
+        }
+       },
+       "required": [
+        "op"
+       ],
+       "type": "object"
+      },
+      "maxItems": 50,
+      "minItems": 1,
+      "type": "array"
      },
      "question": {
       "maxLength": 64,
@@ -19783,8 +20085,10 @@
      "yellow"
     ],
     "edit": [
+     "add",
      "everyone",
-     "restricted"
+     "remove",
+     "set"
     ],
     "meaning": [
      "lost",
@@ -19823,8 +20127,10 @@
      "updated_by"
     ],
     "view": [
+     "add",
      "everyone",
-     "restricted"
+     "remove",
+     "set"
     ]
    },
    "doors": [
@@ -20612,6 +20918,146 @@
            }
           }
          }
+        },
+        {
+         "if": {
+          "properties": {
+           "view": {
+            "enum": [
+             "add",
+             "remove",
+             "set"
+            ]
+           }
+          },
+          "required": [
+           "view"
+          ]
+         },
+         "then": {
+          "anyOf": [
+           {
+            "properties": {
+             "view_roles": {
+              "minItems": 1
+             }
+            },
+            "required": [
+             "view_roles"
+            ]
+           },
+           {
+            "properties": {
+             "view_people_continuation_refs": {
+              "minItems": 1
+             }
+            },
+            "required": [
+             "view_people_continuation_refs"
+            ]
+           },
+           {
+            "properties": {
+             "view_teams_continuation_refs": {
+              "minItems": 1
+             }
+            },
+            "required": [
+             "view_teams_continuation_refs"
+            ]
+           }
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "edit": {
+            "enum": [
+             "add",
+             "remove",
+             "set"
+            ]
+           }
+          },
+          "required": [
+           "edit"
+          ]
+         },
+         "then": {
+          "anyOf": [
+           {
+            "properties": {
+             "edit_roles": {
+              "minItems": 1
+             }
+            },
+            "required": [
+             "edit_roles"
+            ]
+           },
+           {
+            "properties": {
+             "edit_people_continuation_refs": {
+              "minItems": 1
+             }
+            },
+            "required": [
+             "edit_people_continuation_refs"
+            ]
+           },
+           {
+            "properties": {
+             "edit_teams_continuation_refs": {
+              "minItems": 1
+             }
+            },
+            "required": [
+             "edit_teams_continuation_refs"
+            ]
+           }
+          ]
+         }
+        },
+        {
+         "dependentRequired": {
+          "edit_people": [
+           "edit"
+          ],
+          "edit_people_continuation_refs": [
+           "edit"
+          ],
+          "edit_roles": [
+           "edit"
+          ],
+          "edit_roles_continuation_refs": [
+           "edit"
+          ],
+          "edit_teams": [
+           "edit"
+          ],
+          "edit_teams_continuation_refs": [
+           "edit"
+          ],
+          "view_people": [
+           "view"
+          ],
+          "view_people_continuation_refs": [
+           "view"
+          ],
+          "view_roles": [
+           "view"
+          ],
+          "view_roles_continuation_refs": [
+           "view"
+          ],
+          "view_teams": [
+           "view"
+          ],
+          "view_teams_continuation_refs": [
+           "view"
+          ]
+         }
         }
        ],
        "propertyNames": {
@@ -20783,7 +21229,9 @@
      "edit": {
       "enum": [
        "everyone",
-       "restricted"
+       "add",
+       "remove",
+       "set"
       ],
       "type": "string"
      },
@@ -20899,7 +21347,9 @@
      "view": {
       "enum": [
        "everyone",
-       "restricted"
+       "add",
+       "remove",
+       "set"
       ],
       "type": "string"
      },
