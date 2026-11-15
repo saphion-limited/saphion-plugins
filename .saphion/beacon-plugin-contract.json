@@ -17798,6 +17798,28 @@
            "share_role"
           ]
          }
+        },
+        {
+         "if": {
+          "properties": {
+           "share_role": {
+            "enum": [
+             "contributor",
+             "viewer"
+            ]
+           }
+          },
+          "required": [
+           "share_role"
+          ]
+         },
+         "then": {
+          "properties": {
+           "share_capabilities": {
+            "maxItems": 0
+           }
+          }
+         }
         }
        ],
        "propertyNames": {
