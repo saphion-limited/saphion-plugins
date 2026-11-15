@@ -25816,29 +25816,24 @@
            },
            "then": {
             "propertyNames": {
-             "not": {
-              "enum": [
-               "wrap",
-               "title",
-               "from",
-               "to",
-               "fromSide",
-               "toSide",
-               "heads",
-               "dash",
-               "label",
-               "bends",
-               "cols",
-               "rows",
-               "src",
-               "alt",
-               "href",
-               "points",
-               "width",
-               "sticker",
-               "on"
-              ]
-             }
+             "enum": [
+              "id",
+              "x",
+              "y",
+              "locked",
+              "parent",
+              "group",
+              "shape",
+              "w",
+              "h",
+              "color",
+              "stroke",
+              "hollow",
+              "text",
+              "size",
+              "textAlign",
+              "kind"
+             ]
             },
             "required": [
              "h",
@@ -25864,33 +25859,20 @@
            },
            "then": {
             "propertyNames": {
-             "not": {
-              "enum": [
-               "shape",
-               "stroke",
-               "hollow",
-               "textAlign",
-               "wrap",
-               "title",
-               "from",
-               "to",
-               "fromSide",
-               "toSide",
-               "heads",
-               "dash",
-               "label",
-               "bends",
-               "cols",
-               "rows",
-               "src",
-               "alt",
-               "href",
-               "points",
-               "width",
-               "sticker",
-               "on"
-              ]
-             }
+             "enum": [
+              "id",
+              "x",
+              "y",
+              "locked",
+              "parent",
+              "group",
+              "w",
+              "h",
+              "color",
+              "text",
+              "size",
+              "kind"
+             ]
             },
             "required": [
              "id",
@@ -25914,33 +25896,20 @@
            },
            "then": {
             "propertyNames": {
-             "not": {
-              "enum": [
-               "shape",
-               "w",
-               "h",
-               "stroke",
-               "hollow",
-               "title",
-               "from",
-               "to",
-               "fromSide",
-               "toSide",
-               "heads",
-               "dash",
-               "label",
-               "bends",
-               "cols",
-               "rows",
-               "src",
-               "alt",
-               "href",
-               "points",
-               "width",
-               "sticker",
-               "on"
-              ]
-             }
+             "enum": [
+              "id",
+              "x",
+              "y",
+              "locked",
+              "parent",
+              "group",
+              "color",
+              "text",
+              "size",
+              "textAlign",
+              "wrap",
+              "kind"
+             ]
             },
             "required": [
              "id",
@@ -25965,34 +25934,19 @@
            },
            "then": {
             "propertyNames": {
-             "not": {
-              "enum": [
-               "shape",
-               "stroke",
-               "hollow",
-               "text",
-               "size",
-               "textAlign",
-               "wrap",
-               "from",
-               "to",
-               "fromSide",
-               "toSide",
-               "heads",
-               "dash",
-               "label",
-               "bends",
-               "cols",
-               "rows",
-               "src",
-               "alt",
-               "href",
-               "points",
-               "width",
-               "sticker",
-               "on"
-              ]
-             }
+             "enum": [
+              "id",
+              "x",
+              "y",
+              "locked",
+              "parent",
+              "group",
+              "w",
+              "h",
+              "color",
+              "title",
+              "kind"
+             ]
             },
             "required": [
              "h",
@@ -26018,31 +25972,22 @@
            },
            "then": {
             "propertyNames": {
-             "not": {
-              "enum": [
-               "x",
-               "y",
-               "shape",
-               "w",
-               "h",
-               "stroke",
-               "hollow",
-               "text",
-               "size",
-               "textAlign",
-               "wrap",
-               "title",
-               "cols",
-               "rows",
-               "src",
-               "alt",
-               "href",
-               "points",
-               "width",
-               "sticker",
-               "on"
-              ]
-             }
+             "enum": [
+              "id",
+              "locked",
+              "parent",
+              "group",
+              "color",
+              "from",
+              "to",
+              "fromSide",
+              "toSide",
+              "heads",
+              "dash",
+              "label",
+              "bends",
+              "kind"
+             ]
             },
             "required": [
              "from",
@@ -26066,36 +26011,17 @@
            },
            "then": {
             "propertyNames": {
-             "not": {
-              "enum": [
-               "shape",
-               "w",
-               "h",
-               "color",
-               "stroke",
-               "hollow",
-               "text",
-               "size",
-               "textAlign",
-               "wrap",
-               "title",
-               "from",
-               "to",
-               "fromSide",
-               "toSide",
-               "heads",
-               "dash",
-               "label",
-               "bends",
-               "src",
-               "alt",
-               "href",
-               "points",
-               "width",
-               "sticker",
-               "on"
-              ]
-             }
+             "enum": [
+              "id",
+              "x",
+              "y",
+              "locked",
+              "parent",
+              "group",
+              "cols",
+              "rows",
+              "kind"
+             ]
             },
             "required": [
              "cols",
@@ -26121,34 +26047,19 @@
            },
            "then": {
             "propertyNames": {
-             "not": {
-              "enum": [
-               "shape",
-               "color",
-               "stroke",
-               "hollow",
-               "text",
-               "size",
-               "textAlign",
-               "wrap",
-               "title",
-               "from",
-               "to",
-               "fromSide",
-               "toSide",
-               "heads",
-               "dash",
-               "label",
-               "bends",
-               "cols",
-               "rows",
-               "href",
-               "points",
-               "width",
-               "sticker",
-               "on"
-              ]
-             }
+             "enum": [
+              "id",
+              "x",
+              "y",
+              "locked",
+              "parent",
+              "group",
+              "w",
+              "h",
+              "src",
+              "alt",
+              "kind"
+             ]
             },
             "required": [
              "h",
@@ -26175,34 +26086,19 @@
            },
            "then": {
             "propertyNames": {
-             "not": {
-              "enum": [
-               "shape",
-               "color",
-               "stroke",
-               "hollow",
-               "text",
-               "size",
-               "textAlign",
-               "wrap",
-               "from",
-               "to",
-               "fromSide",
-               "toSide",
-               "heads",
-               "dash",
-               "label",
-               "bends",
-               "cols",
-               "rows",
-               "src",
-               "alt",
-               "points",
-               "width",
-               "sticker",
-               "on"
-              ]
-             }
+             "enum": [
+              "id",
+              "x",
+              "y",
+              "locked",
+              "parent",
+              "group",
+              "w",
+              "h",
+              "title",
+              "href",
+              "kind"
+             ]
             },
             "required": [
              "href",
@@ -26228,35 +26124,18 @@
            },
            "then": {
             "propertyNames": {
-             "not": {
-              "enum": [
-               "shape",
-               "w",
-               "h",
-               "stroke",
-               "hollow",
-               "text",
-               "size",
-               "textAlign",
-               "wrap",
-               "title",
-               "from",
-               "to",
-               "fromSide",
-               "toSide",
-               "heads",
-               "dash",
-               "label",
-               "bends",
-               "cols",
-               "rows",
-               "src",
-               "alt",
-               "href",
-               "sticker",
-               "on"
-              ]
-             }
+             "enum": [
+              "id",
+              "x",
+              "y",
+              "locked",
+              "parent",
+              "group",
+              "color",
+              "points",
+              "width",
+              "kind"
+             ]
             },
             "required": [
              "id",
@@ -26281,33 +26160,20 @@
            },
            "then": {
             "propertyNames": {
-             "not": {
-              "enum": [
-               "shape",
-               "color",
-               "stroke",
-               "hollow",
-               "text",
-               "size",
-               "textAlign",
-               "wrap",
-               "title",
-               "from",
-               "to",
-               "fromSide",
-               "toSide",
-               "heads",
-               "dash",
-               "label",
-               "bends",
-               "cols",
-               "rows",
-               "alt",
-               "href",
-               "points",
-               "width"
-              ]
-             }
+             "enum": [
+              "id",
+              "x",
+              "y",
+              "locked",
+              "parent",
+              "group",
+              "w",
+              "h",
+              "src",
+              "sticker",
+              "on",
+              "kind"
+             ]
             },
             "required": [
              "id",
