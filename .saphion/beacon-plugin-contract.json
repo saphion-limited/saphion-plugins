@@ -25345,6 +25345,17 @@
       ],
       "type": "object"
      },
+     "WhiteboardBorder": {
+      "anyOf": [
+       {
+        "$ref": "#/$defs/WhiteboardColour"
+       },
+       {
+        "const": "none",
+        "type": "string"
+       }
+      ]
+     },
      "WhiteboardColour": {
       "enum": [
        "blue",
@@ -26693,7 +26704,7 @@
            "$ref": "#/$defs/WhiteboardSticker"
           },
           "stroke": {
-           "$ref": "#/$defs/WhiteboardColour"
+           "$ref": "#/$defs/WhiteboardBorder"
           },
           "text": {
            "maxLength": 4000,
@@ -27066,7 +27077,7 @@
           "stroke": {
            "anyOf": [
             {
-             "$ref": "#/$defs/WhiteboardColour"
+             "$ref": "#/$defs/WhiteboardBorder"
             },
             {
              "type": "null"
