@@ -25396,6 +25396,26 @@
    "family": "pages",
    "schema": {
     "$defs": {
+     "Anchor": {
+      "additionalProperties": false,
+      "properties": {
+       "x": {
+        "maximum": 1,
+        "minimum": 0,
+        "type": "number"
+       },
+       "y": {
+        "maximum": 1,
+        "minimum": 0,
+        "type": "number"
+       }
+      },
+      "required": [
+       "x",
+       "y"
+      ],
+      "type": "object"
+     },
      "BoardPoint": {
       "additionalProperties": false,
       "properties": {
@@ -26049,9 +26069,12 @@
               "to",
               "fromSide",
               "toSide",
+              "fromAnchor",
+              "toAnchor",
               "heads",
               "dash",
               "label",
+              "labelPosition",
               "bends",
               "kind"
              ]
@@ -26537,6 +26560,9 @@
             }
            ]
           },
+          "fromAnchor": {
+           "$ref": "#/$defs/Anchor"
+          },
           "fromSide": {
            "$ref": "#/$defs/WhiteboardSide"
           },
@@ -26587,6 +26613,11 @@
           "label": {
            "maxLength": 200,
            "type": "string"
+          },
+          "labelPosition": {
+           "maximum": 1,
+           "minimum": 0,
+           "type": "number"
           },
           "locked": {
            "type": "boolean"
@@ -26659,6 +26690,9 @@
              "$ref": "#/$defs/BoardPoint"
             }
            ]
+          },
+          "toAnchor": {
+           "$ref": "#/$defs/Anchor"
           },
           "toSide": {
            "$ref": "#/$defs/WhiteboardSide"
@@ -26783,6 +26817,16 @@
             }
            ]
           },
+          "fromAnchor": {
+           "anyOf": [
+            {
+             "$ref": "#/$defs/Anchor"
+            },
+            {
+             "type": "null"
+            }
+           ]
+          },
           "fromSide": {
            "anyOf": [
             {
@@ -26859,6 +26903,18 @@
             {
              "maxLength": 200,
              "type": "string"
+            },
+            {
+             "type": "null"
+            }
+           ]
+          },
+          "labelPosition": {
+           "anyOf": [
+            {
+             "maximum": 1,
+             "minimum": 0,
+             "type": "number"
             },
             {
              "type": "null"
@@ -27085,6 +27141,16 @@
                "$ref": "#/$defs/BoardPoint"
               }
              ]
+            },
+            {
+             "type": "null"
+            }
+           ]
+          },
+          "toAnchor": {
+           "anyOf": [
+            {
+             "$ref": "#/$defs/Anchor"
             },
             {
              "type": "null"
