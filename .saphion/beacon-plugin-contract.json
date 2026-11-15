@@ -9320,7 +9320,10 @@
         "index",
         "editing",
         "comments",
-        "diagram"
+        "diagram",
+        "whiteboard",
+        "whiteboard_design",
+        "whiteboard_organising"
        ],
        "type": "string"
       },
@@ -10308,7 +10311,8 @@
      "scheduled_task",
      "skill",
      "team",
-     "template"
+     "template",
+     "whiteboard"
     ],
     "operator": [
      "date_after",
@@ -10797,7 +10801,8 @@
        "scheduled_task",
        "skill",
        "team",
-       "template"
+       "template",
+       "whiteboard"
       ],
       "type": "string"
      },
