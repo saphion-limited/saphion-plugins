@@ -23954,6 +23954,16 @@
      "edit",
      "restore"
     ],
+    "kind": [
+     "arrow",
+     "image",
+     "link",
+     "section",
+     "shape",
+     "sticky",
+     "table",
+     "text"
+    ],
     "op": [
      "add",
      "change",
@@ -23988,8 +23998,7 @@
          "act",
          "description",
          "title",
-         "operations",
-         "project_continuation_ref"
+         "operations"
         ]
        },
        "required": [
@@ -24116,6 +24125,119 @@
      "operations": {
       "items": {
        "additionalProperties": false,
+       "allOf": [
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "add"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "id",
+             "fields"
+            ]
+           }
+          },
+          "required": [
+           "element"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "change"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "element",
+             "before"
+            ]
+           }
+          },
+          "required": [
+           "fields",
+           "id"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "remove"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "element",
+             "before",
+             "fields"
+            ]
+           }
+          },
+          "required": [
+           "id"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "op": {
+            "enum": [
+             "meta"
+            ]
+           }
+          },
+          "required": [
+           "op"
+          ]
+         },
+         "then": {
+          "propertyNames": {
+           "not": {
+            "enum": [
+             "element",
+             "before",
+             "id"
+            ]
+           }
+          },
+          "required": [
+           "fields"
+          ]
+         }
+        }
+       ],
        "properties": {
         "before": {
          "maxLength": 64,
@@ -24124,10 +24246,483 @@
         },
         "element": {
          "additionalProperties": true,
+         "allOf": [
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "shape"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "properties": {
+             "h": {
+              "type": "number"
+             },
+             "id": {
+              "type": "string"
+             },
+             "w": {
+              "type": "number"
+             },
+             "x": {
+              "type": "number"
+             },
+             "y": {
+              "type": "number"
+             }
+            },
+            "propertyNames": {
+             "enum": [
+              "kind",
+              "id",
+              "x",
+              "y",
+              "locked",
+              "parent",
+              "shape",
+              "w",
+              "h",
+              "color",
+              "stroke",
+              "hollow",
+              "text",
+              "size",
+              "textAlign"
+             ]
+            },
+            "required": [
+             "h",
+             "id",
+             "w",
+             "x",
+             "y"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "sticky"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "properties": {
+             "id": {
+              "type": "string"
+             },
+             "x": {
+              "type": "number"
+             },
+             "y": {
+              "type": "number"
+             }
+            },
+            "propertyNames": {
+             "enum": [
+              "kind",
+              "id",
+              "x",
+              "y",
+              "locked",
+              "parent",
+              "w",
+              "h",
+              "color",
+              "text",
+              "size"
+             ]
+            },
+            "required": [
+             "id",
+             "x",
+             "y"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "text"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "properties": {
+             "id": {
+              "type": "string"
+             },
+             "text": {
+              "type": "string"
+             },
+             "x": {
+              "type": "number"
+             },
+             "y": {
+              "type": "number"
+             }
+            },
+            "propertyNames": {
+             "enum": [
+              "kind",
+              "id",
+              "x",
+              "y",
+              "locked",
+              "parent",
+              "text",
+              "size",
+              "color",
+              "wrap",
+              "textAlign"
+             ]
+            },
+            "required": [
+             "id",
+             "text",
+             "x",
+             "y"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "section"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "properties": {
+             "h": {
+              "type": "number"
+             },
+             "id": {
+              "type": "string"
+             },
+             "w": {
+              "type": "number"
+             },
+             "x": {
+              "type": "number"
+             },
+             "y": {
+              "type": "number"
+             }
+            },
+            "propertyNames": {
+             "enum": [
+              "kind",
+              "id",
+              "x",
+              "y",
+              "locked",
+              "parent",
+              "w",
+              "h",
+              "title",
+              "color"
+             ]
+            },
+            "required": [
+             "h",
+             "id",
+             "w",
+             "x",
+             "y"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "arrow"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "properties": {
+             "from": {
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "object"
+               }
+              ]
+             },
+             "id": {
+              "type": "string"
+             },
+             "to": {
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "object"
+               }
+              ]
+             }
+            },
+            "propertyNames": {
+             "enum": [
+              "kind",
+              "id",
+              "locked",
+              "parent",
+              "from",
+              "to",
+              "fromSide",
+              "toSide",
+              "heads",
+              "dash",
+              "label",
+              "color",
+              "bends"
+             ]
+            },
+            "required": [
+             "from",
+             "id",
+             "to"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "table"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "properties": {
+             "cols": {
+              "items": {
+               "type": "number"
+              },
+              "type": "array"
+             },
+             "id": {
+              "type": "string"
+             },
+             "rows": {
+              "items": {
+               "items": {
+                "type": "string"
+               },
+               "type": "array"
+              },
+              "type": "array"
+             },
+             "x": {
+              "type": "number"
+             },
+             "y": {
+              "type": "number"
+             }
+            },
+            "propertyNames": {
+             "enum": [
+              "kind",
+              "id",
+              "x",
+              "y",
+              "locked",
+              "parent",
+              "cols",
+              "rows"
+             ]
+            },
+            "required": [
+             "cols",
+             "id",
+             "rows",
+             "x",
+             "y"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "image"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "properties": {
+             "h": {
+              "type": "number"
+             },
+             "id": {
+              "type": "string"
+             },
+             "src": {
+              "type": "string"
+             },
+             "w": {
+              "type": "number"
+             },
+             "x": {
+              "type": "number"
+             },
+             "y": {
+              "type": "number"
+             }
+            },
+            "propertyNames": {
+             "enum": [
+              "kind",
+              "id",
+              "x",
+              "y",
+              "locked",
+              "parent",
+              "src",
+              "w",
+              "h",
+              "alt"
+             ]
+            },
+            "required": [
+             "h",
+             "id",
+             "src",
+             "w",
+             "x",
+             "y"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "link"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "properties": {
+             "href": {
+              "type": "string"
+             },
+             "id": {
+              "type": "string"
+             },
+             "title": {
+              "type": "string"
+             },
+             "x": {
+              "type": "number"
+             },
+             "y": {
+              "type": "number"
+             }
+            },
+            "propertyNames": {
+             "enum": [
+              "kind",
+              "id",
+              "x",
+              "y",
+              "locked",
+              "parent",
+              "href",
+              "title",
+              "w",
+              "h"
+             ]
+            },
+            "required": [
+             "href",
+             "id",
+             "title",
+             "x",
+             "y"
+            ]
+           }
+          }
+         ],
+         "properties": {
+          "id": {
+           "maxLength": 64,
+           "minLength": 1,
+           "type": "string"
+          },
+          "kind": {
+           "enum": [
+            "shape",
+            "sticky",
+            "text",
+            "section",
+            "arrow",
+            "table",
+            "image",
+            "link"
+           ]
+          }
+         },
+         "required": [
+          "id",
+          "kind"
+         ],
          "type": "object"
         },
         "fields": {
          "additionalProperties": true,
+         "minProperties": 1,
          "type": "object"
         },
         "id": {
@@ -24153,9 +24748,6 @@
       "maxItems": 50,
       "minItems": 1,
       "type": "array"
-     },
-     "project_continuation_ref": {
-      "type": "string"
      },
      "title": {
       "maxLength": 200,
