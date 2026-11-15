@@ -25300,25 +25300,6 @@
      "restore",
      "restore_version"
     ],
-    "color": [
-     "blue",
-     "green",
-     "grey",
-     "indigo",
-     "orange",
-     "pink",
-     "purple",
-     "red",
-     "teal",
-     "yellow"
-    ],
-    "fromSide": [
-     "auto",
-     "bottom",
-     "left",
-     "right",
-     "top"
-    ],
     "kind": [
      "arrow",
      "image",
@@ -25336,77 +25317,6 @@
      "change",
      "meta",
      "remove"
-    ],
-    "shape": [
-     "cloud",
-     "database",
-     "diamond",
-     "document",
-     "ellipse",
-     "hexagon",
-     "parallelogram",
-     "person",
-     "pill",
-     "queue",
-     "rect",
-     "rounded"
-    ],
-    "size": [
-     "body",
-     "huge",
-     "large",
-     "small",
-     "title"
-    ],
-    "sticker": [
-     "check",
-     "clap",
-     "clock",
-     "cross",
-     "exclamation",
-     "face",
-     "fire",
-     "flag",
-     "heart",
-     "idea",
-     "laugh",
-     "party",
-     "pin",
-     "plus-one",
-     "question",
-     "rocket",
-     "sad",
-     "smile",
-     "star",
-     "think",
-     "thumbs-down",
-     "thumbs-up",
-     "warning",
-     "wow"
-    ],
-    "stroke": [
-     "blue",
-     "green",
-     "grey",
-     "indigo",
-     "orange",
-     "pink",
-     "purple",
-     "red",
-     "teal",
-     "yellow"
-    ],
-    "textAlign": [
-     "center",
-     "left",
-     "right"
-    ],
-    "toSide": [
-     "auto",
-     "bottom",
-     "left",
-     "right",
-     "top"
     ],
     "until": [
      "reveal"
@@ -25435,1040 +25345,98 @@
       ],
       "type": "object"
      },
-     "WhiteboardElement": {
-      "additionalProperties": false,
-      "allOf": [
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "enum": [
-            "shape"
-           ]
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "propertyNames": {
-          "not": {
-           "enum": [
-            "wrap",
-            "title",
-            "from",
-            "to",
-            "fromSide",
-            "toSide",
-            "heads",
-            "dash",
-            "label",
-            "bends",
-            "cols",
-            "rows",
-            "src",
-            "alt",
-            "href",
-            "points",
-            "width",
-            "sticker",
-            "on"
-           ]
-          }
-         },
-         "required": [
-          "h",
-          "id",
-          "w",
-          "x",
-          "y"
-         ]
-        }
-       },
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "enum": [
-            "sticky"
-           ]
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "propertyNames": {
-          "not": {
-           "enum": [
-            "shape",
-            "stroke",
-            "hollow",
-            "textAlign",
-            "wrap",
-            "title",
-            "from",
-            "to",
-            "fromSide",
-            "toSide",
-            "heads",
-            "dash",
-            "label",
-            "bends",
-            "cols",
-            "rows",
-            "src",
-            "alt",
-            "href",
-            "points",
-            "width",
-            "sticker",
-            "on"
-           ]
-          }
-         },
-         "required": [
-          "id",
-          "x",
-          "y"
-         ]
-        }
-       },
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "enum": [
-            "text"
-           ]
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "propertyNames": {
-          "not": {
-           "enum": [
-            "shape",
-            "w",
-            "h",
-            "stroke",
-            "hollow",
-            "title",
-            "from",
-            "to",
-            "fromSide",
-            "toSide",
-            "heads",
-            "dash",
-            "label",
-            "bends",
-            "cols",
-            "rows",
-            "src",
-            "alt",
-            "href",
-            "points",
-            "width",
-            "sticker",
-            "on"
-           ]
-          }
-         },
-         "required": [
-          "id",
-          "text",
-          "x",
-          "y"
-         ]
-        }
-       },
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "enum": [
-            "section"
-           ]
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "propertyNames": {
-          "not": {
-           "enum": [
-            "shape",
-            "stroke",
-            "hollow",
-            "text",
-            "size",
-            "textAlign",
-            "wrap",
-            "from",
-            "to",
-            "fromSide",
-            "toSide",
-            "heads",
-            "dash",
-            "label",
-            "bends",
-            "cols",
-            "rows",
-            "src",
-            "alt",
-            "href",
-            "points",
-            "width",
-            "sticker",
-            "on"
-           ]
-          }
-         },
-         "required": [
-          "h",
-          "id",
-          "w",
-          "x",
-          "y"
-         ]
-        }
-       },
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "enum": [
-            "arrow"
-           ]
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "propertyNames": {
-          "not": {
-           "enum": [
-            "x",
-            "y",
-            "shape",
-            "w",
-            "h",
-            "stroke",
-            "hollow",
-            "text",
-            "size",
-            "textAlign",
-            "wrap",
-            "title",
-            "cols",
-            "rows",
-            "src",
-            "alt",
-            "href",
-            "points",
-            "width",
-            "sticker",
-            "on"
-           ]
-          }
-         },
-         "required": [
-          "from",
-          "id",
-          "to"
-         ]
-        }
-       },
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "enum": [
-            "table"
-           ]
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "propertyNames": {
-          "not": {
-           "enum": [
-            "shape",
-            "w",
-            "h",
-            "color",
-            "stroke",
-            "hollow",
-            "text",
-            "size",
-            "textAlign",
-            "wrap",
-            "title",
-            "from",
-            "to",
-            "fromSide",
-            "toSide",
-            "heads",
-            "dash",
-            "label",
-            "bends",
-            "src",
-            "alt",
-            "href",
-            "points",
-            "width",
-            "sticker",
-            "on"
-           ]
-          }
-         },
-         "required": [
-          "cols",
-          "id",
-          "rows",
-          "x",
-          "y"
-         ]
-        }
-       },
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "enum": [
-            "image"
-           ]
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "propertyNames": {
-          "not": {
-           "enum": [
-            "shape",
-            "color",
-            "stroke",
-            "hollow",
-            "text",
-            "size",
-            "textAlign",
-            "wrap",
-            "title",
-            "from",
-            "to",
-            "fromSide",
-            "toSide",
-            "heads",
-            "dash",
-            "label",
-            "bends",
-            "cols",
-            "rows",
-            "href",
-            "points",
-            "width",
-            "sticker",
-            "on"
-           ]
-          }
-         },
-         "required": [
-          "h",
-          "id",
-          "src",
-          "w",
-          "x",
-          "y"
-         ]
-        }
-       },
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "enum": [
-            "link"
-           ]
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "propertyNames": {
-          "not": {
-           "enum": [
-            "shape",
-            "color",
-            "stroke",
-            "hollow",
-            "text",
-            "size",
-            "textAlign",
-            "wrap",
-            "from",
-            "to",
-            "fromSide",
-            "toSide",
-            "heads",
-            "dash",
-            "label",
-            "bends",
-            "cols",
-            "rows",
-            "src",
-            "alt",
-            "points",
-            "width",
-            "sticker",
-            "on"
-           ]
-          }
-         },
-         "required": [
-          "href",
-          "id",
-          "title",
-          "x",
-          "y"
-         ]
-        }
-       },
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "enum": [
-            "stroke"
-           ]
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "propertyNames": {
-          "not": {
-           "enum": [
-            "shape",
-            "w",
-            "h",
-            "stroke",
-            "hollow",
-            "text",
-            "size",
-            "textAlign",
-            "wrap",
-            "title",
-            "from",
-            "to",
-            "fromSide",
-            "toSide",
-            "heads",
-            "dash",
-            "label",
-            "bends",
-            "cols",
-            "rows",
-            "src",
-            "alt",
-            "href",
-            "sticker",
-            "on"
-           ]
-          }
-         },
-         "required": [
-          "id",
-          "points",
-          "x",
-          "y"
-         ]
-        }
-       },
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "enum": [
-            "sticker"
-           ]
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "propertyNames": {
-          "not": {
-           "enum": [
-            "shape",
-            "color",
-            "stroke",
-            "hollow",
-            "text",
-            "size",
-            "textAlign",
-            "wrap",
-            "title",
-            "from",
-            "to",
-            "fromSide",
-            "toSide",
-            "heads",
-            "dash",
-            "label",
-            "bends",
-            "cols",
-            "rows",
-            "alt",
-            "href",
-            "points",
-            "width"
-           ]
-          }
-         },
-         "required": [
-          "id",
-          "x",
-          "y"
-         ]
-        }
-       },
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "enum": [
-            "shape"
-           ]
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "properties": {
-          "h": {
-           "minimum": 8
-          },
-          "w": {
-           "minimum": 8
-          }
-         }
-        }
-       },
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "enum": [
-            "sticky"
-           ]
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "properties": {
-          "h": {
-           "minimum": 8
-          },
-          "w": {
-           "minimum": 8
-          }
-         }
-        }
-       },
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "enum": [
-            "section"
-           ]
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "properties": {
-          "h": {
-           "minimum": 40
-          },
-          "w": {
-           "minimum": 40
-          }
-         }
-        }
-       },
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "enum": [
-            "image"
-           ]
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "properties": {
-          "h": {
-           "minimum": 8
-          },
-          "w": {
-           "minimum": 8
-          }
-         }
-        }
-       },
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "enum": [
-            "sticker"
-           ]
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "dependentSchemas": {
-          "group": {
-           "anyOf": [
-            {
-             "required": [
-              "sticker"
-             ]
-            },
-            {
-             "required": [
-              "src"
-             ]
-            }
-           ]
-          },
-          "h": {
-           "anyOf": [
-            {
-             "required": [
-              "sticker"
-             ]
-            },
-            {
-             "required": [
-              "src"
-             ]
-            }
-           ]
-          },
-          "locked": {
-           "anyOf": [
-            {
-             "required": [
-              "sticker"
-             ]
-            },
-            {
-             "required": [
-              "src"
-             ]
-            }
-           ]
-          },
-          "on": {
-           "anyOf": [
-            {
-             "required": [
-              "sticker"
-             ]
-            },
-            {
-             "required": [
-              "src"
-             ]
-            }
-           ]
-          },
-          "parent": {
-           "anyOf": [
-            {
-             "required": [
-              "sticker"
-             ]
-            },
-            {
-             "required": [
-              "src"
-             ]
-            }
-           ]
-          },
-          "w": {
-           "anyOf": [
-            {
-             "required": [
-              "sticker"
-             ]
-            },
-            {
-             "required": [
-              "src"
-             ]
-            }
-           ]
-          }
-         },
-         "oneOf": [
-          {
-           "required": [
-            "sticker"
-           ]
-          },
-          {
-           "required": [
-            "src"
-           ]
-          }
-         ],
-         "properties": {
-          "h": {
-           "minimum": 8
-          },
-          "w": {
-           "minimum": 8
-          }
-         }
-        }
-       }
+     "WhiteboardColour": {
+      "enum": [
+       "blue",
+       "indigo",
+       "purple",
+       "green",
+       "teal",
+       "yellow",
+       "orange",
+       "red",
+       "pink",
+       "grey"
       ],
-      "properties": {
-       "alt": {
-        "maxLength": 300,
-        "type": "string"
-       },
-       "bends": {
-        "items": {
-         "anyOf": [
-          {
-           "enum": [
-            "h",
-            "v"
-           ],
-           "type": "string"
-          },
-          {
-           "type": "number"
-          }
-         ]
-        },
-        "maxItems": 13,
-        "minItems": 1,
-        "type": "array"
-       },
-       "color": {
-        "enum": [
-         "blue",
-         "indigo",
-         "purple",
-         "green",
-         "teal",
-         "yellow",
-         "orange",
-         "red",
-         "pink",
-         "grey"
-        ],
-        "type": "string"
-       },
-       "cols": {
-        "items": {
-         "minimum": 36,
-         "type": "number"
-        },
-        "maxItems": 20,
-        "minItems": 1,
-        "type": "array"
-       },
-       "dash": {
-        "type": "boolean"
-       },
-       "from": {
-        "anyOf": [
-         {
-          "pattern": "^[A-Za-z0-9_-]{1,64}$",
-          "type": "string"
-         },
-         {
-          "$ref": "#/$defs/BoardPoint"
-         }
-        ]
-       },
-       "fromSide": {
-        "enum": [
-         "auto",
-         "top",
-         "right",
-         "bottom",
-         "left"
-        ],
-        "type": "string"
-       },
-       "group": {
-        "pattern": "^[A-Za-z0-9_-]{1,64}$",
-        "type": "string"
-       },
-       "h": {
-        "type": "number"
-       },
-       "heads": {
-        "items": {
-         "enum": [
-          "none",
-          "arrow",
-          "circle"
-         ],
-         "type": "string"
-        },
-        "maxItems": 2,
-        "minItems": 2,
-        "type": "array"
-       },
-       "hollow": {
-        "type": "boolean"
-       },
-       "href": {
-        "maxLength": 2000,
-        "type": "string"
-       },
-       "id": {
-        "pattern": "^[A-Za-z0-9_-]{1,64}$",
-        "type": "string"
-       },
-       "kind": {
-        "enum": [
-         "shape",
-         "sticky",
-         "text",
-         "section",
-         "arrow",
-         "table",
-         "image",
-         "link",
-         "stroke",
-         "sticker"
-        ],
-        "type": "string"
-       },
-       "label": {
-        "maxLength": 200,
-        "type": "string"
-       },
-       "locked": {
-        "type": "boolean"
-       },
-       "on": {
-        "pattern": "^[A-Za-z0-9_-]{1,64}$",
-        "type": "string"
-       },
-       "parent": {
-        "pattern": "^[A-Za-z0-9_-]{1,64}$",
-        "type": "string"
-       },
-       "points": {
-        "items": {
-         "items": {
-          "type": "number"
-         },
-         "maxItems": 2,
-         "minItems": 2,
-         "type": "array"
-        },
-        "maxItems": 4000,
-        "minItems": 1,
-        "type": "array"
-       },
-       "rows": {
-        "items": {
-         "items": {
-          "maxLength": 4000,
-          "type": "string"
-         },
-         "type": "array"
-        },
-        "maxItems": 200,
-        "minItems": 1,
-        "type": "array"
-       },
-       "shape": {
-        "enum": [
-         "rect",
-         "rounded",
-         "ellipse",
-         "diamond",
-         "pill",
-         "hexagon",
-         "parallelogram",
-         "database",
-         "document",
-         "cloud",
-         "queue",
-         "person"
-        ],
-        "type": "string"
-       },
-       "size": {
-        "enum": [
-         "small",
-         "body",
-         "large",
-         "title",
-         "huge"
-        ],
-        "type": "string"
-       },
-       "src": {
-        "maxLength": 200,
-        "minLength": 1,
-        "type": "string"
-       },
-       "sticker": {
-        "enum": [
-         "face",
-         "thumbs-up",
-         "thumbs-down",
-         "heart",
-         "star",
-         "check",
-         "cross",
-         "question",
-         "exclamation",
-         "fire",
-         "idea",
-         "smile",
-         "laugh",
-         "sad",
-         "wow",
-         "think",
-         "party",
-         "clap",
-         "rocket",
-         "flag",
-         "pin",
-         "clock",
-         "warning",
-         "plus-one"
-        ],
-        "type": "string"
-       },
-       "stroke": {
-        "enum": [
-         "blue",
-         "indigo",
-         "purple",
-         "green",
-         "teal",
-         "yellow",
-         "orange",
-         "red",
-         "pink",
-         "grey"
-        ],
-        "type": "string"
-       },
-       "text": {
-        "maxLength": 4000,
-        "type": "string"
-       },
-       "textAlign": {
-        "enum": [
-         "left",
-         "center",
-         "right"
-        ],
-        "type": "string"
-       },
-       "title": {
-        "maxLength": 200,
-        "type": "string"
-       },
-       "to": {
-        "anyOf": [
-         {
-          "pattern": "^[A-Za-z0-9_-]{1,64}$",
-          "type": "string"
-         },
-         {
-          "$ref": "#/$defs/BoardPoint"
-         }
-        ]
-       },
-       "toSide": {
-        "enum": [
-         "auto",
-         "top",
-         "right",
-         "bottom",
-         "left"
-        ],
-        "type": "string"
-       },
-       "w": {
-        "type": "number"
-       },
-       "width": {
-        "enum": [
-         2,
-         4,
-         8
-        ],
-        "type": "integer"
-       },
-       "wrap": {
-        "minimum": 40,
-        "type": "number"
-       },
-       "x": {
-        "type": "number"
-       },
-       "y": {
-        "type": "number"
-       }
-      },
-      "required": [
-       "kind"
+      "type": "string"
+     },
+     "WhiteboardElementId": {
+      "pattern": "^[A-Za-z0-9_-]{1,64}$",
+      "type": "string"
+     },
+     "WhiteboardShape": {
+      "enum": [
+       "rect",
+       "rounded",
+       "ellipse",
+       "diamond",
+       "pill",
+       "hexagon",
+       "parallelogram",
+       "database",
+       "document",
+       "cloud",
+       "queue",
+       "person"
       ],
-      "type": "object"
+      "type": "string"
+     },
+     "WhiteboardSide": {
+      "enum": [
+       "auto",
+       "top",
+       "right",
+       "bottom",
+       "left"
+      ],
+      "type": "string"
+     },
+     "WhiteboardSticker": {
+      "enum": [
+       "face",
+       "thumbs-up",
+       "thumbs-down",
+       "heart",
+       "star",
+       "check",
+       "cross",
+       "question",
+       "exclamation",
+       "fire",
+       "idea",
+       "smile",
+       "laugh",
+       "sad",
+       "wow",
+       "think",
+       "party",
+       "clap",
+       "rocket",
+       "flag",
+       "pin",
+       "clock",
+       "warning",
+       "plus-one"
+      ],
+      "type": "string"
+     },
+     "WhiteboardTextAlign": {
+      "enum": [
+       "left",
+       "center",
+       "right"
+      ],
+      "type": "string"
+     },
+     "WhiteboardTextSize": {
+      "enum": [
+       "small",
+       "body",
+       "large",
+       "title",
+       "huge"
+      ],
+      "type": "string"
      }
     },
     "additionalProperties": false,
@@ -26820,7 +25788,963 @@
          "type": "string"
         },
         "element": {
-         "$ref": "#/$defs/WhiteboardElement"
+         "additionalProperties": false,
+         "allOf": [
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "shape"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "propertyNames": {
+             "not": {
+              "enum": [
+               "wrap",
+               "title",
+               "from",
+               "to",
+               "fromSide",
+               "toSide",
+               "heads",
+               "dash",
+               "label",
+               "bends",
+               "cols",
+               "rows",
+               "src",
+               "alt",
+               "href",
+               "points",
+               "width",
+               "sticker",
+               "on"
+              ]
+             }
+            },
+            "required": [
+             "h",
+             "id",
+             "w",
+             "x",
+             "y"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "sticky"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "propertyNames": {
+             "not": {
+              "enum": [
+               "shape",
+               "stroke",
+               "hollow",
+               "textAlign",
+               "wrap",
+               "title",
+               "from",
+               "to",
+               "fromSide",
+               "toSide",
+               "heads",
+               "dash",
+               "label",
+               "bends",
+               "cols",
+               "rows",
+               "src",
+               "alt",
+               "href",
+               "points",
+               "width",
+               "sticker",
+               "on"
+              ]
+             }
+            },
+            "required": [
+             "id",
+             "x",
+             "y"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "text"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "propertyNames": {
+             "not": {
+              "enum": [
+               "shape",
+               "w",
+               "h",
+               "stroke",
+               "hollow",
+               "title",
+               "from",
+               "to",
+               "fromSide",
+               "toSide",
+               "heads",
+               "dash",
+               "label",
+               "bends",
+               "cols",
+               "rows",
+               "src",
+               "alt",
+               "href",
+               "points",
+               "width",
+               "sticker",
+               "on"
+              ]
+             }
+            },
+            "required": [
+             "id",
+             "text",
+             "x",
+             "y"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "section"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "propertyNames": {
+             "not": {
+              "enum": [
+               "shape",
+               "stroke",
+               "hollow",
+               "text",
+               "size",
+               "textAlign",
+               "wrap",
+               "from",
+               "to",
+               "fromSide",
+               "toSide",
+               "heads",
+               "dash",
+               "label",
+               "bends",
+               "cols",
+               "rows",
+               "src",
+               "alt",
+               "href",
+               "points",
+               "width",
+               "sticker",
+               "on"
+              ]
+             }
+            },
+            "required": [
+             "h",
+             "id",
+             "w",
+             "x",
+             "y"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "arrow"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "propertyNames": {
+             "not": {
+              "enum": [
+               "x",
+               "y",
+               "shape",
+               "w",
+               "h",
+               "stroke",
+               "hollow",
+               "text",
+               "size",
+               "textAlign",
+               "wrap",
+               "title",
+               "cols",
+               "rows",
+               "src",
+               "alt",
+               "href",
+               "points",
+               "width",
+               "sticker",
+               "on"
+              ]
+             }
+            },
+            "required": [
+             "from",
+             "id",
+             "to"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "table"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "propertyNames": {
+             "not": {
+              "enum": [
+               "shape",
+               "w",
+               "h",
+               "color",
+               "stroke",
+               "hollow",
+               "text",
+               "size",
+               "textAlign",
+               "wrap",
+               "title",
+               "from",
+               "to",
+               "fromSide",
+               "toSide",
+               "heads",
+               "dash",
+               "label",
+               "bends",
+               "src",
+               "alt",
+               "href",
+               "points",
+               "width",
+               "sticker",
+               "on"
+              ]
+             }
+            },
+            "required": [
+             "cols",
+             "id",
+             "rows",
+             "x",
+             "y"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "image"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "propertyNames": {
+             "not": {
+              "enum": [
+               "shape",
+               "color",
+               "stroke",
+               "hollow",
+               "text",
+               "size",
+               "textAlign",
+               "wrap",
+               "title",
+               "from",
+               "to",
+               "fromSide",
+               "toSide",
+               "heads",
+               "dash",
+               "label",
+               "bends",
+               "cols",
+               "rows",
+               "href",
+               "points",
+               "width",
+               "sticker",
+               "on"
+              ]
+             }
+            },
+            "required": [
+             "h",
+             "id",
+             "src",
+             "w",
+             "x",
+             "y"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "link"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "propertyNames": {
+             "not": {
+              "enum": [
+               "shape",
+               "color",
+               "stroke",
+               "hollow",
+               "text",
+               "size",
+               "textAlign",
+               "wrap",
+               "from",
+               "to",
+               "fromSide",
+               "toSide",
+               "heads",
+               "dash",
+               "label",
+               "bends",
+               "cols",
+               "rows",
+               "src",
+               "alt",
+               "points",
+               "width",
+               "sticker",
+               "on"
+              ]
+             }
+            },
+            "required": [
+             "href",
+             "id",
+             "title",
+             "x",
+             "y"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "stroke"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "propertyNames": {
+             "not": {
+              "enum": [
+               "shape",
+               "w",
+               "h",
+               "stroke",
+               "hollow",
+               "text",
+               "size",
+               "textAlign",
+               "wrap",
+               "title",
+               "from",
+               "to",
+               "fromSide",
+               "toSide",
+               "heads",
+               "dash",
+               "label",
+               "bends",
+               "cols",
+               "rows",
+               "src",
+               "alt",
+               "href",
+               "sticker",
+               "on"
+              ]
+             }
+            },
+            "required": [
+             "id",
+             "points",
+             "x",
+             "y"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "sticker"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "propertyNames": {
+             "not": {
+              "enum": [
+               "shape",
+               "color",
+               "stroke",
+               "hollow",
+               "text",
+               "size",
+               "textAlign",
+               "wrap",
+               "title",
+               "from",
+               "to",
+               "fromSide",
+               "toSide",
+               "heads",
+               "dash",
+               "label",
+               "bends",
+               "cols",
+               "rows",
+               "alt",
+               "href",
+               "points",
+               "width"
+              ]
+             }
+            },
+            "required": [
+             "id",
+             "x",
+             "y"
+            ]
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "shape"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "properties": {
+             "h": {
+              "minimum": 8
+             },
+             "w": {
+              "minimum": 8
+             }
+            }
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "sticky"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "properties": {
+             "h": {
+              "minimum": 8
+             },
+             "w": {
+              "minimum": 8
+             }
+            }
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "section"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "properties": {
+             "h": {
+              "minimum": 40
+             },
+             "title": {},
+             "w": {
+              "minimum": 40
+             }
+            }
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "image"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "properties": {
+             "h": {
+              "minimum": 8
+             },
+             "w": {
+              "minimum": 8
+             }
+            }
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "link"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "properties": {
+             "title": {}
+            }
+           }
+          },
+          {
+           "if": {
+            "properties": {
+             "kind": {
+              "enum": [
+               "sticker"
+              ]
+             }
+            },
+            "required": [
+             "kind"
+            ]
+           },
+           "then": {
+            "dependentSchemas": {
+             "group": {
+              "anyOf": [
+               {
+                "required": [
+                 "sticker"
+                ]
+               },
+               {
+                "required": [
+                 "src"
+                ]
+               }
+              ]
+             },
+             "h": {
+              "anyOf": [
+               {
+                "required": [
+                 "sticker"
+                ]
+               },
+               {
+                "required": [
+                 "src"
+                ]
+               }
+              ]
+             },
+             "locked": {
+              "anyOf": [
+               {
+                "required": [
+                 "sticker"
+                ]
+               },
+               {
+                "required": [
+                 "src"
+                ]
+               }
+              ]
+             },
+             "on": {
+              "anyOf": [
+               {
+                "required": [
+                 "sticker"
+                ]
+               },
+               {
+                "required": [
+                 "src"
+                ]
+               }
+              ]
+             },
+             "parent": {
+              "anyOf": [
+               {
+                "required": [
+                 "sticker"
+                ]
+               },
+               {
+                "required": [
+                 "src"
+                ]
+               }
+              ]
+             },
+             "w": {
+              "anyOf": [
+               {
+                "required": [
+                 "sticker"
+                ]
+               },
+               {
+                "required": [
+                 "src"
+                ]
+               }
+              ]
+             }
+            },
+            "oneOf": [
+             {
+              "required": [
+               "sticker"
+              ]
+             },
+             {
+              "required": [
+               "src"
+              ]
+             }
+            ],
+            "properties": {
+             "h": {
+              "minimum": 8
+             },
+             "w": {
+              "minimum": 8
+             }
+            }
+           }
+          }
+         ],
+         "properties": {
+          "alt": {
+           "maxLength": 300,
+           "type": "string"
+          },
+          "bends": {
+           "items": {
+            "anyOf": [
+             {
+              "enum": [
+               "h",
+               "v"
+              ],
+              "type": "string"
+             },
+             {
+              "type": "number"
+             }
+            ]
+           },
+           "maxItems": 13,
+           "minItems": 1,
+           "type": "array"
+          },
+          "color": {
+           "$ref": "#/$defs/WhiteboardColour"
+          },
+          "cols": {
+           "items": {
+            "minimum": 36,
+            "type": "number"
+           },
+           "maxItems": 20,
+           "minItems": 1,
+           "type": "array"
+          },
+          "dash": {
+           "type": "boolean"
+          },
+          "from": {
+           "anyOf": [
+            {
+             "$ref": "#/$defs/WhiteboardElementId"
+            },
+            {
+             "$ref": "#/$defs/BoardPoint"
+            }
+           ]
+          },
+          "fromSide": {
+           "$ref": "#/$defs/WhiteboardSide"
+          },
+          "group": {
+           "$ref": "#/$defs/WhiteboardElementId"
+          },
+          "h": {
+           "type": "number"
+          },
+          "heads": {
+           "items": {
+            "enum": [
+             "none",
+             "arrow",
+             "circle"
+            ],
+            "type": "string"
+           },
+           "maxItems": 2,
+           "minItems": 2,
+           "type": "array"
+          },
+          "hollow": {
+           "type": "boolean"
+          },
+          "href": {
+           "maxLength": 2000,
+           "type": "string"
+          },
+          "id": {
+           "$ref": "#/$defs/WhiteboardElementId"
+          },
+          "kind": {
+           "enum": [
+            "shape",
+            "sticky",
+            "text",
+            "section",
+            "arrow",
+            "table",
+            "image",
+            "link",
+            "stroke",
+            "sticker"
+           ],
+           "type": "string"
+          },
+          "label": {
+           "maxLength": 200,
+           "type": "string"
+          },
+          "locked": {
+           "type": "boolean"
+          },
+          "on": {
+           "$ref": "#/$defs/WhiteboardElementId"
+          },
+          "parent": {
+           "$ref": "#/$defs/WhiteboardElementId"
+          },
+          "points": {
+           "items": {
+            "items": {
+             "type": "number"
+            },
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array"
+           },
+           "maxItems": 4000,
+           "minItems": 1,
+           "type": "array"
+          },
+          "rows": {
+           "items": {
+            "items": {
+             "maxLength": 4000,
+             "type": "string"
+            },
+            "type": "array"
+           },
+           "maxItems": 200,
+           "minItems": 1,
+           "type": "array"
+          },
+          "shape": {
+           "$ref": "#/$defs/WhiteboardShape"
+          },
+          "size": {
+           "$ref": "#/$defs/WhiteboardTextSize"
+          },
+          "src": {
+           "maxLength": 200,
+           "minLength": 1,
+           "type": "string"
+          },
+          "sticker": {
+           "$ref": "#/$defs/WhiteboardSticker"
+          },
+          "stroke": {
+           "$ref": "#/$defs/WhiteboardColour"
+          },
+          "text": {
+           "maxLength": 4000,
+           "type": "string"
+          },
+          "textAlign": {
+           "$ref": "#/$defs/WhiteboardTextAlign"
+          },
+          "title": {
+           "maxLength": 200,
+           "type": "string"
+          },
+          "to": {
+           "anyOf": [
+            {
+             "$ref": "#/$defs/WhiteboardElementId"
+            },
+            {
+             "$ref": "#/$defs/BoardPoint"
+            }
+           ]
+          },
+          "toSide": {
+           "$ref": "#/$defs/WhiteboardSide"
+          },
+          "w": {
+           "type": "number"
+          },
+          "width": {
+           "enum": [
+            2,
+            4,
+            8
+           ],
+           "type": "integer"
+          },
+          "wrap": {
+           "minimum": 40,
+           "type": "number"
+          },
+          "x": {
+           "type": "number"
+          },
+          "y": {
+           "type": "number"
+          }
+         },
+         "required": [
+          "kind"
+         ],
+         "type": "object"
         },
         "fields": {
          "additionalProperties": false,
@@ -26865,19 +26789,7 @@
           "color": {
            "anyOf": [
             {
-             "enum": [
-              "blue",
-              "indigo",
-              "purple",
-              "green",
-              "teal",
-              "yellow",
-              "orange",
-              "red",
-              "pink",
-              "grey"
-             ],
-             "type": "string"
+             "$ref": "#/$defs/WhiteboardColour"
             },
             {
              "type": "null"
@@ -26915,8 +26827,7 @@
             {
              "anyOf": [
               {
-               "pattern": "^[A-Za-z0-9_-]{1,64}$",
-               "type": "string"
+               "$ref": "#/$defs/WhiteboardElementId"
               },
               {
                "$ref": "#/$defs/BoardPoint"
@@ -26931,14 +26842,7 @@
           "fromSide": {
            "anyOf": [
             {
-             "enum": [
-              "auto",
-              "top",
-              "right",
-              "bottom",
-              "left"
-             ],
-             "type": "string"
+             "$ref": "#/$defs/WhiteboardSide"
             },
             {
              "type": "null"
@@ -26948,8 +26852,7 @@
           "group": {
            "anyOf": [
             {
-             "pattern": "^[A-Za-z0-9_-]{1,64}$",
-             "type": "string"
+             "$ref": "#/$defs/WhiteboardElementId"
             },
             {
              "type": "null"
@@ -27031,8 +26934,7 @@
           "on": {
            "anyOf": [
             {
-             "pattern": "^[A-Za-z0-9_-]{1,64}$",
-             "type": "string"
+             "$ref": "#/$defs/WhiteboardElementId"
             },
             {
              "type": "null"
@@ -27057,8 +26959,7 @@
           "parent": {
            "anyOf": [
             {
-             "pattern": "^[A-Za-z0-9_-]{1,64}$",
-             "type": "string"
+             "$ref": "#/$defs/WhiteboardElementId"
             },
             {
              "type": "null"
@@ -27123,21 +27024,7 @@
           "shape": {
            "anyOf": [
             {
-             "enum": [
-              "rect",
-              "rounded",
-              "ellipse",
-              "diamond",
-              "pill",
-              "hexagon",
-              "parallelogram",
-              "database",
-              "document",
-              "cloud",
-              "queue",
-              "person"
-             ],
-             "type": "string"
+             "$ref": "#/$defs/WhiteboardShape"
             },
             {
              "type": "null"
@@ -27147,14 +27034,7 @@
           "size": {
            "anyOf": [
             {
-             "enum": [
-              "small",
-              "body",
-              "large",
-              "title",
-              "huge"
-             ],
-             "type": "string"
+             "$ref": "#/$defs/WhiteboardTextSize"
             },
             {
              "type": "null"
@@ -27176,33 +27056,7 @@
           "sticker": {
            "anyOf": [
             {
-             "enum": [
-              "face",
-              "thumbs-up",
-              "thumbs-down",
-              "heart",
-              "star",
-              "check",
-              "cross",
-              "question",
-              "exclamation",
-              "fire",
-              "idea",
-              "smile",
-              "laugh",
-              "sad",
-              "wow",
-              "think",
-              "party",
-              "clap",
-              "rocket",
-              "flag",
-              "pin",
-              "clock",
-              "warning",
-              "plus-one"
-             ],
-             "type": "string"
+             "$ref": "#/$defs/WhiteboardSticker"
             },
             {
              "type": "null"
@@ -27212,19 +27066,7 @@
           "stroke": {
            "anyOf": [
             {
-             "enum": [
-              "blue",
-              "indigo",
-              "purple",
-              "green",
-              "teal",
-              "yellow",
-              "orange",
-              "red",
-              "pink",
-              "grey"
-             ],
-             "type": "string"
+             "$ref": "#/$defs/WhiteboardColour"
             },
             {
              "type": "null"
@@ -27245,12 +27087,7 @@
           "textAlign": {
            "anyOf": [
             {
-             "enum": [
-              "left",
-              "center",
-              "right"
-             ],
-             "type": "string"
+             "$ref": "#/$defs/WhiteboardTextAlign"
             },
             {
              "type": "null"
@@ -27298,8 +27135,7 @@
             {
              "anyOf": [
               {
-               "pattern": "^[A-Za-z0-9_-]{1,64}$",
-               "type": "string"
+               "$ref": "#/$defs/WhiteboardElementId"
               },
               {
                "$ref": "#/$defs/BoardPoint"
@@ -27314,14 +27150,7 @@
           "toSide": {
            "anyOf": [
             {
-             "enum": [
-              "auto",
-              "top",
-              "right",
-              "bottom",
-              "left"
-             ],
-             "type": "string"
+             "$ref": "#/$defs/WhiteboardSide"
             },
             {
              "type": "null"
