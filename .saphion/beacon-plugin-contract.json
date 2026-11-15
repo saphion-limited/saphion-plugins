@@ -1786,139 +1786,6 @@
            "schedule"
           ]
          }
-        },
-        {
-         "if": {
-          "properties": {
-           "trigger_source": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "clock"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           }
-          },
-          "required": [
-           "trigger_source"
-          ]
-         },
-         "then": {
-          "properties": {
-           "trigger": {
-            "properties": {
-             "kind": {
-              "const": "on_schedule"
-             }
-            }
-           }
-          }
-         }
-        },
-        {
-         "if": {
-          "properties": {
-           "trigger_source": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "connection"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           }
-          },
-          "required": [
-           "trigger_source"
-          ]
-         },
-         "then": {
-          "properties": {
-           "trigger": {
-            "properties": {
-             "kind": {
-              "const": "connection_event"
-             }
-            }
-           }
-          }
-         }
-        },
-        {
-         "if": {
-          "properties": {
-           "trigger_source": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "product"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           }
-          },
-          "required": [
-           "trigger_source"
-          ]
-         },
-         "then": {
-          "properties": {
-           "trigger": {
-            "properties": {
-             "kind": {
-              "const": "product_event"
-             }
-            }
-           }
-          }
-         }
-        },
-        {
-         "if": {
-          "properties": {
-           "trigger_source": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "records"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           }
-          },
-          "required": [
-           "trigger_source"
-          ]
-         },
-         "then": {
-          "properties": {
-           "trigger": {
-            "properties": {
-             "kind": {
-              "not": {
-               "enum": [
-                "connection_event",
-                "product_event"
-               ]
-              }
-             }
-            }
-           }
-          }
-         }
         }
        ],
        "propertyNames": {
@@ -1927,18 +1794,16 @@
          "description",
          "name",
          "rule_description",
-         "trigger",
-         "trigger_source",
          "management",
          "entry_context",
          "schedule",
+         "trigger",
          "graph"
         ]
        },
        "required": [
         "name",
         "trigger",
-        "trigger_source",
         "graph"
        ]
       }
@@ -1979,16 +1844,6 @@
             },
             {
              "required": [
-              "trigger"
-             ]
-            },
-            {
-             "required": [
-              "trigger_source"
-             ]
-            },
-            {
-             "required": [
               "management"
              ]
             },
@@ -2000,6 +1855,11 @@
             {
              "required": [
               "schedule"
+             ]
+            },
+            {
+             "required": [
+              "trigger"
              ]
             },
             {
@@ -2522,7 +2382,8 @@
         "then": {
          "propertyNames": {
           "enum": [
-           "kind"
+           "kind",
+           "source"
           ]
          }
         }
@@ -2544,7 +2405,8 @@
          "propertyNames": {
           "enum": [
            "kind",
-           "ignoring"
+           "ignoring",
+           "source"
           ]
          }
         }
@@ -2567,7 +2429,8 @@
           "enum": [
            "kind",
            "field",
-           "to"
+           "to",
+           "source"
           ]
          },
          "required": [
@@ -2592,7 +2455,8 @@
          "propertyNames": {
           "enum": [
            "kind",
-           "field"
+           "field",
+           "source"
           ]
          }
         }
@@ -2615,7 +2479,8 @@
           "enum": [
            "kind",
            "field",
-           "offset_days"
+           "offset_days",
+           "source"
           ]
          },
          "required": [
@@ -2640,7 +2505,8 @@
          "propertyNames": {
           "enum": [
            "kind",
-           "decision"
+           "decision",
+           "source"
           ]
          }
         }
@@ -2666,7 +2532,8 @@
            "date_field",
            "expected_class",
            "expected_record_set_id",
-           "link_field"
+           "link_field",
+           "source"
           ]
          },
          "required": [
@@ -2697,7 +2564,8 @@
            "filters",
            "project_links",
            "projects",
-           "selector"
+           "selector",
+           "source"
           ]
          },
          "required": [
@@ -2724,11 +2592,159 @@
           "enum": [
            "kind",
            "event_key",
-           "filters"
+           "filters",
+           "source"
           ]
          },
          "required": [
           "event_key"
+         ]
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "source": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "clock"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          }
+         },
+         "required": [
+          "source"
+         ]
+        },
+        "then": {
+         "properties": {
+          "kind": {
+           "const": "on_schedule"
+          }
+         }
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "source": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "connection"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          }
+         },
+         "required": [
+          "source"
+         ]
+        },
+        "then": {
+         "properties": {
+          "kind": {
+           "const": "connection_event"
+          }
+         }
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "source": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "product"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          }
+         },
+         "required": [
+          "source"
+         ]
+        },
+        "then": {
+         "properties": {
+          "kind": {
+           "const": "product_event"
+          }
+         }
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "source": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "records"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          }
+         },
+         "required": [
+          "source"
+         ]
+        },
+        "then": {
+         "properties": {
+          "kind": {
+           "not": {
+            "enum": [
+             "connection_event",
+             "product_event"
+            ]
+           }
+          }
+         }
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "kind": {
+           "enum": [
+            "record_created",
+            "record_changed",
+            "field_changed",
+            "assigned",
+            "date_arrives",
+            "review_decided",
+            "dependency_met",
+            "becomes_eligible",
+            "button_clicked",
+            "record_absent",
+            "becomes_behind",
+            "back_on_track"
+           ]
+          }
+         },
+         "required": [
+          "kind"
+         ]
+        },
+        "then": {
+         "required": [
+          "source"
          ]
         }
        }
@@ -2835,180 +2851,179 @@
         "additionalProperties": true,
         "type": "object"
        },
+       "source": {
+        "allOf": [
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "const": "records"
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "anyOf": [
+            {
+             "required": [
+              "board_continuation_ref"
+             ]
+            },
+            {
+             "required": [
+              "record_class"
+             ]
+            }
+           ],
+           "propertyNames": {
+            "enum": [
+             "kind",
+             "board_continuation_ref",
+             "record_class"
+            ]
+           }
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "const": "clock"
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "propertyNames": {
+            "enum": [
+             "kind"
+            ]
+           }
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "const": "connection"
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "propertyNames": {
+            "enum": [
+             "kind",
+             "connection_id",
+             "event_key",
+             "filters",
+             "projects",
+             "project_links",
+             "selector"
+            ]
+           },
+           "required": [
+            "connection_id",
+            "event_key"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "const": "product"
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "propertyNames": {
+            "enum": [
+             "kind",
+             "event_key",
+             "filters"
+            ]
+           },
+           "required": [
+            "event_key"
+           ]
+          }
+         }
+        ],
+        "properties": {
+         "board_continuation_ref": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+         },
+         "connection_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+         },
+         "event_key": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+         },
+         "filters": {
+          "additionalProperties": {
+           "type": "string"
+          },
+          "type": "object"
+         },
+         "kind": {
+          "enum": [
+           "records",
+           "clock",
+           "connection",
+           "product"
+          ],
+          "type": "string"
+         },
+         "project_links": {
+          "items": {
+           "type": "string"
+          },
+          "maxItems": 20,
+          "minItems": 1,
+          "type": "array"
+         },
+         "projects": {
+          "items": {
+           "type": "string"
+          },
+          "maxItems": 20,
+          "minItems": 1,
+          "type": "array"
+         },
+         "record_class": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+         },
+         "selector": {
+          "additionalProperties": true,
+          "type": "object"
+         }
+        },
+        "required": [
+         "kind"
+        ],
+        "type": "object"
+       },
        "to": {
         "maxLength": 400,
         "type": "string"
-       }
-      },
-      "required": [
-       "kind"
-      ],
-      "type": "object"
-     },
-     "trigger_source": {
-      "additionalProperties": true,
-      "allOf": [
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "const": "records"
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "anyOf": [
-          {
-           "required": [
-            "board_continuation_ref"
-           ]
-          },
-          {
-           "required": [
-            "record_class"
-           ]
-          }
-         ],
-         "propertyNames": {
-          "enum": [
-           "kind",
-           "board_continuation_ref",
-           "record_class"
-          ]
-         }
-        }
-       },
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "const": "clock"
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "propertyNames": {
-          "enum": [
-           "kind"
-          ]
-         }
-        }
-       },
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "const": "connection"
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "propertyNames": {
-          "enum": [
-           "kind",
-           "connection_id",
-           "event_key",
-           "filters",
-           "projects",
-           "project_links",
-           "selector"
-          ]
-         },
-         "required": [
-          "connection_id",
-          "event_key"
-         ]
-        }
-       },
-       {
-        "if": {
-         "properties": {
-          "kind": {
-           "const": "product"
-          }
-         },
-         "required": [
-          "kind"
-         ]
-        },
-        "then": {
-         "propertyNames": {
-          "enum": [
-           "kind",
-           "event_key",
-           "filters"
-          ]
-         },
-         "required": [
-          "event_key"
-         ]
-        }
-       }
-      ],
-      "properties": {
-       "board_continuation_ref": {
-        "maxLength": 200,
-        "minLength": 1,
-        "type": "string"
-       },
-       "connection_id": {
-        "maxLength": 200,
-        "minLength": 1,
-        "type": "string"
-       },
-       "event_key": {
-        "maxLength": 200,
-        "minLength": 1,
-        "type": "string"
-       },
-       "filters": {
-        "additionalProperties": {
-         "type": "string"
-        },
-        "type": "object"
-       },
-       "kind": {
-        "enum": [
-         "records",
-         "clock",
-         "connection",
-         "product"
-        ],
-        "type": "string"
-       },
-       "project_links": {
-        "items": {
-         "type": "string"
-        },
-        "maxItems": 20,
-        "minItems": 1,
-        "type": "array"
-       },
-       "projects": {
-        "items": {
-         "type": "string"
-        },
-        "maxItems": 20,
-        "minItems": 1,
-        "type": "array"
-       },
-       "record_class": {
-        "maxLength": 200,
-        "minLength": 1,
-        "type": "string"
-       },
-       "selector": {
-        "additionalProperties": true,
-        "type": "object"
        }
       },
       "required": [
