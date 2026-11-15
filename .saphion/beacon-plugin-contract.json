@@ -5214,7 +5214,10 @@
         "type": "string"
        }
       },
-      "type": "object"
+      "type": [
+       "object",
+       "null"
+      ]
      },
      "description": {
       "anyOf": [
@@ -5349,7 +5352,10 @@
        "first",
        "last"
       ],
-      "type": "object"
+      "type": [
+       "object",
+       "null"
+      ]
      },
      "title": {
       "maxLength": 160,
@@ -6955,7 +6961,10 @@
         "type": "string"
        }
       },
-      "type": "object"
+      "type": [
+       "object",
+       "null"
+      ]
      }
     },
     "required": [
@@ -10138,7 +10147,10 @@
         "type": "object"
        }
       },
-      "type": "object"
+      "type": [
+       "object",
+       "null"
+      ]
      },
      "name": {
       "default": "",
@@ -10836,7 +10848,10 @@
       "required": [
        "field"
       ],
-      "type": "object"
+      "type": [
+       "object",
+       "null"
+      ]
      },
      "status": {
       "enum": [
@@ -16877,7 +16892,10 @@
         "$ref": "#/$defs/ConnectorId"
        }
       },
-      "type": "object"
+      "type": [
+       "object",
+       "null"
+      ]
      },
      "currency": {
       "pattern": "^(AED|AFN|ALL|AMD|AOA|ARS|AUD|AWG|AZN|BAM|BBD|BDT|BHD|BIF|BMD|BND|BOB|BOV|BRL|BSD|BTN|BWP|BYN|BZD|CAD|CDF|CHE|CHF|CHW|CLF|CLP|CNY|COP|COU|CRC|CUP|CVE|CZK|DJF|DKK|DOP|DZD|EGP|ERN|ETB|EUR|FJD|FKP|GBP|GEL|GHS|GIP|GMD|GNF|GTQ|GYD|HKD|HNL|HTG|HUF|IDR|ILS|INR|IQD|IRR|ISK|JMD|JOD|JPY|KES|KGS|KHR|KMF|KPW|KRW|KWD|KYD|KZT|LAK|LBP|LKR|LRD|LSL|LYD|MAD|MDL|MGA|MKD|MMK|MNT|MOP|MRU|MUR|MVR|MWK|MXN|MXV|MYR|MZN|NAD|NGN|NIO|NOK|NPR|NZD|OMR|PAB|PEN|PGK|PHP|PKR|PLN|PYG|QAR|RON|RSD|RUB|RWF|SAR|SBD|SCR|SDG|SEK|SGD|SHP|SLE|SOS|SRD|SSP|STN|SVC|SYP|SZL|THB|TJS|TMT|TND|TOP|TRY|TTD|TWD|TZS|UAH|UGX|USD|USN|UYI|UYU|UYW|UZS|VED|VES|VND|VUV|WST|XAD|XAF|XAG|XAU|XBA|XBB|XBC|XBD|XCD|XCG|XDR|XOF|XPD|XPF|XPT|XSU|XTS|XUA|XXX|YER|ZAR|ZMW|ZWG)$",
@@ -16986,7 +17004,10 @@
        "prefix",
        "digits"
       ],
-      "type": "object"
+      "type": [
+       "object",
+       "null"
+      ]
      },
      "on": {
       "type": "boolean"
@@ -17739,7 +17760,10 @@
       "required": [
        "operator"
       ],
-      "type": "object"
+      "type": [
+       "object",
+       "null"
+      ]
      },
      "form_ref": {
       "type": "string"
@@ -18545,7 +18569,10 @@
         "type": "number"
        }
       },
-      "type": "object"
+      "type": [
+       "object",
+       "null"
+      ]
      },
      "continuation_ref": {
       "type": "string"
@@ -18604,7 +18631,10 @@
         "type": "number"
        }
       },
-      "type": "object"
+      "type": [
+       "object",
+       "null"
+      ]
      },
      "fields": {
       "additionalProperties": {
@@ -22434,7 +22464,10 @@
       "required": [
        "field"
       ],
-      "type": "object"
+      "type": [
+       "object",
+       "null"
+      ]
      },
      "where": {
       "$ref": "#/$defs/SemanticFilterInput"
