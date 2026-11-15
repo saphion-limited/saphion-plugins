@@ -11654,6 +11654,31 @@
     "type": "object"
    }
   },
+  "guide": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "guides",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "items": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 8,
+      "minItems": 1,
+      "type": "array"
+     }
+    },
+    "required": [
+     "items"
+    ],
+    "type": "object"
+   }
+  },
   "hold_table": {
    "choices": {},
    "doors": [
