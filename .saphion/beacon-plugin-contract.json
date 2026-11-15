@@ -14707,6 +14707,19 @@
      "programme",
      "provider_turnaround"
     ],
+    "colour": [
+     "",
+     "blue",
+     "green",
+     "grey",
+     "indigo",
+     "orange",
+     "pink",
+     "purple",
+     "red",
+     "teal",
+     "yellow"
+    ],
     "identity": [
      "none",
      "organisation",
@@ -15710,6 +15723,19 @@
        "additionalProperties": false,
        "properties": {
         "colour": {
+         "enum": [
+          "",
+          "blue",
+          "indigo",
+          "purple",
+          "green",
+          "teal",
+          "yellow",
+          "orange",
+          "red",
+          "pink",
+          "grey"
+         ],
          "type": "string"
         },
         "id": {
@@ -18866,6 +18892,19 @@
      "review",
      "todo"
     ],
+    "colour": [
+     "",
+     "blue",
+     "green",
+     "grey",
+     "indigo",
+     "orange",
+     "pink",
+     "purple",
+     "red",
+     "teal",
+     "yellow"
+    ],
     "edit": [
      "everyone",
      "restricted"
@@ -19844,6 +19883,19 @@
       "type": "string"
      },
      "colour": {
+      "enum": [
+       "",
+       "blue",
+       "indigo",
+       "purple",
+       "green",
+       "teal",
+       "yellow",
+       "orange",
+       "red",
+       "pink",
+       "grey"
+      ],
       "type": "string"
      },
      "description": {
@@ -23136,6 +23188,19 @@
      "restore",
      "update"
     ],
+    "colour": [
+     "",
+     "blue",
+     "green",
+     "grey",
+     "indigo",
+     "orange",
+     "pink",
+     "purple",
+     "red",
+     "teal",
+     "yellow"
+    ],
     "role": [
      "member",
      "owner"
@@ -23421,6 +23486,19 @@
       "type": "string"
      },
      "colour": {
+      "enum": [
+       "",
+       "blue",
+       "indigo",
+       "purple",
+       "green",
+       "teal",
+       "yellow",
+       "orange",
+       "red",
+       "pink",
+       "grey"
+      ],
       "type": "string"
      },
      "continuation_ref": {
