@@ -9469,8 +9469,7 @@
      "scheduled_task",
      "skill",
      "team",
-     "template",
-     "whiteboard"
+     "template"
     ],
     "operator": [
      "date_after",
@@ -9959,8 +9958,7 @@
        "scheduled_task",
        "skill",
        "team",
-       "template",
-       "whiteboard"
+       "template"
       ],
       "type": "string"
      },
@@ -23966,7 +23964,10 @@
          "operations",
          "continuation_ref"
         ]
-       }
+       },
+       "required": [
+        "operations"
+       ]
       }
      },
      {
@@ -24096,6 +24097,7 @@
        "type": "object"
       },
       "maxItems": 50,
+      "minItems": 1,
       "type": "array"
      },
      "project_continuation_ref": {
