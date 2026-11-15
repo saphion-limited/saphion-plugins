@@ -27047,54 +27047,7 @@
           },
           "timer": {
            "additionalProperties": false,
-           "dependentSchemas": {
-            "pausedLeft": {
-             "anyOf": [
-              {
-               "required": [
-                "endsAt"
-               ]
-              },
-              {
-               "required": [
-                "lasts"
-               ]
-              }
-             ]
-            },
-            "starterOnly": {
-             "anyOf": [
-              {
-               "required": [
-                "endsAt"
-               ]
-              },
-              {
-               "required": [
-                "lasts"
-               ]
-              }
-             ]
-            }
-           },
-           "oneOf": [
-            {
-             "required": [
-              "endsAt"
-             ]
-            },
-            {
-             "required": [
-              "lasts"
-             ]
-            }
-           ],
            "properties": {
-            "endsAt": {
-             "maxLength": 40,
-             "minLength": 10,
-             "type": "string"
-            },
             "lasts": {
              "maximum": 86400,
              "minimum": 1,
@@ -27109,6 +27062,9 @@
              "type": "boolean"
             }
            },
+           "required": [
+            "lasts"
+           ],
            "type": [
             "object",
             "null"
