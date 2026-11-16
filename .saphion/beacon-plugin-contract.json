@@ -23871,6 +23871,60 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "anyOf": [
+          {
+           "properties": {
+            "team_description": {
+             "not": {
+              "type": "null"
+             }
+            }
+           },
+           "required": [
+            "team_description"
+           ]
+          },
+          {
+           "properties": {
+            "mark": {
+             "not": {
+              "type": "null"
+             }
+            }
+           },
+           "required": [
+            "mark"
+           ]
+          },
+          {
+           "properties": {
+            "colour": {
+             "not": {
+              "type": "null"
+             }
+            }
+           },
+           "required": [
+            "colour"
+           ]
+          },
+          {
+           "properties": {
+            "owner_continuation_refs": {
+             "not": {
+              "type": "null"
+             }
+            }
+           },
+           "required": [
+            "owner_continuation_refs"
+           ]
+          }
+         ]
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
