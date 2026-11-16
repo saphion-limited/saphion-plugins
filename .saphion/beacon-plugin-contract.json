@@ -13698,10 +13698,9 @@
     "accent": [
      "blue",
      "graphite",
-     "indigo",
+     "ink",
      "rose",
-     "teal",
-     "violet"
+     "teal"
     ],
     "act": [
      "clear_notifications",
@@ -14642,9 +14641,8 @@
     "properties": {
      "accent": {
       "enum": [
-       "indigo",
+       "ink",
        "blue",
-       "violet",
        "teal",
        "rose",
        "graphite"
