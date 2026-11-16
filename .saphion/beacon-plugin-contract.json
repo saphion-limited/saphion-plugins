@@ -20822,6 +20822,33 @@
    "family": "organisation_reach",
    "schema": {
     "additionalProperties": false,
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "parts": {
+         "contains": {
+          "const": "holders"
+         }
+        }
+       },
+       "required": [
+        "parts"
+       ]
+      },
+      "then": {
+       "properties": {
+        "describe": {
+         "minItems": 1,
+         "type": "array"
+        }
+       },
+       "required": [
+        "describe"
+       ]
+      }
+     }
+    ],
     "properties": {
      "describe": {
       "items": {
