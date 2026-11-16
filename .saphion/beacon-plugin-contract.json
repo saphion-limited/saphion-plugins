@@ -5254,8 +5254,22 @@
     "allOf": [
      {
       "if": {
-       "required": [
-        "continuation_ref"
+       "anyOf": [
+        {
+         "required": [
+          "continuation_ref"
+         ]
+        },
+        {
+         "required": [
+          "team_continuation_ref"
+         ]
+        },
+        {
+         "required": [
+          "project_continuation_ref"
+         ]
+        }
        ]
       },
       "then": {
@@ -18825,6 +18839,37 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "dependentRequired": {
+          "due": [
+           "start"
+          ],
+          "start": [
+           "due"
+          ]
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "apply": {
+            "const": true
+           }
+          },
+          "required": [
+           "apply"
+          ]
+         },
+         "then": {
+          "not": {
+           "required": [
+            "start"
+           ]
+          }
+         }
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -19029,6 +19074,7 @@
      },
      "due": {
       "default": "",
+      "format": "date",
       "type": "string"
      },
      "email_continuation_ref": {
@@ -19074,6 +19120,7 @@
      },
      "start": {
       "default": "",
+      "format": "date",
       "type": "string"
      },
      "updates": {
