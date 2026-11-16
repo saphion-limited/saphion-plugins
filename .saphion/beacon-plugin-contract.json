@@ -11151,7 +11151,7 @@
     "properties": {
      "items": {
       "items": {
-       "pattern": "^(?:document|diagram|whiteboard|dashboard|field)(\\.[a-z0-9_.-]+)?$",
+       "pattern": "^(?:document|diagram|whiteboard|dashboard|field|automation)(\\.[a-z0-9_.-]+)?$",
        "type": "string"
       },
       "maxItems": 8,
