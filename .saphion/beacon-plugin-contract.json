@@ -1398,7 +1398,7 @@
      "day": {
       "default": "",
       "maxLength": 14,
-      "pattern": "^(?:today|yesterday|(?:last )?(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)|\\d{4}-\\d{2}-\\d{2})?$",
+      "pattern": "^(?:(?:last )?[a-z]+day|\\d{4}-\\d{2}-\\d{2})?$",
       "type": "string"
      },
      "name_words": {
@@ -5489,7 +5489,7 @@
      },
      "day": {
       "maxLength": 14,
-      "pattern": "^(?:today|yesterday|(?:last )?(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)|\\d{4}-\\d{2}-\\d{2})?$",
+      "pattern": "^(?:(?:last )?[a-z]+day|\\d{4}-\\d{2}-\\d{2})?$",
       "type": "string"
      },
      "query": {
@@ -25296,13 +25296,13 @@
      "published_from": {
       "default": "",
       "maxLength": 14,
-      "pattern": "^(?:today|yesterday|(?:last )?(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)|\\d{4}-\\d{2}-\\d{2})?$",
+      "pattern": "^(?:(?:last )?[a-z]+day|\\d{4}-\\d{2}-\\d{2})?$",
       "type": "string"
      },
      "published_to": {
       "default": "",
       "maxLength": 14,
-      "pattern": "^(?:today|yesterday|(?:last )?(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)|\\d{4}-\\d{2}-\\d{2})?$",
+      "pattern": "^(?:(?:last )?[a-z]+day|\\d{4}-\\d{2}-\\d{2})?$",
       "type": "string"
      },
      "query": {
