@@ -1970,58 +1970,8 @@
        "properties": {
         "act": {
          "enum": [
-          "resume"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       },
-       "required": [
-        "continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "delete"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       },
-       "required": [
-        "continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
+          "resume",
+          "delete",
           "restore"
          ]
         }
@@ -4039,7 +3989,11 @@
        "properties": {
         "act": {
          "enum": [
-          "duplicate"
+          "duplicate",
+          "baseline",
+          "delete",
+          "archive",
+          "restore"
          ]
         }
        },
@@ -4115,32 +4069,6 @@
        "required": [
         "board_continuation_ref",
         "record_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "baseline"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "board_continuation_ref"
-        ]
-       },
-       "required": [
-        "board_continuation_ref"
        ]
       }
      },
@@ -4241,84 +4169,6 @@
        },
        "required": [
         "board_name"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "delete"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "board_continuation_ref"
-        ]
-       },
-       "required": [
-        "board_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "archive"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "board_continuation_ref"
-        ]
-       },
-       "required": [
-        "board_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "restore"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "board_continuation_ref"
-        ]
-       },
-       "required": [
-        "board_continuation_ref"
        ]
       }
      },
@@ -5059,33 +4909,7 @@
        "properties": {
         "act": {
          "enum": [
-          "make_default"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "board_continuation_ref",
-         "view_continuation_ref"
-        ]
-       },
-       "required": [
-        "view_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
+          "make_default",
           "delete"
          ]
         }
@@ -5867,33 +5691,7 @@
        "properties": {
         "act": {
          "enum": [
-          "delete"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref",
-         "update_continuation_ref"
-        ]
-       },
-       "required": [
-        "update_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
+          "delete",
           "restore"
          ]
         }
@@ -6426,59 +6224,12 @@
        "properties": {
         "act": {
          "enum": [
-          "put_back"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       },
-       "required": [
-        "continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "reset"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       },
-       "required": [
-        "continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "duplicate"
+          "put_back",
+          "reset",
+          "duplicate",
+          "delete",
+          "archive",
+          "restore"
          ]
         }
        },
@@ -6628,84 +6379,6 @@
        "required": [
         "continuation_ref",
         "destination_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "delete"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       },
-       "required": [
-        "continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "archive"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       },
-       "required": [
-        "continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "restore"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       },
-       "required": [
-        "continuation_ref"
        ]
       }
      }
@@ -7919,30 +7592,11 @@
        "properties": {
         "act": {
          "enum": [
-          "duplicate_tab"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       }
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "duplicate"
+          "duplicate_tab",
+          "duplicate",
+          "delete",
+          "archive",
+          "restore"
          ]
         }
        },
@@ -8012,75 +7666,6 @@
        "required": [
         "version_continuation_ref"
        ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "delete"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       }
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "archive"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       }
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "restore"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       }
       }
      }
     ],
@@ -9539,58 +9124,8 @@
        "properties": {
         "act": {
          "enum": [
-          "duplicate"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "file_continuation_ref"
-        ]
-       },
-       "required": [
-        "file_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "delete"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "file_continuation_ref"
-        ]
-       },
-       "required": [
-        "file_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
+          "duplicate",
+          "delete",
           "archive"
          ]
         }
@@ -9893,7 +9428,9 @@
        "properties": {
         "act": {
          "enum": [
-          "propose_marking"
+          "propose_marking",
+          "finalise",
+          "delete"
          ]
         }
        },
@@ -9939,58 +9476,6 @@
        "required": [
         "continuation_ref",
         "marking"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "finalise"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       },
-       "required": [
-        "continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "delete"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       },
-       "required": [
-        "continuation_ref"
        ]
       }
      }
@@ -11026,58 +10511,8 @@
        "properties": {
         "act": {
          "enum": [
-          "publish"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       },
-       "required": [
-        "continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "delete"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       },
-       "required": [
-        "continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
+          "publish",
+          "delete",
           "restore"
          ]
         }
@@ -11756,32 +11191,7 @@
        "properties": {
         "act": {
          "enum": [
-          "resend"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "invitation_continuation_ref"
-        ]
-       },
-       "required": [
-        "invitation_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
+          "resend",
           "withdraw"
          ]
         }
@@ -12156,32 +11566,7 @@
        "properties": {
         "act": {
          "enum": [
-          "reactivate"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "person_continuation_ref"
-        ]
-       },
-       "required": [
-        "person_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
+          "reactivate",
           "remove"
          ]
         }
@@ -14369,59 +13754,10 @@
        "properties": {
         "act": {
          "enum": [
-          "star"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "resource_continuation_ref"
-        ]
-       },
-       "required": [
-        "resource_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "unstar"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "resource_continuation_ref"
-        ]
-       },
-       "required": [
-        "resource_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "follow"
+          "star",
+          "unstar",
+          "follow",
+          "read_item_notifications"
          ]
         }
        },
@@ -14473,7 +13809,8 @@
        "properties": {
         "act": {
          "enum": [
-          "read_all_notifications"
+          "read_all_notifications",
+          "remove_my_picture"
          ]
         }
        },
@@ -14495,84 +13832,8 @@
        "properties": {
         "act": {
          "enum": [
-          "read_item_notifications"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "resource_continuation_ref"
-        ]
-       },
-       "required": [
-        "resource_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "read_notifications"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "notification_continuation_ref"
-        ]
-       },
-       "required": [
-        "notification_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "unread_notifications"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "notification_continuation_ref"
-        ]
-       },
-       "required": [
-        "notification_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
+          "read_notifications",
+          "unread_notifications",
           "clear_notifications"
          ]
         }
@@ -15098,28 +14359,6 @@
          "description",
          "full_name",
          "mobile"
-        ]
-       }
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "remove_my_picture"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description"
         ]
        }
       }
@@ -16209,32 +15448,7 @@
        "properties": {
         "act": {
          "enum": [
-          "memory_policy"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "enabled"
-        ]
-       },
-       "required": [
-        "enabled"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
+          "memory_policy",
           "chat_recall"
          ]
         }
@@ -16507,32 +15721,7 @@
        "properties": {
         "act": {
          "enum": [
-          "export_publish"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "export_continuation_ref"
-        ]
-       },
-       "required": [
-        "export_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
+          "export_publish",
           "export_put_back"
          ]
         }
@@ -16587,33 +15776,7 @@
        "properties": {
         "act": {
          "enum": [
-          "configuration_publish"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "product_continuation_ref",
-         "draft_continuation_ref"
-        ]
-       },
-       "required": [
-        "draft_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
+          "configuration_publish",
           "configuration_discard"
          ]
         }
@@ -18120,55 +17283,7 @@
        "properties": {
         "act": {
          "enum": [
-          "add_tab"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "allOf": [
-        {
-         "oneOf": [
-          {
-           "required": [
-            "item_continuation_ref"
-           ]
-          },
-          {
-           "properties": {
-            "section": {
-             "minLength": 1
-            }
-           },
-           "required": [
-            "section"
-           ]
-          }
-         ]
-        }
-       ],
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref",
-         "item_continuation_ref",
-         "section"
-        ]
-       },
-       "required": [
-        "continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
+          "add_tab",
           "remove_tab"
          ]
         }
@@ -18246,7 +17361,9 @@
        "properties": {
         "act": {
          "enum": [
-          "use_tabs_as_default"
+          "use_tabs_as_default",
+          "archive",
+          "restore"
          ]
         }
        },
@@ -18405,58 +17522,6 @@
          "share_teams_continuation_refs",
          "share_capabilities",
          "share_role"
-        ]
-       },
-       "required": [
-        "continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "archive"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       },
-       "required": [
-        "continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "restore"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
         ]
        },
        "required": [
@@ -18786,29 +17851,7 @@
        "properties": {
         "act": {
          "enum": [
-          "delete"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       }
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
+          "delete",
           "restore"
          ]
         }
@@ -19779,32 +18822,7 @@
         "act": {
          "enum": [
           "reject_company",
-          "look_up_company"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "record_continuation_refs"
-        ]
-       },
-       "required": [
-        "record_continuation_refs"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
+          "look_up_company",
           "remove_logo",
           "refresh_logo"
          ]
@@ -21642,58 +20660,8 @@
        "properties": {
         "act": {
          "enum": [
-          "report_complete"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       },
-       "required": [
-        "continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "start_work"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       },
-       "required": [
-        "continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
+          "report_complete",
+          "start_work",
           "receive"
          ]
         }
@@ -22565,32 +21533,7 @@
        "properties": {
         "act": {
          "enum": [
-          "delete"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "role_continuation_ref"
-        ]
-       },
-       "required": [
-        "role_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
+          "delete",
           "restore"
          ]
         }
@@ -23507,29 +22450,7 @@
        "properties": {
         "act": {
          "enum": [
-          "delete"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       }
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
+          "delete",
           "restore"
          ]
         }
@@ -23802,33 +22723,9 @@
          "enum": [
           "organisation",
           "place",
-          "invited"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "resource_continuation_ref"
-        ]
-       },
-       "required": [
-        "resource_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "join"
+          "invited",
+          "join",
+          "hand_to_organisation"
          ]
         }
        },
@@ -23874,32 +22771,6 @@
        "required": [
         "resource_continuation_ref",
         "person_continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "hand_to_organisation"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "resource_continuation_ref"
-        ]
-       },
-       "required": [
-        "resource_continuation_ref"
        ]
       }
      },
@@ -24758,58 +23629,8 @@
        "properties": {
         "act": {
          "enum": [
-          "delete"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       },
-       "required": [
-        "continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "archive"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       },
-       "required": [
-        "continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
+          "delete",
+          "archive",
           "restore"
          ]
         }
@@ -27031,7 +25852,11 @@
        "properties": {
         "act": {
          "enum": [
-          "duplicate"
+          "duplicate",
+          "delete",
+          "archive",
+          "restore",
+          "withdraw_idea"
          ]
         }
        },
@@ -27081,75 +25906,6 @@
        "properties": {
         "act": {
          "enum": [
-          "delete"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       }
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "archive"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       }
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "restore"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       }
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
           "offer_idea"
          ]
         }
@@ -27172,29 +25928,6 @@
         "says",
         "options"
        ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "withdraw_idea"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "continuation_ref"
-        ]
-       }
       }
      }
     ],
