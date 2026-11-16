@@ -9337,6 +9337,31 @@
    "family": "organisation_reach",
    "schema": {
     "additionalProperties": false,
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "whose": {
+         "enum": [
+          "mine"
+         ]
+        }
+       },
+       "required": [
+        "whose"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "not": {
+         "enum": [
+          "project_continuation_ref"
+         ]
+        }
+       }
+      }
+     }
+    ],
     "properties": {
      "project_continuation_ref": {
       "type": "string"
