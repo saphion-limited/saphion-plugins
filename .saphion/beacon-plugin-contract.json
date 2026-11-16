@@ -9749,7 +9749,7 @@
      "not",
      "permission",
      "person",
-     "project",
+     "place",
      "record",
      "role",
      "run",
@@ -9783,6 +9783,10 @@
     ],
     "person": [
      "current"
+    ],
+    "place_kind": [
+     "project",
+     "workspace"
     ],
     "product": [
      "crm",
@@ -10240,7 +10244,7 @@
        "memory",
        "permission",
        "person",
-       "project",
+       "place",
        "record",
        "role",
        "run",
@@ -10258,6 +10262,13 @@
      },
      "person_gives_work": {
       "type": "boolean"
+     },
+     "place_kind": {
+      "enum": [
+       "project",
+       "workspace"
+      ],
+      "type": "string"
      },
      "product": {
       "default": "",
@@ -18168,6 +18179,10 @@
     "mode": [
      "record",
      "snapshot"
+    ],
+    "place_kind": [
+     "project",
+     "workspace"
     ]
    },
    "doors": [
@@ -18206,6 +18221,13 @@
       "enum": [
        "record",
        "snapshot"
+      ],
+      "type": "string"
+     },
+     "place_kind": {
+      "enum": [
+       "project",
+       "workspace"
       ],
       "type": "string"
      },
