@@ -4168,13 +4168,13 @@
         "enum": [
          "act",
          "description",
-         "template_continuation_ref",
-         "board_name",
-         "template_table_name"
+         "name",
+         "table_name",
+         "template_continuation_ref"
         ]
        },
        "required": [
-        "board_name"
+        "name"
        ]
       }
      },
@@ -4237,11 +4237,6 @@
      "board_continuation_ref": {
       "type": "string"
      },
-     "board_name": {
-      "maxLength": 255,
-      "minLength": 1,
-      "type": "string"
-     },
      "description": {
       "maxLength": 240,
       "minLength": 1,
@@ -4302,11 +4297,6 @@
      "template_name": {
       "default": "",
       "maxLength": 255,
-      "type": "string"
-     },
-     "template_table_name": {
-      "maxLength": 255,
-      "minLength": 1,
       "type": "string"
      },
      "whole_template": {
