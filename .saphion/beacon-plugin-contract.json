@@ -111,6 +111,12 @@
    "plugin": "tenders",
    "product": "tenders",
    "scope": "product"
+  },
+  {
+   "command": "write-tender-response",
+   "plugin": "tenders",
+   "product": "tenders",
+   "scope": "product"
   }
  ],
  "ceilings": {
