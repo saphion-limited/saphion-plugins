@@ -371,20 +371,14 @@
      },
      {
       "if": {
-       "anyOf": [
-        {
-         "required": [
-          "reference"
-         ]
-        },
-        {
-         "required": [
-          "anchor_continuation_ref"
-         ]
+       "properties": {
+        "reference": {
+         "minItems": 2
         }
-       ],
+       },
        "required": [
-        "limit"
+        "limit",
+        "reference"
        ]
       },
       "then": {
