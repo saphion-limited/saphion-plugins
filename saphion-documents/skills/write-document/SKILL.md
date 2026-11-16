@@ -1,6 +1,6 @@
 ---
 name: "write-document"
-description: "A document that lives inside Saphion: the default when someone asks for a document and names no file format. For a document: call document_change create first, alone, before any search; then read document_guide."
+description: "A document that lives inside Saphion: the default when someone asks for a document and names no file format. For a document: call document_change create first, alone, before any search; then read guide document."
 user-invocable: false
 metadata:
   outcome: "A document that lives in Saphion, written or changed: outlined first, filled one section at a time, edited in place without overwriting the person's own changes, and answered in its comment threads."
@@ -14,4 +14,4 @@ metadata:
 
 For a document that lives in Saphion beside the chat, something the person will keep, share or return to; a short answer belongs in the chat. The first call of the turn is `document_change` with the act `create`, alone, before any search or planning: it opens the document at once.
 
-Then read `document_guide` (its index first; editing, comments and diagram are its other topics) and fill one section per call.
+Then read `guide document` (`guide document.editing`, `guide document.comments` and `guide diagram` are its other topics) and fill one section per call.
