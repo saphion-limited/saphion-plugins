@@ -18917,6 +18917,17 @@
            ]
           }
          }
+        },
+        {
+         "properties": {
+          "record_continuation_refs": {
+           "maxItems": 1,
+           "minItems": 1
+          }
+         },
+         "required": [
+          "record_continuation_refs"
+         ]
         }
        ],
        "propertyNames": {
