@@ -25324,9 +25324,11 @@
      "delete",
      "duplicate",
      "edit",
+     "offer_idea",
      "rename",
      "restore",
-     "restore_version"
+     "restore_version",
+     "withdraw_idea"
     ],
     "kind": [
      "arrow",
@@ -25402,6 +25404,1467 @@
      "WhiteboardElementId": {
       "pattern": "^[A-Za-z0-9_-]{1,64}$",
       "type": "string"
+     },
+     "WhiteboardOperation": {
+      "additionalProperties": false,
+      "allOf": [
+       {
+        "if": {
+         "properties": {
+          "op": {
+           "enum": [
+            "add"
+           ]
+          }
+         },
+         "required": [
+          "op"
+         ]
+        },
+        "then": {
+         "propertyNames": {
+          "not": {
+           "enum": [
+            "id",
+            "fields"
+           ]
+          }
+         },
+         "required": [
+          "element"
+         ]
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "op": {
+           "enum": [
+            "change"
+           ]
+          }
+         },
+         "required": [
+          "op"
+         ]
+        },
+        "then": {
+         "propertyNames": {
+          "not": {
+           "enum": [
+            "element",
+            "before"
+           ]
+          }
+         },
+         "required": [
+          "fields",
+          "id"
+         ]
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "op": {
+           "enum": [
+            "remove"
+           ]
+          }
+         },
+         "required": [
+          "op"
+         ]
+        },
+        "then": {
+         "propertyNames": {
+          "not": {
+           "enum": [
+            "element",
+            "before",
+            "fields"
+           ]
+          }
+         },
+         "required": [
+          "id"
+         ]
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "op": {
+           "enum": [
+            "meta"
+           ]
+          }
+         },
+         "required": [
+          "op"
+         ]
+        },
+        "then": {
+         "propertyNames": {
+          "not": {
+           "enum": [
+            "element",
+            "before",
+            "id"
+           ]
+          }
+         },
+         "required": [
+          "fields"
+         ]
+        }
+       }
+      ],
+      "properties": {
+       "before": {
+        "maxLength": 64,
+        "minLength": 1,
+        "type": "string"
+       },
+       "element": {
+        "additionalProperties": false,
+        "allOf": [
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "shape"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "propertyNames": {
+            "enum": [
+             "id",
+             "x",
+             "y",
+             "locked",
+             "parent",
+             "group",
+             "shape",
+             "w",
+             "h",
+             "color",
+             "stroke",
+             "hollow",
+             "text",
+             "size",
+             "textAlign",
+             "kind"
+            ]
+           },
+           "required": [
+            "h",
+            "id",
+            "w",
+            "x",
+            "y"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "sticky"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "propertyNames": {
+            "enum": [
+             "id",
+             "x",
+             "y",
+             "locked",
+             "parent",
+             "group",
+             "w",
+             "h",
+             "color",
+             "text",
+             "size",
+             "kind"
+            ]
+           },
+           "required": [
+            "id",
+            "x",
+            "y"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "text"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "propertyNames": {
+            "enum": [
+             "id",
+             "x",
+             "y",
+             "locked",
+             "parent",
+             "group",
+             "color",
+             "text",
+             "size",
+             "textAlign",
+             "wrap",
+             "kind"
+            ]
+           },
+           "required": [
+            "id",
+            "text",
+            "x",
+            "y"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "section"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "propertyNames": {
+            "enum": [
+             "id",
+             "x",
+             "y",
+             "locked",
+             "parent",
+             "group",
+             "w",
+             "h",
+             "color",
+             "title",
+             "kind"
+            ]
+           },
+           "required": [
+            "h",
+            "id",
+            "w",
+            "x",
+            "y"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "arrow"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "propertyNames": {
+            "enum": [
+             "id",
+             "locked",
+             "parent",
+             "group",
+             "color",
+             "from",
+             "to",
+             "fromSide",
+             "toSide",
+             "heads",
+             "dash",
+             "label",
+             "bends",
+             "kind"
+            ]
+           },
+           "required": [
+            "from",
+            "id",
+            "to"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "table"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "propertyNames": {
+            "enum": [
+             "id",
+             "x",
+             "y",
+             "locked",
+             "parent",
+             "group",
+             "cols",
+             "rows",
+             "kind"
+            ]
+           },
+           "required": [
+            "cols",
+            "id",
+            "rows",
+            "x",
+            "y"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "image"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "propertyNames": {
+            "enum": [
+             "id",
+             "x",
+             "y",
+             "locked",
+             "parent",
+             "group",
+             "w",
+             "h",
+             "src",
+             "alt",
+             "kind"
+            ]
+           },
+           "required": [
+            "h",
+            "id",
+            "src",
+            "w",
+            "x",
+            "y"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "link"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "propertyNames": {
+            "enum": [
+             "id",
+             "x",
+             "y",
+             "locked",
+             "parent",
+             "group",
+             "w",
+             "h",
+             "title",
+             "href",
+             "kind"
+            ]
+           },
+           "required": [
+            "href",
+            "id",
+            "title",
+            "x",
+            "y"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "stroke"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "propertyNames": {
+            "enum": [
+             "id",
+             "x",
+             "y",
+             "locked",
+             "parent",
+             "group",
+             "color",
+             "points",
+             "width",
+             "kind"
+            ]
+           },
+           "required": [
+            "id",
+            "points",
+            "x",
+            "y"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "sticker"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "propertyNames": {
+            "enum": [
+             "id",
+             "x",
+             "y",
+             "locked",
+             "parent",
+             "group",
+             "w",
+             "h",
+             "src",
+             "sticker",
+             "on",
+             "kind"
+            ]
+           },
+           "required": [
+            "id",
+            "x",
+            "y"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "shape"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "properties": {
+            "h": {
+             "minimum": 8
+            },
+            "w": {
+             "minimum": 8
+            }
+           }
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "sticky"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "properties": {
+            "h": {
+             "minimum": 8
+            },
+            "w": {
+             "minimum": 8
+            }
+           }
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "section"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "properties": {
+            "h": {
+             "minimum": 40
+            },
+            "title": {},
+            "w": {
+             "minimum": 40
+            }
+           }
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "image"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "properties": {
+            "h": {
+             "minimum": 8
+            },
+            "w": {
+             "minimum": 8
+            }
+           }
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "link"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "properties": {
+            "title": {}
+           }
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "enum": [
+              "sticker"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "dependentSchemas": {
+            "group": {
+             "anyOf": [
+              {
+               "required": [
+                "sticker"
+               ]
+              },
+              {
+               "required": [
+                "src"
+               ]
+              }
+             ]
+            },
+            "h": {
+             "anyOf": [
+              {
+               "required": [
+                "sticker"
+               ]
+              },
+              {
+               "required": [
+                "src"
+               ]
+              }
+             ]
+            },
+            "locked": {
+             "anyOf": [
+              {
+               "required": [
+                "sticker"
+               ]
+              },
+              {
+               "required": [
+                "src"
+               ]
+              }
+             ]
+            },
+            "on": {
+             "anyOf": [
+              {
+               "required": [
+                "sticker"
+               ]
+              },
+              {
+               "required": [
+                "src"
+               ]
+              }
+             ]
+            },
+            "parent": {
+             "anyOf": [
+              {
+               "required": [
+                "sticker"
+               ]
+              },
+              {
+               "required": [
+                "src"
+               ]
+              }
+             ]
+            },
+            "w": {
+             "anyOf": [
+              {
+               "required": [
+                "sticker"
+               ]
+              },
+              {
+               "required": [
+                "src"
+               ]
+              }
+             ]
+            }
+           },
+           "oneOf": [
+            {
+             "required": [
+              "sticker"
+             ]
+            },
+            {
+             "required": [
+              "src"
+             ]
+            }
+           ],
+           "properties": {
+            "h": {
+             "minimum": 8
+            },
+            "w": {
+             "minimum": 8
+            }
+           }
+          }
+         }
+        ],
+        "properties": {
+         "alt": {
+          "maxLength": 300,
+          "type": "string"
+         },
+         "bends": {
+          "items": {
+           "anyOf": [
+            {
+             "enum": [
+              "h",
+              "v"
+             ],
+             "type": "string"
+            },
+            {
+             "type": "number"
+            }
+           ]
+          },
+          "maxItems": 13,
+          "minItems": 1,
+          "type": "array"
+         },
+         "color": {
+          "$ref": "#/$defs/WhiteboardColour"
+         },
+         "cols": {
+          "items": {
+           "minimum": 36,
+           "type": "number"
+          },
+          "maxItems": 20,
+          "minItems": 1,
+          "type": "array"
+         },
+         "dash": {
+          "type": "boolean"
+         },
+         "from": {
+          "anyOf": [
+           {
+            "$ref": "#/$defs/WhiteboardElementId"
+           },
+           {
+            "$ref": "#/$defs/BoardPoint"
+           }
+          ]
+         },
+         "fromSide": {
+          "$ref": "#/$defs/WhiteboardSide"
+         },
+         "group": {
+          "$ref": "#/$defs/WhiteboardElementId"
+         },
+         "h": {
+          "type": "number"
+         },
+         "heads": {
+          "items": {
+           "enum": [
+            "none",
+            "arrow",
+            "circle"
+           ],
+           "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+         },
+         "hollow": {
+          "type": "boolean"
+         },
+         "href": {
+          "maxLength": 2000,
+          "type": "string"
+         },
+         "id": {
+          "$ref": "#/$defs/WhiteboardElementId"
+         },
+         "kind": {
+          "enum": [
+           "shape",
+           "sticky",
+           "text",
+           "section",
+           "arrow",
+           "table",
+           "image",
+           "link",
+           "stroke",
+           "sticker"
+          ],
+          "type": "string"
+         },
+         "label": {
+          "maxLength": 200,
+          "type": "string"
+         },
+         "locked": {
+          "type": "boolean"
+         },
+         "on": {
+          "$ref": "#/$defs/WhiteboardElementId"
+         },
+         "parent": {
+          "$ref": "#/$defs/WhiteboardElementId"
+         },
+         "points": {
+          "items": {
+           "items": {
+            "type": "number"
+           },
+           "maxItems": 2,
+           "minItems": 2,
+           "type": "array"
+          },
+          "maxItems": 4000,
+          "minItems": 1,
+          "type": "array"
+         },
+         "rows": {
+          "items": {
+           "items": {
+            "maxLength": 4000,
+            "type": "string"
+           },
+           "type": "array"
+          },
+          "maxItems": 200,
+          "minItems": 1,
+          "type": "array"
+         },
+         "shape": {
+          "$ref": "#/$defs/WhiteboardShape"
+         },
+         "size": {
+          "$ref": "#/$defs/WhiteboardTextSize"
+         },
+         "src": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+         },
+         "sticker": {
+          "$ref": "#/$defs/WhiteboardSticker"
+         },
+         "stroke": {
+          "$ref": "#/$defs/WhiteboardBorder"
+         },
+         "text": {
+          "maxLength": 4000,
+          "type": "string"
+         },
+         "textAlign": {
+          "$ref": "#/$defs/WhiteboardTextAlign"
+         },
+         "title": {
+          "maxLength": 200,
+          "type": "string"
+         },
+         "to": {
+          "anyOf": [
+           {
+            "$ref": "#/$defs/WhiteboardElementId"
+           },
+           {
+            "$ref": "#/$defs/BoardPoint"
+           }
+          ]
+         },
+         "toSide": {
+          "$ref": "#/$defs/WhiteboardSide"
+         },
+         "w": {
+          "type": "number"
+         },
+         "width": {
+          "enum": [
+           2,
+           4,
+           8
+          ],
+          "type": "integer"
+         },
+         "wrap": {
+          "minimum": 40,
+          "type": "number"
+         },
+         "x": {
+          "type": "number"
+         },
+         "y": {
+          "type": "number"
+         }
+        },
+        "required": [
+         "kind"
+        ],
+        "type": "object"
+       },
+       "fields": {
+        "additionalProperties": false,
+        "properties": {
+         "alt": {
+          "anyOf": [
+           {
+            "maxLength": 300,
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "bends": {
+          "anyOf": [
+           {
+            "items": {
+             "anyOf": [
+              {
+               "enum": [
+                "h",
+                "v"
+               ],
+               "type": "string"
+              },
+              {
+               "type": "number"
+              }
+             ]
+            },
+            "maxItems": 13,
+            "minItems": 1,
+            "type": "array"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "color": {
+          "anyOf": [
+           {
+            "$ref": "#/$defs/WhiteboardColour"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "cols": {
+          "anyOf": [
+           {
+            "items": {
+             "minimum": 36,
+             "type": "number"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "type": "array"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "dash": {
+          "anyOf": [
+           {
+            "type": "boolean"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "from": {
+          "anyOf": [
+           {
+            "anyOf": [
+             {
+              "$ref": "#/$defs/WhiteboardElementId"
+             },
+             {
+              "$ref": "#/$defs/BoardPoint"
+             }
+            ]
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "fromSide": {
+          "anyOf": [
+           {
+            "$ref": "#/$defs/WhiteboardSide"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "group": {
+          "anyOf": [
+           {
+            "$ref": "#/$defs/WhiteboardElementId"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "h": {
+          "anyOf": [
+           {
+            "type": "number"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "heads": {
+          "anyOf": [
+           {
+            "items": {
+             "enum": [
+              "none",
+              "arrow",
+              "circle"
+             ],
+             "type": "string"
+            },
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "hollow": {
+          "anyOf": [
+           {
+            "type": "boolean"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "href": {
+          "anyOf": [
+           {
+            "maxLength": 2000,
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "label": {
+          "anyOf": [
+           {
+            "maxLength": 200,
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "locked": {
+          "anyOf": [
+           {
+            "type": "boolean"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "on": {
+          "anyOf": [
+           {
+            "$ref": "#/$defs/WhiteboardElementId"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "order": {
+          "anyOf": [
+           {
+            "items": {
+             "pattern": "^[A-Za-z0-9_-]{1,64}$",
+             "type": "string"
+            },
+            "maxItems": 800,
+            "type": "array"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "parent": {
+          "anyOf": [
+           {
+            "$ref": "#/$defs/WhiteboardElementId"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "points": {
+          "anyOf": [
+           {
+            "items": {
+             "items": {
+              "type": "number"
+             },
+             "maxItems": 2,
+             "minItems": 2,
+             "type": "array"
+            },
+            "maxItems": 4000,
+            "minItems": 1,
+            "type": "array"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "private": {
+          "additionalProperties": false,
+          "properties": {
+           "until": {
+            "const": "reveal",
+            "type": "string"
+           }
+          },
+          "required": [
+           "until"
+          ],
+          "type": [
+           "object",
+           "null"
+          ]
+         },
+         "rows": {
+          "anyOf": [
+           {
+            "items": {
+             "items": {
+              "maxLength": 4000,
+              "type": "string"
+             },
+             "type": "array"
+            },
+            "maxItems": 200,
+            "minItems": 1,
+            "type": "array"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "shape": {
+          "anyOf": [
+           {
+            "$ref": "#/$defs/WhiteboardShape"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "size": {
+          "anyOf": [
+           {
+            "$ref": "#/$defs/WhiteboardTextSize"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "src": {
+          "anyOf": [
+           {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "sticker": {
+          "anyOf": [
+           {
+            "$ref": "#/$defs/WhiteboardSticker"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "stroke": {
+          "anyOf": [
+           {
+            "$ref": "#/$defs/WhiteboardBorder"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "text": {
+          "anyOf": [
+           {
+            "maxLength": 4000,
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "textAlign": {
+          "anyOf": [
+           {
+            "$ref": "#/$defs/WhiteboardTextAlign"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "timer": {
+          "additionalProperties": false,
+          "properties": {
+           "lasts": {
+            "maximum": 86400,
+            "minimum": 1,
+            "type": "number"
+           },
+           "pausedLeft": {
+            "minimum": 0,
+            "type": "number"
+           },
+           "starterOnly": {
+            "const": true,
+            "type": "boolean"
+           }
+          },
+          "required": [
+           "lasts"
+          ],
+          "type": [
+           "object",
+           "null"
+          ]
+         },
+         "title": {
+          "anyOf": [
+           {
+            "maxLength": 200,
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "to": {
+          "anyOf": [
+           {
+            "anyOf": [
+             {
+              "$ref": "#/$defs/WhiteboardElementId"
+             },
+             {
+              "$ref": "#/$defs/BoardPoint"
+             }
+            ]
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "toSide": {
+          "anyOf": [
+           {
+            "$ref": "#/$defs/WhiteboardSide"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "voting": {
+          "additionalProperties": false,
+          "properties": {
+           "endsAt": {
+            "maxLength": 40,
+            "minLength": 10,
+            "type": "string"
+           },
+           "hidden": {
+            "type": "boolean"
+           },
+           "limit": {
+            "maximum": 20,
+            "minimum": 1,
+            "type": "integer"
+           }
+          },
+          "required": [
+           "limit"
+          ],
+          "type": [
+           "object",
+           "null"
+          ]
+         },
+         "w": {
+          "anyOf": [
+           {
+            "type": "number"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "width": {
+          "anyOf": [
+           {
+            "enum": [
+             2,
+             4,
+             8
+            ],
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "wrap": {
+          "anyOf": [
+           {
+            "minimum": 40,
+            "type": "number"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "x": {
+          "anyOf": [
+           {
+            "type": "number"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "y": {
+          "anyOf": [
+           {
+            "type": "number"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         }
+        },
+        "type": "object"
+       },
+       "id": {
+        "maxLength": 64,
+        "minLength": 1,
+        "type": "string"
+       },
+       "op": {
+        "enum": [
+         "add",
+         "change",
+         "remove",
+         "meta"
+        ],
+        "type": "string"
+       }
+      },
+      "required": [
+       "op"
+      ],
+      "type": "object"
      },
      "WhiteboardShape": {
       "enum": [
@@ -25680,6 +27143,58 @@
         ]
        }
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "offer_idea"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref",
+         "says",
+         "options"
+        ]
+       },
+       "required": [
+        "says",
+        "options"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "withdraw_idea"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref"
+        ]
+       }
+      }
      }
     ],
     "properties": {
@@ -25692,7 +27207,9 @@
        "restore_version",
        "delete",
        "archive",
-       "restore"
+       "restore",
+       "offer_idea",
+       "withdraw_idea"
       ],
       "type": "string"
      },
@@ -25706,1471 +27223,52 @@
      },
      "operations": {
       "items": {
-       "additionalProperties": false,
-       "allOf": [
-        {
-         "if": {
-          "properties": {
-           "op": {
-            "enum": [
-             "add"
-            ]
-           }
-          },
-          "required": [
-           "op"
-          ]
-         },
-         "then": {
-          "propertyNames": {
-           "not": {
-            "enum": [
-             "id",
-             "fields"
-            ]
-           }
-          },
-          "required": [
-           "element"
-          ]
-         }
-        },
-        {
-         "if": {
-          "properties": {
-           "op": {
-            "enum": [
-             "change"
-            ]
-           }
-          },
-          "required": [
-           "op"
-          ]
-         },
-         "then": {
-          "propertyNames": {
-           "not": {
-            "enum": [
-             "element",
-             "before"
-            ]
-           }
-          },
-          "required": [
-           "fields",
-           "id"
-          ]
-         }
-        },
-        {
-         "if": {
-          "properties": {
-           "op": {
-            "enum": [
-             "remove"
-            ]
-           }
-          },
-          "required": [
-           "op"
-          ]
-         },
-         "then": {
-          "propertyNames": {
-           "not": {
-            "enum": [
-             "element",
-             "before",
-             "fields"
-            ]
-           }
-          },
-          "required": [
-           "id"
-          ]
-         }
-        },
-        {
-         "if": {
-          "properties": {
-           "op": {
-            "enum": [
-             "meta"
-            ]
-           }
-          },
-          "required": [
-           "op"
-          ]
-         },
-         "then": {
-          "propertyNames": {
-           "not": {
-            "enum": [
-             "element",
-             "before",
-             "id"
-            ]
-           }
-          },
-          "required": [
-           "fields"
-          ]
-         }
-        }
-       ],
-       "properties": {
-        "before": {
-         "maxLength": 64,
-         "minLength": 1,
-         "type": "string"
-        },
-        "element": {
-         "additionalProperties": false,
-         "allOf": [
-          {
-           "if": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "shape"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           },
-           "then": {
-            "propertyNames": {
-             "enum": [
-              "id",
-              "x",
-              "y",
-              "locked",
-              "parent",
-              "group",
-              "shape",
-              "w",
-              "h",
-              "color",
-              "stroke",
-              "hollow",
-              "text",
-              "size",
-              "textAlign",
-              "kind"
-             ]
-            },
-            "required": [
-             "h",
-             "id",
-             "w",
-             "x",
-             "y"
-            ]
-           }
-          },
-          {
-           "if": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "sticky"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           },
-           "then": {
-            "propertyNames": {
-             "enum": [
-              "id",
-              "x",
-              "y",
-              "locked",
-              "parent",
-              "group",
-              "w",
-              "h",
-              "color",
-              "text",
-              "size",
-              "kind"
-             ]
-            },
-            "required": [
-             "id",
-             "x",
-             "y"
-            ]
-           }
-          },
-          {
-           "if": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "text"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           },
-           "then": {
-            "propertyNames": {
-             "enum": [
-              "id",
-              "x",
-              "y",
-              "locked",
-              "parent",
-              "group",
-              "color",
-              "text",
-              "size",
-              "textAlign",
-              "wrap",
-              "kind"
-             ]
-            },
-            "required": [
-             "id",
-             "text",
-             "x",
-             "y"
-            ]
-           }
-          },
-          {
-           "if": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "section"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           },
-           "then": {
-            "propertyNames": {
-             "enum": [
-              "id",
-              "x",
-              "y",
-              "locked",
-              "parent",
-              "group",
-              "w",
-              "h",
-              "color",
-              "title",
-              "kind"
-             ]
-            },
-            "required": [
-             "h",
-             "id",
-             "w",
-             "x",
-             "y"
-            ]
-           }
-          },
-          {
-           "if": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "arrow"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           },
-           "then": {
-            "propertyNames": {
-             "enum": [
-              "id",
-              "locked",
-              "parent",
-              "group",
-              "color",
-              "from",
-              "to",
-              "fromSide",
-              "toSide",
-              "heads",
-              "dash",
-              "label",
-              "bends",
-              "kind"
-             ]
-            },
-            "required": [
-             "from",
-             "id",
-             "to"
-            ]
-           }
-          },
-          {
-           "if": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "table"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           },
-           "then": {
-            "propertyNames": {
-             "enum": [
-              "id",
-              "x",
-              "y",
-              "locked",
-              "parent",
-              "group",
-              "cols",
-              "rows",
-              "kind"
-             ]
-            },
-            "required": [
-             "cols",
-             "id",
-             "rows",
-             "x",
-             "y"
-            ]
-           }
-          },
-          {
-           "if": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "image"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           },
-           "then": {
-            "propertyNames": {
-             "enum": [
-              "id",
-              "x",
-              "y",
-              "locked",
-              "parent",
-              "group",
-              "w",
-              "h",
-              "src",
-              "alt",
-              "kind"
-             ]
-            },
-            "required": [
-             "h",
-             "id",
-             "src",
-             "w",
-             "x",
-             "y"
-            ]
-           }
-          },
-          {
-           "if": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "link"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           },
-           "then": {
-            "propertyNames": {
-             "enum": [
-              "id",
-              "x",
-              "y",
-              "locked",
-              "parent",
-              "group",
-              "w",
-              "h",
-              "title",
-              "href",
-              "kind"
-             ]
-            },
-            "required": [
-             "href",
-             "id",
-             "title",
-             "x",
-             "y"
-            ]
-           }
-          },
-          {
-           "if": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "stroke"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           },
-           "then": {
-            "propertyNames": {
-             "enum": [
-              "id",
-              "x",
-              "y",
-              "locked",
-              "parent",
-              "group",
-              "color",
-              "points",
-              "width",
-              "kind"
-             ]
-            },
-            "required": [
-             "id",
-             "points",
-             "x",
-             "y"
-            ]
-           }
-          },
-          {
-           "if": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "sticker"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           },
-           "then": {
-            "propertyNames": {
-             "enum": [
-              "id",
-              "x",
-              "y",
-              "locked",
-              "parent",
-              "group",
-              "w",
-              "h",
-              "src",
-              "sticker",
-              "on",
-              "kind"
-             ]
-            },
-            "required": [
-             "id",
-             "x",
-             "y"
-            ]
-           }
-          },
-          {
-           "if": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "shape"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           },
-           "then": {
-            "properties": {
-             "h": {
-              "minimum": 8
-             },
-             "w": {
-              "minimum": 8
-             }
-            }
-           }
-          },
-          {
-           "if": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "sticky"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           },
-           "then": {
-            "properties": {
-             "h": {
-              "minimum": 8
-             },
-             "w": {
-              "minimum": 8
-             }
-            }
-           }
-          },
-          {
-           "if": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "section"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           },
-           "then": {
-            "properties": {
-             "h": {
-              "minimum": 40
-             },
-             "title": {},
-             "w": {
-              "minimum": 40
-             }
-            }
-           }
-          },
-          {
-           "if": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "image"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           },
-           "then": {
-            "properties": {
-             "h": {
-              "minimum": 8
-             },
-             "w": {
-              "minimum": 8
-             }
-            }
-           }
-          },
-          {
-           "if": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "link"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           },
-           "then": {
-            "properties": {
-             "title": {}
-            }
-           }
-          },
-          {
-           "if": {
-            "properties": {
-             "kind": {
-              "enum": [
-               "sticker"
-              ]
-             }
-            },
-            "required": [
-             "kind"
-            ]
-           },
-           "then": {
-            "dependentSchemas": {
-             "group": {
-              "anyOf": [
-               {
-                "required": [
-                 "sticker"
-                ]
-               },
-               {
-                "required": [
-                 "src"
-                ]
-               }
-              ]
-             },
-             "h": {
-              "anyOf": [
-               {
-                "required": [
-                 "sticker"
-                ]
-               },
-               {
-                "required": [
-                 "src"
-                ]
-               }
-              ]
-             },
-             "locked": {
-              "anyOf": [
-               {
-                "required": [
-                 "sticker"
-                ]
-               },
-               {
-                "required": [
-                 "src"
-                ]
-               }
-              ]
-             },
-             "on": {
-              "anyOf": [
-               {
-                "required": [
-                 "sticker"
-                ]
-               },
-               {
-                "required": [
-                 "src"
-                ]
-               }
-              ]
-             },
-             "parent": {
-              "anyOf": [
-               {
-                "required": [
-                 "sticker"
-                ]
-               },
-               {
-                "required": [
-                 "src"
-                ]
-               }
-              ]
-             },
-             "w": {
-              "anyOf": [
-               {
-                "required": [
-                 "sticker"
-                ]
-               },
-               {
-                "required": [
-                 "src"
-                ]
-               }
-              ]
-             }
-            },
-            "oneOf": [
-             {
-              "required": [
-               "sticker"
-              ]
-             },
-             {
-              "required": [
-               "src"
-              ]
-             }
-            ],
-            "properties": {
-             "h": {
-              "minimum": 8
-             },
-             "w": {
-              "minimum": 8
-             }
-            }
-           }
-          }
-         ],
-         "properties": {
-          "alt": {
-           "maxLength": 300,
-           "type": "string"
-          },
-          "bends": {
-           "items": {
-            "anyOf": [
-             {
-              "enum": [
-               "h",
-               "v"
-              ],
-              "type": "string"
-             },
-             {
-              "type": "number"
-             }
-            ]
-           },
-           "maxItems": 13,
-           "minItems": 1,
-           "type": "array"
-          },
-          "color": {
-           "$ref": "#/$defs/WhiteboardColour"
-          },
-          "cols": {
-           "items": {
-            "minimum": 36,
-            "type": "number"
-           },
-           "maxItems": 20,
-           "minItems": 1,
-           "type": "array"
-          },
-          "dash": {
-           "type": "boolean"
-          },
-          "from": {
-           "anyOf": [
-            {
-             "$ref": "#/$defs/WhiteboardElementId"
-            },
-            {
-             "$ref": "#/$defs/BoardPoint"
-            }
-           ]
-          },
-          "fromSide": {
-           "$ref": "#/$defs/WhiteboardSide"
-          },
-          "group": {
-           "$ref": "#/$defs/WhiteboardElementId"
-          },
-          "h": {
-           "type": "number"
-          },
-          "heads": {
-           "items": {
-            "enum": [
-             "none",
-             "arrow",
-             "circle"
-            ],
-            "type": "string"
-           },
-           "maxItems": 2,
-           "minItems": 2,
-           "type": "array"
-          },
-          "hollow": {
-           "type": "boolean"
-          },
-          "href": {
-           "maxLength": 2000,
-           "type": "string"
-          },
-          "id": {
-           "$ref": "#/$defs/WhiteboardElementId"
-          },
-          "kind": {
-           "enum": [
-            "shape",
-            "sticky",
-            "text",
-            "section",
-            "arrow",
-            "table",
-            "image",
-            "link",
-            "stroke",
-            "sticker"
-           ],
-           "type": "string"
-          },
-          "label": {
-           "maxLength": 200,
-           "type": "string"
-          },
-          "locked": {
-           "type": "boolean"
-          },
-          "on": {
-           "$ref": "#/$defs/WhiteboardElementId"
-          },
-          "parent": {
-           "$ref": "#/$defs/WhiteboardElementId"
-          },
-          "points": {
-           "items": {
-            "items": {
-             "type": "number"
-            },
-            "maxItems": 2,
-            "minItems": 2,
-            "type": "array"
-           },
-           "maxItems": 4000,
-           "minItems": 1,
-           "type": "array"
-          },
-          "rows": {
-           "items": {
-            "items": {
-             "maxLength": 4000,
-             "type": "string"
-            },
-            "type": "array"
-           },
-           "maxItems": 200,
-           "minItems": 1,
-           "type": "array"
-          },
-          "shape": {
-           "$ref": "#/$defs/WhiteboardShape"
-          },
-          "size": {
-           "$ref": "#/$defs/WhiteboardTextSize"
-          },
-          "src": {
-           "maxLength": 200,
-           "minLength": 1,
-           "type": "string"
-          },
-          "sticker": {
-           "$ref": "#/$defs/WhiteboardSticker"
-          },
-          "stroke": {
-           "$ref": "#/$defs/WhiteboardBorder"
-          },
-          "text": {
-           "maxLength": 4000,
-           "type": "string"
-          },
-          "textAlign": {
-           "$ref": "#/$defs/WhiteboardTextAlign"
-          },
-          "title": {
-           "maxLength": 200,
-           "type": "string"
-          },
-          "to": {
-           "anyOf": [
-            {
-             "$ref": "#/$defs/WhiteboardElementId"
-            },
-            {
-             "$ref": "#/$defs/BoardPoint"
-            }
-           ]
-          },
-          "toSide": {
-           "$ref": "#/$defs/WhiteboardSide"
-          },
-          "w": {
-           "type": "number"
-          },
-          "width": {
-           "enum": [
-            2,
-            4,
-            8
-           ],
-           "type": "integer"
-          },
-          "wrap": {
-           "minimum": 40,
-           "type": "number"
-          },
-          "x": {
-           "type": "number"
-          },
-          "y": {
-           "type": "number"
-          }
-         },
-         "required": [
-          "kind"
-         ],
-         "type": "object"
-        },
-        "fields": {
-         "additionalProperties": false,
-         "properties": {
-          "alt": {
-           "anyOf": [
-            {
-             "maxLength": 300,
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "bends": {
-           "anyOf": [
-            {
-             "items": {
-              "anyOf": [
-               {
-                "enum": [
-                 "h",
-                 "v"
-                ],
-                "type": "string"
-               },
-               {
-                "type": "number"
-               }
-              ]
-             },
-             "maxItems": 13,
-             "minItems": 1,
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "color": {
-           "anyOf": [
-            {
-             "$ref": "#/$defs/WhiteboardColour"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "cols": {
-           "anyOf": [
-            {
-             "items": {
-              "minimum": 36,
-              "type": "number"
-             },
-             "maxItems": 20,
-             "minItems": 1,
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "dash": {
-           "anyOf": [
-            {
-             "type": "boolean"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "from": {
-           "anyOf": [
-            {
-             "anyOf": [
-              {
-               "$ref": "#/$defs/WhiteboardElementId"
-              },
-              {
-               "$ref": "#/$defs/BoardPoint"
-              }
-             ]
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "fromSide": {
-           "anyOf": [
-            {
-             "$ref": "#/$defs/WhiteboardSide"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "group": {
-           "anyOf": [
-            {
-             "$ref": "#/$defs/WhiteboardElementId"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "h": {
-           "anyOf": [
-            {
-             "type": "number"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "heads": {
-           "anyOf": [
-            {
-             "items": {
-              "enum": [
-               "none",
-               "arrow",
-               "circle"
-              ],
-              "type": "string"
-             },
-             "maxItems": 2,
-             "minItems": 2,
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "hollow": {
-           "anyOf": [
-            {
-             "type": "boolean"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "href": {
-           "anyOf": [
-            {
-             "maxLength": 2000,
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "label": {
-           "anyOf": [
-            {
-             "maxLength": 200,
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "locked": {
-           "anyOf": [
-            {
-             "type": "boolean"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "on": {
-           "anyOf": [
-            {
-             "$ref": "#/$defs/WhiteboardElementId"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "order": {
-           "anyOf": [
-            {
-             "items": {
-              "pattern": "^[A-Za-z0-9_-]{1,64}$",
-              "type": "string"
-             },
-             "maxItems": 800,
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "parent": {
-           "anyOf": [
-            {
-             "$ref": "#/$defs/WhiteboardElementId"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "points": {
-           "anyOf": [
-            {
-             "items": {
-              "items": {
-               "type": "number"
-              },
-              "maxItems": 2,
-              "minItems": 2,
-              "type": "array"
-             },
-             "maxItems": 4000,
-             "minItems": 1,
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "private": {
-           "additionalProperties": false,
-           "properties": {
-            "until": {
-             "const": "reveal",
-             "type": "string"
-            }
-           },
-           "required": [
-            "until"
-           ],
-           "type": [
-            "object",
-            "null"
-           ]
-          },
-          "rows": {
-           "anyOf": [
-            {
-             "items": {
-              "items": {
-               "maxLength": 4000,
-               "type": "string"
-              },
-              "type": "array"
-             },
-             "maxItems": 200,
-             "minItems": 1,
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "shape": {
-           "anyOf": [
-            {
-             "$ref": "#/$defs/WhiteboardShape"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "size": {
-           "anyOf": [
-            {
-             "$ref": "#/$defs/WhiteboardTextSize"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "src": {
-           "anyOf": [
-            {
-             "maxLength": 200,
-             "minLength": 1,
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "sticker": {
-           "anyOf": [
-            {
-             "$ref": "#/$defs/WhiteboardSticker"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "stroke": {
-           "anyOf": [
-            {
-             "$ref": "#/$defs/WhiteboardBorder"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "text": {
-           "anyOf": [
-            {
-             "maxLength": 4000,
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "textAlign": {
-           "anyOf": [
-            {
-             "$ref": "#/$defs/WhiteboardTextAlign"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "timer": {
-           "additionalProperties": false,
-           "properties": {
-            "lasts": {
-             "maximum": 86400,
-             "minimum": 1,
-             "type": "number"
-            },
-            "pausedLeft": {
-             "minimum": 0,
-             "type": "number"
-            },
-            "starterOnly": {
-             "const": true,
-             "type": "boolean"
-            }
-           },
-           "required": [
-            "lasts"
-           ],
-           "type": [
-            "object",
-            "null"
-           ]
-          },
-          "title": {
-           "anyOf": [
-            {
-             "maxLength": 200,
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "to": {
-           "anyOf": [
-            {
-             "anyOf": [
-              {
-               "$ref": "#/$defs/WhiteboardElementId"
-              },
-              {
-               "$ref": "#/$defs/BoardPoint"
-              }
-             ]
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "toSide": {
-           "anyOf": [
-            {
-             "$ref": "#/$defs/WhiteboardSide"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "voting": {
-           "additionalProperties": false,
-           "properties": {
-            "endsAt": {
-             "maxLength": 40,
-             "minLength": 10,
-             "type": "string"
-            },
-            "hidden": {
-             "type": "boolean"
-            },
-            "limit": {
-             "maximum": 20,
-             "minimum": 1,
-             "type": "integer"
-            }
-           },
-           "required": [
-            "limit"
-           ],
-           "type": [
-            "object",
-            "null"
-           ]
-          },
-          "w": {
-           "anyOf": [
-            {
-             "type": "number"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "width": {
-           "anyOf": [
-            {
-             "enum": [
-              2,
-              4,
-              8
-             ],
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "wrap": {
-           "anyOf": [
-            {
-             "minimum": 40,
-             "type": "number"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "x": {
-           "anyOf": [
-            {
-             "type": "number"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          "y": {
-           "anyOf": [
-            {
-             "type": "number"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          }
-         },
-         "type": "object"
-        },
-        "id": {
-         "maxLength": 64,
-         "minLength": 1,
-         "type": "string"
-        },
-        "op": {
-         "enum": [
-          "add",
-          "change",
-          "remove",
-          "meta"
-         ],
-         "type": "string"
-        }
-       },
-       "required": [
-        "op"
-       ],
-       "type": "object"
+       "$ref": "#/$defs/WhiteboardOperation"
       },
       "maxItems": 50,
       "minItems": 1,
       "type": "array"
      },
+     "options": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "label": {
+         "maxLength": 60,
+         "minLength": 1,
+         "type": "string"
+        },
+        "operations": {
+         "items": {
+          "$ref": "#/$defs/WhiteboardOperation"
+         },
+         "maxItems": 60,
+         "minItems": 1,
+         "type": "array"
+        },
+        "why": {
+         "maxLength": 160,
+         "minLength": 1,
+         "type": "string"
+        }
+       },
+       "required": [
+        "label",
+        "why",
+        "operations"
+       ],
+       "type": "object"
+      },
+      "maxItems": 4,
+      "minItems": 2,
+      "type": "array"
+     },
      "project_continuation_ref": {
+      "type": "string"
+     },
+     "says": {
+      "maxLength": 160,
+      "minLength": 1,
       "type": "string"
      },
      "title": {
