@@ -1377,6 +1377,11 @@
      },
      "lead_in": {
       "type": "string"
+     },
+     "near": {
+      "default": "",
+      "maxLength": 120,
+      "type": "string"
      }
     },
     "required": [
