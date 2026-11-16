@@ -5579,7 +5579,7 @@
          "description",
          "continuation_ref",
          "body",
-         "attachments",
+         "file_continuation_refs",
          "update_continuation_ref"
         ]
        },
@@ -5655,7 +5655,7 @@
          "description",
          "continuation_ref",
          "body",
-         "attachments",
+         "file_continuation_refs",
          "thread",
          "block",
          "whole_document",
@@ -5883,15 +5883,6 @@
       ],
       "type": "string"
      },
-     "attachments": {
-      "items": {
-       "maxLength": 2048,
-       "minLength": 1,
-       "type": "string"
-      },
-      "maxItems": 20,
-      "type": "array"
-     },
      "block": {
       "maxLength": 160,
       "minLength": 1,
@@ -5914,6 +5905,13 @@
       "maxLength": 32,
       "minLength": 1,
       "type": "string"
+     },
+     "file_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 20,
+      "type": "array"
      },
      "pinned": {
       "default": true,
@@ -18485,7 +18483,6 @@
      "failed",
      "forbidden",
      "history",
-     "knock_on",
      "missing",
      "pending",
      "refused",
@@ -18585,8 +18582,7 @@
        "skipped",
        "retired",
        "snapshot",
-       "emails",
-       "knock_on"
+       "emails"
       ],
       "type": "string"
      }
@@ -18807,7 +18803,9 @@
          "act",
          "description",
          "record_continuation_refs",
-         "apply"
+         "apply",
+         "start",
+         "due"
         ]
        }
       }
@@ -19002,6 +19000,10 @@
       "minLength": 1,
       "type": "string"
      },
+     "due": {
+      "default": "",
+      "type": "string"
+     },
      "email_continuation_ref": {
       "type": "string"
      },
@@ -19041,6 +19043,10 @@
      },
      "selection_continuation_ref": {
       "minLength": 1,
+      "type": "string"
+     },
+     "start": {
+      "default": "",
       "type": "string"
      },
      "updates": {
@@ -20602,35 +20608,6 @@
     },
     "required": [
      "record_class"
-    ],
-    "type": "object"
-   }
-  },
-  "record_knock_on_read": {
-   "choices": {},
-   "doors": [
-    "routed"
-   ],
-   "family": "organisation_records",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "continuation_ref": {
-      "type": "string"
-     },
-     "due": {
-      "default": "",
-      "maxLength": 10,
-      "type": "string"
-     },
-     "start": {
-      "default": "",
-      "maxLength": 10,
-      "type": "string"
-     }
-    },
-    "required": [
-     "continuation_ref"
     ],
     "type": "object"
    }
