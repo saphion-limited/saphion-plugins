@@ -724,7 +724,8 @@
          "act",
          "description",
          "title",
-         "html"
+         "html",
+         "project_continuation_ref"
         ]
        },
        "required": [
@@ -889,6 +890,9 @@
       "type": "array"
      },
      "html": {
+      "type": "string"
+     },
+     "project_continuation_ref": {
       "type": "string"
      },
      "title": {
@@ -6214,7 +6218,8 @@
          "description",
          "name",
          "project_continuation_ref",
-         "program"
+         "program",
+         "apps"
         ]
        },
        "required": [
@@ -6241,6 +6246,7 @@
          "act",
          "description",
          "program",
+         "apps",
          "continuation_ref"
         ]
        },
@@ -6458,6 +6464,33 @@
        "restore"
       ],
       "type": "string"
+     },
+     "apps": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "as": {
+         "pattern": "^[a-z][a-z0-9_]{0,31}$",
+         "type": "string"
+        },
+        "html": {
+         "type": "string"
+        },
+        "title": {
+         "maxLength": 150,
+         "minLength": 1,
+         "type": "string"
+        }
+       },
+       "required": [
+        "as",
+        "title",
+        "html"
+       ],
+       "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
      },
      "card": {
       "maxLength": 128,
@@ -7156,6 +7189,10 @@
      "textarea",
      "url"
     ],
+    "format": [
+     "landscape",
+     "portrait"
+    ],
     "kind": [
      "bars",
      "budget",
@@ -7490,6 +7527,16 @@
            ]
           }
          }
+        },
+        {
+         "dependentRequired": {
+          "apps": [
+           "markdown"
+          ],
+          "images": [
+           "markdown"
+          ]
+         }
         }
        ],
        "propertyNames": {
@@ -7502,7 +7549,9 @@
          "note",
          "starter",
          "project_continuation_ref",
-         "tab_of_continuation_ref"
+         "tab_of_continuation_ref",
+         "apps",
+         "images"
         ]
        },
        "required": [
@@ -7564,6 +7613,8 @@
          "act",
          "description",
          "title",
+         "apps",
+         "images",
          "continuation_ref",
          "operations",
          "put_back_previous"
@@ -7752,6 +7803,33 @@
       ],
       "type": "string"
      },
+     "apps": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "as": {
+         "pattern": "^[a-z][a-z0-9_]{0,31}$",
+         "type": "string"
+        },
+        "html": {
+         "type": "string"
+        },
+        "title": {
+         "maxLength": 150,
+         "minLength": 1,
+         "type": "string"
+        }
+       },
+       "required": [
+        "as",
+        "title",
+        "html"
+       ],
+       "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+     },
      "continuation_ref": {
       "type": "string"
      },
@@ -7762,6 +7840,36 @@
      },
      "destination_continuation_ref": {
       "type": "string"
+     },
+     "images": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "as": {
+         "pattern": "^[a-z][a-z0-9_]{0,31}$",
+         "type": "string"
+        },
+        "format": {
+         "enum": [
+          "portrait",
+          "landscape"
+         ],
+         "type": "string"
+        },
+        "prompt": {
+         "maxLength": 4000,
+         "minLength": 1,
+         "type": "string"
+        }
+       },
+       "required": [
+        "as",
+        "prompt"
+       ],
+       "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
      },
      "markdown": {
       "type": "string"
@@ -11227,6 +11335,9 @@
       "type": "string"
      },
      "input_continuation_ref": {
+      "type": "string"
+     },
+     "project_continuation_ref": {
       "type": "string"
      },
      "prompt": {
@@ -24514,7 +24625,12 @@
      "restore_version",
      "withdraw_idea"
     ],
+    "format": [
+     "landscape",
+     "portrait"
+    ],
     "kind": [
+     "app",
      "arrow",
      "image",
      "link",
@@ -25026,6 +25142,43 @@
            "properties": {
             "kind": {
              "enum": [
+              "app"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "propertyNames": {
+            "enum": [
+             "id",
+             "x",
+             "y",
+             "locked",
+             "parent",
+             "group",
+             "w",
+             "h",
+             "app",
+             "kind"
+            ]
+           },
+           "required": [
+            "app",
+            "id",
+            "w",
+            "x",
+            "y"
+           ]
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "enum": [
               "stroke"
              ]
             }
@@ -25215,6 +25368,31 @@
            "properties": {
             "kind": {
              "enum": [
+              "app"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "properties": {
+            "h": {
+             "maximum": 1224,
+             "minimum": 144
+            },
+            "w": {
+             "minimum": 120
+            }
+           }
+          }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "enum": [
               "sticker"
              ]
             }
@@ -25338,6 +25516,11 @@
           "maxLength": 300,
           "type": "string"
          },
+         "app": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+         },
          "bends": {
           "items": {
            "anyOf": [
@@ -25424,6 +25607,7 @@
            "table",
            "image",
            "link",
+           "app",
            "stroke",
            "sticker"
           ],
@@ -25542,6 +25726,18 @@
           "anyOf": [
            {
             "maxLength": 300,
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "app": {
+          "anyOf": [
+           {
+            "maxLength": 200,
+            "minLength": 1,
             "type": "string"
            },
            {
@@ -26147,7 +26343,9 @@
          "description",
          "title",
          "operations",
-         "project_continuation_ref"
+         "project_continuation_ref",
+         "apps",
+         "images"
         ]
        },
        "required": [
@@ -26174,6 +26372,8 @@
          "act",
          "description",
          "operations",
+         "apps",
+         "images",
          "continuation_ref"
         ]
        },
@@ -26337,6 +26537,34 @@
       ],
       "type": "string"
      },
+     "apps": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "as": {
+         "pattern": "^[a-z][a-z0-9_]{0,31}$",
+         "type": "string"
+        },
+        "html": {
+         "type": "string"
+        },
+        "title": {
+         "maxLength": 150,
+         "minLength": 1,
+         "type": "string"
+        }
+       },
+       "required": [
+        "as",
+        "title",
+        "html"
+       ],
+       "type": "object"
+      },
+      "maxItems": 50,
+      "minItems": 1,
+      "type": "array"
+     },
      "continuation_ref": {
       "type": "string"
      },
@@ -26347,6 +26575,37 @@
      },
      "destination_continuation_ref": {
       "type": "string"
+     },
+     "images": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "as": {
+         "pattern": "^[a-z][a-z0-9_]{0,31}$",
+         "type": "string"
+        },
+        "format": {
+         "enum": [
+          "portrait",
+          "landscape"
+         ],
+         "type": "string"
+        },
+        "prompt": {
+         "maxLength": 4000,
+         "minLength": 1,
+         "type": "string"
+        }
+       },
+       "required": [
+        "as",
+        "prompt"
+       ],
+       "type": "object"
+      },
+      "maxItems": 50,
+      "minItems": 1,
+      "type": "array"
      },
      "operations": {
       "items": {
