@@ -18792,6 +18792,39 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "if": {
+          "properties": {
+           "updates": {
+            "contains": {
+             "properties": {
+              "selection_continuation_ref": {
+               "type": "string"
+              }
+             },
+             "required": [
+              "selection_continuation_ref"
+             ]
+            }
+           }
+          },
+          "required": [
+           "updates"
+          ]
+         },
+         "then": {
+          "properties": {
+           "history": {
+            "const": false
+           },
+           "updates": {
+            "maxItems": 1
+           }
+          }
+         }
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -18865,6 +18898,18 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "properties": {
+          "record_continuation_refs": {
+           "minItems": 1
+          }
+         },
+         "required": [
+          "record_continuation_refs"
+         ]
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -18956,6 +19001,19 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "properties": {
+          "record_continuation_refs": {
+           "maxItems": 1,
+           "minItems": 1
+          }
+         },
+         "required": [
+          "record_continuation_refs"
+         ]
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -18988,6 +19046,19 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "properties": {
+          "record_continuation_refs": {
+           "maxItems": 1,
+           "minItems": 1
+          }
+         },
+         "required": [
+          "record_continuation_refs"
+         ]
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -19014,6 +19085,19 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "properties": {
+          "record_continuation_refs": {
+           "maxItems": 1,
+           "minItems": 1
+          }
+         },
+         "required": [
+          "record_continuation_refs"
+         ]
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -19042,6 +19126,19 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "properties": {
+          "record_continuation_refs": {
+           "maxItems": 1,
+           "minItems": 1
+          }
+         },
+         "required": [
+          "record_continuation_refs"
+         ]
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
