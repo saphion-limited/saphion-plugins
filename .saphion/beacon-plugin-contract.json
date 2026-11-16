@@ -5421,21 +5421,57 @@
     "additionalProperties": false,
     "allOf": [
      {
-      "dependentRequired": {
-       "continuation_ref": [
-        "when"
+      "if": {
+       "required": [
+        "continuation_ref"
+       ]
+      },
+      "then": {
+       "anyOf": [
+        {
+         "required": [
+          "when"
+         ]
+        },
+        {
+         "required": [
+          "day"
+         ]
+        }
+       ]
+      }
+     },
+     {
+      "not": {
+       "required": [
+        "when",
+        "day"
        ]
       }
      },
      {
       "if": {
-       "properties": {
-        "when": {
-         "type": "string"
+       "anyOf": [
+        {
+         "properties": {
+          "when": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "when"
+         ]
+        },
+        {
+         "properties": {
+          "day": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "day"
+         ]
         }
-       },
-       "required": [
-        "when"
        ]
       },
       "then": {
@@ -5449,6 +5485,10 @@
     ],
     "properties": {
      "continuation_ref": {
+      "type": "string"
+     },
+     "day": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
       "type": "string"
      },
      "query": {
@@ -6992,54 +7032,6 @@
     },
     "required": [
      "act"
-    ],
-    "type": "object"
-   }
-  },
-  "dashboard_guide": {
-   "choices": {},
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "dashboards",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "continuation_ref": {
-      "type": "string"
-     },
-     "items": {
-      "items": {
-       "enum": [
-        "components",
-        "layout",
-        "figures",
-        "charts",
-        "queries",
-        "language",
-        "vocabulary",
-        "recipes",
-        "recipe:Sales pipeline",
-        "recipe:Pipeline changes",
-        "recipe:Project delivery",
-        "recipe:Delivery performance",
-        "recipe:Team workload",
-        "recipe:Project portfolio",
-        "data"
-       ],
-       "type": "string"
-      },
-      "minItems": 1,
-      "type": "array"
-     },
-     "source": {
-      "maxLength": 300,
-      "type": "string"
-     }
-    },
-    "required": [
-     "items"
     ],
     "type": "object"
    }
@@ -9366,39 +9358,6 @@
     "type": "object"
    }
   },
-  "document_guide": {
-   "choices": {},
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "pages",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "items": {
-      "items": {
-       "enum": [
-        "index",
-        "editing",
-        "comments",
-        "diagram",
-        "whiteboard",
-        "whiteboard_design",
-        "whiteboard_organising"
-       ],
-       "type": "string"
-      },
-      "minItems": 1,
-      "type": "array"
-     }
-    },
-    "required": [
-     "items"
-    ],
-    "type": "object"
-   }
-  },
   "document_read": {
    "choices": {
     "view": [
@@ -9495,87 +9454,6 @@
     },
     "required": [
      "code"
-    ],
-    "type": "object"
-   }
-  },
-  "field_type_info": {
-   "choices": {
-    "type": [
-     "address",
-     "autonumber",
-     "button",
-     "checkbox",
-     "connect",
-     "created",
-     "created_by",
-     "date",
-     "duration",
-     "email",
-     "files",
-     "formula",
-     "link",
-     "mirror",
-     "money",
-     "number",
-     "percent",
-     "person",
-     "phone",
-     "rating",
-     "rich_text",
-     "rollup",
-     "status",
-     "tags",
-     "text",
-     "timeline",
-     "updated",
-     "updated_by"
-    ]
-   },
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "organisation_records",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "type": {
-      "enum": [
-       "text",
-       "rich_text",
-       "number",
-       "money",
-       "percent",
-       "rating",
-       "duration",
-       "status",
-       "tags",
-       "person",
-       "date",
-       "timeline",
-       "checkbox",
-       "link",
-       "email",
-       "phone",
-       "files",
-       "address",
-       "connect",
-       "mirror",
-       "rollup",
-       "formula",
-       "button",
-       "created",
-       "updated",
-       "created_by",
-       "updated_by",
-       "autonumber"
-      ],
-      "type": "string"
-     }
-    },
-    "required": [
-     "type"
     ],
     "type": "object"
    }
@@ -10357,6 +10235,7 @@
      "condition",
      "customer",
      "dashboard",
+     "data_source",
      "document",
      "file",
      "form",
@@ -10848,6 +10727,7 @@
        "chat",
        "customer",
        "dashboard",
+       "data_source",
        "document",
        "file",
        "form",
@@ -11721,6 +11601,7 @@
     "properties": {
      "items": {
       "items": {
+       "pattern": "^(?:document|diagram|whiteboard|dashboard|field)(\\.[a-z0-9_.-]+)?$",
        "type": "string"
       },
       "maxItems": 8,
