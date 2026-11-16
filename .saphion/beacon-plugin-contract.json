@@ -9254,6 +9254,10 @@
     "direction": [
      "asc",
      "desc"
+    ],
+    "whose": [
+     "anyone",
+     "mine"
     ]
    },
    "doors": [
@@ -9261,8 +9265,17 @@
    ],
    "family": "organisation_reach",
    "schema": {
-    "$defs": {
-     "FileSortInput": {
+    "additionalProperties": false,
+    "properties": {
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "query": {
+      "default": "",
+      "maxLength": 500,
+      "type": "string"
+     },
+     "sort": {
       "additionalProperties": false,
       "properties": {
        "direction": {
@@ -9281,21 +9294,18 @@
       "required": [
        "field"
       ],
-      "type": "object"
-     }
-    },
-    "additionalProperties": false,
-    "properties": {
-     "project_continuation_ref": {
-      "type": "string"
+      "type": [
+       "object",
+       "null"
+      ]
      },
-     "query": {
-      "default": "",
-      "maxLength": 500,
+     "whose": {
+      "default": "anyone",
+      "enum": [
+       "mine",
+       "anyone"
+      ],
       "type": "string"
-     },
-     "sort": {
-      "$ref": "#/$defs/FileSortInput"
      }
     },
     "type": "object"
