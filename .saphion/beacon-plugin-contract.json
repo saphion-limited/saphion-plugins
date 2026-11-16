@@ -695,6 +695,7 @@
   "app_change": {
    "choices": {
     "act": [
+     "archive",
      "create",
      "delete",
      "edit",
@@ -828,7 +829,8 @@
        "properties": {
         "act": {
          "enum": [
-          "delete"
+          "delete",
+          "archive"
          ]
         }
        },
@@ -857,7 +859,8 @@
        "edit",
        "rewrite",
        "restore",
-       "delete"
+       "delete",
+       "archive"
       ],
       "type": "string"
      },
@@ -5316,9 +5319,15 @@
       "pattern": "^(?:(?:last )?[a-z]+day|\\d{4}-\\d{2}-\\d{2})?$",
       "type": "string"
      },
+     "project_continuation_ref": {
+      "type": "string"
+     },
      "query": {
       "default": "",
       "maxLength": 160,
+      "type": "string"
+     },
+     "team_continuation_ref": {
       "type": "string"
      },
      "when": {
@@ -5646,6 +5655,7 @@
          "description",
          "continuation_ref",
          "body",
+         "attachments",
          "thread",
          "block",
          "whole_document",
@@ -16324,6 +16334,7 @@
   "permission_change": {
    "choices": {
     "act": [
+     "archive",
      "change",
      "create",
      "delete",
@@ -16544,7 +16555,8 @@
        "properties": {
         "act": {
          "enum": [
-          "delete"
+          "delete",
+          "archive"
          ]
         }
        },
@@ -16578,7 +16590,8 @@
        "change",
        "hide",
        "holders",
-       "delete"
+       "delete",
+       "archive"
       ],
       "type": "string"
      },
@@ -18472,6 +18485,7 @@
      "failed",
      "forbidden",
      "history",
+     "knock_on",
      "missing",
      "pending",
      "refused",
@@ -18571,7 +18585,8 @@
        "skipped",
        "retired",
        "snapshot",
-       "emails"
+       "emails",
+       "knock_on"
       ],
       "type": "string"
      }
@@ -20587,6 +20602,35 @@
     },
     "required": [
      "record_class"
+    ],
+    "type": "object"
+   }
+  },
+  "record_knock_on_read": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "organisation_records",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "due": {
+      "default": "",
+      "maxLength": 10,
+      "type": "string"
+     },
+     "start": {
+      "default": "",
+      "maxLength": 10,
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
     ],
     "type": "object"
    }
@@ -24156,6 +24200,7 @@
      "delete",
      "duplicate",
      "edit",
+     "move",
      "offer_idea",
      "rename",
      "restore",
@@ -25889,6 +25934,33 @@
        "properties": {
         "act": {
          "enum": [
+          "move"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref",
+         "destination_continuation_ref"
+        ]
+       },
+       "required": [
+        "destination_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "restore_version"
          ]
         }
@@ -25948,6 +26020,7 @@
        "edit",
        "rename",
        "duplicate",
+       "move",
        "restore_version",
        "delete",
        "archive",
@@ -25963,6 +26036,9 @@
      "description": {
       "maxLength": 240,
       "minLength": 1,
+      "type": "string"
+     },
+     "destination_continuation_ref": {
       "type": "string"
      },
      "operations": {
