@@ -15,7 +15,7 @@ metadata:
 # Build a dashboard as an app
 
 A dashboard, scorecard, KPI page or chart over Saphion's own data is a Saphion Dashboard: make or change it with `dashboard_change`
-(read `guide dashboard` first; it holds the craft, and `find` kind `data_source` then `read` the source for what the person may read), or, when the person is in a Document, add a widget to that Document with
+(read `guide dashboard` first; it holds the craft, and `find` the person's data sources, then `read` one, for what they may read), or, when the person is in a Document, add a widget to that Document with
 `document_change`'s `card`. Beacon reads one with `read`. This procedure is only for a dashboard made as an app: the person explicitly
 asked for an app, or the data is not Saphion's (figures or a file they gave you). If neither is so, stop here and make the Dashboard.
 Say it in one plain line the first time ("I'll build it as an app"), and never call the app a Dashboard. The app tool's description carries the sandbox and the live-data contract; the app design rules carry the page
