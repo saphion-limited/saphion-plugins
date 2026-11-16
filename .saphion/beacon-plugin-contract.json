@@ -4341,6 +4341,25 @@
     "type": "object"
    }
   },
+  "board_view_read": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "boards",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "board_view_save": {
    "choices": {
     "act": [
@@ -5120,6 +5139,25 @@
     },
     "required": [
      "act"
+    ],
+    "type": "object"
+   }
+  },
+  "board_workload_counts": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "boards",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
     ],
     "type": "object"
    }
@@ -6748,6 +6786,9 @@
     "properties": {
      "continuation_ref": {
       "type": "string"
+     },
+     "subject_continuation_ref": {
+      "type": "string"
      }
     },
     "required": [
@@ -7025,6 +7066,9 @@
      "query": {
       "default": "",
       "maxLength": 200,
+      "type": "string"
+     },
+     "subject_continuation_ref": {
       "type": "string"
      }
     },
@@ -10340,6 +10384,9 @@
        "paused",
        "completed"
       ],
+      "type": "string"
+     },
+     "subject": {
       "type": "string"
      },
      "team_today": {
@@ -18517,6 +18564,7 @@
      "changed",
      "changes",
      "comments",
+     "counts",
      "created",
      "data",
      "done",
@@ -18602,6 +18650,7 @@
      },
      "view": {
       "enum": [
+       "counts",
        "data",
        "versions",
        "done",
@@ -20658,11 +20707,12 @@
         "acts",
         "meanings",
         "record_sets",
-        "automation"
+        "automation",
+        "holders"
        ],
        "type": "string"
       },
-      "maxItems": 6,
+      "maxItems": 7,
       "minItems": 1,
       "type": "array"
      },
