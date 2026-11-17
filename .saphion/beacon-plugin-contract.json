@@ -6062,7 +6062,6 @@
      "lines",
      "matrix",
      "progress",
-     "radar",
      "radial",
      "rank",
      "scatter",
@@ -6667,7 +6666,6 @@
          "statuslist",
          "radial",
          "matrix",
-         "radar",
          "scatter",
          "waterfall"
         ],
@@ -7214,7 +7212,6 @@
      "lines",
      "matrix",
      "progress",
-     "radar",
      "radial",
      "rank",
      "scatter",
@@ -8545,7 +8542,6 @@
             "statuslist",
             "radial",
             "matrix",
-            "radar",
             "scatter",
             "waterfall"
            ],
