@@ -12709,12 +12709,12 @@
       "minLength": 1,
       "type": "string"
      },
-     "file_project_id": {
-      "type": "string"
-     },
      "mailboxId": {
       "default": "",
       "maxLength": 320,
+      "type": "string"
+     },
+     "project_continuation_ref": {
       "type": "string"
      },
      "subject": {
@@ -12812,7 +12812,7 @@
       "minLength": 1,
       "type": "string"
      },
-     "file_project_id": {
+     "project_continuation_ref": {
       "type": "string"
      },
      "replyAll": {
@@ -13169,7 +13169,7 @@
       "minLength": 1,
       "type": "string"
      },
-     "file_project_id": {
+     "project_continuation_ref": {
       "type": "string"
      }
     },
@@ -13302,7 +13302,7 @@
       "minLength": 1,
       "type": "string"
      },
-     "file_project_id": {
+     "project_continuation_ref": {
       "type": "string"
      },
      "subject": {
@@ -13395,7 +13395,7 @@
       "minLength": 1,
       "type": "string"
      },
-     "file_project_id": {
+     "project_continuation_ref": {
       "type": "string"
      }
     },
@@ -13468,10 +13468,10 @@
       "minLength": 1,
       "type": "string"
      },
-     "file_project_id": {
+     "folder_ref": {
       "type": "string"
      },
-     "folder_ref": {
+     "project_continuation_ref": {
       "type": "string"
      }
     },
@@ -13527,7 +13527,7 @@
       "minLength": 1,
       "type": "string"
      },
-     "file_project_id": {
+     "project_continuation_ref": {
       "type": "string"
      }
     },
