@@ -5211,7 +5211,7 @@
       "items": {
        "maxLength": 160,
        "minLength": 1,
-       "pattern": "^[^\\s./\\:][^/\\:]*(?:\\.xlsx|\\.docx|\\.pptx|\\.pdf|\\.csv|\\.zip)$",
+       "pattern": "^[^\\s./\\:][^/\\:]*\\.(?:xlsx|docx|pptx|pdf|csv|zip|png|jpg|jpeg)$",
        "type": "string"
       },
       "maxItems": 16,
