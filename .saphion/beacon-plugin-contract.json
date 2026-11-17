@@ -551,6 +551,7 @@
         "comment.deleted",
         "page.mentioned",
         "page.written",
+        "page.write_failed",
         "email.linked",
         "phase.changed",
         "review.requested",
