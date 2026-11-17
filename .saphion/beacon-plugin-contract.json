@@ -4176,6 +4176,7 @@
          "act",
          "description",
          "name",
+         "record_class",
          "table_name",
          "template_continuation_ref"
         ]
