@@ -6208,6 +6208,15 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "dependentRequired": {
+          "apps": [
+           "program"
+          ]
+         }
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -7602,6 +7611,16 @@
            ]
           }
          ]
+        },
+        {
+         "dependentRequired": {
+          "apps": [
+           "operations"
+          ],
+          "images": [
+           "operations"
+          ]
+         }
         }
        ],
        "propertyNames": {
@@ -26333,6 +26352,18 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "dependentRequired": {
+          "apps": [
+           "operations"
+          ],
+          "images": [
+           "operations"
+          ]
+         }
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
