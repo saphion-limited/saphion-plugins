@@ -23124,7 +23124,7 @@
         "enum": [
          "act",
          "description",
-         "resource_continuation_ref",
+         "items_continuation_refs",
          "people_continuation_refs",
          "teams_continuation_refs",
          "role",
@@ -23132,7 +23132,7 @@
         ]
        },
        "required": [
-        "resource_continuation_ref",
+        "items_continuation_refs",
         "role"
        ]
       }
@@ -23181,7 +23181,7 @@
         "enum": [
          "act",
          "description",
-         "resource_continuation_ref",
+         "items_continuation_refs",
          "people_continuation_refs",
          "teams_continuation_refs",
          "unassign",
@@ -23189,7 +23189,7 @@
         ]
        },
        "required": [
-        "resource_continuation_ref"
+        "items_continuation_refs"
        ]
       }
      },
@@ -23481,6 +23481,14 @@
      },
      "item_invitation_continuation_ref": {
       "type": "string"
+     },
+     "items_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 500,
+      "minItems": 1,
+      "type": "array"
      },
      "link_continuation_ref": {
       "type": "string"
