@@ -80,8 +80,8 @@
     {
       "name": "tenders",
       "source": "./tenders",
-      "description": "A source-grounded tender response prepared from a tender pack, for human review.",
-      "version": "1.1.0",
+      "description": "A tender's questions answered from its pack, your Library and the client's feedback, written once and checked by code.",
+      "version": "1.1.1",
       "category": "Bids and safety",
       "author": {
         "name": "Saphion"
