@@ -4077,6 +4077,7 @@
          "act",
          "description",
          "start_on",
+         "rows_continuation_refs",
          "template_continuation_ref",
          "into_continuation_ref",
          "whole_template"
@@ -4258,6 +4259,13 @@
      },
      "resting_template_continuation_ref": {
       "type": "string"
+     },
+     "rows_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 2000,
+      "type": "array"
      },
      "section_id": {
       "$ref": "#/$defs/Identifier"
