@@ -15,7 +15,7 @@ metadata:
 # Build a dashboard as an app
 
 A dashboard, scorecard, KPI page or chart over Saphion's own data is a Saphion Dashboard: make or change it with `dashboard_change`
-(read `guide dashboard` first; it holds the craft, and `find` the person's data sources, then `read` one, for what they may read), or, when the person is in a Document, add a widget to that Document with
+(its format is in the tool; `find` the person's data sources, then `read` one, for what they may read, and `guide dashboard.charts` or another `dashboard.` topic only when you need it), or, when the person is in a Document, add a widget to that Document with
 `document_change`'s `card`. Beacon reads one with `read`. This procedure is only for a dashboard made as an app: the person explicitly
 asked for an app, or the data is not Saphion's (figures or a file they gave you). If neither is so, stop here and make the Dashboard.
 Say it in one plain line the first time ("I'll build it as an app"), and never call the app a Dashboard. The app tool's description carries the sandbox and the live-data contract; the app design rules carry the page
@@ -111,7 +111,7 @@ a source, so a number can be traced; a refused or failed source says why where t
 
 After each write, the result carries the app tool's check report: the app run once, headless, in the light theme at the pane's width, its
 controls tried once, listing what it raised (uncaught errors, console errors) and drew wrong (invalid text such as NaN, a chart that drew
-nothing, labels overlapping or cut off). Fix what the report confirms, at most twice, then say what still fails. That report is the only look
+nothing, labels overlapping or cut off). Fix what the report confirms until it is clean, stopping only when a fix changes nothing, then say what still fails. That report is the only look
 you get: it is words, not a picture, it does not run dark, and its live sources stay `loading` (there is no person), so it proves the controls,
 the loading state and the page's structure, not how the live figures or the colours draw. Colour and dark mode rest on the validator and the
 tokens. Say so, and never claim more than the report shows.

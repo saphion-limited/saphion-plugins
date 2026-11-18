@@ -38,7 +38,7 @@ Restate the question in one sentence, then split it into parts that do not overl
 
 Three is a sound default. For each part write the questions it must answer and what would count as a good source: the regulator or statute,
 the publisher of the standard, the Organisation's own records for something about it; a trade body or a recognised expert next; a vendor only
-for what the vendor itself does. Keep the parts in `todos`, and say what you are researching as you go, naming the part, not your method.
+for what the vendor itself does. Keep the parts as steps (`task_create`, `task_update`).
 
 ## 3. Work each part until it is answered
 

@@ -3,7 +3,7 @@ name: "design"
 description: "Palette, type and layout for a Saphion page or other visual work that no file or app skill covers"
 user-invocable: false
 metadata:
-  outcome: "The visual design of a page or other visual work that Saphion AI makes for people to look at, with a palette, type and layout chosen for its subject and audience, planned, built and critiqued."
+  outcome: "The visual design of a page or other visual work that Beacon makes for people to look at, with a palette, type and layout chosen for its subject and audience, planned, built and critiqued."
   not-outcomes: |-
     A single-file app, Word or PDF file or PowerPoint deck: their own skills carry the design.
     A plain text answer, or a spreadsheet, where nothing is laid out to look at.
