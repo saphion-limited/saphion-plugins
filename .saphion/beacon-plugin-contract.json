@@ -5507,6 +5507,12 @@
     "type": "object"
    }
   },
+  "context_read": {
+   "doors": [
+    "beacon"
+   ],
+   "family": "host"
+  },
   "continue_reading": {
    "choices": {},
    "doors": [
