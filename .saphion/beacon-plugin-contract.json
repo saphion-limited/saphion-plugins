@@ -11491,8 +11491,8 @@
      "account_type": {
       "default": "member",
       "enum": [
-       "member",
-       "admin"
+       "admin",
+       "member"
       ],
       "type": "string"
      },
@@ -11526,8 +11526,8 @@
         "account_type": {
          "default": "member",
          "enum": [
-          "member",
-          "admin"
+          "admin",
+          "member"
          ],
          "type": "string"
         },
@@ -11897,8 +11897,8 @@
     "properties": {
      "account_type": {
       "enum": [
-       "member",
-       "admin"
+       "admin",
+       "member"
       ],
       "type": "string"
      },
