@@ -1,6 +1,7 @@
 ---
 name: "prepare-tender-response"
 description: "From a tender pack"
+user-invocable: false
 metadata:
   outcome: "Prepare or continue a Bid's source-grounded Tender response for human review and preparation-document export."
   not-outcomes: |-
@@ -11,8 +12,11 @@ metadata:
 <!-- SURFACE_REASON: the shipped skill that prepares a Bid's one tender response Document from its tender pack -->
 # Prepare a tender response
 
+Only a person starts a tender response, with New tender in Saphion, because it spends the Organisation's Tenders allowance. Where `document_change` does not
+offer `from_questionnaire`, do not draft a response or make a Document for one: tell the person to start it with New tender.
+
 Work on the selected Bid's one response Document. The Bid owns the client, deadline,
-status and commercial outcome. Read it through bid_response_read; open its existing
+status and commercial outcome. Read it with read (its details, its files and its response); open its existing
 response with read. Never create a second response or copy its commercial facts
 into another record.
 
