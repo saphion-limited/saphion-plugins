@@ -19,8 +19,8 @@ what changed. Someone who missed it should see in a minute whether the work is o
 
 Leave out any section the meeting said nothing about.
 
-1. **Overall status.** Only if the meeting said how the project or team is doing (on track, behind, at risk) and why, in its words. Never
-   invent a red, amber or green rating, a percentage or a status nobody gave.
+1. **Overall status.** Only if the meeting said how the project or team is doing (on track, behind, at risk) and why, in its words. A red, amber or green rating,
+   a percentage or a status nobody gave is left out.
 2. **Previous actions, done or carried.** Which earlier actions were reported done, and which are carried forward and why.
 3. **Progress by workstream or person.** For each workstream or person as the meeting went: what is **done**, what is **next**, what is
    **blocked**. For a stand-up this is the whole recap, three lines a person at most.

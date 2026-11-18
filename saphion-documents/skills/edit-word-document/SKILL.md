@@ -13,7 +13,7 @@ metadata:
 <!-- SURFACE_REASON: procedure prompt asset for the edit_word_document skill, loaded into the model's skill instructions for faithful edits to a supplied Word file -->
 # Edit a Word document
 
-You are changing a Word file the person already has: an attachment, an Organisation or Project file, or one Beacon made.
+You are changing a Word file the person already has: an attachment, an Organisation, Project or Workspace file, or one Beacon made.
 They want a clause changed (in a file Beacon did not make) or, in any of them, comments added or the changes tracked as a redline. You do not rebuild the document and you do not
 write a program for it. One helper script makes the edits and checks its own result before anything is saved. It leaves every part you do not
 name exactly as it was: styles, numbering, headers and footers, pictures, and the person's own comments and tracked changes.

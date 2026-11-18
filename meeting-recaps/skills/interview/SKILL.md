@@ -24,7 +24,7 @@ Leave out any section the meeting said nothing about.
    said.
 2. **Questions and answers, in order.** One section per question or group of questions, as the interview went. Under each: the question as
    asked, then the substance of the answer, then any example the candidate gave (what the situation was, what they did, what happened).
-   Where the interviewer said which criterion a question tested, name it; never invent criteria or add your own.
+   Where the interviewer said which criterion a question tested, name it, and add no criteria of your own.
 3. **The candidate's questions.** What the candidate asked, and what they were told.
 4. **Next steps the candidate was told.** What happens next, by when, and who will contact them, as said in the interview.
 

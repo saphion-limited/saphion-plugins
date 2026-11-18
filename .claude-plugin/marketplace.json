@@ -11,7 +11,7 @@
       "name": "dataviz",
       "source": "./dataviz",
       "description": "Ask Beacon for a dashboard app, or one over data that is not in Saphion: its figures worked out in code, drawn and kept in one place.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "Design",
       "author": {
         "name": "Saphion"
@@ -21,7 +21,7 @@
       "name": "deep-research",
       "source": "./deep-research",
       "description": "Research a question properly across many sources and get a cited report that takes a position.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "Documents and files",
       "author": {
         "name": "Saphion"
@@ -31,7 +31,7 @@
       "name": "design",
       "source": "./design",
       "description": "Palette, type and layout for pages, and polished single-file apps for the side pane.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "category": "Design",
       "author": {
         "name": "Saphion"
@@ -41,7 +41,7 @@
       "name": "meeting-recaps",
       "source": "./meeting-recaps",
       "description": "Recap styles for meetings: a general recap, board and committee minutes, one-to-ones, project and team updates, client meetings, sales calls and interviews.",
-      "version": "2.0.1",
+      "version": "2.0.2",
       "category": "Documents and files",
       "author": {
         "name": "Saphion"
@@ -51,7 +51,7 @@
       "name": "rams",
       "source": "./rams",
       "description": "Risk assessments and method statements written from your Organisation's own two Word templates and Hazard library.",
-      "version": "1.1.1",
+      "version": "1.2.0",
       "category": "Bids and safety",
       "author": {
         "name": "Saphion"
@@ -61,7 +61,7 @@
       "name": "saphion-documents",
       "source": "./saphion-documents",
       "description": "Word and PDF files, spreadsheets and presentations Beacon makes and edits by itself.",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "category": "Documents and files",
       "author": {
         "name": "Saphion"
