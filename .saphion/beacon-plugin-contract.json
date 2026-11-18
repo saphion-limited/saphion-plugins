@@ -15312,7 +15312,7 @@
   },
   "organisation_record_archive_or_bin": {
    "choices": {
-    "removal": [
+    "act": [
      "archive",
      "delete"
     ]
@@ -15324,6 +15324,13 @@
    "schema": {
     "additionalProperties": false,
     "properties": {
+     "act": {
+      "enum": [
+       "archive",
+       "delete"
+      ],
+      "type": "string"
+     },
      "description": {
       "maxLength": 240,
       "minLength": 1,
@@ -15336,17 +15343,10 @@
       "maxItems": 200,
       "minItems": 1,
       "type": "array"
-     },
-     "removal": {
-      "enum": [
-       "archive",
-       "delete"
-      ],
-      "type": "string"
      }
     },
     "required": [
-     "removal",
+     "act",
      "record_continuation_refs"
     ],
     "type": "object"
