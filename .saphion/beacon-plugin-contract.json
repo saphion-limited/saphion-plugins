@@ -307,9 +307,6 @@
           "history",
           "all"
          ]
-        },
-        "reference": {
-         "maxItems": 1
         }
        }
       }
@@ -343,7 +340,6 @@
            "mode": {
             "enum": [
              "all",
-             "history",
              "pinned"
             ]
            }
@@ -471,7 +467,7 @@
      },
      "limit": {
       "default": 30,
-      "maximum": 50,
+      "maximum": 100,
       "minimum": 1,
       "type": "integer"
      },
@@ -506,7 +502,7 @@
      },
      "per_target": {
       "default": 5,
-      "maximum": 50,
+      "maximum": 100,
       "minimum": 1,
       "type": "integer"
      },
