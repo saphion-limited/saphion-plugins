@@ -10443,6 +10443,7 @@
       "type": "string"
      },
      "limit": {
+      "maximum": 250,
       "minimum": 1,
       "type": "integer"
      },
