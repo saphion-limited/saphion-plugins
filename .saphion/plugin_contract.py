@@ -18,7 +18,7 @@ What a ``SKILL.md`` is judged on (each refusal names the file and the word):
 * its ``allowed-tools`` (the standard field): every entry is a tool Beacon is offered, and an entry written ``tool(act=edit)`` names a choice
   that tool declares;
 * its text: a word shaped like a tool name that no tool has (the shape is derived from the contract's own names, as the registry guard
-  ``test_a_skill_names_only_tools_the_registry_offers`` always derived it) or that is a near miss of one (``bid_respnse_read``) is refused. A
+  ``test_a_skill_names_only_tools_the_registry_offers`` always derived it) or that is a near miss of one (``document_raed``) is refused. A
   tool mentioned in backticks or by its snake_case name, followed by ``act`` and a choice, must name a choice that tool declares
   (``document_change`` with the act ``edit``); a choice is named by backticks or by its snake_case form (a bare one-word choice is prose and is not read);
 * its size: the name, description and body ceilings the contract carries, and the package's file count and bytes.
