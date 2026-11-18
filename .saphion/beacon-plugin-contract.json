@@ -17365,6 +17365,7 @@
      "remove_tab",
      "reset_default_tabs",
      "restore",
+     "set_default_tabs",
      "update",
      "use_tabs_as_default"
     ],
@@ -17674,6 +17675,34 @@
        "properties": {
         "act": {
          "enum": [
+          "set_default_tabs"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "kind",
+         "tabs"
+        ]
+       },
+       "required": [
+        "kind",
+        "tabs"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "reset_default_tabs"
          ]
         }
@@ -17828,6 +17857,7 @@
        "remove_tab",
        "order_tabs",
        "use_tabs_as_default",
+       "set_default_tabs",
        "reset_default_tabs",
        "duplicate",
        "archive",
@@ -18048,6 +18078,16 @@
        "type": "string"
       },
       "maxItems": 100,
+      "type": "array"
+     },
+     "tabs": {
+      "items": {
+       "maxLength": 200,
+       "minLength": 1,
+       "type": "string"
+      },
+      "maxItems": 200,
+      "minItems": 1,
       "type": "array"
      }
     },
