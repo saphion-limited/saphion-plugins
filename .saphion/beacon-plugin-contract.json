@@ -3742,26 +3742,6 @@
     "type": "object"
    }
   },
-  "bid_response_read": {
-   "choices": {},
-   "doors": [
-    "beacon",
-    "codeact"
-   ],
-   "family": "bid_responses",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "continuation_ref": {
-      "type": "string"
-     }
-    },
-    "required": [
-     "continuation_ref"
-    ],
-    "type": "object"
-   }
-  },
   "board_change": {
    "choices": {
     "act": [
