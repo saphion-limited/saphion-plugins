@@ -6840,6 +6840,10 @@
   },
   "data_import_preview": {
    "choices": {
+    "date_order": [
+     "Day / month / year",
+     "Month / day / year"
+    ],
     "mode": [
      "create_and_update",
      "create_only",
@@ -6972,6 +6976,14 @@
      }
     ],
     "properties": {
+     "date_order": {
+      "default": "Day / month / year",
+      "enum": [
+       "Day / month / year",
+       "Month / day / year"
+      ],
+      "type": "string"
+     },
      "file_continuation_ref": {
       "type": "string"
      },
@@ -7006,12 +7018,19 @@
       ],
       "type": "string"
      },
+     "project_continuation_ref": {
+      "type": "string"
+     },
      "record_set_continuation_ref": {
       "type": "string"
      },
      "resource_class": {
       "minLength": 1,
       "type": "string"
+     },
+     "retire_absent": {
+      "default": false,
+      "type": "boolean"
      },
      "sheet": {
       "default": "",
