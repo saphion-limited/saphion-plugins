@@ -17253,6 +17253,11 @@
    "schema": {
     "additionalProperties": false,
     "properties": {
+     "assignee": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
      "description": {
       "maxLength": 240,
       "minLength": 1,
@@ -18491,8 +18496,7 @@
       },
       "then": {
        "required": [
-        "continuation_ref",
-        "name"
+        "continuation_ref"
        ]
       }
      },
@@ -18710,6 +18714,63 @@
      },
      "whose": {
       "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "type": "object"
+   }
+  },
+  "projectprobe_payment_certificate_read": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_payment_certificates_approval_status": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "commercialApproved": {
+      "type": "boolean"
+     },
+     "directorApproved": {
+      "type": "boolean"
+     },
+     "pageNumber": {
+      "minimum": 1,
+      "type": "integer"
+     },
+     "pageSize": {
+      "maximum": 200,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "search": {
+      "maxLength": 200,
       "minLength": 1,
       "type": "string"
      }
