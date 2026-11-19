@@ -17105,6 +17105,40 @@
    ],
    "family": "host"
   },
+  "planradar_forms_list": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "form": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
+     "page": {
+      "minimum": 1,
+      "type": "integer"
+     },
+     "pageSize": {
+      "maximum": 100,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "project_continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "planradar_project_changes": {
    "choices": {},
    "doors": [
@@ -17204,6 +17238,68 @@
     "type": "object"
    }
   },
+  "planradar_ticket_create": {
+   "choices": {
+    "priority": [
+     "high",
+     "low",
+     "normal"
+    ]
+   },
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "assignee": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "dueDate": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "type": "string"
+     },
+     "form_ref": {
+      "type": "string"
+     },
+     "location": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
+     "priority": {
+      "enum": [
+       "low",
+       "normal",
+       "high"
+      ],
+      "type": "string"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "subject": {
+      "maxLength": 500,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "project_continuation_ref",
+     "subject"
+    ],
+    "type": "object"
+   }
+  },
   "planradar_ticket_get": {
    "choices": {},
    "doors": [
@@ -17223,6 +17319,40 @@
      }
     },
     "required": [
+     "project_continuation_ref",
+     "ticketNumber"
+    ],
+    "type": "object"
+   }
+  },
+  "planradar_ticket_photo": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "file_continuation_ref": {
+      "type": "string"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "ticketNumber": {
+      "exclusiveMinimum": 0,
+      "type": "integer"
+     }
+    },
+    "required": [
+     "file_continuation_ref",
      "project_continuation_ref",
      "ticketNumber"
     ],
@@ -18854,6 +18984,50 @@
      },
      "toDateExclusive": {
       "format": "date",
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_project_site_diary": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "month": {
+      "pattern": "^\\d{4}-(0[1-9]|1[0-2])$",
+      "type": "string"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "project_continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_project_site_diary_entry": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
       "type": "string"
      }
     },
