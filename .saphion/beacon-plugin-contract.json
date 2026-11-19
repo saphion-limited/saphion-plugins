@@ -17144,6 +17144,39 @@
     "type": "object"
    }
   },
+  "planradar_my_tickets": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "overdue": {
+      "type": "boolean"
+     },
+     "statuses": {
+      "items": {
+       "enum": [
+        "open",
+        "in-progress",
+        "resolved",
+        "feedback",
+        "closed",
+        "rejected"
+       ],
+       "type": "string"
+      },
+      "maxItems": 6,
+      "minItems": 1,
+      "type": "array"
+     }
+    },
+    "type": "object"
+   }
+  },
   "planradar_project_changes": {
    "choices": {},
    "doors": [
@@ -17465,6 +17498,61 @@
     },
     "required": [
      "project_continuation_ref",
+     "ticketNumbers"
+    ],
+    "type": "object"
+   }
+  },
+  "planradar_tickets_export": {
+   "choices": {
+    "format": [
+     "excel",
+     "pdf"
+    ]
+   },
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "format": {
+      "enum": [
+       "excel",
+       "pdf"
+      ],
+      "type": "string"
+     },
+     "job_ref": {
+      "type": "string"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "template": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
+     "ticketNumbers": {
+      "items": {
+       "type": "integer"
+      },
+      "maxItems": 500,
+      "minItems": 1,
+      "type": "array"
+     }
+    },
+    "required": [
+     "project_continuation_ref",
+     "format",
      "ticketNumbers"
     ],
     "type": "object"
@@ -19449,6 +19537,48 @@
       "type": "string"
      }
     },
+    "type": "object"
+   }
+  },
+  "projectprobe_variation_approval": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "approve": {
+      "type": "boolean"
+     },
+     "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "level": {
+      "enum": [
+       1,
+       2
+      ],
+      "type": "integer"
+     },
+     "reason": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref",
+     "level",
+     "approve"
+    ],
     "type": "object"
    }
   },
