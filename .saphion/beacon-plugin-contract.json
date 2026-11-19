@@ -12862,9 +12862,6 @@
       "maxLength": 320,
       "type": "string"
      },
-     "project_continuation_ref": {
-      "type": "string"
-     },
      "subject": {
       "maxLength": 255,
       "minLength": 1,
@@ -12959,9 +12956,6 @@
       },
       "maxItems": 10,
       "type": "array"
-     },
-     "project_continuation_ref": {
-      "type": "string"
      },
      "replyAll": {
       "default": false,
@@ -13455,9 +13449,6 @@
       "maxItems": 10,
       "type": "array"
      },
-     "project_continuation_ref": {
-      "type": "string"
-     },
      "subject": {
       "maxLength": 255,
       "minLength": 1,
@@ -13620,9 +13611,6 @@
      },
      "folder_ref": {
       "type": "string"
-     },
-     "project_continuation_ref": {
-      "type": "string"
      }
     },
     "required": [
@@ -13673,9 +13661,6 @@
       "type": "string"
      },
      "file_continuation_ref": {
-      "type": "string"
-     },
-     "project_continuation_ref": {
       "type": "string"
      }
     },
