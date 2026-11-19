@@ -19079,7 +19079,8 @@
         "act": {
          "enum": [
           "restore",
-          "void"
+          "void",
+          "delete"
          ]
         }
        },
@@ -19115,41 +19116,6 @@
          "description",
          "record_continuation_refs",
          "selection_continuation_ref"
-        ]
-       }
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "delete"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "allOf": [
-        {
-         "properties": {
-          "record_continuation_refs": {
-           "minItems": 1
-          }
-         },
-         "required": [
-          "record_continuation_refs"
-         ]
-        }
-       ],
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description",
-         "record_continuation_refs"
         ]
        }
       }
