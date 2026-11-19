@@ -17168,6 +17168,42 @@
     "type": "object"
    }
   },
+  "planradar_ticket_comment": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "comment": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "ticketNumber": {
+      "exclusiveMinimum": 0,
+      "type": "integer"
+     }
+    },
+    "required": [
+     "project_continuation_ref",
+     "ticketNumber",
+     "comment"
+    ],
+    "type": "object"
+   }
+  },
   "planradar_ticket_get": {
    "choices": {},
    "doors": [
@@ -17193,14 +17229,20 @@
     "type": "object"
    }
   },
-  "planradar_tickets_search": {
+  "planradar_ticket_update": {
    "choices": {
-    "operator": [
-     "has-no-value",
-     "has-value",
-     "on",
-     "on-or-after",
-     "on-or-before"
+    "priority": [
+     "high",
+     "low",
+     "normal"
+    ],
+    "status": [
+     "closed",
+     "feedback",
+     "in-progress",
+     "open",
+     "rejected",
+     "resolved"
     ]
    },
    "doors": [
@@ -17211,11 +17253,122 @@
    "schema": {
     "additionalProperties": false,
     "properties": {
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "dueDate": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "type": "string"
+     },
+     "priority": {
+      "enum": [
+       "low",
+       "normal",
+       "high"
+      ],
+      "type": "string"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "status": {
+      "enum": [
+       "open",
+       "in-progress",
+       "resolved",
+       "feedback",
+       "closed",
+       "rejected"
+      ],
+      "type": "string"
+     },
+     "ticketNumber": {
+      "exclusiveMinimum": 0,
+      "type": "integer"
+     }
+    },
+    "required": [
+     "project_continuation_ref",
+     "ticketNumber"
+    ],
+    "type": "object"
+   }
+  },
+  "planradar_tickets_close": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "ticketNumbers": {
+      "items": {
+       "type": "integer"
+      },
+      "maxItems": 10,
+      "minItems": 1,
+      "type": "array"
+     }
+    },
+    "required": [
+     "project_continuation_ref",
+     "ticketNumbers"
+    ],
+    "type": "object"
+   }
+  },
+  "planradar_tickets_search": {
+   "choices": {
+    "operator": [
+     "has-no-value",
+     "has-value",
+     "on",
+     "on-or-after",
+     "on-or-before"
+    ],
+    "sort": [
+     "created-at",
+     "due-date",
+     "priority",
+     "status",
+     "ticket-number",
+     "updated-at"
+    ]
+   },
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "assignee": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
      "changedSince": {
       "format": "date-time",
       "maxLength": 80,
       "minLength": 1,
       "type": "string"
+     },
+     "descending": {
+      "type": "boolean"
      },
      "dueDate": {
       "additionalProperties": false,
@@ -17246,6 +17399,14 @@
      "form_ref": {
       "type": "string"
      },
+     "location": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
+     "overdue": {
+      "type": "boolean"
+     },
      "page": {
       "minimum": 1,
       "type": "integer"
@@ -17274,6 +17435,17 @@
      "query": {
       "maxLength": 500,
       "minLength": 1,
+      "type": "string"
+     },
+     "sort": {
+      "enum": [
+       "ticket-number",
+       "created-at",
+       "updated-at",
+       "due-date",
+       "status",
+       "priority"
+      ],
       "type": "string"
      },
      "statuses": {
@@ -17443,6 +17615,45 @@
    "schema": {
     "$defs": {
      "JsonValue": {},
+     "ProjectCreateFactsInput": {
+      "additionalProperties": false,
+      "properties": {
+       "client": {
+        "type": "string"
+       },
+       "description": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "items": {
+           "additionalProperties": true,
+           "type": "object"
+          },
+          "type": "array"
+         }
+        ]
+       },
+       "fields": {
+        "additionalProperties": {
+         "$ref": "#/$defs/JsonValue"
+        },
+        "type": "object"
+       },
+       "lead": {
+        "type": "string"
+       },
+       "location": {
+        "$ref": "#/$defs/ProjectLocationInput"
+       },
+       "value": {
+        "minimum": 0,
+        "type": "number"
+       }
+      },
+      "type": "object"
+     },
      "ProjectLocationInput": {
       "additionalProperties": false,
       "properties": {
@@ -17955,9 +18166,6 @@
         },
         "type": "object"
        },
-       "lead": {
-        "type": "string"
-       },
        "location": {
         "$ref": "#/$defs/ProjectLocationInput"
        },
@@ -17991,46 +18199,7 @@
       "type": "string"
      },
      "facts": {
-      "additionalProperties": false,
-      "properties": {
-       "client": {
-        "type": "string"
-       },
-       "description": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "items": {
-           "additionalProperties": true,
-           "type": "object"
-          },
-          "type": "array"
-         }
-        ]
-       },
-       "fields": {
-        "additionalProperties": {
-         "$ref": "#/$defs/JsonValue"
-        },
-        "type": "object"
-       },
-       "lead": {
-        "type": "string"
-       },
-       "location": {
-        "$ref": "#/$defs/ProjectLocationInput"
-       },
-       "value": {
-        "minimum": 0,
-        "type": "number"
-       }
-      },
-      "type": [
-       "object",
-       "null"
-      ]
+      "$ref": "#/$defs/ProjectCreateFactsInput"
      },
      "fields": {
       "additionalProperties": {
@@ -18785,6 +18954,87 @@
     "required": [
      "project_continuation_ref"
     ],
+    "type": "object"
+   }
+  },
+  "projectprobe_variation_history": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_variations_search": {
+   "choices": {
+    "sortField": [
+     "Active",
+     "Description",
+     "IssueDate",
+     "ProjectName",
+     "Quantity",
+     "Rate",
+     "ReferenceNumber",
+     "SubcontractorName"
+    ]
+   },
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "includeInactive": {
+      "type": "boolean"
+     },
+     "pageNumber": {
+      "minimum": 1,
+      "type": "integer"
+     },
+     "pageSize": {
+      "maximum": 200,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "search": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
+     "sortAscending": {
+      "type": "boolean"
+     },
+     "sortField": {
+      "enum": [
+       "ReferenceNumber",
+       "ProjectName",
+       "SubcontractorName",
+       "Description",
+       "IssueDate",
+       "Rate",
+       "Quantity",
+       "Active"
+      ],
+      "type": "string"
+     }
+    },
     "type": "object"
    }
   },
