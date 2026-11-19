@@ -18480,8 +18480,7 @@
      }
     },
     "required": [
-     "look",
-     "project_continuation_ref"
+     "look"
     ],
     "type": "object"
    }
