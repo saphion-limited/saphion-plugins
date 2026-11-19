@@ -22566,9 +22566,7 @@
     "act": [
      "decide_change",
      "propose_change",
-     "receive",
-     "report_complete",
-     "start_work"
+     "receive"
     ]
    },
    "doors": [
@@ -22640,8 +22638,6 @@
        "properties": {
         "act": {
          "enum": [
-          "report_complete",
-          "start_work",
           "receive"
          ]
         }
@@ -22669,8 +22665,6 @@
       "enum": [
        "propose_change",
        "decide_change",
-       "report_complete",
-       "start_work",
        "receive"
       ],
       "type": "string"
