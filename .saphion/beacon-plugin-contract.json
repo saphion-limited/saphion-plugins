@@ -24232,11 +24232,11 @@
         "enum": [
          "act",
          "description",
-         "resource_continuation_ref"
+         "items_continuation_refs"
         ]
        },
        "required": [
-        "resource_continuation_ref"
+        "items_continuation_refs"
        ]
       }
      },
@@ -24258,12 +24258,12 @@
         "enum": [
          "act",
          "description",
-         "resource_continuation_ref",
+         "items_continuation_refs",
          "person_continuation_ref"
         ]
        },
        "required": [
-        "resource_continuation_ref",
+        "items_continuation_refs",
         "person_continuation_ref"
        ]
       }
@@ -24424,13 +24424,13 @@
         "enum": [
          "act",
          "description",
-         "resource_continuation_ref",
+         "items_continuation_refs",
          "person_continuation_ref",
          "accepted"
         ]
        },
        "required": [
-        "resource_continuation_ref",
+        "items_continuation_refs",
         "person_continuation_ref",
         "accepted"
        ]
@@ -24540,9 +24540,6 @@
       "type": "string"
      },
      "record_continuation_ref": {
-      "type": "string"
-     },
-     "resource_continuation_ref": {
       "type": "string"
      },
      "role": {
