@@ -227,6 +227,11 @@
          },
          {
           "required": [
+           "since_last_visit"
+          ]
+         },
+         {
+          "required": [
            "verbs"
           ]
          },
@@ -520,6 +525,10 @@
       },
       "maxItems": 25,
       "type": "array"
+     },
+     "since_last_visit": {
+      "default": false,
+      "type": "boolean"
      },
      "verbs": {
       "items": {
@@ -1465,7 +1474,8 @@
          "enum": [
           "effect",
           "happened",
-          "button"
+          "button",
+          "project_continuation_ref"
          ]
         }
        },
@@ -1498,7 +1508,8 @@
           "test",
           "effect",
           "happened",
-          "button"
+          "button",
+          "project_continuation_ref"
          ]
         }
        },
@@ -1526,7 +1537,8 @@
          "enum": [
           "record_continuation_refs",
           "test",
-          "button"
+          "button",
+          "project_continuation_ref"
          ]
         }
        },
@@ -1561,8 +1573,7 @@
         }
        },
        "required": [
-        "button",
-        "record_continuation_refs"
+        "button"
        ]
       }
      },
@@ -1601,12 +1612,24 @@
        ]
       },
       "then": {
-       "properties": {
-        "record_continuation_refs": {
-         "maxItems": 1,
-         "minItems": 1
+       "oneOf": [
+        {
+         "properties": {
+          "record_continuation_refs": {
+           "maxItems": 1,
+           "minItems": 1
+          }
+         },
+         "required": [
+          "record_continuation_refs"
+         ]
+        },
+        {
+         "required": [
+          "project_continuation_ref"
+         ]
         }
-       }
+       ]
       }
      }
     ],
@@ -1643,6 +1666,9 @@
      },
      "happened": {
       "type": "boolean"
+     },
+     "project_continuation_ref": {
+      "type": "string"
      },
      "record_continuation_refs": {
       "items": {
@@ -2935,6 +2961,34 @@
            "properties": {
             "kind": {
              "enum": [
+              "project"
+             ]
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          }
+         },
+         "required": [
+          "source"
+         ]
+        },
+        "then": {
+         "properties": {
+          "kind": {
+           "const": "button_clicked"
+          }
+         }
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "source": {
+           "properties": {
+            "kind": {
+             "enum": [
               "records"
              ]
             }
@@ -3481,6 +3535,25 @@
             "event_key"
            ]
           }
+         },
+         {
+          "if": {
+           "properties": {
+            "kind": {
+             "const": "project"
+            }
+           },
+           "required": [
+            "kind"
+           ]
+          },
+          "then": {
+           "propertyNames": {
+            "enum": [
+             "kind"
+            ]
+           }
+          }
          }
         ],
         "properties": {
@@ -3523,7 +3596,8 @@
            "records",
            "clock",
            "connection",
-           "product"
+           "product",
+           "project"
           ],
           "type": "string"
          },
@@ -17376,6 +17450,7 @@
    "family": "projects",
    "schema": {
     "$defs": {
+     "JsonValue": {},
      "ProjectLocationInput": {
       "additionalProperties": false,
       "properties": {
@@ -17884,14 +17959,7 @@
        },
        "fields": {
         "additionalProperties": {
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "number"
-          }
-         ]
+         "$ref": "#/$defs/JsonValue"
         },
         "type": "object"
        },
@@ -17952,14 +18020,7 @@
        },
        "fields": {
         "additionalProperties": {
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "number"
-          }
-         ]
+         "$ref": "#/$defs/JsonValue"
         },
         "type": "object"
        },
@@ -17981,14 +18042,7 @@
      },
      "fields": {
       "additionalProperties": {
-       "anyOf": [
-        {
-         "type": "string"
-        },
-        {
-         "type": "number"
-        }
-       ]
+       "$ref": "#/$defs/JsonValue"
       },
       "maxProperties": 64,
       "type": "object"
