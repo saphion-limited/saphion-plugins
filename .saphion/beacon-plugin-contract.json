@@ -142,7 +142,8 @@
     ],
     "product": [
      "crm",
-     "rams"
+     "rams",
+     "tenders"
     ],
     "window": [
      "last_30_days",
@@ -514,6 +515,7 @@
      "product": {
       "default": "",
       "enum": [
+       "tenders",
        "rams",
        "crm"
       ],
@@ -646,6 +648,7 @@
         "mark.unfavourited",
         "mark.followed",
         "mark.unfollowed",
+        "reminder.bid_deadline_passed",
         "lead.converted",
         "reminder.close_passed"
        ],
@@ -1278,6 +1281,11 @@
   },
   "archive_list": {
    "choices": {
+    "product": [
+     "crm",
+     "rams",
+     "tenders"
+    ],
     "view": [
      "archive",
      "bin"
@@ -1292,6 +1300,15 @@
     "properties": {
      "by": {
       "default": "",
+      "type": "string"
+     },
+     "product": {
+      "default": "",
+      "enum": [
+       "tenders",
+       "rams",
+       "crm"
+      ],
       "type": "string"
      },
      "query": {
@@ -4030,6 +4047,22 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "oneOf": [
+          {
+           "required": [
+            "board_continuation_ref"
+           ]
+          },
+          {
+           "required": [
+            "resting_template_continuation_ref"
+           ]
+          }
+         ]
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -4058,6 +4091,22 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "oneOf": [
+          {
+           "required": [
+            "board_continuation_ref"
+           ]
+          },
+          {
+           "required": [
+            "resting_template_continuation_ref"
+           ]
+          }
+         ]
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -10113,7 +10162,8 @@
     ],
     "product": [
      "crm",
-     "rams"
+     "rams",
+     "tenders"
     ],
     "status": [
      "active",
@@ -10597,6 +10647,7 @@
      "product": {
       "default": "",
       "enum": [
+       "tenders",
        "rams",
        "crm"
       ],
@@ -11505,7 +11556,8 @@
     ],
     "product_key": [
      "crm",
-     "rams"
+     "rams",
+     "tenders"
     ]
    },
    "doors": [
@@ -11708,6 +11760,7 @@
         },
         "product_key": {
          "enum": [
+          "tenders",
           "rams",
           "crm"
          ],
@@ -18804,6 +18857,37 @@
         "continuation_ref"
        ]
       }
+     },
+     {
+      "anyOf": [
+       {
+        "properties": {
+         "look": {
+          "not": {
+           "const": "links"
+          }
+         }
+        },
+        "required": [
+         "look"
+        ]
+       },
+       {
+        "required": [
+         "continuation_ref"
+        ]
+       },
+       {
+        "not": {
+         "required": [
+          "query"
+         ]
+        },
+        "required": [
+         "project_continuation_ref"
+        ]
+       }
+      ]
      }
     ],
     "properties": {
