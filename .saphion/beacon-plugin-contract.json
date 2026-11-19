@@ -20302,21 +20302,10 @@
               "then": {
                "properties": {
                 "button": {
-                 "properties": {
-                  "automationId": {
-                   "minLength": 1,
-                   "type": "string"
-                  },
-                  "label": {
-                   "minLength": 1,
-                   "type": "string"
-                  }
-                 },
                  "required": [
                   "label",
-                  "automationId"
-                 ],
-                 "type": "object"
+                  "automation_continuation_ref"
+                 ]
                 }
                },
                "required": [
@@ -20862,43 +20851,66 @@
      },
      "field": {
       "additionalProperties": true,
+      "anyOf": [
+       {
+        "properties": {
+         "type": {
+          "enum": [
+           "text",
+           "rich_text",
+           "number",
+           "money",
+           "percent",
+           "rating",
+           "duration",
+           "status",
+           "tags",
+           "person",
+           "date",
+           "timeline",
+           "checkbox",
+           "link",
+           "email",
+           "phone",
+           "files",
+           "address",
+           "connect",
+           "mirror",
+           "rollup",
+           "formula",
+           "created",
+           "updated",
+           "created_by",
+           "updated_by",
+           "autonumber"
+          ]
+         }
+        }
+       },
+       {
+        "properties": {
+         "button": {
+          "properties": {
+           "automation_continuation_ref": {
+            "minLength": 1,
+            "type": "string"
+           }
+          },
+          "type": "object"
+         },
+         "type": {
+          "enum": [
+           "button"
+          ]
+         }
+        }
+       }
+      ],
       "properties": {
        "label": {
         "maxLength": 120,
         "minLength": 1,
         "type": "string"
-       },
-       "type": {
-        "enum": [
-         "text",
-         "rich_text",
-         "number",
-         "money",
-         "percent",
-         "rating",
-         "duration",
-         "status",
-         "tags",
-         "person",
-         "date",
-         "timeline",
-         "checkbox",
-         "link",
-         "email",
-         "phone",
-         "files",
-         "address",
-         "connect",
-         "mirror",
-         "rollup",
-         "formula",
-         "button",
-         "created",
-         "updated",
-         "created_by",
-         "updated_by",
-         "autonumber"
-        ]
        }
       },
       "type": "object"
