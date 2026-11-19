@@ -17129,8 +17129,7 @@
       "minimum": 1,
       "type": "integer"
      },
-     "saphionProjectRef": {
-      "pattern": "^(?:project_|epl_).+",
+     "project_continuation_ref": {
       "type": "string"
      },
      "since": {
@@ -17140,8 +17139,8 @@
      }
     },
     "required": [
-     "since",
-     "saphionProjectRef"
+     "project_continuation_ref",
+     "since"
     ],
     "type": "object"
    }
@@ -17184,8 +17183,7 @@
    "schema": {
     "additionalProperties": false,
     "properties": {
-     "saphionProjectRef": {
-      "pattern": "^(?:project_|epl_).+",
+     "project_continuation_ref": {
       "type": "string"
      },
      "ticketNumber": {
@@ -17194,8 +17192,8 @@
      }
     },
     "required": [
-     "ticketNumber",
-     "saphionProjectRef"
+     "project_continuation_ref",
+     "ticketNumber"
     ],
     "type": "object"
    }
@@ -17275,13 +17273,12 @@
       "minItems": 1,
       "type": "array"
      },
+     "project_continuation_ref": {
+      "type": "string"
+     },
      "query": {
       "maxLength": 500,
       "minLength": 1,
-      "type": "string"
-     },
-     "saphionProjectRef": {
-      "pattern": "^(?:project_|epl_).+",
       "type": "string"
      },
      "statuses": {
@@ -17302,7 +17299,7 @@
      }
     },
     "required": [
-     "saphionProjectRef"
+     "project_continuation_ref"
     ],
     "type": "object"
    }
@@ -18440,26 +18437,6 @@
        "properties": {
         "look": {
          "enum": [
-          "projects",
-          "folder_locations"
-         ]
-        }
-       },
-       "required": [
-        "look"
-       ]
-      },
-      "then": {
-       "required": [
-        "continuation_ref"
-       ]
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "look": {
-         "enum": [
           "folders"
          ]
         }
@@ -18598,8 +18575,7 @@
       "format": "date",
       "type": "string"
      },
-     "saphionProjectRef": {
-      "pattern": "^(?:project_|epl_).+",
+     "project_continuation_ref": {
       "type": "string"
      },
      "toDateExclusive": {
@@ -18608,7 +18584,7 @@
      }
     },
     "required": [
-     "saphionProjectRef"
+     "project_continuation_ref"
     ],
     "type": "object"
    }
@@ -18781,13 +18757,12 @@
       "minimum": 1,
       "type": "integer"
      },
+     "project_continuation_ref": {
+      "type": "string"
+     },
      "purchaseOrderNumber": {
       "maxLength": 200,
       "minLength": 1,
-      "type": "string"
-     },
-     "saphionProjectRef": {
-      "pattern": "^(?:project_|epl_).+",
       "type": "string"
      },
      "sortAscending": {
@@ -18821,7 +18796,7 @@
      }
     },
     "required": [
-     "saphionProjectRef"
+     "project_continuation_ref"
     ],
     "type": "object"
    }
