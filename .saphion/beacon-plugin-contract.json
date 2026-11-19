@@ -20095,11 +20095,6 @@
    "schema": {
     "additionalProperties": false,
     "properties": {
-     "deliveryAddress": {
-      "maxLength": 200,
-      "minLength": 1,
-      "type": "string"
-     },
      "deliveryDate": {
       "format": "date",
       "type": "string"
@@ -20141,11 +20136,6 @@
      },
      "requestDescription": {
       "maxLength": 2000,
-      "minLength": 1,
-      "type": "string"
-     },
-     "siteContact": {
-      "maxLength": 200,
       "minLength": 1,
       "type": "string"
      },
