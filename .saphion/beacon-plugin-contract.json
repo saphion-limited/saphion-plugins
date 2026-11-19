@@ -12819,13 +12819,6 @@
      ]
     },
     "properties": {
-     "attachmentFileRefs": {
-      "items": {
-       "type": "string"
-      },
-      "maxItems": 10,
-      "type": "array"
-     },
      "bcc": {
       "items": {
        "maxLength": 320,
@@ -12856,6 +12849,13 @@
       "maxLength": 240,
       "minLength": 1,
       "type": "string"
+     },
+     "file_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 10,
+      "type": "array"
      },
      "mailboxId": {
       "default": "",
@@ -12940,13 +12940,6 @@
    "schema": {
     "additionalProperties": false,
     "properties": {
-     "attachmentFileRefs": {
-      "items": {
-       "type": "string"
-      },
-      "maxItems": 10,
-      "type": "array"
-     },
      "comment": {
       "default": "",
       "maxLength": 100000,
@@ -12959,6 +12952,13 @@
       "maxLength": 240,
       "minLength": 1,
       "type": "string"
+     },
+     "file_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 10,
+      "type": "array"
      },
      "project_continuation_ref": {
       "type": "string"
@@ -13407,13 +13407,6 @@
    "schema": {
     "additionalProperties": false,
     "properties": {
-     "attachmentFileRefs": {
-      "items": {
-       "type": "string"
-      },
-      "maxItems": 10,
-      "type": "array"
-     },
      "bcc": {
       "items": {
        "maxLength": 320,
@@ -13449,6 +13442,13 @@
       "maxLength": 240,
       "minLength": 1,
       "type": "string"
+     },
+     "file_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 10,
+      "type": "array"
      },
      "project_continuation_ref": {
       "type": "string"
@@ -13610,9 +13610,7 @@
       "pattern": "^[^\\\\/:*?\"<>|]+$",
       "type": "string"
      },
-     "fileRef": {
-      "maxLength": 512,
-      "minLength": 1,
+     "file_continuation_ref": {
       "type": "string"
      },
      "folder_ref": {
@@ -13624,7 +13622,7 @@
     },
     "required": [
      "folder_ref",
-     "fileRef"
+     "file_continuation_ref"
     ],
     "type": "object"
    }
@@ -13669,9 +13667,7 @@
       "minLength": 1,
       "type": "string"
      },
-     "fileRef": {
-      "maxLength": 512,
-      "minLength": 1,
+     "file_continuation_ref": {
       "type": "string"
      },
      "project_continuation_ref": {
@@ -13680,7 +13676,7 @@
     },
     "required": [
      "continuation_ref",
-     "fileRef"
+     "file_continuation_ref"
     ],
     "type": "object"
    }
@@ -24625,8 +24621,7 @@
          "properties": {
           "view": {
            "enum": [
-            "list",
-            "requests"
+            "list"
            ]
           }
          },
@@ -24652,6 +24647,53 @@
         }
        }
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "view": {
+         "enum": [
+          "requests"
+         ]
+        }
+       },
+       "required": [
+        "view"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "not": {
+         "enum": [
+          "category",
+          "project_continuation_ref"
+         ]
+        }
+       }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "view": {
+         "enum": [
+          "notifications"
+         ]
+        }
+       },
+       "required": [
+        "view"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "not": {
+         "enum": [
+          "project_continuation_ref"
+         ]
+        }
+       }
+      }
      }
     ],
     "properties": {
@@ -24662,6 +24704,9 @@
        "comment",
        "update"
       ],
+      "type": "string"
+     },
+     "project_continuation_ref": {
       "type": "string"
      },
      "view": {
