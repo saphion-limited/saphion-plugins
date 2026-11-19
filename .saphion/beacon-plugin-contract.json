@@ -18999,8 +18999,13 @@
      "continuation_ref": {
       "type": "string"
      },
-     "description": {
+     "creditNoteDescription": {
       "maxLength": 2000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
       "minLength": 1,
       "type": "string"
      },
@@ -19229,12 +19234,17 @@
       ]
      },
      "description": {
-      "maxLength": 4000,
+      "maxLength": 240,
       "minLength": 1,
       "type": "string"
      },
      "diaryDate": {
       "format": "date",
+      "type": "string"
+     },
+     "entryDescription": {
+      "maxLength": 4000,
+      "minLength": 1,
       "type": "string"
      },
      "project_continuation_ref": {
@@ -19274,7 +19284,7 @@
     "required": [
      "project_continuation_ref",
      "diaryDate",
-     "description"
+     "entryDescription"
     ],
     "type": "object"
    }
@@ -19293,7 +19303,7 @@
       "type": "string"
      },
      "description": {
-      "maxLength": 2000,
+      "maxLength": 240,
       "minLength": 1,
       "type": "string"
      },
@@ -19304,6 +19314,11 @@
      },
      "representing": {
       "maxLength": 500,
+      "minLength": 1,
+      "type": "string"
+     },
+     "visitDescription": {
+      "maxLength": 2000,
       "minLength": 1,
       "type": "string"
      },
@@ -19339,7 +19354,7 @@
       "type": "string"
      },
      "description": {
-      "maxLength": 2000,
+      "maxLength": 240,
       "minLength": 1,
       "type": "string"
      },
@@ -19367,6 +19382,11 @@
      },
      "reason": {
       "maxLength": 1000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "receiptDescription": {
+      "maxLength": 2000,
       "minLength": 1,
       "type": "string"
      },
@@ -19743,7 +19763,7 @@
       "type": "string"
      },
      "description": {
-      "maxLength": 2000,
+      "maxLength": 240,
       "minLength": 1,
       "type": "string"
      },
@@ -19779,6 +19799,11 @@
       "maxItems": 50,
       "minItems": 1,
       "type": "array"
+     },
+     "orderDescription": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "type": "string"
      },
      "reason": {
       "maxLength": 1000,
@@ -20052,7 +20077,7 @@
       "type": "string"
      },
      "description": {
-      "maxLength": 2000,
+      "maxLength": 240,
       "minLength": 1,
       "type": "string"
      },
@@ -20076,6 +20101,11 @@
      },
      "reason": {
       "maxLength": 1000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "variationDescription": {
+      "maxLength": 2000,
       "minLength": 1,
       "type": "string"
      }
@@ -20170,7 +20200,7 @@
       "type": "string"
      },
      "description": {
-      "maxLength": 2000,
+      "maxLength": 240,
       "minLength": 1,
       "type": "string"
      },
@@ -20199,11 +20229,16 @@
       "maxLength": 1000,
       "minLength": 1,
       "type": "string"
+     },
+     "variationDescription": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "type": "string"
      }
     },
     "required": [
      "project_continuation_ref",
-     "description",
+     "variationDescription",
      "rate",
      "quantity",
      "adds",
