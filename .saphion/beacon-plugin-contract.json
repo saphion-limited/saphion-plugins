@@ -13488,7 +13488,7 @@
      {
       "not": {
        "required": [
-        "saphionFolderRef"
+        "folder_link_continuation_ref"
        ]
       },
       "required": []
@@ -13509,7 +13509,7 @@
        ]
       },
       "required": [
-       "saphionFolderRef"
+       "folder_link_continuation_ref"
       ]
      }
     ],
@@ -13517,8 +13517,7 @@
      "continuation_ref": {
       "type": "string"
      },
-     "saphionFolderRef": {
-      "pattern": "^efl_.+",
+     "folder_link_continuation_ref": {
       "type": "string"
      }
     },
