@@ -19307,6 +19307,81 @@
     "type": "object"
    }
   },
+  "projectprobe_diary_visitor_amend": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "reason": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "representing": {
+      "maxLength": 500,
+      "minLength": 1,
+      "type": "string"
+     },
+     "visitDescription": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "visitors": {
+      "maxLength": 500,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_diary_visitor_remove": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "reason": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "projectprobe_eligible_budget_costs": {
    "choices": {},
    "doors": [
