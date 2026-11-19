@@ -19266,6 +19266,70 @@
     "type": "object"
    }
   },
+  "projectprobe_goods_receipt_record": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "deliveryDate": {
+      "format": "date",
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "lines": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "line_ref": {
+         "type": "string"
+        },
+        "quantityDelivered": {
+         "exclusiveMinimum": 0,
+         "type": "number"
+        }
+       },
+       "required": [
+        "line_ref",
+        "quantityDelivered"
+       ],
+       "type": "object"
+      },
+      "maxItems": 50,
+      "minItems": 1,
+      "type": "array"
+     },
+     "reason": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "ticketNumber": {
+      "maxLength": 100,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref",
+     "deliveryDate",
+     "lines",
+     "reason"
+    ],
+    "type": "object"
+   }
+  },
   "projectprobe_payment_certificate_approve": {
    "choices": {},
    "doors": [
@@ -19589,6 +19653,79 @@
       "type": "string"
      }
     },
+    "type": "object"
+   }
+  },
+  "projectprobe_purchase_order_amend": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "deliveryDate": {
+      "format": "date",
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "items": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "deleted": {
+         "type": "boolean"
+        },
+        "description": {
+         "maxLength": 2000,
+         "minLength": 1,
+         "type": "string"
+        },
+        "line_ref": {
+         "type": "string"
+        },
+        "quantityRequired": {
+         "exclusiveMinimum": 0,
+         "type": "number"
+        },
+        "rate": {
+         "minimum": 0,
+         "type": "number"
+        }
+       },
+       "required": [
+        "line_ref"
+       ],
+       "type": "object"
+      },
+      "maxItems": 50,
+      "minItems": 1,
+      "type": "array"
+     },
+     "reason": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "siteDeliveryRestrictions": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref",
+     "reason"
+    ],
     "type": "object"
    }
   },
