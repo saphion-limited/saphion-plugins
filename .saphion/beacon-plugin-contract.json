@@ -18445,13 +18445,6 @@
        ]
       },
       "then": {
-       "propertyNames": {
-        "not": {
-         "enum": [
-          "search"
-         ]
-        }
-       },
        "required": [
         "continuation_ref"
        ]
