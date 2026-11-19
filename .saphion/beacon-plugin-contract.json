@@ -12966,6 +12966,11 @@
      "replyAll": {
       "default": false,
       "type": "boolean"
+     },
+     "subject": {
+      "maxLength": 255,
+      "minLength": 1,
+      "type": "string"
      }
     },
     "required": [
@@ -19042,6 +19047,11 @@
       "minimum": 1,
       "type": "integer"
      },
+     "search": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
      "toDateExclusive": {
       "format": "date",
       "type": "string"
@@ -19093,6 +19103,26 @@
     },
     "required": [
      "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_project_subcontractors": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "project_continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "project_continuation_ref"
     ],
     "type": "object"
    }
