@@ -20009,6 +20009,9 @@
       "minLength": 1,
       "type": "string"
      },
+     "delivery_address_ref": {
+      "type": "string"
+     },
      "description": {
       "maxLength": 240,
       "minLength": 1,
@@ -20044,6 +20047,9 @@
      "siteContact": {
       "maxLength": 200,
       "minLength": 1,
+      "type": "string"
+     },
+     "site_contact_ref": {
       "type": "string"
      }
     },
