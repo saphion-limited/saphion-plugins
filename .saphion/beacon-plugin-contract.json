@@ -18896,6 +18896,70 @@
     "type": "object"
    }
   },
+  "projectprobe_deliveries_search": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "pageNumber": {
+      "minimum": 1,
+      "type": "integer"
+     },
+     "pageSize": {
+      "maximum": 200,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "search": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "project_continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_payment_certificate_approve": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "reason": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "projectprobe_payment_certificate_read": {
    "choices": {},
    "doors": [
