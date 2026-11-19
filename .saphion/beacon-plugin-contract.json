@@ -19652,6 +19652,14 @@
      "Opportunity",
      "Project",
      "Tender"
+    ],
+    "sortField": [
+     "ClientName",
+     "EstimatedCompletionDate",
+     "EstimatedStartDate",
+     "Name",
+     "ProjectNumber",
+     "RegionName"
     ]
    },
    "doors": [
@@ -19703,8 +19711,14 @@
       "type": "boolean"
      },
      "sortField": {
-      "maxLength": 200,
-      "minLength": 1,
+      "enum": [
+       "Name",
+       "ProjectNumber",
+       "RegionName",
+       "ClientName",
+       "EstimatedStartDate",
+       "EstimatedCompletionDate"
+      ],
       "type": "string"
      }
     },
@@ -19820,8 +19834,23 @@
   },
   "projectprobe_purchase_orders_search": {
    "choices": {
+    "sortField": [
+     "Active",
+     "CostCentreName",
+     "CreatedByName",
+     "CreatedOn",
+     "DeliveredTotal",
+     "DeliveryDate",
+     "OutstandingTotal",
+     "ProjectName",
+     "PurchaseOrderNumber",
+     "SupplierName",
+     "Total",
+     "WorkGroupName"
+    ],
     "status": [
      "Archived",
+     "CreatedWithCredits",
      "Fulfilled",
      "Live",
      "LiveOrFulfilled",
@@ -19872,22 +19901,40 @@
       "minLength": 1,
       "type": "string"
      },
+     "query": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
      "sortAscending": {
       "type": "boolean"
      },
      "sortField": {
-      "maxLength": 200,
-      "minLength": 1,
+      "enum": [
+       "PurchaseOrderNumber",
+       "SupplierName",
+       "CostCentreName",
+       "WorkGroupName",
+       "Total",
+       "DeliveredTotal",
+       "OutstandingTotal",
+       "CreatedOn",
+       "DeliveryDate",
+       "ProjectName",
+       "CreatedByName",
+       "Active"
+      ],
       "type": "string"
      },
      "status": {
       "enum": [
        "Live",
-       "Fulfilled",
-       "LiveOrFulfilled",
        "SupersededOrDeleted",
+       "Fulfilled",
        "Archived",
-       "Removed"
+       "Removed",
+       "LiveOrFulfilled",
+       "CreatedWithCredits"
       ],
       "type": "string"
      },
@@ -20167,6 +20214,11 @@
   },
   "projectprobe_variations_search": {
    "choices": {
+    "approvalState": [
+     "all",
+     "approved",
+     "pending"
+    ],
     "sortField": [
      "Active",
      "Description",
@@ -20186,6 +20238,14 @@
    "schema": {
     "additionalProperties": false,
     "properties": {
+     "approvalState": {
+      "enum": [
+       "all",
+       "pending",
+       "approved"
+      ],
+      "type": "string"
+     },
      "includeInactive": {
       "type": "boolean"
      },
