@@ -19099,6 +19099,62 @@
     "type": "object"
    }
   },
+  "projectprobe_works_order_payment_cycle": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "search": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_works_orders_search": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "pageNumber": {
+      "minimum": 1,
+      "type": "integer"
+     },
+     "pageSize": {
+      "maximum": 200,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "search": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "type": "object"
+   }
+  },
   "read": {
    "choices": {
     "view": [
