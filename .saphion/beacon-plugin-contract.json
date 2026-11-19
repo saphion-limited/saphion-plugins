@@ -18984,6 +18984,26 @@
     "type": "object"
    }
   },
+  "projectprobe_credit_note_read": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "projectprobe_deliveries_search": {
    "choices": {},
    "doors": [
