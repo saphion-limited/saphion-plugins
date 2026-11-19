@@ -20060,6 +20060,31 @@
     "type": "object"
    }
   },
+  "projectprobe_purchase_request_issue": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "projectprobe_purchase_request_submit": {
    "choices": {},
    "doors": [
@@ -20130,6 +20155,43 @@
     },
     "required": [
      "lines"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_purchase_requests_search": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "active": {
+      "type": "boolean"
+     },
+     "pageNumber": {
+      "minimum": 1,
+      "type": "integer"
+     },
+     "pageSize": {
+      "maximum": 200,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "query": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "project_continuation_ref"
     ],
     "type": "object"
    }
