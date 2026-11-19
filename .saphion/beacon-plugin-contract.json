@@ -3961,11 +3961,11 @@
          "act",
          "description",
          "name",
-         "board_continuation_ref"
+         "board_continuation_ref",
+         "resting_template_continuation_ref"
         ]
        },
        "required": [
-        "board_continuation_ref",
         "name"
        ]
       }
