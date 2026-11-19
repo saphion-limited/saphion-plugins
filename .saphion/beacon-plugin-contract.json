@@ -24506,6 +24506,45 @@
     "type": "object"
    }
   },
+  "template_landing": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "boards",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "into_continuation_ref": {
+      "type": "string"
+     },
+     "rows_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 2000,
+      "type": "array"
+     },
+     "start_on": {
+      "default": "",
+      "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$",
+      "type": "string"
+     },
+     "template_continuation_ref": {
+      "type": "string"
+     },
+     "whole_template": {
+      "default": false,
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "template_continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "template_list": {
    "choices": {},
    "doors": [
