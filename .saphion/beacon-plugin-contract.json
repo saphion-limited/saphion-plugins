@@ -19307,6 +19307,40 @@
     "type": "object"
    }
   },
+  "projectprobe_eligible_budget_costs": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "pageNumber": {
+      "minimum": 1,
+      "type": "integer"
+     },
+     "pageSize": {
+      "maximum": 200,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "query": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "project_continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "projectprobe_goods_receipt_record": {
    "choices": {},
    "doors": [
@@ -19947,6 +19981,74 @@
     },
     "required": [
      "project_continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_purchase_request_submit": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "deliveryAddress": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
+     "deliveryDate": {
+      "format": "date",
+      "type": "string"
+     },
+     "deliveryRestrictions": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "lines": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "cost_ref": {
+         "type": "string"
+        },
+        "quantity": {
+         "exclusiveMinimum": 0,
+         "type": "number"
+        }
+       },
+       "required": [
+        "cost_ref",
+        "quantity"
+       ],
+       "type": "object"
+      },
+      "maxItems": 50,
+      "minItems": 1,
+      "type": "array"
+     },
+     "requestDescription": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "siteContact": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "lines"
     ],
     "type": "object"
    }
