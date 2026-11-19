@@ -3975,11 +3975,7 @@
        "properties": {
         "act": {
          "enum": [
-          "duplicate",
-          "baseline",
-          "delete",
-          "archive",
-          "restore"
+          "duplicate"
          ]
         }
        },
@@ -3992,12 +3988,10 @@
         "enum": [
          "act",
          "description",
-         "board_continuation_ref"
+         "board_continuation_ref",
+         "resting_template_continuation_ref"
         ]
-       },
-       "required": [
-        "board_continuation_ref"
-       ]
+       }
       }
      },
      {
@@ -4055,6 +4049,35 @@
        "required": [
         "board_continuation_ref",
         "record_continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "baseline",
+          "delete",
+          "archive",
+          "restore"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "board_continuation_ref"
+        ]
+       },
+       "required": [
+        "board_continuation_ref"
        ]
       }
      },
