@@ -17539,6 +17539,9 @@
       "minLength": 1,
       "type": "string"
      },
+     "mine": {
+      "type": "boolean"
+     },
      "overdue": {
       "type": "boolean"
      },
@@ -18851,6 +18854,43 @@
     "type": "object"
    }
   },
+  "projectprobe_budget_costs": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "pageNumber": {
+      "minimum": 1,
+      "type": "integer"
+     },
+     "pageSize": {
+      "maximum": 200,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "search": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
+     "variationsOnly": {
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "projectprobe_payment_certificate_read": {
    "choices": {},
    "doors": [
@@ -18905,6 +18945,26 @@
       "type": "string"
      }
     },
+    "type": "object"
+   }
+  },
+  "projectprobe_project_budgets": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "project_continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "project_continuation_ref"
+    ],
     "type": "object"
    }
   },
@@ -19102,6 +19162,40 @@
     "type": "object"
    }
   },
+  "projectprobe_purchase_order_read": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "pageNumber": {
+      "minimum": 1,
+      "type": "integer"
+     },
+     "pageSize": {
+      "maximum": 200,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "search": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "projectprobe_purchase_orders_search": {
    "choices": {
     "status": [
@@ -19189,6 +19283,78 @@
     "required": [
      "project_continuation_ref"
     ],
+    "type": "object"
+   }
+  },
+  "projectprobe_supplier_approval_history": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_suppliers_search": {
+   "choices": {
+    "category": [
+     "AgencyOperative",
+     "Client",
+     "Consultant",
+     "LabourOnlySubcontractor",
+     "MainContractor",
+     "Other",
+     "Subcontractor",
+     "Supplier"
+    ]
+   },
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "category": {
+      "enum": [
+       "Client",
+       "Subcontractor",
+       "MainContractor",
+       "Supplier",
+       "LabourOnlySubcontractor",
+       "Consultant",
+       "Other",
+       "AgencyOperative"
+      ],
+      "type": "string"
+     },
+     "pageNumber": {
+      "minimum": 1,
+      "type": "integer"
+     },
+     "pageSize": {
+      "maximum": 200,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "search": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
     "type": "object"
    }
   },
