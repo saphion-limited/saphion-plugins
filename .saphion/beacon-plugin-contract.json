@@ -13603,6 +13603,10 @@
      "continuation_ref": {
       "type": "string"
      },
+     "foldersOnly": {
+      "default": false,
+      "type": "boolean"
+     },
      "query": {
       "maxLength": 200,
       "minLength": 1,
