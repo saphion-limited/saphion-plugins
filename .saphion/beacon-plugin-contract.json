@@ -15314,48 +15314,6 @@
     "type": "object"
    }
   },
-  "organisation_record_archive_or_bin": {
-   "choices": {
-    "act": [
-     "archive",
-     "delete"
-    ]
-   },
-   "doors": [
-    "beacon"
-   ],
-   "family": "organisation_records",
-   "schema": {
-    "additionalProperties": false,
-    "properties": {
-     "act": {
-      "enum": [
-       "archive",
-       "delete"
-      ],
-      "type": "string"
-     },
-     "description": {
-      "maxLength": 240,
-      "minLength": 1,
-      "type": "string"
-     },
-     "record_continuation_refs": {
-      "items": {
-       "type": "string"
-      },
-      "maxItems": 200,
-      "minItems": 1,
-      "type": "array"
-     }
-    },
-    "required": [
-     "act",
-     "record_continuation_refs"
-    ],
-    "type": "object"
-   }
-  },
   "organisation_record_read": {
    "choices": {},
    "doors": [
@@ -18921,6 +18879,7 @@
   "record_change": {
    "choices": {
     "act": [
+     "archive",
      "attach_email",
      "choose_company",
      "create",
@@ -19080,6 +19039,7 @@
          "enum": [
           "restore",
           "void",
+          "archive",
           "delete"
          ]
         }
@@ -19390,6 +19350,7 @@
        "update",
        "restore",
        "void",
+       "archive",
        "delete",
        "move_dependent_dates",
        "choose_company",
@@ -20370,6 +20331,44 @@
             ]
            }
           }
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "action": {
+            "enum": [
+             "choice_update"
+            ]
+           }
+          },
+          "required": [
+           "action"
+          ]
+         },
+         "then": {
+          "anyOf": [
+           {
+            "required": [
+             "category"
+            ]
+           },
+           {
+            "required": [
+             "meaning"
+            ]
+           },
+           {
+            "required": [
+             "probability"
+            ]
+           },
+           {
+            "required": [
+             "forecast"
+            ]
+           }
+          ]
          }
         },
         {
@@ -23132,6 +23131,28 @@
            ]
           }
          ]
+        },
+        {
+         "if": {
+          "properties": {
+           "role": {
+            "enum": [
+             "contributor",
+             "viewer"
+            ]
+           }
+          },
+          "required": [
+           "role"
+          ]
+         },
+         "then": {
+          "properties": {
+           "capabilities": {
+            "maxItems": 0
+           }
+          }
+         }
         }
        ],
        "propertyNames": {
