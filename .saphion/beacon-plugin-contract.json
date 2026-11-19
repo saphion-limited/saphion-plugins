@@ -17216,7 +17216,7 @@
       "minimum": 1,
       "type": "integer"
      },
-     "search": {
+     "query": {
       "maxLength": 500,
       "minLength": 1,
       "type": "string"
@@ -18805,7 +18805,7 @@
        "propertyNames": {
         "not": {
          "enum": [
-          "search"
+          "query"
          ]
         }
        }
@@ -18847,7 +18847,7 @@
      "project_continuation_ref": {
       "type": "string"
      },
-     "search": {
+     "query": {
       "maxLength": 120,
       "type": "string"
      }
@@ -18954,7 +18954,7 @@
       "minimum": 1,
       "type": "integer"
      },
-     "search": {
+     "query": {
       "maxLength": 200,
       "minLength": 1,
       "type": "string"
@@ -19011,7 +19011,7 @@
      "project_continuation_ref": {
       "type": "string"
      },
-     "search": {
+     "query": {
       "maxLength": 200,
       "minLength": 1,
       "type": "string"
@@ -19344,7 +19344,7 @@
      "project_continuation_ref": {
       "type": "string"
      },
-     "search": {
+     "query": {
       "maxLength": 200,
       "minLength": 1,
       "type": "string"
@@ -19447,7 +19447,7 @@
       "minimum": 1,
       "type": "integer"
      },
-     "search": {
+     "query": {
       "maxLength": 200,
       "minLength": 1,
       "type": "string"
@@ -19561,11 +19561,6 @@
       "minLength": 1,
       "type": "string"
      },
-     "name": {
-      "maxLength": 200,
-      "minLength": 1,
-      "type": "string"
-     },
      "pageNumber": {
       "minimum": 1,
       "type": "integer"
@@ -19576,6 +19571,11 @@
       "type": "integer"
      },
      "projectNumber": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
+     "query": {
       "maxLength": 200,
       "minLength": 1,
       "type": "string"
@@ -19614,7 +19614,7 @@
       "minimum": 1,
       "type": "integer"
      },
-     "search": {
+     "query": {
       "maxLength": 200,
       "minLength": 1,
       "type": "string"
@@ -19779,7 +19779,7 @@
       "minimum": 1,
       "type": "integer"
      },
-     "search": {
+     "query": {
       "maxLength": 200,
       "minLength": 1,
       "type": "string"
@@ -20009,7 +20009,7 @@
      "project_continuation_ref": {
       "type": "string"
      },
-     "search": {
+     "query": {
       "maxLength": 200,
       "minLength": 1,
       "type": "string"
@@ -20047,7 +20047,7 @@
      "continuation_ref": {
       "type": "string"
      },
-     "search": {
+     "query": {
       "maxLength": 200,
       "minLength": 1,
       "type": "string"
@@ -20081,7 +20081,7 @@
      "project_continuation_ref": {
       "type": "string"
      },
-     "search": {
+     "query": {
       "maxLength": 200,
       "minLength": 1,
       "type": "string"
