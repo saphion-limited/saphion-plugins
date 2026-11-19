@@ -18852,9 +18852,6 @@
       "type": "string"
      }
     },
-    "required": [
-     "look"
-    ],
     "type": "object"
    }
   },
@@ -18985,6 +18982,64 @@
     },
     "required": [
      "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_credit_note_record": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "lines": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "description": {
+         "maxLength": 2000,
+         "minLength": 1,
+         "type": "string"
+        },
+        "line_ref": {
+         "type": "string"
+        },
+        "quantity": {
+         "exclusiveMinimum": 0,
+         "type": "number"
+        },
+        "rate": {
+         "exclusiveMinimum": 0,
+         "type": "number"
+        }
+       },
+       "required": [
+        "line_ref",
+        "quantity",
+        "rate"
+       ],
+       "type": "object"
+      },
+      "maxItems": 25,
+      "minItems": 1,
+      "type": "array"
+     }
+    },
+    "required": [
+     "continuation_ref",
+     "lines"
     ],
     "type": "object"
    }
