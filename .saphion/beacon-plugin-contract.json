@@ -19038,6 +19038,249 @@
     "type": "object"
    }
   },
+  "projectprobe_diary_entry_write": {
+   "choices": {
+    "accidents": [
+     "No",
+     "NotApplicable",
+     "Yes"
+    ],
+    "agency": [
+     "No",
+     "NotApplicable",
+     "Yes"
+    ],
+    "daysWork": [
+     "No",
+     "NotApplicable",
+     "Yes"
+    ],
+    "events": [
+     "No",
+     "NotApplicable",
+     "Yes"
+    ],
+    "invoices": [
+     "No",
+     "NotApplicable",
+     "Yes"
+    ],
+    "permit": [
+     "No",
+     "NotApplicable",
+     "Yes"
+    ],
+    "plant": [
+     "No",
+     "NotApplicable",
+     "Yes"
+    ],
+    "qcqa": [
+     "No",
+     "NotApplicable",
+     "Yes"
+    ],
+    "registers": [
+     "No",
+     "NotApplicable",
+     "Yes"
+    ],
+    "toolbox": [
+     "No",
+     "NotApplicable",
+     "Yes"
+    ]
+   },
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "checks": {
+      "additionalProperties": false,
+      "properties": {
+       "accidents": {
+        "enum": [
+         "Yes",
+         "No",
+         "NotApplicable"
+        ],
+        "type": "string"
+       },
+       "agency": {
+        "enum": [
+         "Yes",
+         "No",
+         "NotApplicable"
+        ],
+        "type": "string"
+       },
+       "daysWork": {
+        "enum": [
+         "Yes",
+         "No",
+         "NotApplicable"
+        ],
+        "type": "string"
+       },
+       "events": {
+        "enum": [
+         "Yes",
+         "No",
+         "NotApplicable"
+        ],
+        "type": "string"
+       },
+       "invoices": {
+        "enum": [
+         "Yes",
+         "No",
+         "NotApplicable"
+        ],
+        "type": "string"
+       },
+       "permit": {
+        "enum": [
+         "Yes",
+         "No",
+         "NotApplicable"
+        ],
+        "type": "string"
+       },
+       "plant": {
+        "enum": [
+         "Yes",
+         "No",
+         "NotApplicable"
+        ],
+        "type": "string"
+       },
+       "qcqa": {
+        "enum": [
+         "Yes",
+         "No",
+         "NotApplicable"
+        ],
+        "type": "string"
+       },
+       "registers": {
+        "enum": [
+         "Yes",
+         "No",
+         "NotApplicable"
+        ],
+        "type": "string"
+       },
+       "toolbox": {
+        "enum": [
+         "Yes",
+         "No",
+         "NotApplicable"
+        ],
+        "type": "string"
+       }
+      },
+      "type": [
+       "object",
+       "null"
+      ]
+     },
+     "description": {
+      "maxLength": 4000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "diaryDate": {
+      "format": "date",
+      "type": "string"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "reason": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "siteConditionsAm": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
+     "siteConditionsPm": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
+     "temperatureAm": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
+     "temperaturePm": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
+     "workInProgress": {
+      "maxLength": 4000,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "project_continuation_ref",
+     "diaryDate",
+     "description"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_diary_visitor_add": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "reason": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "representing": {
+      "maxLength": 500,
+      "minLength": 1,
+      "type": "string"
+     },
+     "visitors": {
+      "maxLength": 500,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref",
+     "visitors",
+     "representing"
+    ],
+    "type": "object"
+   }
+  },
   "projectprobe_payment_certificate_approve": {
    "choices": {},
    "doors": [
