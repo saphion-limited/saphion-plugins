@@ -23899,6 +23899,26 @@
     "type": "object"
    }
   },
+  "resource_export_job_read": {
+   "choices": {},
+   "doors": [
+    "routed"
+   ],
+   "family": "visualisations",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "role_change": {
    "choices": {
     "access_level": [
