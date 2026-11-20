@@ -4194,6 +4194,7 @@
          "description",
          "start_on",
          "rows_continuation_refs",
+         "assignees",
          "template_continuation_ref",
          "into_continuation_ref",
          "whole_template"
@@ -4331,6 +4332,30 @@
        "remove"
       ],
       "type": "string"
+     },
+     "assignees": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "person_continuation_ref": {
+         "maxLength": 2048,
+         "minLength": 1,
+         "type": "string"
+        },
+        "row_continuation_ref": {
+         "maxLength": 2048,
+         "minLength": 1,
+         "type": "string"
+        }
+       },
+       "required": [
+        "row_continuation_ref",
+        "person_continuation_ref"
+       ],
+       "type": "object"
+      },
+      "maxItems": 2000,
+      "type": "array"
      },
      "board_continuation_ref": {
       "type": "string"
