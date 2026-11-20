@@ -16728,6 +16728,10 @@
      "add",
      "remove",
      "set"
+    ],
+    "preset": [
+     "leadership",
+     "people-admin"
     ]
    },
    "doors": [
@@ -16757,14 +16761,13 @@
          "description",
          "name",
          "about",
-         "base_continuation_ref",
+         "preset",
          "powers",
          "holder_people_continuation_refs",
          "holder_teams_continuation_refs"
         ]
        },
        "required": [
-        "base_continuation_ref",
         "name"
        ]
       }
@@ -16978,9 +16981,6 @@
       ],
       "type": "string"
      },
-     "base_continuation_ref": {
-      "type": "string"
-     },
      "description": {
       "maxLength": 240,
       "minLength": 1,
@@ -17060,6 +17060,13 @@
       },
       "maxItems": 80,
       "type": "array"
+     },
+     "preset": {
+      "enum": [
+       "leadership",
+       "people-admin"
+      ],
+      "type": "string"
      },
      "token": {
       "maxLength": 128,
