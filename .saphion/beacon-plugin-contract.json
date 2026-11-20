@@ -9618,6 +9618,10 @@
      }
     ],
     "properties": {
+     "apps": {
+      "default": false,
+      "type": "boolean"
+     },
      "project_continuation_ref": {
       "type": "string"
      },
@@ -10076,6 +10080,7 @@
     "kind": [
      "all",
      "any",
+     "app",
      "archive",
      "automation",
      "bin",
@@ -10574,6 +10579,7 @@
      "kind": {
       "enum": [
        "any",
+       "app",
        "archive",
        "automation",
        "bin",
