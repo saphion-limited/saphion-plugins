@@ -21458,6 +21458,10 @@
          "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$",
          "type": "string"
         },
+        "expected_sub_actions": {
+         "minimum": 1,
+         "type": "integer"
+        },
         "selection_continuation_ref": {
          "minLength": 1,
          "type": "string"
