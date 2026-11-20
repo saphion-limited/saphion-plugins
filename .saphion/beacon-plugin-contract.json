@@ -11857,10 +11857,12 @@
     "act": [
      "account_type",
      "deactivate",
+     "details",
      "notetaker_minutes",
      "reactivate",
      "remove",
      "seat_level",
+     "send_password_reset",
      "working_hours"
     ],
     "day": [
@@ -11871,6 +11873,12 @@
      "thursday",
      "tuesday",
      "wednesday"
+    ],
+    "field": [
+     "full_name",
+     "job_title",
+     "mobile",
+     "photo"
     ],
     "level": [
      "max",
@@ -11952,7 +11960,8 @@
         "act": {
          "enum": [
           "reactivate",
-          "remove"
+          "remove",
+          "send_password_reset"
          ]
         }
        },
@@ -12034,6 +12043,37 @@
        "properties": {
         "act": {
          "enum": [
+          "details"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "person_continuation_ref",
+         "field",
+         "value",
+         "photo_continuation_ref",
+         "remove_photo"
+        ]
+       },
+       "required": [
+        "person_continuation_ref",
+        "field"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
           "working_hours"
          ]
         }
@@ -12074,6 +12114,8 @@
        "remove",
        "seat_level",
        "notetaker_minutes",
+       "details",
+       "send_password_reset",
        "working_hours"
       ],
       "type": "string"
@@ -12084,6 +12126,15 @@
      "description": {
       "maxLength": 240,
       "minLength": 1,
+      "type": "string"
+     },
+     "field": {
+      "enum": [
+       "full_name",
+       "mobile",
+       "job_title",
+       "photo"
+      ],
       "type": "string"
      },
      "holdings_successor_continuation_ref": {
@@ -12107,8 +12158,15 @@
      "person_continuation_ref": {
       "type": "string"
      },
+     "photo_continuation_ref": {
+      "type": "string"
+     },
      "projects_successor_continuation_ref": {
       "type": "string"
+     },
+     "remove_photo": {
+      "default": false,
+      "type": "boolean"
      },
      "repeats_successor_continuation_ref": {
       "type": "string"
@@ -12117,6 +12175,10 @@
       "type": "string"
      },
      "teams_successor_continuation_ref": {
+      "type": "string"
+     },
+     "value": {
+      "maxLength": 200,
       "type": "string"
      },
      "working_week": {
