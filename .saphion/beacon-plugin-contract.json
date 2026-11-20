@@ -4047,32 +4047,16 @@
        ]
       },
       "then": {
-       "allOf": [
-        {
-         "oneOf": [
-          {
-           "required": [
-            "board_continuation_ref"
-           ]
-          },
-          {
-           "required": [
-            "resting_template_continuation_ref"
-           ]
-          }
-         ]
-        }
-       ],
        "propertyNames": {
         "enum": [
          "act",
          "description",
          "name",
-         "board_continuation_ref",
-         "resting_template_continuation_ref"
+         "target_continuation_ref"
         ]
        },
        "required": [
+        "target_continuation_ref",
         "name"
        ]
       }
@@ -4091,30 +4075,16 @@
        ]
       },
       "then": {
-       "allOf": [
-        {
-         "oneOf": [
-          {
-           "required": [
-            "board_continuation_ref"
-           ]
-          },
-          {
-           "required": [
-            "resting_template_continuation_ref"
-           ]
-          }
-         ]
-        }
-       ],
        "propertyNames": {
         "enum": [
          "act",
          "description",
-         "board_continuation_ref",
-         "resting_template_continuation_ref"
+         "target_continuation_ref"
         ]
-       }
+       },
+       "required": [
+        "target_continuation_ref"
+       ]
       }
      },
      {
@@ -4424,6 +4394,9 @@
      "table_name": {
       "maxLength": 120,
       "minLength": 1,
+      "type": "string"
+     },
+     "target_continuation_ref": {
       "type": "string"
      },
      "template_continuation_ref": {
@@ -15539,10 +15512,6 @@
       },
       "type": "object"
      },
-     "ConnectorId": {
-      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$",
-      "type": "string"
-     },
      "ExportDesign": {
       "additionalProperties": false,
       "properties": {
@@ -15979,7 +15948,6 @@
          "act",
          "description",
          "required",
-         "connected",
          "field_settings"
         ]
        }
@@ -16375,21 +16343,6 @@
      },
      "colour": {
       "type": "string"
-     },
-     "connected": {
-      "additionalProperties": false,
-      "properties": {
-       "actual_finish": {
-        "$ref": "#/$defs/ConnectorId"
-       },
-       "actual_start": {
-        "$ref": "#/$defs/ConnectorId"
-       }
-      },
-      "type": [
-       "object",
-       "null"
-      ]
      },
      "currency": {
       "pattern": "^(AED|AFN|ALL|AMD|AOA|ARS|AUD|AWG|AZN|BAM|BBD|BDT|BHD|BIF|BMD|BND|BOB|BOV|BRL|BSD|BTN|BWP|BYN|BZD|CAD|CDF|CHE|CHF|CHW|CLF|CLP|CNY|COP|COU|CRC|CUP|CVE|CZK|DJF|DKK|DOP|DZD|EGP|ERN|ETB|EUR|FJD|FKP|GBP|GEL|GHS|GIP|GMD|GNF|GTQ|GYD|HKD|HNL|HTG|HUF|IDR|ILS|INR|IQD|IRR|ISK|JMD|JOD|JPY|KES|KGS|KHR|KMF|KPW|KRW|KWD|KYD|KZT|LAK|LBP|LKR|LRD|LSL|LYD|MAD|MDL|MGA|MKD|MMK|MNT|MOP|MRU|MUR|MVR|MWK|MXN|MXV|MYR|MZN|NAD|NGN|NIO|NOK|NPR|NZD|OMR|PAB|PEN|PGK|PHP|PKR|PLN|PYG|QAR|RON|RSD|RUB|RWF|SAR|SBD|SCR|SDG|SEK|SGD|SHP|SLE|SOS|SRD|SSP|STN|SVC|SYP|SZL|THB|TJS|TMT|TND|TOP|TRY|TTD|TWD|TZS|UAH|UGX|USD|USN|UYI|UYU|UYW|UZS|VED|VES|VND|VUV|WST|XAD|XAF|XAG|XAU|XBA|XBB|XBC|XBD|XCD|XCG|XDR|XOF|XPD|XPF|XPT|XSU|XTS|XUA|XXX|YER|ZAR|ZMW|ZWG)$",
@@ -18835,102 +18788,111 @@
    "family": "external_connections",
    "schema": {
     "additionalProperties": false,
-    "allOf": [
-     {
-      "if": {
-       "properties": {
-        "look": {
-         "enum": [
-          "links"
-         ]
-        }
-       },
-       "required": [
-        "look"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "not": {
-         "enum": [
-          "query"
-         ]
-        }
-       }
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "look": {
-         "enum": [
-          "folders"
-         ]
-        }
-       },
-       "required": [
-        "look"
-       ]
-      },
-      "then": {
-       "required": [
-        "continuation_ref"
-       ]
-      }
-     },
-     {
-      "anyOf": [
-       {
-        "properties": {
-         "look": {
-          "not": {
-           "const": "links"
-          }
-         }
-        },
-        "required": [
-         "look"
-        ]
-       },
-       {
-        "required": [
-         "continuation_ref"
-        ]
-       },
-       {
-        "not": {
-         "required": [
-          "query"
-         ]
-        },
-        "required": [
-         "project_continuation_ref"
-        ]
-       }
-      ]
-     }
-    ],
     "properties": {
-     "continuation_ref": {
-      "type": "string"
-     },
-     "look": {
-      "enum": [
-       "links",
-       "projects",
-       "folder_locations",
-       "folders"
+     "target": {
+      "additionalProperties": false,
+      "allOf": [
+       {
+        "if": {
+         "properties": {
+          "look": {
+           "enum": [
+            "links"
+           ]
+          }
+         },
+         "required": [
+          "look"
+         ]
+        },
+        "then": {
+         "propertyNames": {
+          "not": {
+           "enum": [
+            "query",
+            "project_continuation_ref"
+           ]
+          }
+         },
+         "required": [
+          "continuation_ref"
+         ]
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "look": {
+           "enum": [
+            "folders"
+           ]
+          }
+         },
+         "required": [
+          "look"
+         ]
+        },
+        "then": {
+         "required": [
+          "continuation_ref"
+         ]
+        }
+       },
+       {
+        "else": {
+         "required": [
+          "continuation_ref"
+         ]
+        },
+        "if": {
+         "properties": {
+          "look": {
+           "enum": [
+            "links",
+            "projects",
+            "folder_locations",
+            "folders"
+           ]
+          }
+         },
+         "required": [
+          "look"
+         ]
+        },
+        "then": {}
+       }
       ],
-      "type": "string"
-     },
-     "project_continuation_ref": {
-      "type": "string"
-     },
-     "query": {
-      "maxLength": 120,
-      "type": "string"
+      "properties": {
+       "continuation_ref": {
+        "maxLength": 170,
+        "minLength": 1,
+        "type": "string"
+       },
+       "look": {
+        "enum": [
+         "links",
+         "projects",
+         "folder_locations",
+         "folders"
+        ],
+        "type": "string"
+       },
+       "project_continuation_ref": {
+        "maxLength": 170,
+        "minLength": 1,
+        "type": "string"
+       },
+       "query": {
+        "maxLength": 120,
+        "type": "string"
+       }
+      },
+      "type": "object"
      }
     },
+    "required": [
+     "target"
+    ],
     "type": "object"
    }
   },
