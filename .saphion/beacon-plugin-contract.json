@@ -4052,11 +4052,11 @@
          "act",
          "description",
          "name",
-         "target_continuation_ref"
+         "item_continuation_ref"
         ]
        },
        "required": [
-        "target_continuation_ref",
+        "item_continuation_ref",
         "name"
        ]
       }
@@ -4079,11 +4079,11 @@
         "enum": [
          "act",
          "description",
-         "target_continuation_ref"
+         "item_continuation_ref"
         ]
        },
        "required": [
-        "target_continuation_ref"
+        "item_continuation_ref"
        ]
       }
      },
@@ -4346,6 +4346,9 @@
      "into_continuation_ref": {
       "type": "string"
      },
+     "item_continuation_ref": {
+      "type": "string"
+     },
      "kept_continuation_ref": {
       "type": "string"
      },
@@ -4394,9 +4397,6 @@
      "table_name": {
       "maxLength": 120,
       "minLength": 1,
-      "type": "string"
-     },
-     "target_continuation_ref": {
       "type": "string"
      },
      "template_continuation_ref": {
