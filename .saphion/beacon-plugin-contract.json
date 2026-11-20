@@ -17773,19 +17773,29 @@
         "required": [
          "item_continuation_ref"
         ]
+       },
+       {
+        "required": [
+         "item_continuation_refs"
+        ]
        }
       ]
      },
      {
-      "else": {
-       "propertyNames": {
-        "not": {
-         "enum": [
-          "format"
-         ]
-        }
-       }
+      "if": {
+       "required": [
+        "file_continuation_ref"
+       ]
       },
+      "then": {
+       "not": {
+        "required": [
+         "format"
+        ]
+       }
+      }
+     },
+     {
       "if": {
        "required": [
         "item_continuation_ref"
@@ -17805,6 +17815,7 @@
       "type": "string"
      },
      "file_continuation_ref": {
+      "minLength": 1,
       "type": "string"
      },
      "format": {
@@ -17818,7 +17829,16 @@
       "type": "string"
      },
      "item_continuation_ref": {
+      "minLength": 1,
       "type": "string"
+     },
+     "item_continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 200,
+      "minItems": 1,
+      "type": "array"
      }
     },
     "type": "object"
