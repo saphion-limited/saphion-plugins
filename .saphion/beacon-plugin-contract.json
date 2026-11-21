@@ -3862,7 +3862,6 @@
       "type": "string"
      }
     },
-    "additionalProperties": false,
     "allOf": [
      {
       "if": {
@@ -4016,6 +4015,13 @@
          }
         }
        ],
+       "properties": {
+        "ordinal": {
+         "exclusiveMaximum": 200,
+         "minimum": 0,
+         "type": "integer"
+        }
+       },
        "propertyNames": {
         "enum": [
          "act",
@@ -4129,6 +4135,13 @@
        ]
       },
       "then": {
+       "properties": {
+        "position": {
+         "maximum": 9007199254740991,
+         "minimum": 0,
+         "type": "integer"
+        }
+       },
        "propertyNames": {
         "enum": [
          "act",
@@ -4188,6 +4201,17 @@
        ]
       },
       "then": {
+       "properties": {
+        "start_on": {
+         "default": "",
+         "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$",
+         "type": "string"
+        },
+        "whole_template": {
+         "default": false,
+         "type": "boolean"
+        }
+       },
        "propertyNames": {
         "enum": [
          "act",
@@ -4234,6 +4258,13 @@
          }
         }
        ],
+       "properties": {
+        "template_name": {
+         "default": "",
+         "maxLength": 255,
+         "type": "string"
+        }
+       },
        "propertyNames": {
         "enum": [
          "act",
@@ -4382,16 +4413,6 @@
       "minLength": 1,
       "type": "string"
      },
-     "ordinal": {
-      "exclusiveMaximum": 200,
-      "minimum": 0,
-      "type": "integer"
-     },
-     "position": {
-      "maximum": 9007199254740991,
-      "minimum": 0,
-      "type": "integer"
-     },
      "project_continuation_ref": {
       "type": "string"
      },
@@ -4414,11 +4435,6 @@
      "section_id": {
       "$ref": "#/$defs/Identifier"
      },
-     "start_on": {
-      "default": "",
-      "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$",
-      "type": "string"
-     },
      "table_name": {
       "maxLength": 120,
       "minLength": 1,
@@ -4426,21 +4442,13 @@
      },
      "template_continuation_ref": {
       "type": "string"
-     },
-     "template_name": {
-      "default": "",
-      "maxLength": 255,
-      "type": "string"
-     },
-     "whole_template": {
-      "default": false,
-      "type": "boolean"
      }
     },
     "required": [
      "act"
     ],
-    "type": "object"
+    "type": "object",
+    "unevaluatedProperties": false
    }
   },
   "board_read": {
@@ -12083,6 +12091,67 @@
        ]
       },
       "then": {
+       "allOf": [
+        {
+         "else": {
+          "properties": {
+           "photo_continuation_ref": {
+            "maxLength": 0
+           },
+           "remove_photo": {
+            "const": false
+           },
+           "value": {
+            "type": "string"
+           }
+          },
+          "required": [
+           "value"
+          ]
+         },
+         "if": {
+          "properties": {
+           "field": {
+            "enum": [
+             "photo"
+            ]
+           }
+          },
+          "required": [
+           "field"
+          ]
+         },
+         "then": {
+          "oneOf": [
+           {
+            "properties": {
+             "photo_continuation_ref": {
+              "minLength": 1
+             }
+            },
+            "required": [
+             "photo_continuation_ref"
+            ]
+           },
+           {
+            "properties": {
+             "remove_photo": {
+              "const": true
+             }
+            },
+            "required": [
+             "remove_photo"
+            ]
+           }
+          ],
+          "properties": {
+           "value": {
+            "type": "null"
+           }
+          }
+         }
+        }
+       ],
        "propertyNames": {
         "enum": [
          "act",
@@ -17835,29 +17904,35 @@
       ]
      },
      {
+      "else": {
+       "not": {
+        "required": [
+         "item_continuation_ref"
+        ]
+       }
+      },
       "if": {
+       "properties": {
+        "format": {
+         "enum": [
+          "docx",
+          "pdf",
+          "xlsx",
+          "csv",
+          "markdown"
+         ]
+        }
+       },
        "required": [
-        "file_continuation_ref"
+        "format"
        ]
       },
       "then": {
        "not": {
         "required": [
-         "format"
+         "file_continuation_ref"
         ]
        }
-      }
-     },
-     {
-      "if": {
-       "required": [
-        "item_continuation_ref"
-       ]
-      },
-      "then": {
-       "required": [
-        "format"
-       ]
       }
      }
     ],
@@ -21001,11 +21076,6 @@
           "properties": {
            "updates": {
             "contains": {
-             "properties": {
-              "selection_continuation_ref": {
-               "type": "string"
-              }
-             },
              "required": [
               "selection_continuation_ref"
              ]
@@ -21023,6 +21093,45 @@
            },
            "updates": {
             "maxItems": 1
+           }
+          }
+         }
+        },
+        {
+         "if": {
+          "properties": {
+           "updates": {
+            "contains": {
+             "required": [
+              "expected_sub_actions"
+             ]
+            }
+           }
+          },
+          "required": [
+           "updates"
+          ]
+         },
+         "then": {
+          "properties": {
+           "history": {
+            "const": false
+           },
+           "updates": {
+            "items": {
+             "not": {
+              "required": [
+               "expected_sub_actions"
+              ]
+             }
+            },
+            "prefixItems": [
+             {
+              "required": [
+               "expected_sub_actions"
+              ]
+             }
+            ]
            }
           }
          }
@@ -21456,35 +21565,58 @@
        "additionalProperties": false,
        "allOf": [
         {
-         "oneOf": [
-          {
-           "required": [
-            "continuation_ref"
-           ]
-          },
-          {
-           "required": [
-            "selection_continuation_ref"
+         "else": {
+          "required": [
+           "continuation_ref"
+          ]
+         },
+         "if": {
+          "required": [
+           "selection_continuation_ref"
+          ]
+         },
+         "then": {
+          "not": {
+           "anyOf": [
+            {
+             "required": [
+              "continuation_ref"
+             ]
+            },
+            {
+             "required": [
+              "created_on"
+             ]
+            },
+            {
+             "required": [
+              "stage_history"
+             ]
+            },
+            {
+             "required": [
+              "expected_sub_actions"
+             ]
+            }
            ]
           }
-         ]
+         }
+        },
+        {
+         "dependentRequired": {
+          "expected_sub_actions": [
+           "continuation_ref",
+           "changes"
+          ]
+         }
         },
         {
          "dependentSchemas": {
-          "selection_continuation_ref": {
-           "not": {
-            "anyOf": [
-             {
-              "required": [
-               "created_on"
-              ]
-             },
-             {
-              "required": [
-               "stage_history"
-              ]
-             }
-            ]
+          "expected_sub_actions": {
+           "properties": {
+            "changes": {
+             "minProperties": 1
+            }
            }
           }
          }
