@@ -4385,7 +4385,7 @@
        ],
        "type": "object"
       },
-      "maxItems": 2000,
+      "maxItems": 5000,
       "type": "array"
      },
      "board_continuation_ref": {
@@ -4429,7 +4429,7 @@
       "items": {
        "type": "string"
       },
-      "maxItems": 2000,
+      "maxItems": 5000,
       "type": "array"
      },
      "section_id": {
@@ -11898,8 +11898,10 @@
      "deactivate",
      "details",
      "notetaker_minutes",
+     "photo",
      "reactivate",
      "remove",
+     "remove_photo",
      "seat_level",
      "send_password_reset",
      "working_hours"
@@ -11916,8 +11918,7 @@
     "field": [
      "full_name",
      "job_title",
-     "mobile",
-     "photo"
+     "mobile"
     ],
     "level": [
      "max",
@@ -12000,6 +12001,7 @@
          "enum": [
           "reactivate",
           "remove",
+          "remove_photo",
           "send_password_reset"
          ]
         }
@@ -12091,81 +12093,47 @@
        ]
       },
       "then": {
-       "allOf": [
-        {
-         "else": {
-          "properties": {
-           "photo_continuation_ref": {
-            "maxLength": 0
-           },
-           "remove_photo": {
-            "const": false
-           },
-           "value": {
-            "type": "string"
-           }
-          },
-          "required": [
-           "value"
-          ]
-         },
-         "if": {
-          "properties": {
-           "field": {
-            "enum": [
-             "photo"
-            ]
-           }
-          },
-          "required": [
-           "field"
-          ]
-         },
-         "then": {
-          "oneOf": [
-           {
-            "properties": {
-             "photo_continuation_ref": {
-              "minLength": 1
-             }
-            },
-            "required": [
-             "photo_continuation_ref"
-            ]
-           },
-           {
-            "properties": {
-             "remove_photo": {
-              "const": true
-             }
-            },
-            "required": [
-             "remove_photo"
-            ]
-           }
-          ],
-          "properties": {
-           "value": {
-            "type": "null"
-           }
-          }
-         }
-        }
-       ],
        "propertyNames": {
         "enum": [
          "act",
          "description",
          "person_continuation_ref",
          "field",
-         "value",
-         "photo_continuation_ref",
-         "remove_photo"
+         "value"
         ]
        },
        "required": [
         "person_continuation_ref",
-        "field"
+        "field",
+        "value"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "photo"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "person_continuation_ref",
+         "photo_continuation_ref"
+        ]
+       },
+       "required": [
+        "person_continuation_ref",
+        "photo_continuation_ref"
        ]
       }
      },
@@ -12215,6 +12183,8 @@
        "seat_level",
        "notetaker_minutes",
        "details",
+       "photo",
+       "remove_photo",
        "send_password_reset",
        "working_hours"
       ],
@@ -12232,8 +12202,7 @@
       "enum": [
        "full_name",
        "mobile",
-       "job_title",
-       "photo"
+       "job_title"
       ],
       "type": "string"
      },
@@ -12263,10 +12232,6 @@
      },
      "projects_successor_continuation_ref": {
       "type": "string"
-     },
-     "remove_photo": {
-      "default": false,
-      "type": "boolean"
      },
      "repeats_successor_continuation_ref": {
       "type": "string"
@@ -17626,7 +17591,7 @@
       "items": {
        "type": "integer"
       },
-      "maxItems": 10,
+      "maxItems": 40,
       "minItems": 1,
       "type": "array"
      }
@@ -26629,7 +26594,7 @@
       "items": {
        "type": "string"
       },
-      "maxItems": 2000,
+      "maxItems": 5000,
       "type": "array"
      },
      "start_on": {
