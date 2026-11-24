@@ -27,7 +27,7 @@ From `execute_code`, call `build_files` with exactly these fields: `program`, `l
 
 - A run delivers up to **16 files**, each as its own card. Use a ZIP for a folder-preserving bundle.
 - The input files are every file you name in `input_continuation_refs`: a photograph, a drawing or a table the person attached,
-  or an Organisation file, each by the `reference` you were shown it under. Each is placed in the working directory under
+  or an Organisation file, each by the `continuation_ref` you were shown it under. Each is placed in the working directory under
   its own name made safe and the result lists the names: open the picture
   there (`document.add_picture("site-photo.png", width=Inches(5))`, `reportlab` `Image`), never
   write its bytes into the program. Pictures, CSV, Excel, Word, PowerPoint and PDF, at most 15 MB

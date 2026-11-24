@@ -32,7 +32,7 @@ Building a new workbook from nothing is not this procedure's job. A `.xlsm` (mac
 ## 2. Plan the change, then run it once
 
 From `execute_code`, call `skill_script(skill="edit-spreadsheet", script="scripts/edit_spreadsheet.py", args=["{input_1}", <plan>],
-input_continuation_refs=[<the workbook's reference: an attachment's `reference` from its label, or a found file's `continuation_ref`>])`, the plan being one JSON object (text). The change is saved as a new version of that same workbook (a file the person uploaded is never changed: the first edit makes one working copy beside it, and every later edit updates that copy); never as a second file.
+input_continuation_refs=[<the workbook's reference: an attachment's `continuation_ref` from its label, or a found file's `continuation_ref`>])`, the plan being one JSON object (text). The change is saved as a new version of that same workbook (a file the person uploaded is never changed: the first edit makes one working copy beside it, and every later edit updates that copy); never as a second file.
 
 **Every address in the plan is as the workbook was supplied.** Do not work out where rows will land: the script moves
 every formula, name, rule, validation list, table, chart and print area for you, including what you write in the plan.

@@ -173,7 +173,7 @@
        "anyOf": [
         {
          "required": [
-          "reference"
+          "continuation_refs"
          ]
         },
         {
@@ -256,7 +256,7 @@
         "anyOf": [
          {
           "required": [
-           "reference"
+           "continuation_refs"
           ]
          },
          {
@@ -302,7 +302,7 @@
         }
        },
        "required": [
-        "reference",
+        "continuation_refs",
         "with_changes"
        ]
       },
@@ -325,12 +325,12 @@
         ]
        },
        "properties": {
-        "reference": {
+        "continuation_refs": {
          "minItems": 2
         }
        },
        "required": [
-        "reference"
+        "continuation_refs"
        ]
       },
       "then": {
@@ -374,13 +374,13 @@
      {
       "if": {
        "properties": {
-        "reference": {
+        "continuation_refs": {
          "minItems": 2
         }
        },
        "required": [
         "limit",
-        "reference"
+        "continuation_refs"
        ]
       },
       "then": {
@@ -437,6 +437,13 @@
      },
      "by": {
       "type": "string"
+     },
+     "continuation_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 25,
+      "type": "array"
      },
      "families": {
       "items": {
@@ -520,13 +527,6 @@
        "crm"
       ],
       "type": "string"
-     },
-     "reference": {
-      "items": {
-       "type": "string"
-      },
-      "maxItems": 25,
-      "type": "array"
      },
      "since_last_visit": {
       "default": false,
@@ -14151,6 +14151,8 @@
      "default"
     ],
     "event": [
+     "access_given",
+     "access_lost",
      "alert",
      "assignment",
      "comment",
@@ -15122,11 +15124,13 @@
           "team_mention",
           "assignment",
           "waiting_on_you",
+          "access_given",
           "reply",
           "support",
           "comment",
           "alert",
           "following",
+          "access_lost",
           "due_reminder",
           "overdue"
          ],
@@ -18928,111 +18932,111 @@
    "family": "external_connections",
    "schema": {
     "additionalProperties": false,
-    "properties": {
-     "target": {
-      "additionalProperties": false,
-      "allOf": [
-       {
-        "if": {
-         "properties": {
-          "look": {
-           "enum": [
-            "links"
-           ]
-          }
-         },
-         "required": [
-          "look"
-         ]
-        },
-        "then": {
-         "propertyNames": {
-          "not": {
-           "enum": [
-            "query",
-            "project_continuation_ref"
-           ]
-          }
-         },
-         "required": [
-          "continuation_ref"
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "look": {
+         "enum": [
+          "links"
          ]
         }
        },
-       {
-        "if": {
-         "properties": {
-          "look": {
-           "enum": [
-            "folders"
-           ]
-          }
-         },
-         "required": [
-          "look"
-         ]
-        },
-        "then": {
-         "required": [
-          "continuation_ref"
-         ]
-        }
-       },
-       {
-        "else": {
-         "required": [
-          "continuation_ref"
-         ]
-        },
-        "if": {
-         "properties": {
-          "look": {
-           "enum": [
-            "links",
-            "projects",
-            "folder_locations",
-            "folders"
-           ]
-          }
-         },
-         "required": [
-          "look"
-         ]
-        },
-        "then": {}
-       }
-      ],
-      "properties": {
-       "continuation_ref": {
-        "maxLength": 170,
-        "minLength": 1,
-        "type": "string"
-       },
-       "look": {
-        "enum": [
-         "links",
-         "projects",
-         "folder_locations",
-         "folders"
-        ],
-        "type": "string"
-       },
-       "project_continuation_ref": {
-        "maxLength": 170,
-        "minLength": 1,
-        "type": "string"
-       },
-       "query": {
-        "maxLength": 120,
-        "type": "string"
-       }
+       "required": [
+        "look"
+       ]
       },
-      "type": "object"
+      "then": {
+       "propertyNames": {
+        "not": {
+         "enum": [
+          "query",
+          "project_continuation_ref"
+         ]
+        }
+       },
+       "required": [
+        "continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "look": {
+         "enum": [
+          "folders"
+         ]
+        }
+       },
+       "required": [
+        "look"
+       ]
+      },
+      "then": {
+       "required": [
+        "continuation_ref"
+       ]
+      }
+     },
+     {
+      "else": {
+       "anyOf": [
+        {
+         "required": [
+          "continuation_ref"
+         ]
+        },
+        {
+         "required": [
+          "project_continuation_ref"
+         ]
+        }
+       ]
+      },
+      "if": {
+       "properties": {
+        "look": {
+         "enum": [
+          "links",
+          "projects",
+          "folder_locations",
+          "folders"
+         ]
+        }
+       },
+       "required": [
+        "look"
+       ]
+      },
+      "then": {}
+     }
+    ],
+    "properties": {
+     "continuation_ref": {
+      "maxLength": 170,
+      "minLength": 1,
+      "type": "string"
+     },
+     "look": {
+      "enum": [
+       "links",
+       "projects",
+       "folder_locations",
+       "folders"
+      ],
+      "type": "string"
+     },
+     "project_continuation_ref": {
+      "maxLength": 170,
+      "minLength": 1,
+      "type": "string"
+     },
+     "query": {
+      "maxLength": 120,
+      "type": "string"
      }
     },
-    "required": [
-     "target"
-    ],
     "type": "object"
    }
   },
@@ -19107,6 +19111,218 @@
       "type": "string"
      }
     },
+    "type": "object"
+   }
+  },
+  "projectprobe_approval_queue": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {},
+    "type": "object"
+   }
+  },
+  "projectprobe_budget_cost_add": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "cost_centre_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "head_office_category_ref": {
+      "type": "string"
+     },
+     "name": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
+     "packaging_unit_ref": {
+      "type": "string"
+     },
+     "prelim_category_ref": {
+      "type": "string"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "project_head_office_category_ref": {
+      "type": "string"
+     },
+     "quantity": {
+      "minimum": 0,
+      "type": "number"
+     },
+     "rate": {
+      "minimum": 0,
+      "type": "number"
+     },
+     "reason": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "salesRate": {
+      "minimum": 0,
+      "type": "number"
+     },
+     "section_ref": {
+      "type": "string"
+     },
+     "sub_section_ref": {
+      "type": "string"
+     },
+     "vat_category_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref",
+     "section_ref",
+     "sub_section_ref",
+     "cost_centre_ref",
+     "vat_category_ref",
+     "project_continuation_ref",
+     "name",
+     "quantity",
+     "rate"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_budget_cost_choices": {
+   "choices": {
+    "kind": [
+     "CostCentre",
+     "HeadOfficeCostCategory",
+     "PackagingUnit",
+     "PrelimCategory",
+     "ProjectHeadOfficeCategory",
+     "Section",
+     "VatCategory",
+     "WorkPair"
+    ]
+   },
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "kind": {
+      "enum": [
+       "Section",
+       "WorkPair",
+       "CostCentre",
+       "VatCategory",
+       "PrelimCategory",
+       "ProjectHeadOfficeCategory",
+       "HeadOfficeCostCategory",
+       "PackagingUnit"
+      ],
+      "type": "string"
+     },
+     "pageNumber": {
+      "minimum": 1,
+      "type": "integer"
+     },
+     "pageSize": {
+      "maximum": 100,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "query": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref",
+     "project_continuation_ref",
+     "kind"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_budget_cost_material_allocate": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "material_ref": {
+      "type": "string"
+     },
+     "reason": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref",
+     "material_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_budget_cost_notes": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
     "type": "object"
    }
   },
@@ -19648,6 +19864,9 @@
       "minLength": 1,
       "type": "string"
      },
+     "file_continuation_ref": {
+      "type": "string"
+     },
      "lines": {
       "items": {
        "additionalProperties": false,
@@ -19691,6 +19910,43 @@
      "deliveryDate",
      "lines",
      "reason"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_materials_search": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "generalOnly": {
+      "type": "boolean"
+     },
+     "pageNumber": {
+      "minimum": 1,
+      "type": "integer"
+     },
+     "pageSize": {
+      "maximum": 100,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "query": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "project_continuation_ref"
     ],
     "type": "object"
    }
@@ -19782,7 +20038,181 @@
     "type": "object"
    }
   },
+  "projectprobe_payment_deadlines": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {},
+    "type": "object"
+   }
+  },
+  "projectprobe_plant_hire_extend": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "hire_line_refs": {
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 25,
+      "minItems": 1,
+      "type": "array"
+     }
+    },
+    "required": [
+     "hire_line_refs"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_plant_hire_search": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "pageNumber": {
+      "minimum": 1,
+      "type": "integer"
+     },
+     "pageSize": {
+      "maximum": 100,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "query": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "project_continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_plants_search": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "availableInPrelims": {
+      "type": "boolean"
+     },
+     "pageNumber": {
+      "minimum": 1,
+      "type": "integer"
+     },
+     "pageSize": {
+      "maximum": 100,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "project_continuation_ref": {
+      "type": "string"
+     },
+     "query": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "project_continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_project_budget_cost_notes": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "project_continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "project_continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "projectprobe_project_budgets": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "project_continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "project_continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_project_client_valuation": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_project_client_valuations": {
    "choices": {},
    "doors": [
     "beacon",
@@ -19892,6 +20322,46 @@
     "type": "object"
    }
   },
+  "projectprobe_project_limit_history": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "project_continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "project_continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_project_notes": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "project_continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "project_continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "projectprobe_project_site_diary": {
    "choices": {},
    "doors": [
@@ -19937,6 +20407,26 @@
    }
   },
   "projectprobe_project_subcontractors": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "project_continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "project_continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_project_team": {
    "choices": {},
    "doors": [
     "beacon",
@@ -20147,6 +20637,26 @@
     "type": "object"
    }
   },
+  "projectprobe_purchase_order_revisions": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "projectprobe_purchase_orders_search": {
    "choices": {
     "sortField": [
@@ -20326,7 +20836,13 @@
       "items": {
        "additionalProperties": false,
        "properties": {
-        "cost_ref": {
+        "headOffice": {
+         "type": "boolean"
+        },
+        "includeInPrelims": {
+         "type": "boolean"
+        },
+        "item_ref": {
          "type": "string"
         },
         "quantity": {
@@ -20335,7 +20851,7 @@
         }
        },
        "required": [
-        "cost_ref",
+        "item_ref",
         "quantity"
        ],
        "type": "object"
@@ -20392,6 +20908,97 @@
     },
     "required": [
      "project_continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_retentions_search": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "pageNumber": {
+      "minimum": 1,
+      "type": "integer"
+     },
+     "pageSize": {
+      "maximum": 200,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "projectName": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
+     "query": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
+     "subcontractorName": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     },
+     "workOrderName": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "type": "object"
+   }
+  },
+  "projectprobe_stock_room_search": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "pageNumber": {
+      "minimum": 1,
+      "type": "integer"
+     },
+     "pageSize": {
+      "maximum": 100,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "query": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "type": "object"
+   }
+  },
+  "projectprobe_subcontractor_application_read": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
     ],
     "type": "object"
    }
@@ -20742,6 +21349,26 @@
     "type": "object"
    }
   },
+  "projectprobe_works_order_items": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "projectprobe_works_order_payment_cycle": {
    "choices": {},
    "doors": [
@@ -20880,7 +21507,7 @@
       "saphion.issued_references": true,
       "type": "string"
      },
-     "reference": {
+     "continuation_ref": {
       "maxLength": 160,
       "minLength": 1,
       "type": "string"
@@ -20920,7 +21547,7 @@
      }
     },
     "required": [
-     "reference"
+     "continuation_ref"
     ],
     "type": "object"
    }

@@ -96,7 +96,7 @@ def form_fields(reader) -> dict[str, FormField]:
                 kind = "choice"
             if kind is None:
                 continue
-            entry = found.setdefault(name, FormField(name, kind, flags=flags, max_length=int(_inherited(widget, "/MaxLen") or 0)))
+            entry = (found[name] if name in found else found.setdefault(name, FormField(name, kind, flags=flags, max_length=int(_inherited(widget, "/MaxLen") or 0))))
             if number not in entry.pages:
                 entry.pages.append(number)
             entry.widgets.append(widget)

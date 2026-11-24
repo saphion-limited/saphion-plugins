@@ -26,7 +26,7 @@ From `execute_code`, call `build_files` with exactly these fields: `program`, `l
 - A run delivers up to **16 files**, each as its own card. No network and no installs, so no downloaded images, icons or
   fonts. A program is stopped after about a minute.
 - The input files are every file you name in `input_continuation_refs`: site photographs, drawings or tables the person attached,
-  or Organisation files, each by the `reference` you were shown it under. Each is placed in the working directory under its own name
+  or Organisation files, each by the `continuation_ref` you were shown it under. Each is placed in the working directory under its own name
   made safe and the result lists the names: put a photograph on a slide from
   there (`slide.shapes.add_picture("site-1.jpg", ...)`, `pptxgenjs` `addImage({path})`), never write its
   bytes into the program. Pictures, CSV, Excel, Word, PowerPoint and PDF, at most 15 MB each; a file you

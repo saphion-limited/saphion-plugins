@@ -26,7 +26,7 @@ From `execute_code`, call `build_files` with exactly these fields: `program`, `l
 
 - A run delivers up to **16 files**, each as its own card. No network and no installs. A program is stopped after about a minute.
 - The input files are every file you name in `input_continuation_refs`: a CSV, a workbook or a picture the person attached, or an
-  Organisation file, each by the `reference` you were shown it under. Each is placed in the working directory under its own name made
+  Organisation file, each by the `continuation_ref` you were shown it under. Each is placed in the working directory under its own name made
   safe and the result lists the names: open it there
   (`openpyxl.load_workbook`, `pandas.read_csv`), never write its data into the program. At most 15 MB
   each; a file you cannot read here refuses the run, naming it.
