@@ -17,7 +17,7 @@ way up. The result must still be their PDF: the same pages, only what was asked 
 helper scripts do the file work with `pypdf` inside the file sandbox; you decide what goes in each field and which pages, and you look at the
 pages. Building a PDF from nothing is not this skill's job.
 
-Run a script from `execute_code` with `skill_script(skill="edit-pdf", script="scripts/<name>.py", args=[...], input_continuation_refs=[...])`. A file is named in `input_continuation_refs` by the `reference` you were shown it under; in `args` its path is `{input_1}` (the first file), `{input_2}` and so on. The sandbox has no network and no installs. Each script checks its own result by reading the written file back, and writes nothing if the check fails: the
+Run a script from `execute_code` with `skill_script(skill="edit-pdf", script="scripts/<name>.py", args=[...], input_continuation_refs=[...])`. A file is named in `input_continuation_refs` by the `continuation_ref` you were shown it under; in `args` its path is `{input_1}` (the first file), `{input_2}` and so on. The sandbox has no network and no installs. Each script checks its own result by reading the written file back, and writes nothing if the check fails: the
 refusal names what is wrong, so correct the request and run it again. A file changed arrives as a new version of the same file, under its own name (a file the person uploaded is never changed: the first edit makes one working copy beside it, and every later edit updates that copy); a joined or extracted file is a new file.
 
 ## 1. Know the file

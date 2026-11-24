@@ -18,7 +18,7 @@ the same layouts, theme and placeholders, the new slides on the template's own l
 measured and looked at, nothing overflowing. Two helper scripts do the file work with `python-pptx`
 inside the file sandbox; you decide the content and the layouts, and you look at every slide.
 
-Run a script from `execute_code` with `skill_script(skill="edit-presentation", script="scripts/<name>.py", args=[...], input_continuation_refs=[...])`. A file is named in `input_continuation_refs` by the `reference` you were shown it under; in `args` its path is `{input_1}` (the first file), `{input_2}` and so on. The
+Run a script from `execute_code` with `skill_script(skill="edit-presentation", script="scripts/<name>.py", args=[...], input_continuation_refs=[...])`. A file is named in `input_continuation_refs` by the `continuation_ref` you were shown it under; in `args` its path is `{input_1}` (the first file), `{input_2}` and so on. The
 sandbox has no network and no installs. A deck built from nothing, or with no template or supplied deck behind it, is not changed
 here: it is built new, by a program that makes it.
 

@@ -124,7 +124,7 @@ whoever has it open. Do the reads yourself first, with the `find` or `read` you 
 declare the same call and arguments and design the drawing from what it returned.
 
 **The sources block.** Declare each source once, in one block, as the call you just made: the arguments of your `find` (`"find"`) or of
-your `read` (`"read"`: its `reference`, `view`, `at`, `text`):
+your `read` (`"read"`: its `continuation_ref`, `view`, `at`, `text`):
 `<script type="application/saphion-sources+json">{"opps": {"find": {"kind": "record", "record_class": "opportunity"}, "rows": 500}}</script>`
 (`label` optional, else the source's name; `rows` optional, within the tool's limit). The host reads each source as the person
 viewing it, with their own access. `saphionData.get(name)` is `{status, data, message, read_at, has_more, total}` (status loading,
