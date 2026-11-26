@@ -145,7 +145,7 @@ def main(arguments: list[str]) -> None:
         print(f"Check in the render: {finding}")
     for finding in old[:SHOWN_FINDINGS]:
         print(f"Already in the template, untouched: {finding}")
-    print(f"Next: read every page of {output} (read, with `at` 1-6, 7-12, ...) and look at each slide before saying it is ready.")
+    print(f"Next: read every page of {output} (read, with `pages` 1-6, 7-12, ...) and look at each slide before saying it is ready.")
 
 
 try:

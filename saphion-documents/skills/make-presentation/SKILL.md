@@ -156,7 +156,7 @@ The report states total slides, exact slides shown and the next native-file read
    - low contrast, a stray font, an empty placeholder, a slide dense enough to read as a report page.
 4. Fix each cause in the program (cut words, split the slide, widen the box, drop categories), never by
    shrinking text below the minimums. Run again and look at the new images.
-5. Follow `next_read` with `read` on the made file's `continuation_ref`, passing its `at` (the pages).
+5. Follow `next_read` with `read` on the made file's `continuation_ref`, passing its `pages`.
    Continue inspecting the already-made file until every slide has been shown. Never rebuild or replace
    it merely to inspect later slides. Deliver when validation passes and every claimed slide was inspected.
 

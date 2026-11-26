@@ -1,8 +1,8 @@
-<!-- SURFACE_REASON: Saphion's chart colours and chrome for the dataviz skill, each value a token of the product's one colour owner (ramps.css) so an app draws with the same colours as the product -->
+<!-- SURFACE_REASON: Saphion's chart colours and chrome for the dataviz skill, each value a token of the product's one colour owner (ramps.generated.css) so an app draws with the same colours as the product -->
 # Saphion's palette
 
 Every colour in an app's chart is one of the product's own, never one chosen for the occasion. Saphion keeps its colours in one place
-(`ramps.css`, the "label palette" that chips, avatars and the product's charts all draw from, with `tokens.css` pointing at it). An
+(`ramps.generated.css`, the "label palette" that chips, avatars and the product's charts all draw from, with `tokens.generated.css` pointing at it). An
 app cannot see those files, so it copies the values below into its own `:root` tokens. The tables name the product token each value is,
 so a value can be traced and a changed token is found by the test that compares them. Where a step is a mix, the table says what is
 mixed with what.
