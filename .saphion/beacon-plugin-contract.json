@@ -5705,6 +5705,11 @@
       "default": "",
       "maxLength": 1000,
       "type": "string"
+     },
+     "pages": {
+      "default": "",
+      "maxLength": 40,
+      "type": "string"
      }
     },
     "required": [
@@ -9753,8 +9758,10 @@
      "create",
      "delete",
      "finalise",
+     "make_default",
      "mark",
-     "propose_marking"
+     "propose_marking",
+     "replace_file"
     ],
     "as": [
      "fact",
@@ -9827,6 +9834,35 @@
        "properties": {
         "act": {
          "enum": [
+          "replace_file"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "file_continuation_ref",
+         "continuation_ref"
+        ]
+       },
+       "required": [
+        "file_continuation_ref",
+        "continuation_ref"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "make_default",
           "propose_marking",
           "finalise",
           "delete"
@@ -9883,6 +9919,8 @@
      "act": {
       "enum": [
        "create",
+       "replace_file",
+       "make_default",
        "propose_marking",
        "mark",
        "finalise",
@@ -14090,8 +14128,8 @@
      "teal"
     ],
     "act": [
-     "clear_notifications",
      "follow",
+     "mark_notices",
      "my_email_preferences",
      "my_generation_defaults",
      "my_mailbox_settings",
@@ -14100,13 +14138,9 @@
      "my_settings",
      "notification_choices",
      "put_back_notifications",
-     "read_all_notifications",
-     "read_item_notifications",
-     "read_notifications",
      "remove_my_picture",
      "star",
      "unfollow",
-     "unread_notifications",
      "unstar"
     ],
     "channel": [
@@ -14199,6 +14233,12 @@
      "reduced",
      "system"
     ],
+    "orb": [
+     "dusk",
+     "meadow",
+     "ocean",
+     "original"
+    ],
     "sidebar_density": [
      "comfortable",
      "compact"
@@ -14216,6 +14256,11 @@
     "turn_mode": [
      "hands_free",
      "push_to_talk"
+    ],
+    "value": [
+     "cleared",
+     "read",
+     "unread"
     ],
     "voice": [
      "beacon",
@@ -14258,8 +14303,7 @@
          "enum": [
           "star",
           "unstar",
-          "follow",
-          "read_item_notifications"
+          "follow"
          ]
         }
        },
@@ -14311,32 +14355,7 @@
        "properties": {
         "act": {
          "enum": [
-          "read_all_notifications",
-          "remove_my_picture"
-         ]
-        }
-       },
-       "required": [
-        "act"
-       ]
-      },
-      "then": {
-       "propertyNames": {
-        "enum": [
-         "act",
-         "description"
-        ]
-       }
-      }
-     },
-     {
-      "if": {
-       "properties": {
-        "act": {
-         "enum": [
-          "read_notifications",
-          "unread_notifications",
-          "clear_notifications"
+          "mark_notices"
          ]
         }
        },
@@ -14349,11 +14368,13 @@
         "enum": [
          "act",
          "description",
-         "notification_continuation_ref"
+         "resource_continuation_ref",
+         "notification_continuation_ref",
+         "value"
         ]
        },
        "required": [
-        "notification_continuation_ref"
+        "value"
        ]
       }
      },
@@ -14559,7 +14580,8 @@
              "instructions",
              "voice",
              "turn_mode",
-             "language"
+             "language",
+             "orb"
             ]
            }
           }
@@ -14596,7 +14618,8 @@
              "instructions",
              "voice",
              "turn_mode",
-             "language"
+             "language",
+             "orb"
             ]
            }
           }
@@ -14636,7 +14659,8 @@
              "working_week",
              "voice",
              "turn_mode",
-             "language"
+             "language",
+             "orb"
             ]
            }
           }
@@ -14788,6 +14812,11 @@
            "required": [
             "language"
            ]
+          },
+          {
+           "required": [
+            "orb"
+           ]
           }
          ]
         }
@@ -14817,6 +14846,7 @@
          "voice",
          "turn_mode",
          "language",
+         "orb",
          "chat_recall"
         ]
        },
@@ -14861,6 +14891,28 @@
          "description",
          "full_name",
          "mobile"
+        ]
+       }
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "remove_my_picture"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description"
         ]
        }
       }
@@ -15049,11 +15101,7 @@
        "unstar",
        "follow",
        "unfollow",
-       "read_all_notifications",
-       "read_item_notifications",
-       "read_notifications",
-       "unread_notifications",
-       "clear_notifications",
+       "mark_notices",
        "put_back_notifications",
        "notification_choices",
        "my_presence",
@@ -15276,9 +15324,18 @@
       "items": {
        "type": "string"
       },
-      "maxItems": 10000,
+      "maxItems": 500,
       "minItems": 1,
       "type": "array"
+     },
+     "orb": {
+      "enum": [
+       "original",
+       "ocean",
+       "dusk",
+       "meadow"
+      ],
+      "type": "string"
      },
      "preferred_name": {
       "maxLength": 80,
@@ -15366,6 +15423,14 @@
      },
      "use_account_signatory": {
       "type": "boolean"
+     },
+     "value": {
+      "enum": [
+       "read",
+       "unread",
+       "cleared"
+      ],
+      "type": "string"
      },
      "voice": {
       "enum": [
@@ -15460,6 +15525,11 @@
      "focus": {
       "default": "",
       "maxLength": 500,
+      "type": "string"
+     },
+     "pages": {
+      "default": "",
+      "maxLength": 40,
       "type": "string"
      }
     },
@@ -19842,6 +19912,102 @@
     "type": "object"
    }
   },
+  "projectprobe_goods_receipt_change": {
+   "choices": {},
+   "doors": [
+    "beacon",
+    "codeact"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "deliveryDate": {
+      "format": "date",
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "lines": {
+      "items": {
+       "additionalProperties": false,
+       "properties": {
+        "line_ref": {
+         "type": "string"
+        },
+        "quantityDelivered": {
+         "minimum": 0,
+         "type": "number"
+        }
+       },
+       "required": [
+        "line_ref",
+        "quantityDelivered"
+       ],
+       "type": "object"
+      },
+      "maxItems": 50,
+      "minItems": 1,
+      "type": "array"
+     },
+     "reason": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "receiptDescription": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "type": "string"
+     },
+     "ticketNumber": {
+      "maxLength": 100,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref",
+     "reason"
+    ],
+    "type": "object"
+   }
+  },
+  "projectprobe_goods_receipt_delete": {
+   "choices": {},
+   "doors": [
+    "beacon"
+   ],
+   "family": "external_connections",
+   "schema": {
+    "additionalProperties": false,
+    "properties": {
+     "continuation_ref": {
+      "type": "string"
+     },
+     "description": {
+      "maxLength": 240,
+      "minLength": 1,
+      "type": "string"
+     },
+     "reason": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "continuation_ref"
+    ],
+    "type": "object"
+   }
+  },
   "projectprobe_goods_receipt_record": {
    "choices": {},
    "doors": [
@@ -21510,6 +21676,10 @@
      "continuation_ref": {
       "maxLength": 160,
       "minLength": 1,
+      "type": "string"
+     },
+     "pages": {
+      "maxLength": 40,
       "type": "string"
      },
      "text": {
@@ -24646,6 +24816,11 @@
      },
      "where": {
       "$ref": "#/$defs/SemanticFilterInput"
+     },
+     "whose": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
      },
      "within": {
       "maxLength": 200,

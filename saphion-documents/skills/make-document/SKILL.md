@@ -123,7 +123,7 @@ of one declared output. Ranges are inclusive and contain at most six pages. Imag
    - a placeholder or blank left in by mistake.
 4. Fix the cause in the program and run again. Look at the new images. Stop when the pages are
    clean; re-check only what you changed.
-5. Follow each check result's `next_read` with `read` on the made file's `continuation_ref`, passing its `at` (the pages). This reads the already-made file at its exact version. Never rebuild or replace a file
+5. Follow each check result's `next_read` with `read` on the made file's `continuation_ref`, passing its `pages`. This reads the already-made file at its exact version. Never rebuild or replace a file
    to inspect later pages. Continue until every page has actually been shown; report any unread pages.
 
 ## 5. PDFs with reportlab
