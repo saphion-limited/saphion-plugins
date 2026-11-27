@@ -7308,6 +7308,7 @@
      "move",
      "move_tab",
      "name_tab",
+     "property",
      "redraft",
      "restore",
      "restore_version"
@@ -7918,6 +7919,35 @@
         "version_continuation_ref"
        ]
       }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "property"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "continuation_ref",
+         "key",
+         "value"
+        ]
+       },
+       "required": [
+        "key",
+        "value"
+       ]
+      }
      }
     ],
     "properties": {
@@ -7935,7 +7965,8 @@
        "restore_version",
        "delete",
        "archive",
-       "restore"
+       "restore",
+       "property"
       ],
       "type": "string"
      },
@@ -8011,6 +8042,10 @@
       },
       "minItems": 1,
       "type": "array"
+     },
+     "key": {
+      "minLength": 1,
+      "type": "string"
      },
      "markdown": {
       "type": "string"
@@ -9297,6 +9332,22 @@
      },
      "under_continuation_ref": {
       "type": "string"
+     },
+     "value": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "integer"
+       },
+       {
+        "type": "number"
+       },
+       {
+        "type": "boolean"
+       }
+      ]
      },
      "version_continuation_ref": {
       "type": "string"
@@ -11601,6 +11652,7 @@
      "withdraw"
     ],
     "level": [
+     "contributor",
      "editor",
      "manager"
     ],
@@ -11803,8 +11855,9 @@
         "level": {
          "default": "editor",
          "enum": [
+          "manager",
           "editor",
-          "manager"
+          "contributor"
          ],
          "type": "string"
         },
@@ -14128,8 +14181,8 @@
      "teal"
     ],
     "act": [
+     "cleared",
      "follow",
-     "mark_notices",
      "my_email_preferences",
      "my_generation_defaults",
      "my_mailbox_settings",
@@ -14138,9 +14191,11 @@
      "my_settings",
      "notification_choices",
      "put_back_notifications",
+     "read",
      "remove_my_picture",
      "star",
      "unfollow",
+     "unread",
      "unstar"
     ],
     "channel": [
@@ -14257,11 +14312,6 @@
      "hands_free",
      "push_to_talk"
     ],
-    "value": [
-     "cleared",
-     "read",
-     "unread"
-    ],
     "voice": [
      "beacon",
      "bossa",
@@ -14355,7 +14405,9 @@
        "properties": {
         "act": {
          "enum": [
-          "mark_notices"
+          "read",
+          "unread",
+          "cleared"
          ]
         }
        },
@@ -14369,13 +14421,9 @@
          "act",
          "description",
          "resource_continuation_ref",
-         "notification_continuation_ref",
-         "value"
+         "notification_continuation_ref"
         ]
-       },
-       "required": [
-        "value"
-       ]
+       }
       }
      },
      {
@@ -15101,7 +15149,9 @@
        "unstar",
        "follow",
        "unfollow",
-       "mark_notices",
+       "read",
+       "unread",
+       "cleared",
        "put_back_notifications",
        "notification_choices",
        "my_presence",
@@ -15424,14 +15474,6 @@
      "use_account_signatory": {
       "type": "boolean"
      },
-     "value": {
-      "enum": [
-       "read",
-       "unread",
-       "cleared"
-      ],
-      "type": "string"
-     },
      "voice": {
       "enum": [
        "echo",
@@ -15640,6 +15682,7 @@
      "recap_style",
      "remove_identity_image",
      "remove_targets",
+     "reset_setting",
      "targets",
      "type_identity",
      "type_reference",
@@ -15675,6 +15718,16 @@
     "kind": [
      "icon",
      "logo"
+    ],
+    "setting": [
+     "chat_recall",
+     "company_details",
+     "conversation_retention",
+     "financial_year",
+     "memory_policy",
+     "notification_retention",
+     "second_step",
+     "working_week"
     ],
     "table_style": [
      "TableStyleLight9",
@@ -16022,6 +16075,32 @@
        "required": [
         "addon",
         "on"
+       ]
+      }
+     },
+     {
+      "if": {
+       "properties": {
+        "act": {
+         "enum": [
+          "reset_setting"
+         ]
+        }
+       },
+       "required": [
+        "act"
+       ]
+      },
+      "then": {
+       "propertyNames": {
+        "enum": [
+         "act",
+         "description",
+         "setting"
+        ]
+       },
+       "required": [
+        "setting"
        ]
       }
      },
@@ -16496,6 +16575,7 @@
        "memory_policy",
        "chat_recall",
        "action_addon",
+       "reset_setting",
        "working_week",
        "recap_style",
        "product_presentation",
@@ -16723,6 +16803,19 @@
       },
       "maxItems": 80,
       "type": "array"
+     },
+     "setting": {
+      "enum": [
+       "conversation_retention",
+       "working_week",
+       "notification_retention",
+       "financial_year",
+       "company_details",
+       "second_step",
+       "memory_policy",
+       "chat_recall"
+      ],
+      "type": "string"
      },
      "skill_id": {
       "maxLength": 256,
@@ -17152,6 +17245,7 @@
         "create_workspaces",
         "set_default_tabs",
         "manage_fields",
+        "manage_organisation_automations",
         "manage_templates",
         "share_with_organisation",
         "manage_billing",
@@ -18701,10 +18795,10 @@
      },
      "share_role": {
       "enum": [
-       "viewer",
-       "contributor",
+       "manager",
        "editor",
-       "manager"
+       "contributor",
+       "viewer"
       ],
       "type": "string"
      },
@@ -24987,10 +25081,10 @@
     "properties": {
      "access_level": {
       "enum": [
-       "viewer",
-       "contributor",
+       "manager",
        "editor",
-       "manager"
+       "contributor",
+       "viewer"
       ],
       "type": "string"
      },
@@ -26500,10 +26594,10 @@
      },
      "role": {
       "enum": [
-       "viewer",
-       "contributor",
+       "manager",
        "editor",
-       "manager"
+       "contributor",
+       "viewer"
       ],
       "type": "string"
      },
