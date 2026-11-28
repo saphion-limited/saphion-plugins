@@ -10,7 +10,6 @@ metadata:
     A dashboard of the Organisation's own data, which is built live from it.
     Make a Word, PDF, PowerPoint or Excel file.
 ---
-<!-- SURFACE_REASON: procedure prompt asset for the design_app skill, loaded into the model's skill instructions for polished single-file apps -->
 # Design an app
 
 You are making a polished single-file HTML app or page that opens in Saphion's side pane: a

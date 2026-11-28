@@ -10,7 +10,6 @@ metadata:
     Figures, tables, charts, records or places that Saphion already shows natively in their own form.
     Change only the content of something already designed.
 ---
-<!-- SURFACE_REASON: procedure prompt asset for the design skill, loaded into the model's skill instructions as the visual-design procedure for Documents and other visual work no file or app skill covers -->
 <!-- Adapted from anthropics/skills `frontend-design` (commit dbd4588f9e10, Apache-2.0), with principles from `brand-guidelines`, `theme-factory` and `canvas-design` (same licence). Changed by Saphion: rewritten for Saphion's tools and surfaces. See /NOTICE. -->
 # Design
 

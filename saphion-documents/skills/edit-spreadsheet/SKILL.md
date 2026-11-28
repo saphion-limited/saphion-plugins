@@ -9,7 +9,6 @@ metadata:
     Read, check or summarise a workbook without changing it.
     Make a CSV, or change a macro-enabled (.xlsm) or old (.xls) workbook.
 ---
-<!-- SURFACE_REASON: procedure prompt asset for the edit_spreadsheet skill, loaded into the model's skill instructions for changing a supplied Excel workbook without losing its formulas -->
 # Edit a spreadsheet
 
 The person gave you a working workbook and wants it changed: rows added, an input changed, a summary added. It goes back

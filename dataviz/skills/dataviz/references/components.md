@@ -1,4 +1,3 @@
-<!-- SURFACE_REASON: the parts a dataviz app's charts are assembled from, and the accessible table twin, loaded on demand by the procedure -->
 # Components: the pieces a chart is made of
 
 An app draws charts from a few parts in plain HTML and SVG (the sandbox also loads `chart.js/auto` and `d3` by bare name; hand-written SVG

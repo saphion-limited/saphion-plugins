@@ -9,7 +9,6 @@ metadata:
     Read, summarise or answer questions about a PDF without changing it.
     Edit the text or pictures on a PDF page, sign it, or open a password-protected or scanned one.
 ---
-<!-- SURFACE_REASON: procedure prompt asset and helper scripts for the edit_pdf skill, loaded into the model's skill instructions for filling, merging, splitting and rotating PDFs the person supplied -->
 # Work with PDFs
 
 The person gave you one or more PDFs and wants a form filled in, files joined into one, some pages taken out, or pages turned the right

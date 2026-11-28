@@ -1,4 +1,3 @@
-<!-- SURFACE_REASON: the colour method of the dataviz skill (the jobs colour does, the six checks and how to run them), loaded on demand by the procedure -->
 # Colour by job, then measure it
 
 Colour in a chart is never picked by eye. Each colour does one of five jobs, and a categorical set is allowed only if it passes the checks

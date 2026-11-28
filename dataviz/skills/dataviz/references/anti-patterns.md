@@ -1,4 +1,3 @@
-<!-- SURFACE_REASON: the failure modes the dataviz skill checks every chart against before it ships, loaded on demand by the procedure -->
 # Anti-patterns: what goes wrong
 
 Check every chart against this list before it ships. If a chart matches an entry it is wrong, and the fix is the "Instead".

@@ -12,7 +12,6 @@ metadata:
   hand-over-edit-word-document: "Change a Word file the person supplied, or add comments or tracked changes to any Word file."
   hand-over-edit-pdf: "Fill in, join, take pages out of or turn the pages of a PDF the person supplied."
 ---
-<!-- SURFACE_REASON: procedure prompt asset for the make_document skill, loaded into the model's skill instructions for building Word and PDF files -->
 # Make a document
 
 You are building a Word document or a PDF the person will read, print or send: a report, a

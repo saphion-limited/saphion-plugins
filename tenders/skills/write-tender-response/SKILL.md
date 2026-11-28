@@ -9,7 +9,6 @@ metadata:
     Price a tender, complete a form of tender or sign a declaration.
     A Word or PDF document that is not a tender response, or a document that lives in Saphion.
 ---
-<!-- SURFACE_REASON: procedure prompt asset for the write_tender_response skill: the tender writer's professional procedure and review checklist (Daniel, 16 Nov 2026, D1), loaded into every tender response the writer writes and into a conversation about one -->
 # Write a tender response
 
 A tender response is a set of written answers to a buyer's questions, scored against stated criteria by someone who has many other bids to read. It

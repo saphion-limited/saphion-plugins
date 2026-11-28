@@ -9,7 +9,6 @@ metadata:
     A client meeting, project update or other meeting record that does not need formal minutes.
     Advice on company law or on how to run a board meeting.
 ---
-<!-- SURFACE_REASON: procedure prompt asset for the board_minutes skill, the formal board and committee minutes recap style, loaded into the recap of a Notetaker meeting and into a conversation that asks for board or committee minutes -->
 # Board and committee minutes
 
 Formal minutes of a board, a board committee (audit, remuneration, nominations, risk) or any committee that approves and signs its

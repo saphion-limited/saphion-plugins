@@ -1,4 +1,3 @@
-<!-- SURFACE_REASON: Saphion's chart colours and chrome for the dataviz skill, each value a token of the product's one colour owner (ramps.generated.css) so an app draws with the same colours as the product -->
 # Saphion's palette
 
 Every colour in an app's chart is one of the product's own, never one chosen for the occasion. Saphion keeps its colours in one place

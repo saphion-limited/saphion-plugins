@@ -11,7 +11,6 @@ metadata:
     A designed app, page or calculator with no Organisation data.
     A Word, PDF, PowerPoint or Excel file.
 ---
-<!-- SURFACE_REASON: procedure prompt asset for the dataviz skill, loaded into the model's skill instructions as the procedure for a dashboard made as an app -->
 # Build a dashboard as an app
 
 A dashboard, scorecard, KPI page or chart over Saphion's own data is a Saphion Dashboard: make or change it with `dashboard_change`

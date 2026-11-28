@@ -9,7 +9,6 @@ metadata:
     Draft ordinary chat content merely because its subject overlaps workplace safety.
     A Word or PDF document that is not a RAMS, or a document that lives in Saphion.
 ---
-<!-- SURFACE_REASON: procedure prompt asset for the create_rams skill: the RAMS writer's professional procedure and review checklist (Daniel, 5 Nov 2026, decision 11), loaded into every RAMS the writer writes and into a conversation about a RAMS -->
 # Write a RAMS
 
 A RAMS is one Document with two tabs: a **risk assessment** and a **method statement**, written for one job, in the
