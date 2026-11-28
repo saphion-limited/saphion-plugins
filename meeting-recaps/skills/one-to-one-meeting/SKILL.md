@@ -9,7 +9,6 @@ metadata:
     A team meeting or project update, which have their own styles.
     Advice to the manager on how to manage the person, or a judgement of the person.
 ---
-<!-- SURFACE_REASON: procedure prompt asset for the one-to-one-meeting skill, the one-to-one recap style, loaded into the recap of a Notetaker meeting and into a conversation that asks for a one-to-one record -->
 # One-to-one
 
 A manager's regular check-in with one team member. The recap is for the two of them: what each said they are working on, what is in the way,

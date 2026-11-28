@@ -10,7 +10,6 @@ metadata:
     Make an interactive app or page.
   hand-over-edit-presentation: "Add slides to, or update slides in, a template or a deck the person supplied."
 ---
-<!-- SURFACE_REASON: procedure prompt asset for the make_presentation skill, loaded into the model's skill instructions for building PowerPoint decks -->
 # Make a presentation
 
 You are building a PowerPoint deck the person will present or send: a client update, a bid

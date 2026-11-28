@@ -10,7 +10,6 @@ metadata:
     Make a CSV or plain text file.
   hand-over-edit-spreadsheet: "Change a workbook the person supplied: add rows, change an input or add a summary while keeping its formulas and layout."
 ---
-<!-- SURFACE_REASON: procedure prompt asset for the make_spreadsheet skill, loaded into the model's skill instructions for building Excel workbooks -->
 # Make a spreadsheet
 
 You are building an Excel workbook the person will open, check and probably send on. It must

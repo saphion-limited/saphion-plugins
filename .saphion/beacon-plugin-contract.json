@@ -648,6 +648,7 @@
         "mark.unfavourited",
         "mark.followed",
         "mark.unfollowed",
+        "billing.plan_receipt",
         "reminder.bid_deadline_passed",
         "lead.converted",
         "reminder.close_passed"
@@ -12071,13 +12072,13 @@
          "act",
          "description",
          "person_continuation_ref",
-         "successor_continuation_ref",
          "actions_successor_continuation_ref",
          "repeats_successor_continuation_ref",
          "teams_successor_continuation_ref",
          "projects_successor_continuation_ref",
          "items_successor_continuation_ref",
-         "holdings_successor_continuation_ref"
+         "holdings_successor_continuation_ref",
+         "successor_continuation_ref"
         ]
        },
        "required": [

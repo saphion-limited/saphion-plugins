@@ -1,4 +1,3 @@
-<!-- SURFACE_REASON: shared look guidance spliced into every Skill that makes something visual (design, design_app, make_document, make_presentation), so the look rules have one owner and one text -->
 ## The look, planned before any code
 
 Write these for yourself first (in a program, as comments at its top). Where the brief leaves one open, choose, and say in your reply what you chose.

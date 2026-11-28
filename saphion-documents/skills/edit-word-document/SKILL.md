@@ -10,7 +10,6 @@ metadata:
     Edit a document that lives inside Saphion.
     Change a Word file Beacon made itself without comments or tracked changes, which is changed in place as the file it is.
 ---
-<!-- SURFACE_REASON: procedure prompt asset for the edit_word_document skill, loaded into the model's skill instructions for faithful edits to a supplied Word file -->
 # Edit a Word document
 
 You are changing a Word file the person already has: an attachment, an Organisation, Project or Workspace file, or one Beacon made.

@@ -9,7 +9,6 @@ metadata:
     A one-to-one, project update, client meeting, sales call or interview record, which have their own styles.
     A verbatim transcript, or a summary of a document that is not a meeting.
 ---
-<!-- SURFACE_REASON: procedure prompt asset for the meeting_recap skill, Saphion's default meeting recap style, loaded into the recap of a Notetaker meeting and into a conversation that asks for a meeting recap -->
 # Meeting recap
 
 The default recap for any meeting without a more specific style: an internal meeting, a call, a catch-up. Someone who missed the meeting should know in one minute

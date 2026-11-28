@@ -9,7 +9,6 @@ metadata:
     Summarise or read a deck without changing it.
     Make a Word document, PDF or spreadsheet.
 ---
-<!-- SURFACE_REASON: procedure prompt asset and helper scripts for the edit_presentation skill, loaded into the model's skill instructions for changing a PowerPoint template or deck the person supplied -->
 # Edit a presentation
 
 The person gave you a PowerPoint template or a deck and wants slides added or changed in it: three

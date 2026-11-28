@@ -1,4 +1,3 @@
-<!-- SURFACE_REASON: how the dataviz skill picks the form of each figure before any colour, loaded on demand by the procedure -->
 # Choosing the form
 
 Decide the form first, then the colour. What the reader has to do with the figure picks the form, and often the right form is not a chart.

@@ -1,4 +1,3 @@
-<!-- SURFACE_REASON: the hover layer and in-page filter rules of the dataviz skill, loaded on demand when an app draws a chart -->
 # Interaction: the hover layer and filters
 
 A chart in an app responds by default. The hover layer is part of the deliverable, and leaving it out is the exception (a bare stat tile),

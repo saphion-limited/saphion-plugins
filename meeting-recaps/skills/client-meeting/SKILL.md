@@ -9,7 +9,6 @@ metadata:
     A project or team update, a sales call or a one-to-one record, which have their own styles.
     A letter or email to the client, or a contract variation.
 ---
-<!-- SURFACE_REASON: procedure prompt asset for the client_meeting skill, the client meeting recap style, loaded into the recap of a Notetaker meeting and into a conversation that asks for a client meeting record -->
 # Client meeting
 
 A record of a meeting between a firm and its client, in any line of work. It keeps what the client asked for close to their own words, because

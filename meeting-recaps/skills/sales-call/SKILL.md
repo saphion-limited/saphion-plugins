@@ -9,7 +9,6 @@ metadata:
     A deal score, a forecast or a judgement of whether the prospect will buy.
     A proposal, quote or follow-up email.
 ---
-<!-- SURFACE_REASON: procedure prompt asset for the sales_call skill, the sales call recap style, loaded into the recap of a Notetaker meeting and into a conversation that asks for a sales call record -->
 # Sales call
 
 A record of a discovery call, demo or sales meeting with a prospect. It keeps what the prospect said close to their words, because the next

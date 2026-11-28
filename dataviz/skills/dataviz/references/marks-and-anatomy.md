@@ -1,4 +1,3 @@
-<!-- SURFACE_REASON: the mark specs, spacers, labels and figures of the dataviz skill, loaded on demand when an app draws a chart -->
 # Marks and anatomy
 
 A quiet chart is a few fixed specs and some empty space. Only the data is allowed to be loud.

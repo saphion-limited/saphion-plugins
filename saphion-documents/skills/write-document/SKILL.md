@@ -9,7 +9,6 @@ metadata:
     Make a spreadsheet, a presentation or an app.
   hand-over-make-document: "A Word or PDF file named, tracked changes wanted, or a .docx to change or use as a template: the make-document skill builds the file. Needing to send, attach or print a document is no reason to pick Word."
 ---
-<!-- SURFACE_REASON: procedure prompt asset for the write_document skill, loaded into the model's skill instructions for writing and editing a document that lives in Saphion -->
 # Write a Saphion document
 
 For a document that lives in Saphion beside the chat, something the person will keep, share or return to; a short answer belongs in the chat. Its `title` is the Document's name and is required; the owner and dates under it are drawn by the app, so never write them or the title into the body.

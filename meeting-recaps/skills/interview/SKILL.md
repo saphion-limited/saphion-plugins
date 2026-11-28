@@ -9,7 +9,6 @@ metadata:
     A judgement of the candidate's character, fit, confidence or personality.
     A one-to-one, a client meeting or a team meeting record, which have their own styles.
 ---
-<!-- SURFACE_REASON: procedure prompt asset for the interview skill, the job interview recap style, loaded into the recap of a Notetaker meeting and into a conversation that asks for an interview record -->
 # Interview
 
 A fair record of a job interview, so that the people deciding can compare candidates on what each said against the same criteria, and so

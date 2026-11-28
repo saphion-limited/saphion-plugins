@@ -9,7 +9,6 @@ metadata:
     A project plan, a risk register or a formal change request.
     A judgement of whether the project is on track beyond what the meeting said.
 ---
-<!-- SURFACE_REASON: procedure prompt asset for the project and team update skill, the project and team update recap style, loaded into the recap of a Notetaker meeting and into a conversation that asks for a project or team update record -->
 # Project and team update
 
 A recap of a stand-up, team sync or project status meeting: where the work stands against the plan, who is doing what, what is in the way, and
